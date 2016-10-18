@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<resources>  
+
+
+    <attr name="containerBackgroundLayer1" format="reference|color"></attr>
+    <attr name="containerBackgroundLayer2" format="reference|color"></attr>
+    <attr name="myTitleTextColor" format="color"></attr>
+    <attr name="mySubTitleTextColor" format="color"></attr>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_meizi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:maxHeight="1000dp"
+            android:minHeight="200dp"
+            android:scaleType="fitXY"
+            app:layout_constraintLeft_toLeftOf="@id/cl_meizi"
+            app:layout_constraintRight_toRightOf="@id/cl_meizi"
+            app:layout_constraintTop_toTopOf="@id/cl_meizi" />
+
+
+        <TextView
+            android:id="@+id/who"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="#55333333"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/cl_meizi"
+            app:layout_constraintLeft_toLeftOf="@id/cl_meizi"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            tools:text="asdasd" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="@id/cl_meizi"
+           app:layout_constraintBaseline_toBaselineOf="@id/who"
+            android:text="1921年2月12日" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
