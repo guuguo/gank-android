@@ -1,4 +1,4 @@
-package com.guuguo.learnsave.app.activity
+package com.guuguo.learnsave.app.base
 
 import android.os.Bundle
 import android.os.PersistableBundle

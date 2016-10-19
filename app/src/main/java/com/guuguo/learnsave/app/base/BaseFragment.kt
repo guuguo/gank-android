@@ -1,4 +1,4 @@
-package com.guuguo.learnsave.app.fragment
+package com.guuguo.learnsave.app.base
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.guuguo.learnsave.app.MyApplication
-import com.guuguo.learnsave.app.activity.BaseActivity
 
 /**
  * Created by guodeqing on 7/23/16.

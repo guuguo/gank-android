@@ -1,6 +1,7 @@
 package com.guuguo.learnsave.app.activity
 
 import com.guuguo.learnsave.R
+import com.guuguo.learnsave.app.base.BaseActivity
 
 class DateGankActivity : BaseActivity() {
     override fun initPresenter() {

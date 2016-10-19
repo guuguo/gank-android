@@ -3,17 +3,21 @@ package com.guuguo.learnsave.app.activity
 import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
 import `in`.srain.cube.views.ptr.header.MaterialHeader
+import android.app.Activity
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.Toast
-import butterknife.BindView
+import butterknife.bindView
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.adapter.MeiziAdapter
+import com.guuguo.learnsave.app.base.BaseActivity
 import com.guuguo.learnsave.bean.entity.GankBean
 import com.guuguo.learnsave.presenter.MainPresenter
 import com.guuguo.learnsave.view.IMainView
 import java.util.*
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
 
 class MainActivity : BaseActivity(), IMainView {
@@ -28,13 +32,10 @@ class MainActivity : BaseActivity(), IMainView {
         presenter.init()
     }
 
+    val recycler: RecyclerView by bindView(R.id.recycler)
+    val pflMain: PtrFrameLayout by  bindView(R.id.pfl_main)
 
-    @BindView(R.id.recycler)
-    var recycler: RecyclerView? = null;
-    @BindView(R.id.pfl_main)
-    var pflMain: PtrFrameLayout? = null;
-
-
+   
     override fun getLayoutResId(): Int {
         return R.layout.activity_main;
     }
@@ -88,5 +89,5 @@ class MainActivity : BaseActivity(), IMainView {
             meiziList.addAll(lMeiziList)
         meiziAdapter!!.setNewData(meiziList)
     }
-
 }
+

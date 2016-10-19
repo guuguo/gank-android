@@ -9,10 +9,7 @@ class MyApplication : Application() {
 
 
     companion object {
-         var instance: MyApplication? = null
-            get() {
-                return instance
-            }
+        var instance: MyApplication? = null
     }
 
     override fun onCreate() {

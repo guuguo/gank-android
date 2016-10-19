@@ -1,43 +1,29 @@
 <resources>
 
 
-    <!-- 日间模式 -->
-    <style name="AppTheme.day" parent="AppTheme">
-        <item name="android:windowBackground">@color/day_main_base_bg</item>
-        <item name="containerBackgroundLayer2">@color/day_main_front_bg</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="myTitleTextColor">@color/day_title_text</item>
-        <item name="android:textColor">@color/day_text</item>
-        <item name="android:colorForeground">@color/design_fab_stroke_top_outer_color</item>
-        <item name="android:textColorHint">@color/day_hint</item>
-        <item name="android:textColorLink">@color/day_hint</item>
-
-    </style>
-    <!-- 夜间模式 -->
-    <style name="AppTheme.night" parent="AppTheme">
-        <item name="android:windowBackground">@color/night_main_bg</item>
-        <item name="containerBackgroundLayer2">@color/night_main_front_bg</item>
-        <item name="colorPrimary">@color/night_actionbar_background</item>
-        <item name="myTitleTextColor">@color/night_title_text</item>
-        <item name="android:textColor">@color/night_text</item>
-        <item name="android:textColorHint">@color/night_hint</item>
-        <item name="android:textColorLink">@color/night_hint</item>
-    </style>
-
-    <style name="toolbar" parent="Base.Widget.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/white</item>
-
-    </style>
-
+    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--<item name="android:textColorPrimary">@color/material_red</item>-->
-        <!--<item name="android:textColorSecondary">@color/white100</item>-->
-        <!--<item name="colorControlNormal">?android:textColor</item>-->
-        <item name="actionMenuTextColor">@color/white100</item>
-        <item name="android:editTextColor">?android:textColor</item>
-
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.FullScreen" parent="Theme.AppCompat.NoActionBar" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+    
     <style name="Widget.Design.AppBarLayout" parent="android:Widget">
         <item name="elevation">0dp</item>
         <item name="android:background">?attr/colorPrimary</item>
