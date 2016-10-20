@@ -19,9 +19,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <meta-data
-        android:name="com.mypackage.MyGlideModule"
-        android:value="CustomImageSizeGlideModule" />
+
     <application xmlns:tools="http://schemas.android.com/tools"
         android:name=".app.MyApplication"
         android:allowBackup="true"
@@ -30,6 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+      
         <activity android:name=".app.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

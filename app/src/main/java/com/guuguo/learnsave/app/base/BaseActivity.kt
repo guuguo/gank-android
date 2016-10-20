@@ -1,7 +1,6 @@
 package com.guuguo.learnsave.app.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import butterknife.ButterKnife
 import com.guuguo.learnsave.app.MyApplication
@@ -17,12 +16,11 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun getLayoutResId(): Int
     abstract fun initPresenter()
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(getLayoutResId())
         ButterKnife.bind(this)
-        initPresenter()
-    }
-
+        initPresenter() }
 
 }

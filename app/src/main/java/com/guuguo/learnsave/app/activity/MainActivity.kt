@@ -3,7 +3,6 @@ package com.guuguo.learnsave.app.activity
 import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
 import `in`.srain.cube.views.ptr.header.MaterialHeader
-import android.app.Activity
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
@@ -14,14 +13,12 @@ import com.guuguo.learnsave.adapter.MeiziAdapter
 import com.guuguo.learnsave.app.base.BaseActivity
 import com.guuguo.learnsave.bean.entity.GankBean
 import com.guuguo.learnsave.presenter.MainPresenter
+import com.guuguo.learnsave.util.DisplayUtil
 import com.guuguo.learnsave.view.IMainView
 import java.util.*
-import kotlin.properties.ReadOnlyProperty
-import kotlin.reflect.KProperty
 
 
 class MainActivity : BaseActivity(), IMainView {
-
     var page = 1
     var isRefresh = false
     var meiziAdapter: MeiziAdapter? = null
@@ -33,9 +30,9 @@ class MainActivity : BaseActivity(), IMainView {
     }
 
     val recycler: RecyclerView by bindView(R.id.recycler)
-    val pflMain: PtrFrameLayout by  bindView(R.id.pfl_main)
+    val ptrMain: PtrFrameLayout by  bindView(R.id.pfl_main)
 
-   
+
     override fun getLayoutResId(): Int {
         return R.layout.activity_main;
     }
@@ -44,50 +41,66 @@ class MainActivity : BaseActivity(), IMainView {
     override fun initIView() {
         initPtr()
         initRecycler()
+        ptrMain.postDelayed({ ptrMain.autoRefresh() }, 50)
     }
 
     private fun initRecycler() {
-        recycler?.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
+        meiziAdapter = MeiziAdapter(meiziList)
+        meiziAdapter?.openLoadMore(12)
+        meiziAdapter?.setOnLoadMoreListener {
+            presenter.fetchMeiziData(page)
+        }
+
+        recycler.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
+        recycler.adapter = meiziAdapter
+
     }
 
     private fun initPtr() {
         var header = MaterialHeader(activity)
-        header.setPtrFrameLayout(pflMain)
-        pflMain?.headerView = header
-        pflMain?.setPtrHandler(object : PtrDefaultHandler() {
+        header.setPtrFrameLayout(ptrMain)
+        header.setPadding(0, DisplayUtil.dip2px(15f), 0, DisplayUtil.dip2px(10f))
+        ptrMain.headerView = header
+        ptrMain.setPtrHandler(object : PtrDefaultHandler() {
             override fun onRefreshBegin(frame: PtrFrameLayout?) {
+                page = 1
+                isRefresh = true
                 presenter.fetchMeiziData(page)
             }
         })
+        ptrMain.addPtrUIHandler(header)
     }
 
     override fun showProgress() {
-        isRefresh = true
     }
 
     override fun hideProgress() {
-        isRefresh = false
+        if (isRefresh) {
+            ptrMain.refreshComplete()
+            isRefresh = false
+        }
     }
 
     override fun showNoMoreData() {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        meiziAdapter?.loadComplete()
     }
 
-    override fun showErrorView() {
-        Toast.makeText(activity, "error", Toast.LENGTH_LONG).show()
+    override fun showErrorView(e: Throwable) {
+        Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
+        
     }
 
-    override fun showMeiziList(lMeiziList: MutableList<GankBean>) {
-        if (meiziAdapter == null) {
-            meiziAdapter = MeiziAdapter()
-            recycler!!.adapter = meiziAdapter
-        }
+    override fun showMeiziList(lMeiziList: List<GankBean>) {
+        page++
         if (isRefresh) {
             meiziList.clear()
             meiziList.addAll(lMeiziList)
-        } else
-            meiziList.addAll(lMeiziList)
-        meiziAdapter!!.setNewData(meiziList)
+            meiziAdapter?.notifyDataSetChanged()
+        } else {
+            recycler.post {
+                meiziAdapter?.addData(lMeiziList)
+            }
+        }
     }
 }
 

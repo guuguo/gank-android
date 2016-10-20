@@ -4,10 +4,7 @@ import android.content.Context
 import com.guuguo.learnsave.bean.Ganks
 import com.guuguo.learnsave.net.ApiServer
 import com.guuguo.learnsave.view.IMainView
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
 import rx.functions.Action1
-import rx.schedulers.Schedulers
 
 /**
  * 主界面presenter
@@ -21,10 +18,7 @@ class MainPresenter(context: Context, iView: IMainView) : BasePresenter<IMainVie
 
     fun fetchMeiziData(page: Int) {
         iView.showProgress()
-        subscription = Observable.zip(ApiServer.getGankData(ApiServer.TYPE_FULI, 15, page),
-                ApiServer.getGankData(ApiServer.TYPE_REST, 15, page),
-                { fuliData, restData -> createMeiziDataWithRestDesc(fuliData, restData) })
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        subscription = ApiServer.getGankData(ApiServer.TYPE_FULI, 12, page)
                 .subscribe(object : Action1<Ganks> {
                     override fun call(meiziData: Ganks) {
                         if (meiziData.results.size === 0) {
@@ -34,8 +28,8 @@ class MainPresenter(context: Context, iView: IMainView) : BasePresenter<IMainVie
                         }
                         iView.hideProgress()
                     }
-                }, Action1<kotlin.Throwable> {
-                    iView.showErrorView()
+                }, Action1<kotlin.Throwable> {error->
+                    iView.showErrorView(error)
                     iView.hideProgress()
                 })
 

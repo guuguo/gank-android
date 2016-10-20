@@ -16,17 +16,20 @@ import java.io.InputStream;
  */
 
 public class CustomImageSizeGlideModule implements GlideModule {
-    @Override public void applyOptions(Context context, GlideBuilder builder) {
+    @Override
+    public void applyOptions(Context context, GlideBuilder builder) {
         // nothing to do here
     }
 
-    @Override public void registerComponents(Context context, Glide glide) {
+    @Override
+    public void registerComponents(Context context, Glide glide) {
         glide.register(CustomImageSizeModel.class, InputStream.class, new CustomImageSizeModelFactory());
     }
+
     private class CustomImageSizeModelFactory implements ModelLoaderFactory<CustomImageSizeModel, InputStream> {
         @Override
         public ModelLoader<CustomImageSizeModel, InputStream> build(Context context, GenericLoaderFactory factories) {
-            return new CustomImageSizeUrlLoader( context );
+            return new CustomImageSizeUrlLoader(context);
         }
 
         @Override
