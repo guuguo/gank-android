@@ -11,7 +11,7 @@ import butterknife.bindView
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.adapter.MeiziAdapter
 import com.guuguo.learnsave.app.base.BaseActivity
-import com.guuguo.learnsave.bean.entity.GankBean
+import com.guuguo.learnsave.model.entity.GankModel
 import com.guuguo.learnsave.presenter.MainPresenter
 import com.guuguo.learnsave.util.DisplayUtil
 import com.guuguo.learnsave.view.IMainView
@@ -22,7 +22,7 @@ class MainActivity : BaseActivity(), IMainView {
     var page = 1
     var isRefresh = false
     var meiziAdapter: MeiziAdapter? = null
-    var meiziList = ArrayList<GankBean>()
+    var meiziList = ArrayList<GankModel>()
     val presenter: MainPresenter by lazy { MainPresenter(activity, this) }
 
     override fun initPresenter() {
@@ -90,7 +90,7 @@ class MainActivity : BaseActivity(), IMainView {
         
     }
 
-    override fun showMeiziList(lMeiziList: List<GankBean>) {
+    override fun showMeiziList(lMeiziList: List<GankModel>) {
         page++
         if (isRefresh) {
             meiziList.clear()

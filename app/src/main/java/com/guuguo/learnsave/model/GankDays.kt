@@ -1,4 +1,4 @@
-package com.guuguo.learnsave.bean
+package com.guuguo.learnsave.model
 
 /**
  * Created by guodeqing on 7/24/16.

@@ -1,8 +1,8 @@
 package com.guuguo.learnsave.presenter
 
 import android.content.Context
-import com.guuguo.learnsave.bean.Ganks
-import com.guuguo.learnsave.net.ApiServer
+import com.guuguo.learnsave.model.Ganks
+import com.guuguo.learnsave.model.retrofit.ApiServer
 import com.guuguo.learnsave.view.IMainView
 import rx.functions.Action1
 

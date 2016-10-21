@@ -1,7 +1,7 @@
-package com.guuguo.learnsave.bean
+package com.guuguo.learnsave.model
 
 import com.google.gson.annotations.SerializedName
-import com.guuguo.learnsave.bean.entity.GankBean
+import com.guuguo.learnsave.model.entity.GankModel
 import java.util.*
 
 /**
@@ -10,21 +10,21 @@ import java.util.*
 class GankDayResult {
     var date: Long = 0
 
-    var android: ArrayList<GankBean>? = null
+    var android: ArrayList<GankModel>? = null
 
-    var ios: ArrayList<GankBean>? = null
+    var ios: ArrayList<GankModel>? = null
 
     @SerializedName("休息视频")
-    var rest: ArrayList<GankBean>? = null
+    var rest: ArrayList<GankModel>? = null
 
     @SerializedName("拓展资源")
-    var extend: ArrayList<GankBean>? = null
+    var extend: ArrayList<GankModel>? = null
 
     @SerializedName("瞎推荐")
-    var recommend: ArrayList<GankBean>? = null
+    var recommend: ArrayList<GankModel>? = null
 
     @SerializedName("福利")
-    var welfare: ArrayList<GankBean>? = null
+    var welfare: ArrayList<GankModel>? = null
 
     override fun toString(): String {
         return "ResultsBean{" +

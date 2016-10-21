@@ -67,18 +67,17 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 //    compile project(':androidLib:androidLib')
 
-    ext.butterknife_version = "8.4.0"
+
     apt "com.jakewharton:butterknife-compiler:$butterknife_version"
     compile "com.jakewharton:butterknife:$butterknife_version"
     compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
     
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    ext.support_vesion = "24.2.1"
-    compile "com.android.support:cardview-v7:$support_vesion"
-    compile "com.android.support:recyclerview-v7:$support_vesion"
-    compile "com.android.support:appcompat-v7:$support_vesion"
-    compile "com.android.support:design:$support_vesion"
+    compile "com.android.support:cardview-v7:$support_version"
+    compile "com.android.support:recyclerview-v7:$support_version"
+    compile "com.android.support:appcompat-v7:$support_version"
+    compile "com.android.support:design:$support_version"
     compile "com.android.support.constraint:constraint-layout:1.0.0-alpha3"
 
     

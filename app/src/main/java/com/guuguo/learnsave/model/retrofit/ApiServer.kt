@@ -1,9 +1,8 @@
-package com.guuguo.learnsave.net
+package com.guuguo.learnsave.model.retrofit
 
-import com.guuguo.learnsave.bean.GankDays
-import com.guuguo.learnsave.bean.Ganks
-import com.guuguo.learnsave.net.retrofit.GankRetrofit
-import com.guuguo.learnsave.net.retrofit.GankService
+import com.guuguo.learnsave.extension.date
+import com.guuguo.learnsave.model.GankDays
+import com.guuguo.learnsave.model.Ganks
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -22,16 +21,17 @@ object ApiServer {
     val TYPE_FRONT = "前端"
     val TYPE_ALL = "all"
 
+    val gankServer by lazy { GankRetrofit.retrofit.create(GankService::class.java) }
     fun getGankData(type: String, count: Int, page: Int): Observable<Ganks> {
-        return GankRetrofit.getRetrofit().create(GankService::class.java)
+        return gankServer
                 .getGanHuo(type, count, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun getGankOneDayData(date: Date): Observable<GankDays> {
-        val dateStr = SimpleDateFormat("yyyy/MM/dd").format(date)
-        return GankRetrofit.getRetrofit().create(GankService::class.java)
+        val dateStr = date.date()
+        return gankServer
                 .getGankOneDay(dateStr)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
