@@ -1,38 +1,104 @@
 <resources>
-
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="AppTheme.FullScreen" parent="Theme.AppCompat.NoActionBar" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@android:color/transparent</item>
-    </style>
     
+
+    <!-- 日间模式 -->
+    <!--<style name="AppTheme.day" parent="AppTheme">-->
+        <!--<item name="android:windowBackground">@color/day_main_base_bg</item>-->
+        <!--<item name="containerBackgroundLayer2">@color/day_main_front_bg</item>-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="myTitleTextColor">@color/day_title_text</item>-->
+        <!--<item name="android:textColor">@color/day_text</item>-->
+        <!--<item name="subtitleTextColor">@color/day_sub_title_text</item>-->
+        <!--<item name="android:colorForeground">@color/design_fab_stroke_top_outer_color</item>-->
+        <!--<item name="android:textColorHint">@color/day_hint</item>-->
+        <!--<item name="android:textColorLink">@color/day_hint</item>-->
+        <!--<item name="containerBackgroundLayer1">@color/day_main_base_bg</item>-->
+    <!--</style>-->
+   <!-- &lt;!&ndash; 夜间模式 &ndash;&gt;
+    <style name="AppTheme.night" parent="AppTheme">
+        <item name="android:windowBackground">@color/night_main_bg</item>
+        <item name="containerBackgroundLayer2">@color/night_main_front_bg</item>
+        <item name="colorPrimary">@color/night_actionbar_background</item>
+        <item name="myTitleTextColor">@color/night_title_text</item>
+        <item name="android:textColor">@color/night_text</item>
+        <item name="android:textColorHint">@color/night_hint</item>
+        <item name="android:textColorLink">@color/night_hint</item>
+        <item name="containerBackgroundLayer1">@color/night_main_bg</item>
+
+    </style>-->
+
+    <style name="MyDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.Design.Snackbar" parent="android:Widget">
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="android:minWidth">@dimen/design_snackbar_min_width</item>
+        <item name="android:maxWidth">@dimen/design_snackbar_max_width</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:textColor">@color/white100</item>
+        <item name="android:paddingLeft">@dimen/design_snackbar_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/design_snackbar_padding_horizontal</item>
+        <item name="elevation">@dimen/design_snackbar_elevation</item>
+        <item name="maxActionInlineWidth">@dimen/design_snackbar_action_inline_max_width</item>
+    </style>
+
+    <style name="TextAppearance.Design.Snackbar.Message" parent="android:TextAppearance">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="toolbar" parent="Base.Widget.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+        <!--<item name="">@color/white</item>-->
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/day_main_base_bg</item>
+        <item name="containerBackgroundLayer2">@color/day_main_front_bg</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="myTitleTextColor">@color/day_title_text</item>
+        <item name="android:textColor">@color/day_text</item>
+        <item name="subtitleTextColor">@color/day_sub_title_text</item>
+        <item name="android:colorForeground">@color/design_fab_stroke_top_outer_color</item>
+        <item name="android:textColorHint">@color/day_hint</item>
+        <item name="android:textColorLink">@color/day_hint</item>
+        <item name="containerBackgroundLayer1">@color/day_main_base_bg</item>
+        
+        
+        <item name="actionMenuTextColor">@color/white100</item>
+        <item name="android:editTextColor">?android:textColor</item>
+
+    </style>
+
     <style name="Widget.Design.AppBarLayout" parent="android:Widget">
         <item name="elevation">0dp</item>
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
-    <style name="text_item_title">
+    <style name="text_item_title_bold">
         <item name="android:textColor">?myTitleTextColor</item>
         <item name="android:textSize">@dimen/title_item</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_item_title">
+        <item name="android:textColor">?myTitleTextColor</item>
+        <item name="android:textSize">@dimen/title_item</item>
     </style>
 
     <style name="text_level1_title">
@@ -58,8 +124,20 @@
     </style>
 
     <style name="under_line">
-        <item name="android:background">@color/black20</item>
+        <item name="android:background">@color/black40</item>
         <item name="android:layout_height">1px</item>
         <item name="android:layout_width">match_parent</item>
+    </style>
+    <style name="vertical_line">
+        <item name="android:background">@color/black40</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">1px</item>
+    </style>
+
+    <style name="under_dash">
+        <item name="android:background">@drawable/bg_dash_line</item>
+        <item name="android:layout_height">2px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layerType">software</item>
     </style>
 </resources>

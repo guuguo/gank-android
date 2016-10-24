@@ -1,9 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>  
-<resources>  
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
 
 
     <attr name="containerBackgroundLayer1" format="reference|color"></attr>
     <attr name="containerBackgroundLayer2" format="reference|color"></attr>
     <attr name="myTitleTextColor" format="color"></attr>
     <attr name="mySubTitleTextColor" format="color"></attr>
+    <declare-styleable name="IconTextView">
+        <attr name="typeface" format="enum">
+            <enum name="material_icon" value="0"/>
+            <enum name="font_awesome" value="1"/>
+        </attr>
+    </declare-styleable>
 </resources>

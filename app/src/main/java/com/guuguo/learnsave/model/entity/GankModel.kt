@@ -18,4 +18,10 @@ class GankModel {
 
     var width: Int = 0
     var height: Int = 0
+    override fun equals(other: Any?): Boolean {
+        if (other is GankModel)
+            if (_id == other._id)
+                return true
+        return false
+    }
 }

@@ -35,14 +35,14 @@ class MainPresenter(context: Context, iView: IMainView) : BasePresenter<IMainVie
 
     }
 
-    private fun createMeiziDataWithRestDesc(meiziData: Ganks, data: Ganks): Ganks {
-        val size = Math.min(meiziData.results.size, data.results.size)
-        for (i in 0..size - 1) {
-            meiziData.results[i].desc = meiziData.results[i].desc + "，" + data.results[i].desc
-            meiziData.results[i].who = data.results[i].who
-        }
-        return meiziData
-    }
+//    private fun createMeiziDataWithRestDesc(meiziData: Ganks, data: Ganks): Ganks {
+//        val size = Math.min(meiziData.results.size, data.results.size)
+//        for (i in 0..size - 1) {
+//            meiziData.results[i].desc = meiziData.results[i].desc + "，" + data.results[i].desc
+//            meiziData.results[i].who = data.results[i].who
+//        }
+//        return meiziData
+//    }
 
 
 }

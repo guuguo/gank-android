@@ -1,8 +1,8 @@
 <!--?xml version=1.0 encoding=utf-8?-->
 <resources>
     <color name="mired">#E34F1B</color>
-    <color name="migray">#EEF0EF</color>
-    <color name="blue">#0092FF</color>
+    <color name="migray">#f3f3f3</color>
+    <color name="blue">#3180e2</color>
     <color name="blue_deep">#0154B2</color>
     <color name="gray">#4F4F4F</color>
     <color name="red30">#4dE34F1B</color>
@@ -16,12 +16,15 @@
     <color name="remark_item">#ffffff</color>
 
     <color name="white100">#ffffffff</color>
+    <color name="white20">#33ffffff</color>
     <color name="white30">#4dffffff</color>
     <color name="white40">#66ffffff</color>
     <color name="white60">#99ffffff</color>
     <color name="white70">#b3ffffff</color>
+    <color name="white80">#ccffffff</color>
     <color name="white90">#e6ffffff</color>
     <color name="black">#ff000000</color>
+    <color name="black10">#16000000</color>
     <color name="black20">#33000000</color>
     <color name="black30">#4d000000</color>
     <color name="black40">#66000000</color>
@@ -50,6 +53,7 @@
     <color name="day_main_base_bg">#F2F2F2</color>
     <color name="day_main_front_bg">#ffffff</color>
     <color name="day_title_text">#404040</color>
+    <color name="day_sub_title_text">#5a5a5a</color>
     <color name="day_text">#0e0e0e</color>
     <color name="day_hint">#919191</color>
 
