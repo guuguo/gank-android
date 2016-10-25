@@ -23,17 +23,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <!--<TextView-->
-        <!--android:id="@+id/who"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:gravity="center"-->
-        <!--android:textStyle="bold"-->
-        <!--app:layout_constraintBottom_toBottomOf="@id/cl_meizi"-->
-        <!--app:layout_constraintLeft_toLeftOf="@id/cl_meizi"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/image"-->
-        <!--tools:text="asdasd" />-->
-
         <TextView
             android:id="@+id/date"
             android:layout_width="0dp"

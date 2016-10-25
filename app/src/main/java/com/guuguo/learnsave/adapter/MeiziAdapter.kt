@@ -60,6 +60,9 @@ class MeiziAdapter : BaseQuickAdapter<GankModel> {
                 })
     }
 
+    override fun getItemId(position: Int): Long {
+        return getItem(position).url!!.hashCode().toLong()
+    }
 
 }
 

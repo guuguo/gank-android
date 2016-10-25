@@ -15,7 +15,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.adapter.MeiziAdapter
 import com.guuguo.learnsave.app.base.BaseActivity
-import com.guuguo.learnsave.extension.update
+import com.guuguo.learnsave.extension.updateData
 import com.guuguo.learnsave.model.entity.GankModel
 import com.guuguo.learnsave.presenter.MainPresenter
 import com.guuguo.learnsave.util.DisplayUtil
@@ -114,8 +114,7 @@ class MainActivity : ToolBarActivity(), IMainView {
     override fun showMeiziList(lMeiziList: List<GankModel>) {
         page++
         if (isRefresh) {
-            meiziList.update(lMeiziList)
-            meiziAdapter?.notifyDataSetChanged()
+            meiziAdapter?.updateData(lMeiziList)
         } else {
             recycler.post {
                 meiziAdapter?.addData(lMeiziList)
