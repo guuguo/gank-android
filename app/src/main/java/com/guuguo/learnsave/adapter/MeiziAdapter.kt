@@ -12,10 +12,17 @@ import com.guuguo.learnsave.model.entity.GankModel
 import java.text.SimpleDateFormat
 
 import android.R.attr.width
+import android.animation.ObjectAnimator
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.media.Image
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.TextView
 import com.bumptech.glide.DrawableTypeRequest
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable
@@ -25,8 +32,14 @@ import com.bumptech.glide.request.target.BaseTarget
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.SizeReadyCallback
 import com.bumptech.glide.request.target.Target
+import com.guuguo.learnsave.app.activity.GankActivity
 import com.guuguo.learnsave.app.widget.RatioImageView
 import com.guuguo.learnsave.extension.date
+import com.guuguo.learnsave.extension.getDateSimply
+import com.guuguo.learnsave.util.MEIZI
+import com.guuguo.learnsave.util.OmeiziDrawable
+import com.guuguo.learnsave.util.TRANSLATE_GIRL_VIEW
+import java.io.Serializable
 
 class MeiziAdapter : BaseQuickAdapter<GankModel> {
     constructor() : super(R.layout.item_meizi, null) {
@@ -37,15 +50,26 @@ class MeiziAdapter : BaseQuickAdapter<GankModel> {
 
     override fun convert(holder: BaseViewHolder, gankBean: GankModel) {
         val image = holder.getView<View>(R.id.image) as RatioImageView
-        holder.setText(R.id.date, gankBean.publishedAt?.date())
-        //        Glide.with(mContext).using( new CustomImageSizeUrlLoader(holder.convertView.getContext())).load(new CustomImageSizeModelFutureStudio(gankBean.getUrl())).into((ImageView) holder.getView(R.id.image));
+        val describe = holder.getView<View>(R.id.date)
+        describe.visibility = View.GONE
+        holder.setText(R.id.date, gankBean.publishedAt?.getDateSimply())
+        holder.itemView.setOnClickListener {
+            
+            OmeiziDrawable = image.getDrawable()
+            val intent = Intent(image.context, GankActivity::class.java)
+            intent.putExtra(MEIZI, gankBean as Serializable)
+            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(image.context as Activity, image, TRANSLATE_GIRL_VIEW)
+            ActivityCompat.startActivity(image.context as Activity, intent, optionsCompat.toBundle())
+        }
+        
         with(gankBean) {
             if (width > 0 && height > 0) {
-                image.setOriginalSize(width, height)
+                knownImageSize(describe, image, width, height)
             }
         }
         Glide.with(mContext).load(gankBean.url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .crossFade()
                 .into(object : SimpleTarget<GlideDrawable>() {
                     override fun onResourceReady(resource: GlideDrawable, glideAnimation: GlideAnimation<in GlideDrawable>) {
                         val height = resource.intrinsicHeight
@@ -53,11 +77,16 @@ class MeiziAdapter : BaseQuickAdapter<GankModel> {
                         gankBean.width = width
                         gankBean.height = height
 
-                        image.setTag(gankBean.url)
                         image.setImageDrawable(resource)
-                        image.setOriginalSize(width, height)
+                        knownImageSize(describe, image, width, height)
                     }
                 })
+        
+    }
+
+    private fun knownImageSize(describe: View, image: RatioImageView, width: Int, height: Int) {
+        image.setOriginalSize(width, height)
+        describe.visibility = View.VISIBLE
     }
 
     override fun getItemId(position: Int): Long {

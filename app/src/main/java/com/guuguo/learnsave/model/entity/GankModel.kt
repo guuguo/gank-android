@@ -1,11 +1,12 @@
 package com.guuguo.learnsave.model.entity
 
+import java.io.Serializable
 import java.util.*
 
 /**
  * Created by guodeqing on 7/24/16.
  */
-class GankModel {
+class GankModel : Serializable {
     var _id: String? = null
     var createdAt: Date? = null
     var desc: String? = null
@@ -24,4 +25,9 @@ class GankModel {
                 return true
         return false
     }
+
+    override fun toString(): String {
+        return "GankModel(_id=$_id, createdAt=$createdAt, desc=$desc, publishedAt=$publishedAt, source=$source, type=$type, url=$url, used=$used, who=$who, width=$width, height=$height)"
+    }
+
 }

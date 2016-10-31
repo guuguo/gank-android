@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".app.activity.DateGankActivity" />
+        <activity android:name=".app.activity.GankActivity" />
 
     </application>
 

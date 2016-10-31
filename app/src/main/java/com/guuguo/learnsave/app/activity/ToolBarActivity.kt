@@ -16,6 +16,7 @@ import butterknife.bindView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
+import com.flyco.systembar.SystemBarHelper
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.adapter.MeiziAdapter
 import com.guuguo.learnsave.app.base.BaseActivity
@@ -32,19 +33,24 @@ abstract class ToolBarActivity : BaseActivity() {
     val toolbar by bindView<Toolbar>(R.id.toolbar)
     var actionBar: ActionBar? = null
 
-    protected fun isBackVisible(): Boolean {
+    open protected fun isBackVisible(): Boolean {
         return false
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initToolBar()
     }
 
     open protected fun initToolBar() {
+        SystemBarHelper.immersiveStatusBar(activity, 0f)
+        SystemBarHelper.setHeightAndPadding(activity, toolbar)
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
+        
         actionBar?.setDisplayHomeAsUpEnabled(isBackVisible());
+        if (isBackVisible()) toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 }
 

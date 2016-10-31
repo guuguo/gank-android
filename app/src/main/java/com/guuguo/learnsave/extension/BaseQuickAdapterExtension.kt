@@ -8,8 +8,10 @@ import java.util.*
  */
 fun <T> BaseQuickAdapter<T>.updateData(list: List<T>) {
     var index = 0
-    if (data?.size == 0)
+    if (data?.size == 0) {
         addAll(0, list)
+        return
+    }
     for (nModel in list) {
         if (data.get(0)!!.equals(nModel))
             break
@@ -22,6 +24,6 @@ fun <T> BaseQuickAdapter<T>.updateData(list: List<T>) {
 }
 
 private fun <T> BaseQuickAdapter<T>.addAll(index: Int, list: List<T>) {
-    data.addAll(0, list.subList(0, index))
+    data.addAll(0, list.subList(0, index+list.size))
     notifyItemRangeInserted(0, index + 1)
 }

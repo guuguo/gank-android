@@ -3,6 +3,7 @@ package com.guuguo.learnsave.app.activity
 import android.content.Intent
 import android.graphics.Color
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
@@ -42,12 +43,6 @@ class MainActivity : ToolBarActivity(), IMainView {
         return R.layout.activity_main;
     }
 
-    override fun initToolBar() {
-        super.initToolBar()
-        toolbar.setTitle("Gank")
-        toolbar.setTitleTextColor(Color.WHITE)
-        
-    }
 
     override fun initIView() {
         initSwiper()
@@ -73,8 +68,8 @@ class MainActivity : ToolBarActivity(), IMainView {
         recycler.addOnItemTouchListener(object : OnItemClickListener() {
             override fun SimpleOnItemClick(adapter: BaseQuickAdapter<*>?, view: View?, position: Int) {
                 var model = adapter!!.getItem(position) as GankModel;
-                var intent = Intent(activity, DateGankActivity::class.java)
-                intent.putExtra(DateGankActivity.FIELD_DATE, model.publishedAt)
+                var intent = Intent(activity, GankActivity::class.java)
+                intent.putExtra(GankActivity.FIELD_DATE, model.publishedAt)
                 startActivity(intent)
             }
         })
