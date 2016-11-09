@@ -97,7 +97,8 @@ dependencies {
     
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.github.nisrulz:easydeviceinfo-base:2.2.0'
-    
+    compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
+
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'

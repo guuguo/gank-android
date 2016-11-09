@@ -65,14 +65,14 @@ class MainActivity : ToolBarActivity(), IMainView {
 
         recycler.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
         recycler.adapter = meiziAdapter
-        recycler.addOnItemTouchListener(object : OnItemClickListener() {
-            override fun SimpleOnItemClick(adapter: BaseQuickAdapter<*>?, view: View?, position: Int) {
-                var model = adapter!!.getItem(position) as GankModel;
-                var intent = Intent(activity, GankActivity::class.java)
-                intent.putExtra(GankActivity.FIELD_DATE, model.publishedAt)
-                startActivity(intent)
-            }
-        })
+//        recycler.addOnItemTouchListener(object : OnItemClickListener() {
+//            override fun SimpleOnItemClick(adapter: BaseQuickAdapter<*>?, view: View?, position: Int) {
+//                var model = adapter!!.getItem(position) as GankModel;
+//                var intent = Intent(activity, GankActivity::class.java)
+//                intent.putExtra(GankActivity.FIELD_DATE, model.publishedAt)
+//                startActivity(intent)
+//            }
+//        })
     }
 
     private fun initSwiper() {

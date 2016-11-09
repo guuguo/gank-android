@@ -1,31 +1,39 @@
 package com.guuguo.learnsave.app.activity
 
 import android.support.v4.view.ViewCompat
+import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.ImageView
 import butterknife.bindView
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.app.base.BaseActivity
+import com.guuguo.learnsave.app.widget.RatioImageView
+import com.guuguo.learnsave.extension.date
+import com.guuguo.learnsave.extension.getDateSimply
 import com.guuguo.learnsave.extension.showSnackTip
 import com.guuguo.learnsave.model.GankDays
 import com.guuguo.learnsave.model.entity.GankModel
 import com.guuguo.learnsave.presenter.DateGankPresenter
+import com.guuguo.learnsave.util.MEIZI
 import com.guuguo.learnsave.util.OmeiziDrawable
 import com.guuguo.learnsave.util.TRANSLATE_GIRL_VIEW
 import com.guuguo.learnsave.view.IDateGankView
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar
 
 class GankActivity : ToolBarActivity(), IDateGankView {
 
     val contentView by bindView<View>(R.id.activity)
-    val mIvMeizi by bindView<View>(R.id.iv_head)
+    val mIvMeizi by bindView<RatioImageView>(R.id.iv_head)
+    val mRecycler by bindView<RecyclerView>(R.id.rv_gank)
+    val mProgress by bindView<SmoothProgressBar>(R.id.progressbar)
 
-    companion object {
-        val FIELD_DATE = "date"
-    }
+    var mGankBean: GankModel? = null
 
-    val dateGankPresenter by lazy { DateGankPresenter(activity, this) }
+
+    val mPresenter by lazy { DateGankPresenter(activity, this) }
 
     override fun initPresenter() {
-        dateGankPresenter.init()
+        mPresenter.init()
     }
 
     override fun getLayoutResId(): Int {
@@ -37,16 +45,24 @@ class GankActivity : ToolBarActivity(), IDateGankView {
     }
 
     override fun initIView() {
-        mIvMeizi.setBackgroundDrawable(OmeiziDrawable)
+        mGankBean = intent.getSerializableExtra(MEIZI) as GankModel?
+        initIvMeizi()
+        mPresenter.fetchDate(mGankBean!!.publishedAt!!)
+    }
+
+    private fun initIvMeizi() {
+        mIvMeizi.setImageDrawable(OmeiziDrawable)
+        mIvMeizi.setOriginalSize(mGankBean!!.width, mGankBean!!.height)
         ViewCompat.setTransitionName(mIvMeizi, TRANSLATE_GIRL_VIEW)
     }
 
     override fun showDate(date: GankDays) {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun hideProgress() {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+//        if(mProgress.isShown)
+        mProgress.visibility = View.GONE
     }
 
     override fun showErrorView(e: Throwable) {
@@ -54,7 +70,10 @@ class GankActivity : ToolBarActivity(), IDateGankView {
     }
 
     override fun showProgress() {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+//        if(!mProgress.isShown)
+        mProgress.visibility = View.VISIBLE
+
+//        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 
