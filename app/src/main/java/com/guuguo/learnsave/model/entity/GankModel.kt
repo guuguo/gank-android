@@ -7,12 +7,12 @@ import java.util.*
  * Created by guodeqing on 7/24/16.
  */
 class GankModel : Serializable {
-    var _id: String? = null
+    var _id: String = ""
     var createdAt: Date? = null
     var desc: String? = null
     var publishedAt: Date? = null
     var source: String? = null
-    var type: String? = null
+    var type: String = ""
     var url: String? = null
     var used: String? = null
     var who: String? = null

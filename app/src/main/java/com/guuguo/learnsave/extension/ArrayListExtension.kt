@@ -24,6 +24,11 @@ import java.util.*
 //    this.clear()
 //    this.addAll(temp)
 //}
+fun <T> ArrayList<T>.addAllSafe(list: List<T>?) {
+    if (list != null)
+        addAll(list!!)
+}
+
 
 fun <T> List<T>.intersection(list: List<T>): ArrayList<T> {
     var temp = ArrayList<T>()

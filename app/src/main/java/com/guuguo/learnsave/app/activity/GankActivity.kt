@@ -1,11 +1,13 @@
 package com.guuguo.learnsave.app.activity
 
 import android.support.v4.view.ViewCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import butterknife.bindView
 import com.guuguo.learnsave.R
+import com.guuguo.learnsave.adapter.GankAdapter
 import com.guuguo.learnsave.app.base.BaseActivity
 import com.guuguo.learnsave.app.widget.RatioImageView
 import com.guuguo.learnsave.extension.date
@@ -19,6 +21,7 @@ import com.guuguo.learnsave.util.OmeiziDrawable
 import com.guuguo.learnsave.util.TRANSLATE_GIRL_VIEW
 import com.guuguo.learnsave.view.IDateGankView
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+import java.util.*
 
 class GankActivity : ToolBarActivity(), IDateGankView {
 
@@ -26,6 +29,9 @@ class GankActivity : ToolBarActivity(), IDateGankView {
     val mIvMeizi by bindView<RatioImageView>(R.id.iv_head)
     val mRecycler by bindView<RecyclerView>(R.id.rv_gank)
     val mProgress by bindView<SmoothProgressBar>(R.id.progressbar)
+    val mGankAdapter by lazy {
+        GankAdapter()
+    }
 
     var mGankBean: GankModel? = null
 
@@ -48,6 +54,12 @@ class GankActivity : ToolBarActivity(), IDateGankView {
         mGankBean = intent.getSerializableExtra(MEIZI) as GankModel?
         initIvMeizi()
         mPresenter.fetchDate(mGankBean!!.publishedAt!!)
+        initRecycler()
+    }
+
+    private fun initRecycler() {
+        mRecycler.layoutManager=LinearLayoutManager(activity)
+        mRecycler.adapter=mGankAdapter
     }
 
     private fun initIvMeizi() {
@@ -56,12 +68,11 @@ class GankActivity : ToolBarActivity(), IDateGankView {
         ViewCompat.setTransitionName(mIvMeizi, TRANSLATE_GIRL_VIEW)
     }
 
-    override fun showDate(date: GankDays) {
-
+    override fun showDate(date: ArrayList<GankModel>) {
+        mGankAdapter.setNewData(date)
     }
 
     override fun hideProgress() {
-//        if(mProgress.isShown)
         mProgress.visibility = View.GONE
     }
 
@@ -70,10 +81,7 @@ class GankActivity : ToolBarActivity(), IDateGankView {
     }
 
     override fun showProgress() {
-//        if(!mProgress.isShown)
         mProgress.visibility = View.VISIBLE
-
-//        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 

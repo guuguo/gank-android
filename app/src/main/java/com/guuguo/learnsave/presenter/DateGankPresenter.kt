@@ -1,8 +1,10 @@
 package com.guuguo.learnsave.presenter
 
 import android.content.Context
+import com.guuguo.learnsave.extension.addAllSafe
 import com.guuguo.learnsave.model.GankDays
 import com.guuguo.learnsave.model.Ganks
+import com.guuguo.learnsave.model.entity.GankModel
 import com.guuguo.learnsave.model.retrofit.ApiServer
 import com.guuguo.learnsave.view.IDateGankView
 import com.guuguo.learnsave.view.IMainView
@@ -19,15 +21,22 @@ class DateGankPresenter(context: Context, iView: IDateGankView) : BasePresenter<
         subscription.unsubscribe()
     }
 
-    fun fetchDate(date:Date) {
+    fun fetchDate(date: Date) {
         iView.showProgress()
         subscription = ApiServer.getGankOneDayData(date)
                 .subscribe(object : Action1<GankDays> {
                     override fun call(gankDays: GankDays) {
-                        iView.showDate(gankDays)
+                        var list = ArrayList<GankModel>()
+                        list.addAllSafe(gankDays.results!!.android)
+                        list.addAllSafe(gankDays.results!!.ios)
+                        list.addAllSafe(gankDays.results!!.rest)
+                        list.addAllSafe(gankDays.results!!.recommend)
+                        list.addAllSafe(gankDays.results!!.extend)
+
+                        iView.showDate(list)
                         iView.hideProgress()
                     }
-                }, Action1<kotlin.Throwable> {error->
+                }, Action1<kotlin.Throwable> { error ->
                     iView.showErrorView(error)
                     iView.hideProgress()
                 })

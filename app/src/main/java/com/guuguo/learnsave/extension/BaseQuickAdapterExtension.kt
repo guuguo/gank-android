@@ -24,6 +24,6 @@ fun <T> BaseQuickAdapter<T>.updateData(list: List<T>) {
 }
 
 private fun <T> BaseQuickAdapter<T>.addAll(index: Int, list: List<T>) {
-    data.addAll(0, list.subList(0, index+list.size))
+    data.addAll(0, list.subList(0, index + list.size))
     notifyItemRangeInserted(0, index + 1)
 }

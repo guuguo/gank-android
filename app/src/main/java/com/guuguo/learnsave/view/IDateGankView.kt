@@ -2,6 +2,7 @@ package com.guuguo.learnsave.view
 
 import com.guuguo.learnsave.model.GankDays
 import com.guuguo.learnsave.model.entity.GankModel
+import java.util.*
 
 /**
  * 主界面的接口
@@ -11,5 +12,5 @@ interface IDateGankView : IBaseView {
     fun showProgress()
     fun hideProgress()
     fun showErrorView(e: Throwable)
-    fun showDate(date:GankDays)
+    fun showDate(date:ArrayList<GankModel>)
 }

@@ -28,7 +28,6 @@ class MainActivity : ToolBarActivity(), IMainView {
     var page = 1
     var isRefresh = false
     var meiziAdapter: MeiziAdapter? = null
-    var meiziList = ArrayList<GankModel>()
     val presenter: MainPresenter by lazy { MainPresenter(activity, this) }
 
     override fun initPresenter() {
@@ -57,7 +56,7 @@ class MainActivity : ToolBarActivity(), IMainView {
     }
 
     private fun initRecycler() {
-        meiziAdapter = MeiziAdapter(meiziList)
+        meiziAdapter = MeiziAdapter()
         meiziAdapter?.openLoadMore(12)
         meiziAdapter?.setOnLoadMoreListener {
             presenter.fetchMeiziData(page)
@@ -65,14 +64,6 @@ class MainActivity : ToolBarActivity(), IMainView {
 
         recycler.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
         recycler.adapter = meiziAdapter
-//        recycler.addOnItemTouchListener(object : OnItemClickListener() {
-//            override fun SimpleOnItemClick(adapter: BaseQuickAdapter<*>?, view: View?, position: Int) {
-//                var model = adapter!!.getItem(position) as GankModel;
-//                var intent = Intent(activity, GankActivity::class.java)
-//                intent.putExtra(GankActivity.FIELD_DATE, model.publishedAt)
-//                startActivity(intent)
-//            }
-//        })
     }
 
     private fun initSwiper() {
