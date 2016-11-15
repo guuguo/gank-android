@@ -27,13 +27,9 @@ import java.util.*
 class MainActivity : ToolBarActivity(), IMainView {
     var page = 1
     var isRefresh = false
-    var meiziAdapter: MeiziAdapter? = null
+    var meiziAdapter = MeiziAdapter()
+
     val presenter: MainPresenter by lazy { MainPresenter(activity, this) }
-
-    override fun initPresenter() {
-        presenter.init()
-    }
-
     val recycler: RecyclerView by bindView(R.id.recycler)
     val swiper: SwipeRefreshLayout by  bindView(R.id.swiper)
 
@@ -42,6 +38,9 @@ class MainActivity : ToolBarActivity(), IMainView {
         return R.layout.activity_main;
     }
 
+    override fun initPresenter() {
+        presenter.init()
+    }
 
     override fun initIView() {
         initSwiper()
@@ -52,13 +51,12 @@ class MainActivity : ToolBarActivity(), IMainView {
             swiper.isRefreshing = true
             onRefresh()
         }
-        
+
     }
 
     private fun initRecycler() {
-        meiziAdapter = MeiziAdapter()
-        meiziAdapter?.openLoadMore(12)
-        meiziAdapter?.setOnLoadMoreListener {
+        meiziAdapter.openLoadMore(12)
+        meiziAdapter.setOnLoadMoreListener {
             presenter.fetchMeiziData(page)
         }
 
@@ -89,7 +87,7 @@ class MainActivity : ToolBarActivity(), IMainView {
     }
 
     override fun showNoMoreData() {
-        meiziAdapter?.loadComplete()
+        meiziAdapter.loadComplete()
     }
 
     override fun showErrorView(e: Throwable) {
@@ -100,10 +98,10 @@ class MainActivity : ToolBarActivity(), IMainView {
     override fun showMeiziList(lMeiziList: List<GankModel>) {
         page++
         if (isRefresh) {
-            meiziAdapter?.updateData(lMeiziList)
+            meiziAdapter.updateData(lMeiziList)
         } else {
             recycler.post {
-                meiziAdapter?.addData(lMeiziList)
+                meiziAdapter.addData(lMeiziList)
             }
         }
     }

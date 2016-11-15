@@ -4,8 +4,11 @@ import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ImageView
 import butterknife.bindView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.adapter.GankAdapter
 import com.guuguo.learnsave.app.base.BaseActivity
@@ -50,6 +53,11 @@ class GankActivity : ToolBarActivity(), IDateGankView {
         return true
     }
 
+    override fun initToolBar() {
+        super.initToolBar()
+        actionBar?.setTitle(mGankBean?.desc)
+    }
+
     override fun initIView() {
         mGankBean = intent.getSerializableExtra(MEIZI) as GankModel?
         initIvMeizi()
@@ -58,8 +66,14 @@ class GankActivity : ToolBarActivity(), IDateGankView {
     }
 
     private fun initRecycler() {
-        mRecycler.layoutManager=LinearLayoutManager(activity)
-        mRecycler.adapter=mGankAdapter
+        mRecycler.layoutManager = LinearLayoutManager(activity)
+        mRecycler.adapter = mGankAdapter
+        mRecycler.addOnItemTouchListener(object : OnItemChildClickListener() {
+            override fun SimpleOnItemChildClick(adapter: BaseQuickAdapter<*>?, view: View?, i: Int) {
+                if (view!!.id == R.id.tv_content)
+                    WebViewActivity.loadWebViewActivity(mGankAdapter.getItem(i), activity)
+            }
+        })
     }
 
     private fun initIvMeizi() {

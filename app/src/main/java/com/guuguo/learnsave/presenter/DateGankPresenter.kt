@@ -1,7 +1,6 @@
 package com.guuguo.learnsave.presenter
 
 import android.content.Context
-import com.guuguo.learnsave.extension.addAllSafe
 import com.guuguo.learnsave.model.GankDays
 import com.guuguo.learnsave.model.Ganks
 import com.guuguo.learnsave.model.entity.GankModel
@@ -17,30 +16,34 @@ import java.util.*
  */
 class DateGankPresenter(context: Context, iView: IDateGankView) : BasePresenter<IDateGankView>(context, iView) {
 
-    override fun release() {
-        subscription.unsubscribe()
-    }
-
     fun fetchDate(date: Date) {
         iView.showProgress()
         subscription = ApiServer.getGankOneDayData(date)
                 .subscribe(object : Action1<GankDays> {
                     override fun call(gankDays: GankDays) {
-                        var list = ArrayList<GankModel>()
-                        list.addAllSafe(gankDays.results!!.android)
-                        list.addAllSafe(gankDays.results!!.ios)
-                        list.addAllSafe(gankDays.results!!.rest)
-                        list.addAllSafe(gankDays.results!!.recommend)
-                        list.addAllSafe(gankDays.results!!.extend)
-
-                        iView.showDate(list)
+                        iView.showDate(getMergeAllGanks(gankDays))
                         iView.hideProgress()
                     }
                 }, Action1<kotlin.Throwable> { error ->
                     iView.showErrorView(error)
                     iView.hideProgress()
                 })
-
     }
 
+    fun getMergeAllGanks(gankDays: GankDays): ArrayList<GankModel> {
+        var list = ArrayList<GankModel>()
+        list.addAllSafe(gankDays.results!!.Android)
+        list.addAllSafe(gankDays.results!!.iOS)
+        list.addAllSafe(gankDays.results!!.recommend)
+        list.addAllSafe(gankDays.results!!.extend)
+        list.addAllSafe(gankDays.results!!.APP)
+        list.addAllSafe(gankDays.results!!.web)
+        list.addAllSafe(gankDays.results!!.rest)
+        return list
+    }
+
+    fun <T> ArrayList<T>.addAllSafe(list: List<T>?) {
+        if (list != null)
+            addAll(list!!)
+    }
 }

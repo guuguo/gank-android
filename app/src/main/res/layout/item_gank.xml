@@ -12,8 +12,9 @@
         android:id="@+id/tv_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="休息视频"
-        android:textSize="25sp"
+        android:paddingTop="20dp"
+        tools:text="休息视频"
+        android:textSize="23sp"
         android:textStyle="bold"/>
 
     <TextView
@@ -21,10 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
-        android:drawableLeft="@drawable/ic_ios"
+        tools:drawableLeft="@drawable/ic_ios"
         android:gravity="center_vertical"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:text="暴雪游戏25年"
+        tools:text="暴雪游戏25年"
+        android:drawablePadding="10dp"
         android:textColor="@color/black70" />
 </LinearLayout>

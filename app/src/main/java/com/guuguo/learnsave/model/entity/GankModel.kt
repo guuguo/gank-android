@@ -13,7 +13,7 @@ class GankModel : Serializable {
     var publishedAt: Date? = null
     var source: String? = null
     var type: String = ""
-    var url: String? = null
+    var url: String = ""
     var used: String? = null
     var who: String? = null
 

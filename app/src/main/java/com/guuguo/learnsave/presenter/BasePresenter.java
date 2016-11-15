@@ -20,10 +20,15 @@ public abstract class BasePresenter<T extends IBaseView> {
         this.iView = iView;
     }
 
-    public void init(){
+    public void init() {
         iView.initIView();
     }
 
-    public abstract void release();
+    public void release() {
+        if (subscription != null)
+            subscription.unsubscribe();
+    }
+
+    ;
 
 }

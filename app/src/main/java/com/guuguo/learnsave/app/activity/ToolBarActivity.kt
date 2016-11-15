@@ -48,7 +48,6 @@ abstract class ToolBarActivity : BaseActivity() {
         SystemBarHelper.setHeightAndPadding(activity, toolbar)
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        
         actionBar?.setDisplayHomeAsUpEnabled(isBackVisible());
         if (isBackVisible()) toolbar.setNavigationOnClickListener { onBackPressed() }
     }

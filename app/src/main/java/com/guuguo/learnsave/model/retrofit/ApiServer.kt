@@ -21,7 +21,7 @@ object ApiServer {
     val TYPE_FRONT = "前端"
     val TYPE_ALL = "all"
 
-    val gankServer by lazy { GankRetrofit.retrofit.create(GankService::class.java) }
+    val gankServer by lazy { GankRetrofit.getRetrofit().create(GankService::class.java) }
     fun getGankData(type: String, count: Int, page: Int): Observable<Ganks> {
         return gankServer
                 .getGanHuo(type, count, page)

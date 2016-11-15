@@ -9,8 +9,6 @@ import java.util.*
  * Created by panl on 15/12/22.
  */
 interface IDateGankView : IBaseView {
-    fun showProgress()
-    fun hideProgress()
-    fun showErrorView(e: Throwable)
+
     fun showDate(date:ArrayList<GankModel>)
 }

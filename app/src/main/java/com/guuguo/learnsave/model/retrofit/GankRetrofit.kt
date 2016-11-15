@@ -1,5 +1,6 @@
 package com.guuguo.learnsave.model.retrofit
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.guuguo.learnsave.util.GANHUO_API
 
@@ -12,13 +13,18 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object GankRetrofit {
     val pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-    val gsonConver by lazy { GsonConverterFactory.create(GsonBuilder().setDateFormat(pattern).create()) }
-    val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
+    fun getGsonConver(gsonBuilder: GsonBuilder?): GsonConverterFactory {
+        var gson: Gson = GsonBuilder().setDateFormat(pattern).create();
+        if (gsonBuilder != null)
+            gson = gsonBuilder?.setDateFormat(pattern).create()
+        return GsonConverterFactory.create(gson)
+    }
+
+    fun getRetrofit(gsonBuilder: GsonBuilder? = null): Retrofit {
+        return Retrofit.Builder()
                 .baseUrl(GANHUO_API)
-                .addConverterFactory(gsonConver)
+                .addConverterFactory(getGsonConver(gsonBuilder))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build()
     }
-    
 }

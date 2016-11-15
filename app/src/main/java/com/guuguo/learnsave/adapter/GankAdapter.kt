@@ -42,6 +42,8 @@ import com.guuguo.learnsave.util.OmeiziDrawable
 import com.guuguo.learnsave.util.TRANSLATE_GIRL_VIEW
 import java.io.Serializable
 import android.graphics.drawable.Drawable
+import com.guuguo.learnsave.app.activity.WebViewActivity
+import com.guuguo.learnsave.extension.dpToPx
 
 
 class GankAdapter : BaseQuickAdapter<GankModel> {
@@ -56,20 +58,21 @@ class GankAdapter : BaseQuickAdapter<GankModel> {
         holder.setVisible(R.id.tv_category, holder.layoutPosition == 0 || !gankBean.type.equals(getItem(holder.layoutPosition - 1).type))
                 .setText(R.id.tv_category, gankBean.type)
                 .setText(R.id.tv_content, gankBean.desc)
-
-        var res = 0
+               
+        var res = R.drawable.ic_other
         when (gankBean.type) {
             "iOS" -> res = R.drawable.ic_ios
             "Android" -> res = R.drawable.ic_android
+            "前端" -> res = R.drawable.ic_web
             "瞎推荐" -> res = R.drawable.ic_other
             "休息视频" -> res = R.drawable.ic_relax
             "拓展资源" -> res = R.drawable.ic_extension
+            "APP" -> res = R.drawable.ic_app
         }
         val drawable = holder.getConvertView().context
                 .getDrawable(res)
-/// 这一步必须要做,否则不会显示.  
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(),
-                drawable.getMinimumHeight())
+        /// 这一步必须要做,否则不会显示.  
+        drawable.setBounds(0, 0, 20.dpToPx(), 20.dpToPx())
         holder.getView<TextView>(R.id.tv_content).setCompoundDrawables(drawable, null, null, null)
     }
 

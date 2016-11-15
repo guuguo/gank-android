@@ -10,9 +10,14 @@ import java.util.*
 class GankDayResult {
     var date: Long = 0
 
-    var android: ArrayList<GankModel>? = null
+    var Android: ArrayList<GankModel>? = null
+   
+    var APP: ArrayList<GankModel>? = null
 
-    var ios: ArrayList<GankModel>? = null
+    var iOS: ArrayList<GankModel>? = null
+    
+    @SerializedName("前端")
+    var web: ArrayList<GankModel>? = null
 
     @SerializedName("休息视频")
     var rest: ArrayList<GankModel>? = null
@@ -25,12 +30,12 @@ class GankDayResult {
 
     @SerializedName("福利")
     var welfare: ArrayList<GankModel>? = null
-
+    
     override fun toString(): String {
         return "ResultsBean{" +
                 "date=" + date +
-                ", Android=" + android +
-                ", iOS=" + ios +
+                ", Android=" + Android +
+                ", iOS=" + iOS +
                 ", rest=" + rest +
                 ", extend=" + extend +
                 ", recommend=" + recommend +
