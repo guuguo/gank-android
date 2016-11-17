@@ -6,8 +6,8 @@ import android.support.design.widget.AppBarLayout
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.view.animation.DecelerateInterpolator
-import butterknife.bindView
 import com.guuguo.learnsave.R
+import kotterknife.bindView
 
 /**
  * 带Toolbar的基础Activity

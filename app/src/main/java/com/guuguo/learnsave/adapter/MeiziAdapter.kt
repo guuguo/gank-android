@@ -53,14 +53,8 @@ class MeiziAdapter : BaseQuickAdapter<GankModel> {
         val describe = holder.getView<View>(R.id.date)
         describe.visibility = View.GONE
         holder.setText(R.id.date, gankBean.publishedAt?.getDateSimply())
-        holder.itemView.setOnClickListener {
-            
-            OmeiziDrawable = image.getDrawable()
-            val intent = Intent(image.context, GankActivity::class.java)
-            intent.putExtra(MEIZI, gankBean as Serializable)
-            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(image.context as Activity, image, TRANSLATE_GIRL_VIEW)
-            ActivityCompat.startActivity(image.context as Activity, intent, optionsCompat.toBundle())
-        }
+                .addOnClickListener(R.id.image)
+ 
         
         with(gankBean) {
             if (width > 0 && height > 0) {

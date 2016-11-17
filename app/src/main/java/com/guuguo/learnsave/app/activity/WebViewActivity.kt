@@ -5,9 +5,11 @@ import android.content.Intent
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import butterknife.bindView
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.adapter.GankAdapter
 import com.guuguo.learnsave.app.base.BaseActivity
@@ -29,33 +31,42 @@ import com.guuguo.learnsave.view.IDateGankView
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar
 import java.util.*
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.WebSettings
+import kotterknife.bindView
 
 
 class WebViewActivity : ToolBarActivity(), IBaseView {
 
+    val contentView by bindView<View>(R.id.activity)
     val mProgress by bindView<SmoothProgressBar>(R.id.progressbar)
     val mWebView by bindView<WebView>(R.id.wv_web)
 
     var mGankBean: GankModel? = null
+    val mPresenter by lazy { WebViewPresenter(activity, this) }
 
     companion object {
         fun loadWebViewActivity(gank: GankModel, context: Context) {
-            var intent = Intent(context, WebViewActivity.javaClass)
+            var intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra(GANK, gank)
             context.startActivity(intent)
         }
     }
 
-    val mPresenter by lazy { WebViewPresenter(activity, this) }
-    fun loadUrl(url: String) {
-        mWebView.setWebChromeClient(WebChromeClient())
-        mWebView.setWebViewClient(WebViewClient())
-        mWebView.getSettings().setJavaScriptEnabled(true)
-        mWebView.loadUrl(url)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.web_menu, menu)
+        return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            R.id.menu_browser -> mPresenter.openInBrowser(mGankBean!!.url)
+            R.id.menu_copy -> mPresenter.copyUrl(mGankBean!!.url)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_webview
@@ -76,7 +87,7 @@ class WebViewActivity : ToolBarActivity(), IBaseView {
 
     override fun initIView() {
         mGankBean = intent.getSerializableExtra(GANK) as GankModel?
-        loadUrl(mGankBean!!.url)
+        mPresenter.loadUrl(mWebView, mGankBean!!.url)
     }
 
     override fun hideProgress() {
@@ -90,5 +101,8 @@ class WebViewActivity : ToolBarActivity(), IBaseView {
         mProgress.visibility = View.VISIBLE
     }
 
+    override fun showTip(msg: String) {
+        showSnackTip(contentView, msg)
+    }
 
 }

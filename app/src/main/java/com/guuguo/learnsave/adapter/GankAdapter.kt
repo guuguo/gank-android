@@ -58,7 +58,8 @@ class GankAdapter : BaseQuickAdapter<GankModel> {
         holder.setVisible(R.id.tv_category, holder.layoutPosition == 0 || !gankBean.type.equals(getItem(holder.layoutPosition - 1).type))
                 .setText(R.id.tv_category, gankBean.type)
                 .setText(R.id.tv_content, gankBean.desc)
-               
+                .addOnClickListener(R.id.tv_content)
+
         var res = R.drawable.ic_other
         when (gankBean.type) {
             "iOS" -> res = R.drawable.ic_ios
@@ -70,7 +71,7 @@ class GankAdapter : BaseQuickAdapter<GankModel> {
             "APP" -> res = R.drawable.ic_app
         }
         val drawable = holder.getConvertView().context
-                .getDrawable(res)
+                .resources.getDrawable(res)
         /// 这一步必须要做,否则不会显示.  
         drawable.setBounds(0, 0, 20.dpToPx(), 20.dpToPx())
         holder.getView<TextView>(R.id.tv_content).setCompoundDrawables(drawable, null, null, null)

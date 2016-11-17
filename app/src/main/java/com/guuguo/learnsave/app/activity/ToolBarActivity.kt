@@ -12,7 +12,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
-import butterknife.bindView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
@@ -24,6 +23,7 @@ import com.guuguo.learnsave.model.entity.GankModel
 import com.guuguo.learnsave.presenter.MainPresenter
 import com.guuguo.learnsave.util.DisplayUtil
 import com.guuguo.learnsave.view.IMainView
+import kotterknife.bindView
 import java.util.*
 
 

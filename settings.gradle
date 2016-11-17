@@ -1,4 +1,4 @@
-include ':app',':androidLib'
-project(':androidLib').projectDir = new File('../androidLib/')
-include ':androidLib:androidLib'
+include ':app'//,':androidLib'
+//project(':androidLib').projectDir = new File('../androidLib/')
+//include ':androidLib:androidLib'
 

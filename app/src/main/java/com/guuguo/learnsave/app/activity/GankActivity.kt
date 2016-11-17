@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageView
-import butterknife.bindView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.guuguo.learnsave.R
@@ -15,6 +14,7 @@ import com.guuguo.learnsave.app.base.BaseActivity
 import com.guuguo.learnsave.app.widget.RatioImageView
 import com.guuguo.learnsave.extension.date
 import com.guuguo.learnsave.extension.getDateSimply
+import com.guuguo.learnsave.extension.safe
 import com.guuguo.learnsave.extension.showSnackTip
 import com.guuguo.learnsave.model.GankDays
 import com.guuguo.learnsave.model.entity.GankModel
@@ -24,9 +24,11 @@ import com.guuguo.learnsave.util.OmeiziDrawable
 import com.guuguo.learnsave.util.TRANSLATE_GIRL_VIEW
 import com.guuguo.learnsave.view.IDateGankView
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+import kotterknife.bindView
 import java.util.*
 
 class GankActivity : ToolBarActivity(), IDateGankView {
+
 
     val contentView by bindView<View>(R.id.activity)
     val mIvMeizi by bindView<RatioImageView>(R.id.iv_head)
@@ -91,12 +93,13 @@ class GankActivity : ToolBarActivity(), IDateGankView {
     }
 
     override fun showErrorView(e: Throwable) {
-        showSnackTip(contentView, e.message!!)
+        showSnackTip(contentView, e.message.safe())
     }
 
     override fun showProgress() {
         mProgress.visibility = View.VISIBLE
     }
-
-
+    override fun showTip(msg: String) {
+        showSnackTip(contentView, msg)
+    }
 }

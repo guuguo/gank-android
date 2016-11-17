@@ -9,4 +9,5 @@ interface IBaseView {
     fun showProgress()
     fun hideProgress()
     fun showErrorView(e:Throwable)
+    fun showTip(msg: String) 
 }
