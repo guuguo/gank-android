@@ -5,7 +5,7 @@ package com.guuguo.learnsave.util
  */
 
 // 默认每页加载数量
-val DEFAULT_COUNT = 12
+val MEIZI_COUNT=12
 val GANHUO_API = "https://gank.io/api/"
 
 val MEIZI = "meizi"

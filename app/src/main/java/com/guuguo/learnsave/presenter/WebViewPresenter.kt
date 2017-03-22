@@ -14,7 +14,6 @@ import com.guuguo.learnsave.model.retrofit.ApiServer
 import com.guuguo.learnsave.view.IBaseView
 import com.guuguo.learnsave.view.IDateGankView
 import com.guuguo.learnsave.view.IMainView
-import rx.functions.Action1
 import java.util.*
 import android.content.ClipData
 import android.content.ClipboardManager

@@ -1,5 +1,6 @@
 package com.guuguo.learnsave.util
 
+import com.guuguo.android.util.Preference
 import com.guuguo.learnsave.app.MyApplication
 
 
@@ -9,6 +10,5 @@ import com.guuguo.learnsave.app.MyApplication
 
 object Option {
     var context = MyApplication.instance!!
-
-    var userName: String by Preference(context, userName, "")
+    var userName: String by Preference(context, "")
 }

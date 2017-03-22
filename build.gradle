@@ -4,14 +4,16 @@ buildscript {
     ext.kotlin_version = '1.0.4'
     ext.support_version = "25.0.0"
     ext.butterknife_version = "8.4.0"
-    
+    ext.anko_version = "0.9"
+
+
     repositories {
         mavenCentral()
         jcenter()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"

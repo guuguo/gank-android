@@ -4,14 +4,14 @@ import android.content.Context;
 
 import com.guuguo.learnsave.view.IBaseView;
 
-import rx.Subscription;
+import io.reactivex.disposables.Disposable;
 
 /**
  * 基础presenter
  * Created by panl on 15/12/24.
  */
 public abstract class BasePresenter<T extends IBaseView> {
-    protected Subscription subscription;
+    protected Disposable subscription;
     protected Context context;
     protected T iView;
 
@@ -25,8 +25,8 @@ public abstract class BasePresenter<T extends IBaseView> {
     }
 
     public void release() {
-        if (subscription != null)
-            subscription.unsubscribe();
+        if (subscription != null && !subscription.isDisposed())
+            subscription.dispose();
     }
 
     ;

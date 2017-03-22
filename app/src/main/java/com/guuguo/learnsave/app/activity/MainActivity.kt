@@ -21,6 +21,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.adapter.MeiziAdapter
 import com.guuguo.learnsave.app.base.BaseActivity
+import com.guuguo.learnsave.app.fragment.SearchRevealFragment
 import com.guuguo.learnsave.extension.safe
 import com.guuguo.learnsave.extension.showSnackTip
 import com.guuguo.learnsave.extension.updateData
@@ -68,17 +69,26 @@ class MainActivity : ToolBarActivity(), IMainView {
         }
 
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item!!.itemId){
-            R.id.menu_check_up->Beta.checkUpgrade()
+        when (item!!.itemId) {
+            R.id.menu_check_up -> Beta.checkUpgrade()
+            R.id.menu_search -> {
+                supportFragmentManager
+                        .beginTransaction()
+                        .add(android.R.id.content, SearchRevealFragment(), "fragment_my")
+                        .addToBackStack("fragment:reveal")
+                        .commit()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
     private fun initRecycler() {
         meiziAdapter.openLoadMore(12)
         meiziAdapter.setOnLoadMoreListener {

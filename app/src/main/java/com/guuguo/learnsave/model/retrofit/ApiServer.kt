@@ -1,11 +1,11 @@
 package com.guuguo.learnsave.model.retrofit
 
 import com.guuguo.learnsave.extension.date
-import com.guuguo.learnsave.model.GankDays
-import com.guuguo.learnsave.model.Ganks
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import com.guuguo.learnsave.model.*
+import com.guuguo.learnsave.model.entity.SearchResultModel
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,17 +22,23 @@ object ApiServer {
     val TYPE_ALL = "all"
 
     val gankServer by lazy { GankRetrofit.getRetrofit().create(GankService::class.java) }
-    fun getGankData(type: String, count: Int, page: Int): Observable<Ganks> {
+    fun getGankData(type: String, count: Int, page: Int): Single<Ganks> {
         return gankServer
                 .getGanHuo(type, count, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getGankOneDayData(date: Date): Observable<GankDays> {
+    fun getGankOneDayData(date: Date): Single<GankDays> {
         val dateStr = date.date()
         return gankServer
                 .getGankOneDay(dateStr)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+    fun getGankSearchResult(type: String,category:String, count: Int, page: Int): Single<SearchResult> {
+        return gankServer
+                .getGankSearchResult(type,category,count,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

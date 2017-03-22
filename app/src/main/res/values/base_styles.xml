@@ -2,7 +2,9 @@
 
     <style name="AppTheme.FullScreen" parent="Theme.AppCompat.NoActionBar" />
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="colorControlNormal">@color/white</item>
+        </style>
 
     <style name="AppTheme.AppBar" parent="Widget.AppCompat.ActionBar" />
 

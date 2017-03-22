@@ -3,8 +3,10 @@ package com.guuguo.learnsave.presenter
 import android.content.Context
 import com.guuguo.learnsave.model.Ganks
 import com.guuguo.learnsave.model.retrofit.ApiServer
+import com.guuguo.learnsave.util.MEIZI_COUNT
 import com.guuguo.learnsave.view.IMainView
-import rx.functions.Action1
+import io.reactivex.functions.Action
+import io.reactivex.functions.Consumer
 
 /**
  * 主界面presenter
@@ -12,37 +14,27 @@ import rx.functions.Action1
  */
 class MainPresenter(context: Context, iView: IMainView) : BasePresenter<IMainView>(context, iView) {
 
-    override fun release() {
-        subscription.unsubscribe()
-    }
-
     fun fetchMeiziData(page: Int) {
         iView.showProgress()
-        subscription = ApiServer.getGankData(ApiServer.TYPE_FULI, 12, page)
-                .subscribe(object : Action1<Ganks> {
-                    override fun call(meiziData: Ganks) {
-                        if (meiziData.results.size === 0) {
-                            iView.showNoMoreData()
-                        } else {
-                            iView.showMeiziList(meiziData.results)
+        subscription = ApiServer.getGankData(ApiServer.TYPE_FULI, MEIZI_COUNT, page)
+                .subscribe(object : Consumer<Ganks> {
+                    override fun accept(meiziData: Ganks?) {
+                        meiziData?.let {
+                            if (meiziData.results.isEmpty()) {
+                                iView.showNoMoreData()
+                            } else {
+                                iView.showMeiziList(meiziData.results)
+                            }
+                            iView.hideProgress()
                         }
+                    }
+                }, object : Consumer<kotlin.Throwable> {
+                    override fun accept(error: Throwable) {
+                        iView.showErrorView(error)
                         iView.hideProgress()
                     }
-                }, Action1<kotlin.Throwable> {error->
-                    iView.showErrorView(error)
-                    iView.hideProgress()
                 })
 
     }
-
-//    private fun createMeiziDataWithRestDesc(meiziData: Ganks, data: Ganks): Ganks {
-//        val size = Math.min(meiziData.results.size, data.results.size)
-//        for (i in 0..size - 1) {
-//            meiziData.results[i].desc = meiziData.results[i].desc + "，" + data.results[i].desc
-//            meiziData.results[i].who = data.results[i].who
-//        }
-//        return meiziData
-//    }
-
 
 }

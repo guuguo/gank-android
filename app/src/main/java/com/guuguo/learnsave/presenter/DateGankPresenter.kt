@@ -7,7 +7,7 @@ import com.guuguo.learnsave.model.entity.GankModel
 import com.guuguo.learnsave.model.retrofit.ApiServer
 import com.guuguo.learnsave.view.IDateGankView
 import com.guuguo.learnsave.view.IMainView
-import rx.functions.Action1
+import io.reactivex.functions.Consumer
 import java.util.*
 
 /**
@@ -19,12 +19,11 @@ class DateGankPresenter(context: Context, iView: IDateGankView) : BasePresenter<
     fun fetchDate(date: Date) {
         iView.showProgress()
         subscription = ApiServer.getGankOneDayData(date)
-                .subscribe(object : Action1<GankDays> {
-                    override fun call(gankDays: GankDays) {
-                        iView.showDate(getMergeAllGanks(gankDays))
-                        iView.hideProgress()
-                    }
-                }, Action1<kotlin.Throwable> { error ->
+                .subscribe(Consumer {
+                    gankDays ->
+                    iView.showDate(getMergeAllGanks(gankDays))
+                    iView.hideProgress()
+                }, Consumer<kotlin.Throwable> { error ->
                     iView.showErrorView(error)
                     iView.hideProgress()
                 })
