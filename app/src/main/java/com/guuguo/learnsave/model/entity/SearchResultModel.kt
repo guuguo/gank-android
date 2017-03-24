@@ -17,12 +17,11 @@ class SearchResultModel : Serializable {
      * who : Jason
      */
 
-    var desc: String? = null
-    var ganhuo_id: String? = null
-    var publishedAt: String? = null
-    var readability: String? = null
-    var type: String? = null
-    var url: String? = null
-    var who: String? = null
-
+    var desc = ""
+    var ganhuo_id = ""
+    var publishedAt = ""
+    var readability = ""
+    var type = ""
+    var url = ""
+    var who = ""
 }

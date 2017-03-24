@@ -3,7 +3,7 @@ package com.guuguo.learnsave.presenter
 import android.content.Context
 import com.guuguo.learnsave.model.Ganks
 import com.guuguo.learnsave.model.retrofit.ApiServer
-import com.guuguo.learnsave.util.MEIZI_COUNT
+import com.guuguo.learnsave.app.MEIZI_COUNT
 import com.guuguo.learnsave.view.IMainView
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer

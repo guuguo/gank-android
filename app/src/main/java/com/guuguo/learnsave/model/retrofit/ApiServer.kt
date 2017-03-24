@@ -1,5 +1,6 @@
 package com.guuguo.learnsave.model.retrofit
 
+import com.guuguo.learnsave.R.id.date
 import com.guuguo.learnsave.extension.date
 import com.guuguo.learnsave.model.*
 import com.guuguo.learnsave.model.entity.SearchResultModel
@@ -22,12 +23,10 @@ object ApiServer {
     val TYPE_ALL = "all"
 
     val gankServer by lazy { GankRetrofit.getRetrofit().create(GankService::class.java) }
-    fun getGankData(type: String, count: Int, page: Int): Single<Ganks> {
-        return gankServer
-                .getGanHuo(type, count, page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-    }
+    fun getGankData(type: String, count: Int, page: Int): Single<Ganks> = gankServer
+            .getGanHuo(type, count, page)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
     fun getGankOneDayData(date: Date): Single<GankDays> {
         val dateStr = date.date()
@@ -36,10 +35,9 @@ object ApiServer {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
-    fun getGankSearchResult(type: String,category:String, count: Int, page: Int): Single<SearchResult> {
-        return gankServer
-                .getGankSearchResult(type,category,count,page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-    }
+
+    fun getGankSearchResult(query: String, category: String, count: Int, page: Int): Single<SearchResult> = gankServer
+            .getGankSearchResult(query, category, count, page)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 }

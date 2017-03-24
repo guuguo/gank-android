@@ -2,6 +2,7 @@ package com.guuguo.learnsave.app
 
 import android.app.Application
 import com.guuguo.android.lib.BaseApplication
+import com.guuguo.learnsave.R
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 
@@ -10,7 +11,7 @@ import com.tencent.bugly.beta.Beta
  */
 class MyApplication : BaseApplication() {
     override fun init() {
-        instance = INSTANCE as MyApplication? ;
+        instance = INSTANCE as MyApplication?;
         initBugly()
     }
 
@@ -20,6 +21,8 @@ class MyApplication : BaseApplication() {
 
 
     private fun initBugly() {
+        Beta.upgradeDialogLayoutId = R.layout.dialog_upgrade
+        Beta.tipsDialogLayoutId = R.layout.dialog_tips
         Bugly.init(this, "40950003e9", false);
     }
 }

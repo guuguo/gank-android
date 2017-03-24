@@ -1,18 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--<in.srain.cube.views.ptr.PtrFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:id="@+id/pfl_main"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent">-->
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-  
-    <include layout="@layout/view_toolbar" />
-
-    <include layout="@layout/view_refresh_recycler" />
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</android.support.design.widget.CoordinatorLayout>
+<include layout="@layout/view_refresh_recycler" />

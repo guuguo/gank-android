@@ -2,7 +2,7 @@ package com.guuguo.learnsave.model.retrofit
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.guuguo.learnsave.util.GANHUO_API
+import com.guuguo.learnsave.app.GANHUO_API
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 import retrofit2.Retrofit

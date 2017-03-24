@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fingdo.statelayout.StateLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/state_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:emptyImg="@drawable/ic_state_empty"
+    app:emptyText="没有数据"
+    app:errorImg="@drawable/ic_state_error"
+    app:errorText="出错了"
+    app:loadingText="加载中..."
+    app:noNetworkImg="@drawable/ic_state_no_network"
+    app:noNetworkText="没有网络"
+    app:timeOutImg="@drawable/ic_state_time_out"
+    app:timeOutText="网络超时">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="10dp"
+        android:paddingBottom="20dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ui.activity.MainActivity" />
+</com.fingdo.statelayout.StateLayout>

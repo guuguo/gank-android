@@ -9,7 +9,7 @@ import java.util.*
 class GankModel : Serializable {
     var _id: String = ""
     var createdAt: Date? = null
-    var desc: String? = null
+    var desc: String=""
     var publishedAt: Date? = null
     var source: String? = null
     var type: String = ""
