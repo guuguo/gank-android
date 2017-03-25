@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.activity.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context=".ui.activity.GankDailyFragment"
+    tools:showIn="@layout/fragment_gank_daily">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"

@@ -23,5 +23,5 @@
         android:padding="10dp"
         android:paddingBottom="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".ui.activity.MainActivity" />
+        tools:context=".ui.activity.GankDailyFragment" />
 </com.fingdo.statelayout.StateLayout>

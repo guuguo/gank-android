@@ -20,11 +20,8 @@ class MainPresenter(context: Context, iView: IMainView) : BasePresenter<IMainVie
                 .subscribe(object : Consumer<Ganks> {
                     override fun accept(meiziData: Ganks?) {
                         meiziData?.let {
-                            if (meiziData.results.isEmpty()) {
-                                iView.showNoMoreData()
-                            } else {
-                                iView.showMeiziList(meiziData.results)
-                            }
+
+                            iView.showMeiziList(meiziData.results)
                             iView.hideProgress()
                         }
                     }

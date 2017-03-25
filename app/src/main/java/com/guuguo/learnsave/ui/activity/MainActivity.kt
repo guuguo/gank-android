@@ -1,88 +1,104 @@
 package com.guuguo.learnsave.ui.activity
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
+import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.view.Menu
+import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.MenuItem
-import android.view.View
-import android.widget.ImageView
-import android.widget.Toast
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.listener.OnItemChildClickListener
-import com.chad.library.adapter.base.listener.OnItemClickListener
+import android.widget.TextView
+import com.guuguo.android.lib.app.LBaseFragment
+import com.guuguo.android.lib.utils.LogUtil
+
 import com.guuguo.learnsave.R
-import com.guuguo.learnsave.R.id.*
-import com.guuguo.learnsave.ui.adapter.MeiziAdapter
 import com.guuguo.learnsave.ui.base.BaseActivity
-//import com.guuguo.learnsave.app.fragment.SearchRevealFragment
-import com.guuguo.learnsave.extension.safe
-import com.guuguo.learnsave.extension.showSnackTip
-import com.guuguo.learnsave.extension.updateData
-import com.guuguo.learnsave.model.entity.GankModel
-import com.guuguo.learnsave.presenter.MainPresenter
-import com.guuguo.learnsave.util.DisplayUtil
-import com.guuguo.learnsave.app.MEIZI
-import com.guuguo.learnsave.app.OmeiziDrawable
-import com.guuguo.learnsave.app.TRANSLATE_GIRL_VIEW
-import com.guuguo.learnsave.view.IMainView
+import com.guuguo.learnsave.util.ActivityHelper
 import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.proguard.ac
-import kotterknife.bindView
-import java.io.Serializable
-import java.util.*
+import kotlinx.android.synthetic.main.activity_main.*
 
+class MainActivity : BaseActivity() {
+    private val STATE_FRAGMENT_SHOW = "STATE_FRAGMENT_SHOW"
 
-class MainActivity : BaseActivity(), IMainView {
-    var page = 1
-    var isRefresh = false
-    var meiziAdapter = MeiziAdapter()
-
-    val contentView by bindView<View>(R.id.activity)
-    val presenter: MainPresenter by lazy { MainPresenter(activity, this) }
-    val recycler: RecyclerView by bindView(R.id.recycler)
-    val swiper: SwipeRefreshLayout by bindView(R.id.swiper)
-    override fun getTintSystemBarColor(): Int {
-        return ContextCompat.getColor(activity, R.color.colorPrimary)
-    }
-
-    override fun getLayoutResId(): Int {
-        return R.layout.view_refresh_recycler;
-    }
-
+    private var mTextMessage: TextView? = null
     override fun getHeaderTitle(): String {
         return "gank"
+    }
+
+    override fun getMenuResId(): Int {
+        return R.menu.main_menu
     }
 
     override fun getToolBarResId(): Int {
         return R.layout.toolbar_common
     }
-    override fun initPresenter() {
-        presenter.init()
+
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_main
     }
 
-    override fun initIView() {
-        initSwiper()
-        initRecycler()
-        toolbar.setOnClickListener { recycler.smoothScrollToPosition(0) }
-        toolbar.setNavigationIcon(R.drawable.ic_launcher)
-        swiper.post {
-            swiper.isRefreshing = true
-            onRefresh()
+    override fun getTintSystemBarColor(): Int {
+        return ContextCompat.getColor(activity, R.color.colorPrimary)
+    }
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+
+        when (item.itemId) {
+            R.id.navigation_home -> {
+//                message!!.setText(R.string.title_home)
+                switchContent(0)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_dashboard -> {
+//                message!!.setText(R.string.title_dashboard)
+                switchContent(1)
+                return@OnNavigationItemSelectedListener true
+            }
+//            R.id.navigation_notifications -> {
+////                message!!.setText(R.string.title_notifications)
+//                return@OnNavigationItemSelectedListener true
+//            }
+        }
+        false
+    }
+
+    override fun initAboutInstanceStat(savedInstanceState: Bundle?) {
+        super.initAboutInstanceStat(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            mFragments.add(GankDailyFragment())
+            mFragments.add(GankDailyFragment2())
+
+        } else {
+            val manager = supportFragmentManager
+            val saveName = savedInstanceState.getString(STATE_FRAGMENT_SHOW)
+            currentFragment = null
+            if (!TextUtils.isEmpty(saveName))
+                currentFragment = manager.findFragmentByTag(saveName)
+
+            LogUtil.i(manager.fragments.size.toString() + "")
+            restoreAddFragment(manager, GankDailyFragment::class.java)
+            restoreAddFragment(manager, GankDailyFragment2::class.java)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
+    private fun restoreAddFragment(manager: FragmentManager, clazz: Class<*>) {
+        val fragment = manager.findFragmentByTag(clazz.name) as LBaseFragment
+        if (fragment != null)
+            mFragments.add(fragment)
+        else {
+            try {
+                mFragments.add(clazz.newInstance() as LBaseFragment)
+            } catch (e: InstantiationException) {
+                e.printStackTrace()
+            } catch (e: IllegalAccessException) {
+                e.printStackTrace()
+            }
+
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -103,75 +119,30 @@ class MainActivity : BaseActivity(), IMainView {
         }
     }
 
-    private fun initRecycler() {
-        meiziAdapter.setEnableLoadMore(true)
-        meiziAdapter.setOnLoadMoreListener({
-            presenter.fetchMeiziData(page)
-        }, recycler)
+    override fun initView() {
+        super.initView()
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        recycler.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
-        recycler.adapter = meiziAdapter
-        meiziAdapter.setOnItemChildClickListener { _, view, position ->
-            when (view!!.id) {
-                R.id.image -> {
-                    val image = view as ImageView
-                    OmeiziDrawable = view.getDrawable()
-                    val intent = Intent(activity, GankActivity::class.java)
-                    intent.putExtra(MEIZI, meiziAdapter.getItem(position) as Serializable)
-                    val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image, TRANSLATE_GIRL_VIEW)
-                    ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
-                    true
-                }
-                else -> false
-
-            }
-        }
+        switchContent(0)
     }
 
-    private fun initSwiper() {
-        swiper.setOnRefreshListener {
-            onRefresh()
-        };
-    }
+    private var currentFragment: Fragment? = null
 
-    private fun onRefresh() {
-        page = 1
-        isRefresh = true
-        presenter.fetchMeiziData(page)
-    }
+    /**
+     * 切换fragment
 
-    override fun showProgress() {
-    }
+     * @param toPosition
+     */
+    fun switchContent(toPosition: Int) {
+        val to = mFragments[toPosition]
+        val fragmentManager = supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
 
-    override fun hideProgress() {
-        if (isRefresh) {
-            swiper.isRefreshing = false
-            isRefresh = false
-        }
-    }
-
-    override fun showNoMoreData() {
-        meiziAdapter.loadMoreEnd(true)
-    }
-
-    override fun showErrorView(e: Throwable) {
-        Toast.makeText(activity, e.message.safe(), Toast.LENGTH_LONG).show()
-    }
-
-
-    override fun showMeiziList(lMeiziList: List<GankModel>) {
-        page++
-        if (isRefresh) {
-            meiziAdapter.updateData(lMeiziList)
-        } else {
-            recycler.post {
-                meiziAdapter.addData(lMeiziList)
-            }
-        }
-    }
-
-    override fun showTip(msg: String) {
-        showSnackTip(contentView, msg)
+        if (currentFragment != null)
+            transaction.hide(currentFragment)
+        if (!to.isAdded)
+            transaction.add(R.id.content, to, to.javaClass.name) // 隐藏当前的fragment，add下一个到Activity中
+        transaction.show(to).commitAllowingStateLoss()
+        currentFragment = to
     }
 }
-
