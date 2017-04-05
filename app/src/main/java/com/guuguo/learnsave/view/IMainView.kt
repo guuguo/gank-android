@@ -8,6 +8,5 @@ import com.guuguo.learnsave.model.entity.GankModel
  */
 interface IMainView : IBaseView {
 
-    fun showNoMoreData()
     fun showMeiziList(lMeiziList: List<GankModel>)
 }

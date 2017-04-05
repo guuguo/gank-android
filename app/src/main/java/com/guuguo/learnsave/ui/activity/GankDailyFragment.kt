@@ -107,7 +107,6 @@ class GankDailyFragment : BaseFragment(), IMainView {
 
     private fun onRefresh() {
         page = 1
-        meiziAdapter.setEnableLoadMore(false)
         presenter.fetchMeiziData(page)
     }
 
@@ -118,16 +117,12 @@ class GankDailyFragment : BaseFragment(), IMainView {
         swiper.isRefreshing = false
     }
 
-    override fun showNoMoreData() {
-    }
-
     override fun showErrorView(e: Throwable) {
         Toast.makeText(activity, e.message.safe(), Toast.LENGTH_LONG).show()
     }
 
 
     override fun showMeiziList(lMeiziList: List<GankModel>) {
-        meiziAdapter.setEnableLoadMore(true)
         meiziAdapter.loadMoreComplete()
         if (lMeiziList.size < MEIZI_COUNT) {
             meiziAdapter.loadMoreEnd(true)

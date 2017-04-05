@@ -9,5 +9,4 @@ import java.util.*
 
 class Ganks : GankResult() {
      var results = ArrayList<GankModel>()
-
 }

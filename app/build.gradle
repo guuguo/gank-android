@@ -110,7 +110,7 @@ dependencies {
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.github.nisrulz:easydeviceinfo-base:2.2.0'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.8'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //retrofit
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
@@ -122,11 +122,12 @@ dependencies {
     compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
 
     //support
-    compile 'com.android.support:design:25.3.0'
-    compile 'com.android.support:support-vector-drawable:25.3.0'
+    ext.support_vesion = "25.3.1"
+
+    compile "com.android.support:support-vector-drawable:$support_vesion"
 
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support:support-annotations:25.3.0'
+    androidTestCompile "com.android.support:support-annotations:$support_vesion"
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'

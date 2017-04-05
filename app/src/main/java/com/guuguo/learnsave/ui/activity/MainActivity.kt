@@ -47,12 +47,12 @@ class MainActivity : BaseActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         when (item.itemId) {
-            R.id.navigation_home -> {
+            R.id.navigation_daily -> {
 //                message!!.setText(R.string.title_home)
                 switchContent(0)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_category -> {
 //                message!!.setText(R.string.title_dashboard)
                 switchContent(1)
                 return@OnNavigationItemSelectedListener true
@@ -70,7 +70,7 @@ class MainActivity : BaseActivity() {
 
         if (savedInstanceState == null) {
             mFragments.add(GankDailyFragment())
-            mFragments.add(GankDailyFragment2())
+            mFragments.add(GankCategoryFragment())
 
         } else {
             val manager = supportFragmentManager
@@ -81,7 +81,7 @@ class MainActivity : BaseActivity() {
 
             LogUtil.i(manager.fragments.size.toString() + "")
             restoreAddFragment(manager, GankDailyFragment::class.java)
-            restoreAddFragment(manager, GankDailyFragment2::class.java)
+            restoreAddFragment(manager, GankCategoryFragment::class.java)
         }
     }
 

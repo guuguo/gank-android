@@ -41,7 +41,7 @@ import com.guuguo.learnsave.app.OmeiziDrawable
 import com.guuguo.learnsave.app.TRANSLATE_GIRL_VIEW
 import java.io.Serializable
 
-class MeiziAdapter : BaseQuickAdapter<GankModel,BaseViewHolder> {
+class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
     constructor() : super(R.layout.item_meizi, null) {
     }
 
@@ -54,8 +54,8 @@ class MeiziAdapter : BaseQuickAdapter<GankModel,BaseViewHolder> {
         describe.visibility = View.GONE
         holder.setText(R.id.date, gankBean.publishedAt?.getDateSimply())
                 .addOnClickListener(R.id.image)
- 
-        
+
+
         with(gankBean) {
             if (width > 0 && height > 0) {
                 knownImageSize(describe, image, width, height)
@@ -75,7 +75,7 @@ class MeiziAdapter : BaseQuickAdapter<GankModel,BaseViewHolder> {
                         knownImageSize(describe, image, width, height)
                     }
                 })
-        
+
     }
 
     private fun knownImageSize(describe: View, image: RatioImageView, width: Int, height: Int) {
