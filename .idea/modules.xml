@@ -9,7 +9,6 @@
       <module fileurl="file://$PROJECT_DIR$/ganktv/ganktv.iml" filepath="$PROJECT_DIR$/ganktv/ganktv.iml" />
       <module fileurl="file://$PROJECT_DIR$/leanSave.iml" filepath="$PROJECT_DIR$/leanSave.iml" />
       <module fileurl="file://$PROJECT_DIR$/../androidLib/leanSave-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/leanSave-androidLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/menbership/menbership.iml" filepath="$PROJECT_DIR$/menbership/menbership.iml" />
     </modules>
   </component>
 </project>

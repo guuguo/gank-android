@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 
 android {
@@ -21,8 +22,36 @@ android {
 }
 
 dependencies {
+    compile project(':androidLib:androidLib')
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:leanback-v17:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.github.bumptech.glide:glide:3.4.+'
+    //support
+    compile "com.android.support:leanback-v17:$support_version"
+//    compile "com.android.support:appcompat-v7:$support_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    
+    //support
+    compile "com.android.support:cardview-v7:$support_version"
+
+    //retrofit
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    
+//    //function 
+//    compile 'com.orhanobut:logger:1.15'
+//    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+//    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.2@aar'
+//    compile 'com.google.code.gson:gson:2.8.0'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
+    
+//    //rxjava
+//    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+//    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+//    compile 'com.artemzin.rxjava:proguard-rules:1.2.7.0'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+}
+repositories {
+    mavenCentral()
 }
