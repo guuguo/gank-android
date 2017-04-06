@@ -142,7 +142,7 @@ class MainFragment : BrowseFragment() {
         isHeadersTransitionOnBackEnabled = true
 
         // set fastLane (or headers) background color
-        brandColor = resources.getColor(R.color.fastlane_background)
+        brandColor = resources.getColor(R.color.colorPrimary)
         // set search icon color
         searchAffordanceColor = resources.getColor(R.color.search_opaque)
     }
@@ -191,10 +191,8 @@ class MainFragment : BrowseFragment() {
                 val intent = Intent(activity, DetailsActivity::class.java)
                 intent.putExtra(DetailsActivity.GANK, item)
 
-                val bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        activity,
-                        (itemViewHolder?.view as ImageCardView).mainImageView,
-                        DetailsActivity.SHARED_ELEMENT_NAME).toBundle()
+                val bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                        (itemViewHolder?.view as ImageCardView).mainImageView,DetailsActivity.SHARED_ELEMENT_NAME).toBundle()
                 activity.startActivity(intent, bundle)
             } else if (item is String) {
                 if (item.indexOf(getString(R.string.error_fragment)) >= 0) {

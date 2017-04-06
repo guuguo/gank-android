@@ -16,16 +16,18 @@ package top.guuguo.ganktv;
 
 import android.support.v17.leanback.widget.AbstractDetailsDescriptionPresenter;
 
+import com.guuguo.learnsave.model.entity.GankModel;
+
 public class DetailsDescriptionPresenter extends AbstractDetailsDescriptionPresenter {
 
     @Override
     protected void onBindDescription(ViewHolder viewHolder, Object item) {
-        Movie movie = (Movie) item;
+        GankModel gank = (GankModel) item;
 
-        if (movie != null) {
-            viewHolder.getTitle().setText(movie.getTitle());
-            viewHolder.getSubtitle().setText(movie.getStudio());
-            viewHolder.getBody().setText(movie.getDescription());
+        if (gank != null) {
+            viewHolder.getTitle().setText(gank.getDesc());
+            viewHolder.getSubtitle().setText(gank.getDesc());
+            viewHolder.getBody().setText(gank.getDesc());
         }
     }
 }

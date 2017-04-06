@@ -36,8 +36,8 @@ class CardPresenter : Presenter() {
         Log.d(TAG, "onCreateViewHolder")
 
         sDefaultBackgroundColor = parent.resources.getColor(R.color.default_background)
-        sSelectedBackgroundColor = parent.resources.getColor(R.color.selected_background)
-        mDefaultCardImage = parent.resources.getDrawable(R.drawable.movie)
+        sSelectedBackgroundColor = parent.resources.getColor(R.color.colorPrimary)
+        mDefaultCardImage = parent.resources.getDrawable(R.drawable.empty_cute_girl_box)
 
         val cardView = object : ImageCardView(parent.context) {
             override fun setSelected(selected: Boolean) {
