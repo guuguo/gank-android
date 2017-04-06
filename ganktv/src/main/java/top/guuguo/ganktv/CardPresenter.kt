@@ -14,11 +14,13 @@
 
 package top.guuguo.ganktv
 
+import am.drawable.DoubleCircleDrawable
 import android.graphics.drawable.Drawable
 import android.support.v17.leanback.widget.ImageCardView
 import android.support.v17.leanback.widget.Presenter
 import android.util.Log
 import android.view.ViewGroup
+import android.widget.ImageView
 
 import com.bumptech.glide.Glide
 import com.guuguo.learnsave.extension.date
@@ -57,7 +59,13 @@ class CardPresenter : Presenter() {
         val cardView = viewHolder.view as ImageCardView
 
         Log.d(TAG, "onBindViewHolder")
-        if (gank.url != null) {
+        if (gank.url.isNullOrEmpty()) {
+//            cardView.mainImageView
+//            val loading = findViewById(R.id.loading_iv_01) as ImageView
+//            val drawable = DoubleCircleDrawable(getResources().getDisplayMetrics().density)
+//            loading.setImageDrawable(drawable)
+//            drawable.start()
+        } else {
             cardView.titleText = gank.publishedAt?.getDateSimply()
             cardView.contentText = gank.desc
             cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)

@@ -101,6 +101,7 @@ class MainFragment : BrowseFragment() {
                             val gridHeader = HeaderItem(0, "每日")
                             val listRowAdapter = ArrayObjectAdapter(cardPresenter)
                             listRowAdapter.addAll(0, meiziData.results)
+                            
                             mRowsAdapter!!.add(0,ListRow(gridHeader, listRowAdapter))
 
                         }
