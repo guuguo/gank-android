@@ -14,10 +14,8 @@
 
 package top.guuguo.ganktv
 
+import android.app.Fragment
 import java.net.URI
-import java.util.Collections
-import java.util.Timer
-import java.util.TimerTask
 
 import android.content.Intent
 import android.graphics.Color
@@ -26,22 +24,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v17.leanback.app.BackgroundManager
 import android.support.v17.leanback.app.BrowseFragment
-import android.support.v17.leanback.widget.ArrayObjectAdapter
-import android.support.v17.leanback.widget.HeaderItem
-import android.support.v17.leanback.widget.ImageCardView
-import android.support.v17.leanback.widget.ListRow
-import android.support.v17.leanback.widget.ListRowPresenter
-import android.support.v17.leanback.widget.OnItemViewClickedListener
-import android.support.v17.leanback.widget.OnItemViewSelectedListener
-import android.support.v17.leanback.widget.Presenter
-import android.support.v17.leanback.widget.Row
-import android.support.v17.leanback.widget.RowPresenter
+import android.support.v17.leanback.widget.*
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.content.ContextCompat.startActivity
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewFragment
 import android.widget.TextView
 import android.widget.Toast
 
@@ -54,89 +45,102 @@ import com.guuguo.learnsave.model.Ganks
 import com.guuguo.learnsave.model.entity.GankModel
 import com.guuguo.learnsave.model.retrofit.ApiServer
 import io.reactivex.functions.Consumer
+import java.util.*
 
 class MainFragment : BrowseFragment() {
 
-    private val mHandler = Handler()
+    companion object {
+        private val TAG = "MainFragment"
+
+        private val GRID_ITEM_WIDTH = 200
+        private val GRID_ITEM_HEIGHT = 200
+        //    private static final int NUM_ROWS = 10;
+        private val NUM_COLS = 15
+        private val HEADER_ID_1: Long = 1
+        private val HEADER_NAME_1 = "每日"
+        private val HEADER_ID_2: Long = 2
+        private val HEADER_NAME_2 = "Android"
+        private val HEADER_ID_3: Long = 3
+        private val HEADER_NAME_3 = "IOS"
+        private val HEADER_ID_4: Long = 4
+        private val HEADER_NAME_4 = "Web"
+    }
+
     private var mRowsAdapter: ArrayObjectAdapter? = null
-    private var mDefaultBackground: Drawable? = null
-    private var mMetrics: DisplayMetrics? = null
-    private var mBackgroundTimer: Timer? = null
-    private var mBackgroundURI: URI? = null
+
     private var mBackgroundManager: BackgroundManager? = null
 
-    var page = 1;
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.i(TAG, "onCreate")
         super.onActivityCreated(savedInstanceState)
 
         prepareBackgroundManager()
-
         setupUIElements()
-
-        loadRows()
-
+//        loadRows()
+        createRows()
         setupEventListeners()
+
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (null != mBackgroundTimer) {
-            Log.d(TAG, "onDestroy: " + mBackgroundTimer!!.toString())
-            mBackgroundTimer!!.cancel()
-        }
-    }
 
-    private fun loadRows() {
-
-
+    private fun createRows() {
         mRowsAdapter = ArrayObjectAdapter(ListRowPresenter())
-        val cardPresenter = CardPresenter()
+        val headerItem1 = HeaderItem(HEADER_ID_1, HEADER_NAME_1)
+        val pageRow1 = PageRow(headerItem1)
+        mRowsAdapter?.add(pageRow1)
 
-        ApiServer.getGankData(ApiServer.TYPE_FULI, MEIZI_COUNT, page)
-                .subscribe(object : Consumer<Ganks> {
-                    override fun accept(meiziData: Ganks?) {
-                        meiziData?.let {
-                            val gridHeader = HeaderItem(0, "每日")
-                            val listRowAdapter = ArrayObjectAdapter(cardPresenter)
-                            listRowAdapter.addAll(0, meiziData.results)
-                            mRowsAdapter!!.add(0,ListRow(gridHeader, listRowAdapter))
+        val headerItem2 = HeaderItem(HEADER_ID_2, HEADER_NAME_2)
+        val pageRow2 = PageRow(headerItem2)
+        mRowsAdapter?.add(pageRow2)
 
-                        }
-                    }
-                }, object : Consumer<kotlin.Throwable> {
-                    override fun accept(error: Throwable) {
-                    }
-                })
+        val headerItem3 = HeaderItem(HEADER_ID_3, HEADER_NAME_3)
+        val pageRow3 = PageRow(headerItem3)
+        mRowsAdapter?.add(pageRow3)
 
-        val gridHeader = HeaderItem(1, "分类")
-
-        val mGridPresenter = GridItemPresenter()
-        val gridRowAdapter = ArrayObjectAdapter(mGridPresenter)
-        gridRowAdapter.add("安卓")
-        gridRowAdapter.add("IOS")
-        gridRowAdapter.add("前端")
-       
-        mRowsAdapter!!.add(ListRow(gridHeader, gridRowAdapter))
-
+        val headerItem4 = HeaderItem(HEADER_ID_4, HEADER_NAME_4)
+        val pageRow4 = PageRow(headerItem4)
+        mRowsAdapter?.add(pageRow4)
         adapter = mRowsAdapter
+    }
 
+    private class PageRowFragmentFactory internal constructor(private val mBackgroundManager: BackgroundManager) : BrowseFragment.FragmentFactory<Fragment>() {
+        val map = HashMap<Long, Fragment>()
+        override fun createFragment(rowObj: Any): Fragment {
+            val row = rowObj as Row
+            mBackgroundManager.drawable = null
+            var fragment: Fragment? = map.get(row.headerItem.id);
+            if (fragment == null) {
+                if (row.headerItem.id == HEADER_ID_1) {
+                    fragment = GankMeiziGridFragment()
+                } else if (row.headerItem.id == HEADER_ID_2) {
+                    fragment = GankMeiziGridFragment()
+                } else if (row.headerItem.id == HEADER_ID_3) {
+                    fragment = GankMeiziGridFragment()
+                } else if (row.headerItem.id == HEADER_ID_4) {
+                    fragment = GankMeiziGridFragment()
+                }
+                if (fragment == null) {
+                    throw IllegalArgumentException(String.format("Invalid row %s", rowObj))
+                }
+                map.put(row.headerItem.id,fragment)
+            }
+            return fragment
+        }
     }
 
     private fun prepareBackgroundManager() {
 
         mBackgroundManager = BackgroundManager.getInstance(activity)
         mBackgroundManager!!.attach(activity.window)
-        mDefaultBackground = resources.getDrawable(R.drawable.default_background)
-        mMetrics = DisplayMetrics()
-        activity.windowManager.defaultDisplay.getMetrics(mMetrics)
+        mainFragmentRegistry.registerFragment(PageRow::class.java,
+                PageRowFragmentFactory(mBackgroundManager!!))
     }
 
     private fun setupUIElements() {
         // setBadgeDrawable(getActivity().getResources().getDrawable(
         // R.drawable.videos_by_google_banner));
-        title = getString(R.string.browse_title) // Badge, when set, takes precedent
+//        title = getString(R.string.browse_title) // Badge, when set, takes precedent
         // over title
         headersState = BrowseFragment.HEADERS_ENABLED
         isHeadersTransitionOnBackEnabled = true
@@ -152,82 +156,11 @@ class MainFragment : BrowseFragment() {
             Toast.makeText(activity, "Implement your own in-app search", Toast.LENGTH_LONG)
                     .show()
         }
-
-        onItemViewClickedListener = ItemViewClickedListener()
-        onItemViewSelectedListener = ItemViewSelectedListener()
+        
     }
 
-    protected fun updateBackground(uri: String) {
-
-        val width = mMetrics!!.widthPixels
-        val height = mMetrics!!.heightPixels
-        Glide.with(activity)
-                .load(uri)
-                .centerCrop()
-                .error(mDefaultBackground)
-                .into<SimpleTarget<GlideDrawable>>(object : SimpleTarget<GlideDrawable>(width, height) {
-                    override fun onResourceReady(resource: GlideDrawable,
-                                                 glideAnimation: GlideAnimation<in GlideDrawable>) {
-                        mBackgroundManager!!.drawable = resource
-                    }
-                })
-        mBackgroundTimer!!.cancel()
-    }
-
-    private fun startBackgroundTimer() {
-        if (null != mBackgroundTimer) {
-            mBackgroundTimer!!.cancel()
-        }
-        mBackgroundTimer = Timer()
-        mBackgroundTimer!!.schedule(UpdateBackgroundTask(), BACKGROUND_UPDATE_DELAY.toLong())
-    }
-
-    private inner class ItemViewClickedListener : OnItemViewClickedListener {
-        override fun onItemClicked(itemViewHolder: Presenter.ViewHolder?, item: Any?,
-                                   rowViewHolder: RowPresenter.ViewHolder?, row: Row) {
-
-            if (item is GankModel) {
-                Log.d(TAG, "Item: " + item.toString())
-                val intent = Intent(activity, DetailsActivity::class.java)
-                intent.putExtra(DetailsActivity.GANK, item)
-
-                val bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-                        (itemViewHolder?.view as ImageCardView).mainImageView,DetailsActivity.SHARED_ELEMENT_NAME).toBundle()
-                activity.startActivity(intent, bundle)
-            } else if (item is String) {
-                if (item.indexOf(getString(R.string.error_fragment)) >= 0) {
-                    val intent = Intent(activity, BrowseErrorActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(activity, item, Toast.LENGTH_SHORT)
-                            .show()
-                }
-            }
-        }
-    }
-
-    private inner class ItemViewSelectedListener : OnItemViewSelectedListener {
-        override fun onItemSelected(itemViewHolder: Presenter.ViewHolder?, item: Any?,
-                                    rowViewHolder: RowPresenter.ViewHolder?, row: Row) {
-            if (item is GankModel) {
-                mBackgroundURI = URI(item.url)
-                startBackgroundTimer()
-            }
-
-        }
-    }
-
-    private inner class UpdateBackgroundTask : TimerTask() {
-
-        override fun run() {
-            mHandler.post {
-                if (mBackgroundURI != null) {
-                    updateBackground(mBackgroundURI!!.toString())
-                }
-            }
-
-        }
-    }
+   
+   
 
     private inner class GridItemPresenter : Presenter() {
         override fun onCreateViewHolder(parent: ViewGroup): Presenter.ViewHolder {
@@ -248,14 +181,5 @@ class MainFragment : BrowseFragment() {
         override fun onUnbindViewHolder(viewHolder: Presenter.ViewHolder) {}
     }
 
-    companion object {
-        private val TAG = "MainFragment"
-
-        private val BACKGROUND_UPDATE_DELAY = 300
-        private val GRID_ITEM_WIDTH = 200
-        private val GRID_ITEM_HEIGHT = 200
-        //    private static final int NUM_ROWS = 10;
-        private val NUM_COLS = 15
-    }
 
 }
