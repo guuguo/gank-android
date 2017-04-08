@@ -16,6 +16,9 @@ package top.guuguo.ganktv
 
 import android.app.Fragment
 import java.net.URI
+import java.util.Collections
+import java.util.Timer
+import java.util.TimerTask
 
 import android.content.Intent
 import android.graphics.Color
@@ -70,6 +73,7 @@ class MainFragment : BrowseFragment() {
 
     private var mBackgroundManager: BackgroundManager? = null
 
+    var page = 1;
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.i(TAG, "onCreate")
