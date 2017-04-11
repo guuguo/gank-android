@@ -28,6 +28,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebSettings
+import com.chad.library.adapter.base.animation.ScaleInAnimation
 import com.guuguo.android.lib.view.SimpleViewHelper
 import com.guuguo.learnsave.R.id.activity
 import com.guuguo.learnsave.ui.adapter.SearchResultAdapter
@@ -72,6 +73,7 @@ class SearchActivity : BaseActivity() {
             page++
             search(fsv_search.query)
         }, recycler)
+        mSearchResultAdapter.openLoadAnimation(ScaleInAnimation())
         mSearchResultAdapter.setOnItemClickListener { _, view, position ->
             val bean = mSearchResultAdapter.getItem(position)
             if (view!!.id == R.id.tv_content) {
@@ -84,45 +86,38 @@ class SearchActivity : BaseActivity() {
         fsv_search.setOnHomeActionClickListener { activity.finish() }
         fsv_search.setOnQueryChangeListener { oldQuery, newQuery ->
             clearApiCall()
+            page=1
             search(newQuery)
         }
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        when (item!!.itemId) {
-//            R.id.menu_search -> {
-//                page = 1
-//                search()
-//                return true
-//            }
-//            else -> return super.onOptionsItemSelected(item)
-//        }
-//    }
 
     private fun search(searchText: String) {
-        if (page == 1)
-            if (searchText.isNullOrEmpty()) {
-                simplerViewHelper?.showEmpty("请输入搜索关键字")
-            } else {
+        if (searchText.isNullOrEmpty()) {
+            simplerViewHelper?.showEmpty("请输入搜索关键字")
+        } else {
+            if (page == 1) {
                 simplerViewHelper?.showLoading("正在加载搜索结果")
-                addApiCall(ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, SEARCH_COUNT, page).subscribe(Consumer {
-                    searchResult ->
-                    mSearchResultAdapter.loadMoreComplete()
-                    simplerViewHelper?.restore()
-
-                    if (page == 1) {
-                        if (searchResult.count == 0)
-                            simplerViewHelper?.showEmpty("搜索结果为空")
-                        else {
-                            mSearchResultAdapter.setNewData(searchResult.results)
-                        }
-                    } else
-                        if (searchResult.count < SEARCH_COUNT)
-                            mSearchResultAdapter.loadMoreEnd()
-                    mSearchResultAdapter.addData(searchResult.results!!)
-                }, Consumer<Throwable> { error ->
-                    dialogErrorShow(error.message, null)
-                }))
             }
+            addApiCall(ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, SEARCH_COUNT, page).subscribe(Consumer {
+                searchResult ->
+                simplerViewHelper?.restore()
+
+                if (page == 1) {
+                    if (searchResult.count == 0)
+                        simplerViewHelper?.showEmpty("搜索结果为空")
+                    else {
+                        mSearchResultAdapter.setNewData(searchResult.results)
+                    }
+                } else {
+                    mSearchResultAdapter.loadMoreComplete()
+                    if (searchResult.count < SEARCH_COUNT)
+                        mSearchResultAdapter.loadMoreEnd()
+                    mSearchResultAdapter.addData(searchResult.results!!)
+                }
+            }, Consumer<Throwable> { error ->
+                dialogErrorShow(error.message, null)
+            }))
+        }
     }
 }

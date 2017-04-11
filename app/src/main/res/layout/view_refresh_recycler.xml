@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.guuguo.android.lib.view.VerticalSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.guuguo.android.lib.view.VerticalSwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swiper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.activity.GankDailyFragment"
     tools:showIn="@layout/fragment_gank_daily">
 
@@ -13,6 +13,6 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        android:paddingBottom="20dp"/>
 </com.guuguo.android.lib.view.VerticalSwipeRefreshLayout>

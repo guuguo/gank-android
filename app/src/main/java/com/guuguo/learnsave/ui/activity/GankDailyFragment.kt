@@ -19,6 +19,7 @@ import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
+import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.R.id.*
 import com.guuguo.learnsave.ui.adapter.MeiziAdapter
@@ -74,7 +75,7 @@ class GankDailyFragment : BaseFragment(), IMainView {
     }
 
     private fun initRecycler() {
-        meiziAdapter.setEnableLoadMore(true)
+
         meiziAdapter.setOnLoadMoreListener({
             page++
             presenter.fetchMeiziData(page)
@@ -123,13 +124,13 @@ class GankDailyFragment : BaseFragment(), IMainView {
 
 
     override fun showMeiziList(lMeiziList: List<GankModel>) {
-        meiziAdapter.loadMoreComplete()
         if (lMeiziList.size < MEIZI_COUNT) {
-            meiziAdapter.loadMoreEnd(true)
+            meiziAdapter.loadMoreEnd(false)
         }
         if (page == 1) {
-            meiziAdapter.updateData(lMeiziList)
+            meiziAdapter.setNewData(lMeiziList)
         } else {
+            meiziAdapter.loadMoreComplete()
             meiziAdapter.addData(lMeiziList)
         }
     }
