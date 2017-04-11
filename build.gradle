@@ -5,7 +5,7 @@ buildscript {
     ext.support_version = "25.3.1"
     ext.butterknife_version = "8.4.0"
     ext.anko_version = "0.9"
-
+    ext.bugly_upgrade= "1.2.4"
 
     repositories {
         mavenCentral()
@@ -18,11 +18,12 @@ buildscript {
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 //        classpath "com.android.databinding:dataBinder:1.0-rc1"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"  }
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
 }
 allprojects {
     repositories {
-        jcenter ()
+        jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven {

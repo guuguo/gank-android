@@ -86,7 +86,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun restoreAddFragment(manager: FragmentManager, clazz: Class<*>) {
-        val fragment = manager.findFragmentByTag(clazz.name) as LBaseFragment
+        val fragment = manager.findFragmentByTag(clazz.name) as LBaseFragment?
         if (fragment != null)
             mFragments.add(fragment)
         else {
