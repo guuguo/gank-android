@@ -2,12 +2,14 @@ package com.guuguo.learnsave.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.TextView
@@ -48,19 +50,13 @@ class MainActivity : BaseActivity() {
 
         when (item.itemId) {
             R.id.navigation_daily -> {
-//                message!!.setText(R.string.title_home)
                 switchContent(0)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_category -> {
-//                message!!.setText(R.string.title_dashboard)
                 switchContent(1)
                 return@OnNavigationItemSelectedListener true
             }
-//            R.id.navigation_notifications -> {
-////                message!!.setText(R.string.title_notifications)
-//                return@OnNavigationItemSelectedListener true
-//            }
         }
         false
     }
@@ -122,7 +118,6 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         super.initView()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
         switchContent(0)
     }
 
@@ -130,7 +125,6 @@ class MainActivity : BaseActivity() {
 
     /**
      * 切换fragment
-
      * @param toPosition
      */
     fun switchContent(toPosition: Int) {

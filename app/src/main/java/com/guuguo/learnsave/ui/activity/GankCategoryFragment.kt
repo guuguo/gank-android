@@ -3,9 +3,13 @@ package com.guuguo.learnsave.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.support.design.widget.TabLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.OrientationHelper
@@ -33,110 +37,32 @@ import com.guuguo.learnsave.util.DisplayUtil
 import com.guuguo.learnsave.app.MEIZI
 import com.guuguo.learnsave.app.OmeiziDrawable
 import com.guuguo.learnsave.app.TRANSLATE_GIRL_VIEW
+import com.guuguo.learnsave.ui.adapter.MyFragmentPagerAdapter
 import com.guuguo.learnsave.ui.base.BaseFragment
 import com.guuguo.learnsave.view.IMainView
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.proguard.ac
+import kotlinx.android.synthetic.main.fragment_category_gank.*
+import kotlinx.android.synthetic.main.layout_viewpager.*
 import kotterknife.bindView
 import java.io.Serializable
 import java.util.*
 
 
-class GankCategoryFragment : BaseFragment(), IMainView {
-    var page = 1
-    var isRefresh = false
-    var meiziAdapter = MeiziAdapter()
-
-    val presenter: MainPresenter by lazy { MainPresenter(activity, this) }
-    val recycler: RecyclerView by bindView(R.id.recycler)
-    val swiper: SwipeRefreshLayout by bindView(R.id.swiper)
-
+class GankCategoryFragment : BaseFragment() {
+    val fragments:Array<Class<*>> = arrayOf(GankDailyFragment::class.java, GankDailyFragment::class.java, GankDailyFragment::class.java, GankDailyFragment::class.java, GankDailyFragment::class.java, GankDailyFragment::class.java)
+    override fun initPresenter() {
+    }
 
     override fun getLayoutResId(): Int {
-        return R.layout.view_refresh_recycler;
+        return R.layout.fragment_category_gank;
     }
 
-
-    override fun initPresenter() {
-        presenter.init()
-    }
- 
-    override fun initIView() {
-        initSwiper()
-        initRecycler()
-        toolbar.setOnClickListener { recycler.smoothScrollToPosition(0) }
-        toolbar.setNavigationIcon(R.drawable.ic_launcher)
-        swiper.post {
-            swiper.isRefreshing = true
-            onRefresh()
-        }
+    override fun initView() {
+        super.initView()
+        viewpager.adapter = MyFragmentPagerAdapter(activity, activity.supportFragmentManager, fragments)
+        tabLayout.setupWithViewPager(viewpager)
     }
 
-    private fun initRecycler() {
-        meiziAdapter.setEnableLoadMore(true)
-        meiziAdapter.setOnLoadMoreListener({
-            presenter.fetchMeiziData(page)
-        }, recycler)
-
-        recycler.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
-        recycler.adapter = meiziAdapter
-        meiziAdapter.setOnItemChildClickListener { _, view, position ->
-            when (view!!.id) {
-                R.id.image -> {
-                    val image = view as ImageView
-                    OmeiziDrawable = view.getDrawable()
-                    val intent = Intent(activity, GankActivity::class.java)
-                    intent.putExtra(MEIZI, meiziAdapter.getItem(position) as Serializable)
-                    val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image, TRANSLATE_GIRL_VIEW)
-                    ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
-                    true
-                }
-                else -> false
-
-            }
-        }
-    }
-
-    private fun initSwiper() {
-        swiper.setOnRefreshListener {
-            onRefresh()
-        };
-    }
-
-    private fun onRefresh() {
-        page = 1
-        isRefresh = true
-        presenter.fetchMeiziData(page)
-    }
-
-    override fun showProgress() {
-    }
-
-    override fun hideProgress() {
-        if (isRefresh) {
-            swiper.isRefreshing = false
-            isRefresh = false
-        }
-    }
-
-    override fun showErrorView(e: Throwable) {
-        Toast.makeText(activity, e.message.safe(), Toast.LENGTH_LONG).show()
-    }
-
-
-    override fun showMeiziList(lMeiziList: List<GankModel>) {
-        page++
-        if (isRefresh) {
-            meiziAdapter.updateData(lMeiziList)
-        } else {
-            recycler.post {
-                meiziAdapter.addData(lMeiziList)
-            }
-        }
-    }
-
-    override fun showTip(msg: String) {
-        showSnackTip(activity.getContainer(), msg)
-    }
 }
 
