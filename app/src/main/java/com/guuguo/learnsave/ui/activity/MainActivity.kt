@@ -34,9 +34,6 @@ class MainActivity : BaseActivity() {
         return R.menu.main_menu
     }
 
-    override fun getToolBarResId(): Int {
-        return R.layout.toolbar_common
-    }
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_main

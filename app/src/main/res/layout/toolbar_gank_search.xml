@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/appbar"
     android:layout_width="match_parent"
@@ -10,10 +11,10 @@
         android:id="@+id/id_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Toolbar.Dark"
         app:contentInsetEndWithActions="0dp"
         app:contentInsetStartWithNavigation="5dp"
-        app:layout_collapseMode="pin">
+        app:layout_collapseMode="pin"
+    >
 
         <com.flyco.roundview.RoundFrameLayout
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
                 android:background="@null"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp "
-                android:textColor="@color/black" />
+                android:textColor="@color/black"/>
         </com.flyco.roundview.RoundFrameLayout>
     </android.support.v7.widget.Toolbar>
 

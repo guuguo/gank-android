@@ -2,6 +2,7 @@ package com.guuguo.learnsave.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -78,6 +79,12 @@ class WebViewActivity : BaseActivity(), IBaseView {
         when (item!!.itemId) {
             R.id.menu_browser -> mPresenter.openInBrowser(url)
             R.id.menu_copy -> mPresenter.copyUrl(url)
+            R.id.menu_share -> {
+                val intent = Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT,url);
+                startActivity(Intent.createChooser(intent, "分享链接到"));
+            }
         }
         return super.onOptionsItemSelected(item)
     }
