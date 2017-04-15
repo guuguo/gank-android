@@ -6,7 +6,7 @@
     android:id="@+id/swiper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.GankDailyFragment"
+    tools:context=".ui.fragment.GankDailyFragment"
     tools:showIn="@layout/fragment_gank_daily">
 
     <android.support.v7.widget.RecyclerView

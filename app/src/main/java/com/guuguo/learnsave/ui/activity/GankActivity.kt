@@ -15,7 +15,7 @@ import com.guuguo.android.lib.view.RatioImageView
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.R.id.activity
 import com.guuguo.learnsave.R.id.toolbar_layout
-import com.guuguo.learnsave.ui.adapter.GankAdapter
+import com.guuguo.learnsave.ui.adapter.CategoryGankAdapter
 import com.guuguo.learnsave.ui.base.BaseActivity
 import com.guuguo.learnsave.extension.date
 import com.guuguo.learnsave.extension.getDateSimply
@@ -41,7 +41,7 @@ class GankActivity : BaseActivity(), IDateGankView {
     val mRecycler by bindView<RecyclerView>(R.id.rv_gank)
     val mProgress by bindView<SmoothProgressBar>(R.id.progressbar)
     val mGankAdapter by lazy {
-        GankAdapter()
+        CategoryGankAdapter()
     }
 
     override fun getToolBarResId(): Int {

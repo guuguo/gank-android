@@ -45,16 +45,19 @@ import com.guuguo.learnsave.ui.activity.WebViewActivity
 import com.guuguo.learnsave.extension.dpToPx
 
 
-class GankAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
+class CategoryGankAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
     constructor() : super(R.layout.item_gank, null) {
     }
 
-    constructor(data: List<GankModel>) : super(R.layout.item_gank_search, data) {
+    constructor(data: List<GankModel>) : super(R.layout.item_gank, data) {
     }
 
     override fun convert(holder: BaseViewHolder, gankBean: GankModel) {
 
-        holder.setText(R.id.tv_content, gankBean.desc)
+        holder.setVisible(R.id.tv_category, holder.layoutPosition == 0 || !gankBean.type.equals(getItem(holder.layoutPosition - 1).type))
+                .setText(R.id.tv_category, gankBean.type)
+                .setText(R.id.tv_content, gankBean.desc)
+                .addOnClickListener(R.id.tv_content)
 
         var res = R.drawable.ic_other
         when (gankBean.type) {

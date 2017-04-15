@@ -1,8 +1,9 @@
-package com.guuguo.learnsave.ui.activity
+package com.guuguo.learnsave.ui.fragment
 
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
@@ -50,7 +51,14 @@ import java.util.*
 
 
 class GankCategoryFragment : BaseFragment() {
-    val fragments:Array<Class<*>> = arrayOf(GankDailyFragment::class.java, GankDailyFragment::class.java, GankDailyFragment::class.java, GankDailyFragment::class.java, GankDailyFragment::class.java, GankDailyFragment::class.java)
+    val fragments: Array<Class<*>> = arrayOf(GankCategoryContentFragment::class.java, GankCategoryContentFragment::class.java, GankCategoryContentFragment::class.java)
+    val titleStrs = arrayOf("Android", "IOS", "前端")
+
+    //    val TYPE_ANDROID = "Android"
+//    val TYPE_IOS = "iOS"
+//    val TYPE_REST = "休息视频"
+//    val TYPE_EXPAND = "拓展资源"
+//    val TYPE_FRONT = "前端"
     override fun initPresenter() {
     }
 
@@ -60,7 +68,13 @@ class GankCategoryFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
-        viewpager.adapter = MyFragmentPagerAdapter(activity, activity.supportFragmentManager, fragments)
+        viewpager.adapter = object : MyFragmentPagerAdapter(activity, activity.supportFragmentManager, fragments, titleStrs) {
+            override fun initNewFragment(position: Int, fragment: Fragment?, title: String) {
+                val bundle = Bundle()
+                bundle.putString(GankCategoryContentFragment.ARG_GANK_TYPE, title)
+                fragment?.arguments = bundle
+            }
+        }
         tabLayout.setupWithViewPager(viewpager)
     }
 

@@ -12,7 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import com.guuguo.learnsave.R
-import com.guuguo.learnsave.ui.adapter.GankAdapter
+import com.guuguo.learnsave.ui.adapter.CategoryGankAdapter
 import com.guuguo.learnsave.ui.base.BaseActivity
 import com.guuguo.learnsave.model.GankDays
 import com.guuguo.learnsave.model.entity.GankModel
@@ -29,7 +29,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebSettings
 import com.chad.library.adapter.base.animation.ScaleInAnimation
-import com.guuguo.android.lib.view.SimpleViewHelper
+import com.guuguo.android.lib.view.simpleview.SimpleViewHelper
 import com.guuguo.learnsave.R.id.activity
 import com.guuguo.learnsave.ui.adapter.SearchResultAdapter
 import com.guuguo.learnsave.extension.*

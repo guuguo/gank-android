@@ -1,4 +1,4 @@
-package com.guuguo.learnsave.ui.activity
+package com.guuguo.learnsave.ui.fragment
 
 import android.app.Activity
 import android.content.Intent
@@ -35,6 +35,7 @@ import com.guuguo.learnsave.app.MEIZI
 import com.guuguo.learnsave.app.MEIZI_COUNT
 import com.guuguo.learnsave.app.OmeiziDrawable
 import com.guuguo.learnsave.app.TRANSLATE_GIRL_VIEW
+import com.guuguo.learnsave.ui.activity.GankActivity
 import com.guuguo.learnsave.ui.base.BaseFragment
 import com.guuguo.learnsave.view.IMainView
 import com.tencent.bugly.beta.Beta
@@ -85,7 +86,7 @@ class GankDailyFragment : BaseFragment(), IMainView {
         recycler.adapter = meiziAdapter
         meiziAdapter.setOnItemChildClickListener { _, view, position ->
             when (view!!.id) {
-                R.id.image -> {
+                image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.getDrawable()
                     val intent = Intent(activity, GankActivity::class.java)

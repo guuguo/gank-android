@@ -12,7 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import com.guuguo.learnsave.R
-import com.guuguo.learnsave.ui.adapter.GankAdapter
+import com.guuguo.learnsave.ui.adapter.CategoryGankAdapter
 import com.guuguo.learnsave.ui.base.BaseActivity
 import com.guuguo.learnsave.extension.date
 import com.guuguo.learnsave.extension.getDateSimply

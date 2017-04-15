@@ -18,6 +18,8 @@ import com.guuguo.android.lib.utils.LogUtil
 
 import com.guuguo.learnsave.R
 import com.guuguo.learnsave.ui.base.BaseActivity
+import com.guuguo.learnsave.ui.fragment.GankCategoryFragment
+import com.guuguo.learnsave.ui.fragment.GankDailyFragment
 import com.guuguo.learnsave.util.ActivityHelper
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.activity_main.*

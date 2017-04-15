@@ -6,12 +6,14 @@ import android.support.v4.app.FragmentManager;
 
 import java.util.HashMap;
 
+import static android.R.attr.fragment;
+
 
 /**
  * Created by mimi on 2017-02-09.
  */
 
-public class MyFragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
+public abstract class MyFragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
     private Context mContext;
 
     public MyFragmentPagerAdapter(Context context, FragmentManager fm) {
@@ -19,9 +21,10 @@ public class MyFragmentPagerAdapter extends android.support.v4.app.FragmentPager
         this.mContext = context;
     }
 
-    public MyFragmentPagerAdapter(Context context, FragmentManager fm, Class[] fragments) {
+    public MyFragmentPagerAdapter(Context context, FragmentManager fm, Class[] fragments, String[] strs) {
         this(context, fm);
         this.fragments = fragments;
+        this.strs = strs;
     }
 
     HashMap<Integer, Fragment> fragmentHashMap = new HashMap<>();
@@ -40,6 +43,7 @@ public class MyFragmentPagerAdapter extends android.support.v4.app.FragmentPager
         Fragment fragment = null;
         try {
             fragment = (Fragment) fragments[position].newInstance();
+            initNewFragment(position,fragment,strs[position]);
             fragmentHashMap.put(position, fragment);
         } catch (InstantiationException e) {
             e.printStackTrace();
@@ -49,12 +53,14 @@ public class MyFragmentPagerAdapter extends android.support.v4.app.FragmentPager
         return fragment;
     }
 
+    protected abstract void initNewFragment(int position, Fragment fragment,String title);
+
     @Override
     public int getCount() {
-        return strs.length;
+        return Math.min(strs.length, fragments.length);
     }
 
-    String[] strs = {"直播", "推荐", "追番", "分区", "关注", "发现"};
+    private String[] strs;
 
     public void setFragments(Class[] fragments) {
         this.fragments = fragments;

@@ -20,7 +20,6 @@ abstract class BaseFragment : LBaseFragment() {
 
     protected var myApplication = MyApplication.instance
     protected var contentView: View? = null
-//    protected var activity: BaseActivity? = null
 
     abstract fun initPresenter()
 
