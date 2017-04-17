@@ -46,11 +46,9 @@ import com.guuguo.learnsave.extension.dpToPx
 
 
 class CategoryGankAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
-    constructor() : super(R.layout.item_gank, null) {
-    }
+    constructor() : super(R.layout.item_gank, null)
 
-    constructor(data: List<GankModel>) : super(R.layout.item_gank, data) {
-    }
+    constructor(data: List<GankModel>) : super(R.layout.item_gank, data)
 
     override fun convert(holder: BaseViewHolder, gankBean: GankModel) {
 

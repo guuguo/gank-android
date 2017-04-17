@@ -61,6 +61,13 @@ class WebViewActivity : BaseActivity(), IBaseView {
         }
     }
 
+    override fun onBackPressed() {
+        if (mWebView.canGoBack())
+            mWebView.goBack()
+        else
+            super.onBackPressed()
+    }
+
     override fun initVariable() {
         url = intent.getStringExtra(ARG_URL)
         desc = intent.getStringExtra(ARG_DESC)
@@ -82,7 +89,7 @@ class WebViewActivity : BaseActivity(), IBaseView {
             R.id.menu_share -> {
                 val intent = Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT,url);
+                intent.putExtra(Intent.EXTRA_TEXT, url);
                 startActivity(Intent.createChooser(intent, "分享链接到"));
             }
         }

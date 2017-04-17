@@ -48,11 +48,9 @@ import com.guuguo.learnsave.model.entity.SearchResultModel
 
 
 class SearchResultAdapter : BaseQuickAdapter<SearchResultModel,BaseViewHolder> {
-    constructor() : super(R.layout.item_gank_search, null) {
-    }
+    constructor() : super(R.layout.item_gank_search, null)
 
-    constructor(data: List<SearchResultModel>) : super(R.layout.item_gank_search, data) {
-    }
+    constructor(data: List<SearchResultModel>) : super(R.layout.item_gank_search, data)
 
     override fun convert(holder: BaseViewHolder, gankBean: SearchResultModel) {
 

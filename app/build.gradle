@@ -75,7 +75,7 @@ dependencies {
     })
 
     compile project(':androidLib:androidLib')
-    
+    compile project(':SwipeBackFragment:swipeback')
     //butterknife
     apt "com.jakewharton:butterknife-compiler:$butterknife_version"
     compile "com.jakewharton:butterknife:$butterknife_version"

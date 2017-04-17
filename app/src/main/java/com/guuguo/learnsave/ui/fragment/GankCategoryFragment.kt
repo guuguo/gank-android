@@ -22,6 +22,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.animation.SlideInLeftAnimation
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.guuguo.learnsave.R
@@ -52,7 +53,7 @@ import java.util.*
 
 class GankCategoryFragment : BaseFragment() {
     val fragments: Array<Class<*>> = arrayOf(GankCategoryContentFragment::class.java, GankCategoryContentFragment::class.java, GankCategoryContentFragment::class.java)
-    val titleStrs = arrayOf("Android", "IOS", "前端")
+    val titleStrs = arrayOf("Android", "iOS", "前端")
 
     //    val TYPE_ANDROID = "Android"
 //    val TYPE_IOS = "iOS"
@@ -68,6 +69,7 @@ class GankCategoryFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
+        viewpager.offscreenPageLimit=2
         viewpager.adapter = object : MyFragmentPagerAdapter(activity, activity.supportFragmentManager, fragments, titleStrs) {
             override fun initNewFragment(position: Int, fragment: Fragment?, title: String) {
                 val bundle = Bundle()

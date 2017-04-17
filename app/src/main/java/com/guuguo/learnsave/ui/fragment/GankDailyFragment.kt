@@ -17,6 +17,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.animation.ScaleInAnimation
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
@@ -76,7 +77,7 @@ class GankDailyFragment : BaseFragment(), IMainView {
     }
 
     private fun initRecycler() {
-
+//        meiziAdapter.openLoadAnimation(ScaleInAnimation())
         meiziAdapter.setOnLoadMoreListener({
             page++
             presenter.fetchMeiziData(page)

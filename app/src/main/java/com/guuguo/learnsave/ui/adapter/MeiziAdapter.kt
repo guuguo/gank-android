@@ -42,11 +42,9 @@ import com.guuguo.learnsave.app.TRANSLATE_GIRL_VIEW
 import java.io.Serializable
 
 class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
-    constructor() : super(R.layout.item_meizi, null) {
-    }
+    constructor() : super(R.layout.item_meizi, null)
 
-    constructor(data: List<GankModel>) : super(R.layout.item_meizi, data) {
-    }
+    constructor(data: List<GankModel>) : super(R.layout.item_meizi, data)
 
     override fun convert(holder: BaseViewHolder, gankBean: GankModel) {
         val image = holder.getView<View>(R.id.image) as RatioImageView

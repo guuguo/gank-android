@@ -29,6 +29,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebSettings
 import com.chad.library.adapter.base.animation.ScaleInAnimation
+import com.chad.library.adapter.base.animation.SlideInBottomAnimation
+import com.chad.library.adapter.base.animation.SlideInLeftAnimation
+import com.flyco.animation.SlideEnter.SlideBottomEnter
 import com.guuguo.android.lib.view.simpleview.SimpleViewHelper
 import com.guuguo.learnsave.R.id.activity
 import com.guuguo.learnsave.ui.adapter.SearchResultAdapter
@@ -73,7 +76,7 @@ class SearchActivity : BaseActivity() {
             page++
             search(fsv_search.query)
         }, recycler)
-        mSearchResultAdapter.openLoadAnimation(ScaleInAnimation())
+        mSearchResultAdapter.openLoadAnimation(SlideInLeftAnimation())
         mSearchResultAdapter.setOnItemClickListener { _, view, position ->
             val bean = mSearchResultAdapter.getItem(position)
             if (view!!.id == R.id.tv_content) {

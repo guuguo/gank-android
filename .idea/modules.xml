@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LearnSave.iml" filepath="$PROJECT_DIR$/LearnSave.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../androidLib/LearnSave-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/LearnSave-androidLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SwipeBackFragment/SwipeBackFragment.iml" filepath="$PROJECT_DIR$/../SwipeBackFragment/SwipeBackFragment.iml" />
       <module fileurl="file://$PROJECT_DIR$/../androidLib/androidLib/androidLib-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/androidLib/androidLib-androidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gankIO.iml" filepath="$PROJECT_DIR$/gankIO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../androidLib/gankIO-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/gankIO-androidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/ganktv/ganktv.iml" filepath="$PROJECT_DIR$/ganktv/ganktv.iml" />
       <module fileurl="file://$PROJECT_DIR$/leanSave.iml" filepath="$PROJECT_DIR$/leanSave.iml" />
       <module fileurl="file://$PROJECT_DIR$/../androidLib/leanSave-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/leanSave-androidLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SwipeBackFragment/swipeback/swipeback.iml" filepath="$PROJECT_DIR$/../SwipeBackFragment/swipeback/swipeback.iml" />
     </modules>
   </component>
 </project>

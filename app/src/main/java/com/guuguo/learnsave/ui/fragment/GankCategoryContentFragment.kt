@@ -14,6 +14,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.animation.SlideInBottomAnimation
+import com.chad.library.adapter.base.animation.SlideInLeftAnimation
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
@@ -61,7 +63,7 @@ class GankCategoryContentFragment : BaseFragment() {
     }
 
     override fun getLayoutResId(): Int {
-        return R.layout.view_refresh_recycler;
+        return R.layout.fragment_gank_category_content;
     }
 
     override fun initVariable() {

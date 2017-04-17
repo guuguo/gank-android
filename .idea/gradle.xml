@@ -7,11 +7,13 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$/../SwipeBackFragment" />
+            <option value="$PROJECT_DIR$/../SwipeBackFragment/swipeback" />
+            <option value="$PROJECT_DIR$/../androidLib" />
+            <option value="$PROJECT_DIR$/../androidLib/androidLib" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/ganktv" />
-            <option value="$PROJECT_DIR$/../androidLib" />
-            <option value="$PROJECT_DIR$/../androidLib/androidLib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
