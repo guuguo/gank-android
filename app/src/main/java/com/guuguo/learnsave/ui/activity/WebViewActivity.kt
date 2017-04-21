@@ -37,10 +37,11 @@ import android.webkit.WebViewClient
 import android.webkit.WebSettings
 import com.guuguo.learnsave.R.id.activity
 import com.guuguo.learnsave.extension.safe
+import com.guuguo.learnsave.ui.base.BaseSwipeBackActivity
 import kotterknife.bindView
 
 
-class WebViewActivity : BaseActivity(), IBaseView {
+class WebViewActivity : BaseSwipeBackActivity(), IBaseView {
 
     val contentView by bindView<View>(R.id.activity)
     val mProgress by bindView<SmoothProgressBar>(R.id.progressbar)

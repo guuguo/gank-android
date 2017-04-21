@@ -27,6 +27,7 @@ import com.guuguo.learnsave.presenter.DateGankPresenter
 import com.guuguo.learnsave.app.MEIZI
 import com.guuguo.learnsave.app.OmeiziDrawable
 import com.guuguo.learnsave.app.TRANSLATE_GIRL_VIEW
+import com.guuguo.learnsave.ui.base.BaseSwipeBackActivity
 import com.guuguo.learnsave.view.IDateGankView
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar
 import kotlinx.android.synthetic.main.toolbar_gank_detail.*
@@ -78,7 +79,7 @@ class GankActivity : BaseActivity(), IDateGankView {
     }
 
     private fun initRecycler() {
-        mRecycler.layoutManager = LinearLayoutManager(activity)
+        mRecycler.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
         mRecycler.adapter = mGankAdapter
         mGankAdapter.onItemChildClickListener = object : BaseQuickAdapter.OnItemChildClickListener {
             override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int): Boolean {

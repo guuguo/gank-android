@@ -33,10 +33,11 @@ import com.chad.library.adapter.base.animation.SlideInBottomAnimation
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation
 import com.flyco.animation.SlideEnter.SlideBottomEnter
 import com.guuguo.android.lib.view.simpleview.SimpleViewHelper
-import com.guuguo.learnsave.R.id.activity
+import com.guuguo.learnsave.R.id.*
 import com.guuguo.learnsave.ui.adapter.SearchResultAdapter
 import com.guuguo.learnsave.extension.*
 import com.guuguo.learnsave.model.retrofit.ApiServer
+import com.guuguo.learnsave.ui.base.BaseSwipeBackActivity
 import com.guuguo.learnsave.util.*
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_search.*
@@ -45,7 +46,7 @@ import kotlinx.android.synthetic.main.toolbar_search.*
 import kotterknife.bindView
 
 
-class SearchActivity : BaseActivity() {
+class SearchActivity : BaseSwipeBackActivity() {
     val SEARCH_COUNT = 20
 
     var page = 1
