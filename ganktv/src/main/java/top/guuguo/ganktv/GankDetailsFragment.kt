@@ -42,7 +42,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
-import com.guuguo.learnsave.model.entity.GankModel
+import com.guuguo.gank.model.entity.GankModel
 
 import java.util.Collections
 

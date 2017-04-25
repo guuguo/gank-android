@@ -1,8 +1,8 @@
-package com.guuguo.learnsave.model.retrofit
+package com.guuguo.gank.model.retrofit
 
-import com.guuguo.learnsave.extension.date
-import com.guuguo.learnsave.model.*
-import com.guuguo.learnsave.model.entity.SearchResultModel
+import com.guuguo.gank.extension.date
+import com.guuguo.gank.model.*
+import com.guuguo.gank.model.entity.SearchResultModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

@@ -22,9 +22,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import com.bumptech.glide.Glide
-import com.guuguo.learnsave.extension.date
-import com.guuguo.learnsave.extension.getDateSimply
-import com.guuguo.learnsave.model.entity.GankModel
+import com.guuguo.gank.extension.date
+import com.guuguo.gank.extension.getDateSimply
+import com.guuguo.gank.model.entity.GankModel
 
 /*
  * A CardPresenter is used to generate Views and bind Objects to them on demand.

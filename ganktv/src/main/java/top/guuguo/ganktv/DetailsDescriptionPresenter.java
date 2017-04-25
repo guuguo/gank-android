@@ -16,7 +16,7 @@ package top.guuguo.ganktv;
 
 import android.support.v17.leanback.widget.AbstractDetailsDescriptionPresenter;
 
-import com.guuguo.learnsave.model.entity.GankModel;
+import com.guuguo.gank.model.entity.GankModel;
 
 public class DetailsDescriptionPresenter extends AbstractDetailsDescriptionPresenter {
 

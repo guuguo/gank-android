@@ -1,4 +1,4 @@
-package com.guuguo.learnsave.model.retrofit
+package com.guuguo.gank.model.retrofit
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

@@ -32,11 +32,11 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.google.gson.Gson
 import com.guuguo.android.lib.utils.DisplayUtil
 import com.guuguo.ganktv.app.MEIZI_COUNT
-import com.guuguo.learnsave.extension.getScreeHeight
-import com.guuguo.learnsave.extension.getScreeWidth
-import com.guuguo.learnsave.model.Ganks
-import com.guuguo.learnsave.model.entity.GankModel
-import com.guuguo.learnsave.model.retrofit.ApiServer
+import com.guuguo.gank.extension.getScreeHeight
+import com.guuguo.gank.extension.getScreeWidth
+import com.guuguo.gank.model.Ganks
+import com.guuguo.gank.model.entity.GankModel
+import com.guuguo.gank.model.retrofit.ApiServer
 import io.reactivex.functions.Consumer
 import java.net.URI
 import java.util.*

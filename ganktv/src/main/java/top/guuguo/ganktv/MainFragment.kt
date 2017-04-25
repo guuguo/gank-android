@@ -44,9 +44,9 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.guuguo.ganktv.app.MEIZI_COUNT
-import com.guuguo.learnsave.model.Ganks
-import com.guuguo.learnsave.model.entity.GankModel
-import com.guuguo.learnsave.model.retrofit.ApiServer
+import com.guuguo.gank.model.Ganks
+import com.guuguo.gank.model.entity.GankModel
+import com.guuguo.gank.model.retrofit.ApiServer
 import io.reactivex.functions.Consumer
 import java.util.*
 
