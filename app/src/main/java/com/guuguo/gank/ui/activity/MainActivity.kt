@@ -122,6 +122,7 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         super.initView()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        toolbar.navigationIcon=ContextCompat.getDrawable(activity,R.drawable.ic_launcher_xml)
         switchContent(0)
     }
 

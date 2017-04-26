@@ -69,7 +69,6 @@ class GankDailyFragment : BaseFragment(), IMainView {
         initSwiper()
         initRecycler()
         toolbar.setOnClickListener { recycler.smoothScrollToPosition(0) }
-        toolbar.setNavigationIcon(R.drawable.ic_launcher_ghost)
         swiper.post {
             swiper.isRefreshing = true
             onRefresh()
