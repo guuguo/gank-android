@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.guuguo.learnsave", appContext.getPackageName());
+        assertEquals("com.guuguo.gank", appContext.getPackageName());
     }
 }

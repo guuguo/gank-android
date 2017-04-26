@@ -1,4 +1,4 @@
-//package com.guuguo.learnsave.app.fragment
+//package com.guuguo.gank.app.fragment
 //
 //import android.animation.Animator
 //import android.content.Context
@@ -15,11 +15,11 @@
 //import android.widget.ImageView
 //import android.widget.LinearLayout
 //
-//import com.guuguo.learnsave.R
-//import com.guuguo.learnsave.app.base.BaseFragment
-//import com.guuguo.learnsave.extension.squareRoot
-//import com.guuguo.learnsave.presenter.SearchRevealPresenter
-//import com.guuguo.learnsave.view.IBaseView
+//import com.guuguo.gank.R
+//import com.guuguo.gank.app.base.BaseFragment
+//import com.guuguo.gank.extension.squareRoot
+//import com.guuguo.gank.presenter.SearchRevealPresenter
+//import com.guuguo.gank.view.IBaseView
 //
 //import io.codetail.animation.ViewAnimationUtils
 //

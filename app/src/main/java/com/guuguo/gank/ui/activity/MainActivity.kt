@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.text.TextUtils
@@ -49,12 +50,14 @@ class MainActivity : BaseActivity() {
 
         when (item.itemId) {
             R.id.navigation_daily -> {
-                appbar.elevation=10f
+                ViewCompat.setElevation(appbar,10f)
+//                appbar.elevation=10f
                 switchContent(0)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_category -> {
-                appbar.elevation=0f
+                ViewCompat.setElevation(appbar,0f)
+//                appbar.elevation=0f
                 switchContent(1)
                 return@OnNavigationItemSelectedListener true
             }

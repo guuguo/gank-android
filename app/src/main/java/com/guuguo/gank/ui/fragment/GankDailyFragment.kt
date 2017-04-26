@@ -25,7 +25,7 @@ import com.guuguo.gank.R
 import com.guuguo.gank.R.id.*
 import com.guuguo.gank.ui.adapter.MeiziAdapter
 import com.guuguo.gank.ui.base.BaseActivity
-//import com.guuguo.learnsave.app.fragment.SearchRevealFragment
+//import com.guuguo.gank.app.fragment.SearchRevealFragment
 import com.guuguo.gank.extension.safe
 import com.guuguo.gank.extension.showSnackTip
 import com.guuguo.gank.extension.updateData
@@ -69,7 +69,7 @@ class GankDailyFragment : BaseFragment(), IMainView {
         initSwiper()
         initRecycler()
         toolbar.setOnClickListener { recycler.smoothScrollToPosition(0) }
-        toolbar.setNavigationIcon(R.drawable.ic_launcher)
+        toolbar.setNavigationIcon(R.drawable.ic_launcher_ghost)
         swiper.post {
             swiper.isRefreshing = true
             onRefresh()

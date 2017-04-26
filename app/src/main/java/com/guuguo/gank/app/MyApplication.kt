@@ -1,6 +1,7 @@
 package com.guuguo.gank.app
 
 import android.app.Application
+import android.support.v7.app.AppCompatDelegate
 import com.guuguo.android.lib.BaseApplication
 import com.guuguo.gank.R
 import com.tencent.bugly.Bugly
@@ -13,7 +14,7 @@ class MyApplication : BaseApplication() {
     override fun init() {
         instance = INSTANCE as MyApplication?;
         initBugly()
-    }
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); }
 
     companion object {
         var instance: MyApplication? = null

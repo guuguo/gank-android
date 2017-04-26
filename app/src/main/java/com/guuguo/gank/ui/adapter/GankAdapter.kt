@@ -41,6 +41,7 @@ import com.guuguo.gank.app.OmeiziDrawable
 import com.guuguo.gank.app.TRANSLATE_GIRL_VIEW
 import java.io.Serializable
 import android.graphics.drawable.Drawable
+import android.support.v7.app.AppCompatDelegate
 import com.guuguo.gank.ui.activity.WebViewActivity
 import com.guuguo.gank.extension.dpToPx
 

@@ -1,4 +1,4 @@
-//package com.guuguo.learnsave.app.base
+//package com.guuguo.gank.app.base
 //
 //
 //import android.os.Bundle
@@ -6,7 +6,7 @@
 //import android.support.v7.app.ActionBar
 //import android.support.v7.widget.Toolbar
 //import android.view.animation.DecelerateInterpolator
-//import com.guuguo.learnsave.R
+//import com.guuguo.gank.R
 //import kotterknife.bindView
 //
 ///**
