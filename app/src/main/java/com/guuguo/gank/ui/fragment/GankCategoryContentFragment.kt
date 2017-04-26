@@ -19,13 +19,13 @@ import com.chad.library.adapter.base.animation.SlideInLeftAnimation
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
+import com.guuguo.android.lib.extension.safe
+import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
 import com.guuguo.gank.R.id.*
 import com.guuguo.gank.ui.adapter.MeiziAdapter
 import com.guuguo.gank.ui.base.BaseActivity
 //import com.guuguo.gank.app.fragment.SearchRevealFragment
-import com.guuguo.gank.extension.safe
-import com.guuguo.gank.extension.showSnackTip
 import com.guuguo.gank.extension.updateData
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.presenter.MainPresenter

@@ -14,9 +14,7 @@ import android.widget.ImageView
 import com.guuguo.gank.R
 import com.guuguo.gank.ui.adapter.CategoryGankAdapter
 import com.guuguo.gank.ui.base.BaseActivity
-import com.guuguo.gank.extension.date
-import com.guuguo.gank.extension.getDateSimply
-import com.guuguo.gank.extension.showSnackTip
+
 import com.guuguo.gank.model.GankDays
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.presenter.BasePresenter
@@ -35,8 +33,9 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebSettings
+import com.guuguo.android.lib.extension.safe
+import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R.id.activity
-import com.guuguo.gank.extension.safe
 import com.guuguo.gank.ui.base.BaseSwipeBackActivity
 import kotterknife.bindView
 

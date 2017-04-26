@@ -30,8 +30,6 @@ import com.guuguo.gank.R.id.*
 import com.guuguo.gank.ui.adapter.MeiziAdapter
 import com.guuguo.gank.ui.base.BaseActivity
 //import com.guuguo.gank.app.fragment.SearchRevealFragment
-import com.guuguo.gank.extension.safe
-import com.guuguo.gank.extension.showSnackTip
 import com.guuguo.gank.extension.updateData
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.presenter.MainPresenter

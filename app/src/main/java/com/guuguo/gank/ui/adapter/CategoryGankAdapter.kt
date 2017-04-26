@@ -34,15 +34,13 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.SizeReadyCallback
 import com.bumptech.glide.request.target.Target
 import com.guuguo.gank.ui.activity.GankActivity
-import com.guuguo.gank.extension.date
-import com.guuguo.gank.extension.getDateSimply
 import com.guuguo.gank.app.MEIZI
 import com.guuguo.gank.app.OmeiziDrawable
 import com.guuguo.gank.app.TRANSLATE_GIRL_VIEW
 import java.io.Serializable
 import android.graphics.drawable.Drawable
+import com.guuguo.android.lib.extension.dpToPx
 import com.guuguo.gank.ui.activity.WebViewActivity
-import com.guuguo.gank.extension.dpToPx
 
 
 class CategoryGankAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
