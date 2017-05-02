@@ -5,8 +5,10 @@ import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.SearchResult
 import com.guuguo.gank.model.entity.SearchResultModel
 import io.reactivex.Single
+import retrofit2.http.FormUrlEncoded
 
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.Path
 
 /**

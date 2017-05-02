@@ -32,8 +32,8 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.google.gson.Gson
 import com.guuguo.android.lib.utils.DisplayUtil
 import com.guuguo.ganktv.app.MEIZI_COUNT
-import com.guuguo.gank.extension.getScreeHeight
-import com.guuguo.gank.extension.getScreeWidth
+import com.guuguo.android.lib.extension.getScreeHeight
+import com.guuguo.android.lib.extension.getScreeWidth
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.model.retrofit.ApiServer

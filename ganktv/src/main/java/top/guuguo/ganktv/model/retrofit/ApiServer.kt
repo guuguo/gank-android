@@ -1,6 +1,6 @@
 package com.guuguo.gank.model.retrofit
 
-import com.guuguo.gank.extension.date
+import com.guuguo.android.lib.extension.date
 import com.guuguo.gank.model.*
 import com.guuguo.gank.model.entity.SearchResultModel
 import io.reactivex.Single
