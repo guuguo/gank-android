@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'android-apt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 //apply plugin: 'com.android.databinding'
 
 android {
@@ -57,7 +59,9 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-
+    dataBinding {
+        enabled = true
+    }
 
 }
 
@@ -82,6 +86,7 @@ dependencies {
     
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    kapt "com.android.databinding:compiler:2.3.2"
 
     //support
     compile "com.android.support:support-vector-drawable:$support_version"

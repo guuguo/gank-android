@@ -2,41 +2,18 @@ package com.guuguo.gank.ui.activity
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import com.guuguo.gank.R
-import com.guuguo.gank.ui.adapter.CategoryGankAdapter
-import com.guuguo.gank.ui.base.BaseActivity
 
-import com.guuguo.gank.model.GankDays
-import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.presenter.BasePresenter
-import com.guuguo.gank.presenter.DateGankPresenter
 import com.guuguo.gank.presenter.WebViewPresenter
-import com.guuguo.gank.app.GANK
-import com.guuguo.gank.app.MEIZI
-import com.guuguo.gank.app.OmeiziDrawable
-import com.guuguo.gank.app.TRANSLATE_GIRL_VIEW
 import com.guuguo.gank.view.IBaseView
-import com.guuguo.gank.view.IDateGankView
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar
-import java.util.*
-import android.webkit.WebChromeClient
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.webkit.WebSettings
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
-import com.guuguo.gank.R.id.activity
-import com.guuguo.gank.ui.base.BaseSwipeBackActivity
+import com.guuguo.gank.base.BaseSwipeBackActivity
 import kotterknife.bindView
 
 

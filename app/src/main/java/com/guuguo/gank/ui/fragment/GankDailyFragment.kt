@@ -1,50 +1,31 @@
 package com.guuguo.gank.ui.fragment
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.animation.ScaleInAnimation
-import com.chad.library.adapter.base.listener.OnItemChildClickListener
-import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
 import com.guuguo.gank.R.id.*
 import com.guuguo.gank.ui.adapter.MeiziAdapter
-import com.guuguo.gank.ui.base.BaseActivity
 //import com.guuguo.gank.app.fragment.SearchRevealFragment
-import com.guuguo.gank.extension.updateData
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.presenter.MainPresenter
-import com.guuguo.gank.util.DisplayUtil
 import com.guuguo.gank.app.MEIZI
 import com.guuguo.gank.app.MEIZI_COUNT
 import com.guuguo.gank.app.OmeiziDrawable
 import com.guuguo.gank.app.TRANSLATE_GIRL_VIEW
 import com.guuguo.gank.ui.activity.GankActivity
-import com.guuguo.gank.ui.base.BaseFragment
+import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.view.IMainView
-import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.proguard.ac
-import com.tencent.bugly.proguard.m
 import kotterknife.bindView
 import java.io.Serializable
-import java.util.*
 
 
 class GankDailyFragment : BaseFragment(), IMainView {

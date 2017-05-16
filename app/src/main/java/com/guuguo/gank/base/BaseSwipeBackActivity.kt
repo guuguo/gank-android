@@ -1,16 +1,11 @@
-package com.guuguo.gank.ui.base
+package com.guuguo.gank.base
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.annotation.DrawableRes
-import android.support.v4.app.AppLaunchChecker.onActivityCreate
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import com.guuguo.android.lib.app.LBaseActivity
-import com.guuguo.gank.app.MyApplication
 import me.yokeyword.swipebackfragment.LSwipeBackView
 import me.yokeyword.swipebackfragment.SwipeBackLayout
 

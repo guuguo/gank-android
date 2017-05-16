@@ -6,7 +6,7 @@ import com.guuguo.gank.model.entity.SearchResultModel
  * Created by 大哥哥 on 2016-11-19.
  */
 
-class SearchResult {
+class GankNetResult {
 
     /**
      * count : 10

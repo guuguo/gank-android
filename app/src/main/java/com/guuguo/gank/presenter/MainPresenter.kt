@@ -2,11 +2,12 @@ package com.guuguo.gank.presenter
 
 import android.content.Context
 import com.guuguo.gank.model.Ganks
-import com.guuguo.gank.model.retrofit.ApiServer
+import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.app.MEIZI_COUNT
+import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.view.IMainView
-import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
+import java.util.*
 
 /**
  * 主界面presenter
@@ -17,11 +18,10 @@ class MainPresenter(context: Context, iView: IMainView) : BasePresenter<IMainVie
     fun fetchMeiziData(page: Int) {
         iView.showProgress()
         subscription = ApiServer.getGankData(ApiServer.TYPE_FULI, MEIZI_COUNT, page)
-                .subscribe(object : Consumer<Ganks> {
-                    override fun accept(meiziData: Ganks?) {
+                .subscribe(object : Consumer<Ganks<ArrayList<GankModel>>> {
+                    override fun accept(meiziData: Ganks<ArrayList<GankModel>>?) {
                         meiziData?.let {
-
-                            iView.showMeiziList(meiziData.results)
+                            iView.showMeiziList(meiziData.results!!)
                             iView.hideProgress()
                         }
                     }

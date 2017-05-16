@@ -1,13 +1,12 @@
-package com.guuguo.gank.model.retrofit
+package com.guuguo.gank.net
 
-import com.guuguo.gank.R.id.date
 import com.guuguo.android.lib.extension.date
 import com.guuguo.gank.model.*
-import com.guuguo.gank.model.entity.SearchResultModel
+import com.guuguo.gank.model.entity.GankModel
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -23,7 +22,7 @@ object ApiServer {
     val TYPE_ALL = "all"
 
     val gankServer by lazy { GankRetrofit.getRetrofit().create(GankService::class.java) }
-    fun getGankData(type: String, count: Int, page: Int): Single<Ganks> = gankServer
+    fun getGankData(type: String, count: Int, page: Int): Observable<Ganks<ArrayList<GankModel>>> = gankServer
             .getGanHuo(type, count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -36,7 +35,7 @@ object ApiServer {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getGankSearchResult(query: String, category: String, count: Int, page: Int): Single<SearchResult> = gankServer
+    fun getGankSearchResult(query: String, category: String, count: Int, page: Int): Single<GankNetResult> = gankServer
             .getGankSearchResult(query, category, count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

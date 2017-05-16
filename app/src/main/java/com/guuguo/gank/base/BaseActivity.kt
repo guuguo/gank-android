@@ -1,8 +1,5 @@
-package com.guuguo.gank.ui.base
+package com.guuguo.gank.base
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import butterknife.ButterKnife
 import com.guuguo.android.lib.app.LBaseActivity
 import com.guuguo.gank.app.MyApplication
 

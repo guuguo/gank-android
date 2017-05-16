@@ -7,6 +7,6 @@ import java.util.*
  * Created by guodeqing on 7/17/16.
  */
 
-class Ganks : GankResult() {
-     var results = ArrayList<GankModel>()
+class Ganks<T> : GankResult() {
+    var results: T? = null
 }

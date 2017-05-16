@@ -1,12 +1,6 @@
-package com.guuguo.gank.ui.base
+package com.guuguo.gank.base
 
-import android.app.PendingIntent.getActivity
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.guuguo.android.lib.app.LBaseFragment
 import com.guuguo.gank.app.MyApplication

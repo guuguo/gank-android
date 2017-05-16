@@ -1,34 +1,23 @@
 package com.guuguo.gank.ui.activity
 
-import android.support.design.widget.AppBarLayout
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.listener.OnItemChildClickListener
-import com.flyco.systembar.SystemBarHelper
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.android.lib.view.RatioImageView
 import com.guuguo.gank.R
-import com.guuguo.gank.R.id.activity
-import com.guuguo.gank.R.id.toolbar_layout
 import com.guuguo.gank.ui.adapter.CategoryGankAdapter
-import com.guuguo.gank.ui.base.BaseActivity
-import com.guuguo.gank.model.GankDays
+import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.presenter.DateGankPresenter
 import com.guuguo.gank.app.MEIZI
 import com.guuguo.gank.app.OmeiziDrawable
 import com.guuguo.gank.app.TRANSLATE_GIRL_VIEW
-import com.guuguo.gank.ui.base.BaseSwipeBackActivity
 import com.guuguo.gank.view.IDateGankView
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar
-import kotlinx.android.synthetic.main.toolbar_gank_detail.*
 import kotterknife.bindView
 import java.util.*
 

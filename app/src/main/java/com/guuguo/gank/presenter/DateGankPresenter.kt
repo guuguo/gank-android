@@ -2,11 +2,9 @@ package com.guuguo.gank.presenter
 
 import android.content.Context
 import com.guuguo.gank.model.GankDays
-import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.model.retrofit.ApiServer
+import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.view.IDateGankView
-import com.guuguo.gank.view.IMainView
 import io.reactivex.functions.Consumer
 import java.util.*
 

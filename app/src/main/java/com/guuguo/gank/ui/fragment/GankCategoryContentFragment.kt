@@ -1,54 +1,20 @@
 package com.guuguo.gank.ui.fragment
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Color
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.*
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.animation.SlideInBottomAnimation
-import com.chad.library.adapter.base.animation.SlideInLeftAnimation
-import com.chad.library.adapter.base.listener.OnItemChildClickListener
-import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
-import com.guuguo.gank.R.id.*
-import com.guuguo.gank.ui.adapter.MeiziAdapter
-import com.guuguo.gank.ui.base.BaseActivity
 //import com.guuguo.gank.app.fragment.SearchRevealFragment
-import com.guuguo.gank.extension.updateData
 import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.presenter.MainPresenter
-import com.guuguo.gank.util.DisplayUtil
-import com.guuguo.gank.app.MEIZI
 import com.guuguo.gank.app.MEIZI_COUNT
-import com.guuguo.gank.app.OmeiziDrawable
-import com.guuguo.gank.app.TRANSLATE_GIRL_VIEW
 import com.guuguo.gank.model.Ganks
-import com.guuguo.gank.model.retrofit.ApiServer
-import com.guuguo.gank.ui.activity.GankActivity
+import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.ui.activity.WebViewActivity
 import com.guuguo.gank.ui.adapter.GankAdapter
-import com.guuguo.gank.ui.adapter.SearchResultAdapter
-import com.guuguo.gank.ui.base.BaseFragment
-import com.guuguo.gank.view.IMainView
-import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.proguard.ac
-import com.tencent.bugly.proguard.m
+import com.guuguo.gank.base.BaseFragment
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
-import kotterknife.bindView
-import java.io.Serializable
 import java.util.*
 
 
@@ -125,10 +91,10 @@ class GankCategoryContentFragment : BaseFragment() {
 
     private fun fetchGankData(page: Int) {
         ApiServer.getGankData(gank_type, MEIZI_COUNT, page)
-                .subscribe(object : Consumer<Ganks> {
-                    override fun accept(meiziData: Ganks?) {
+                .subscribe(object : Consumer<Ganks<ArrayList<GankModel>>> {
+                    override fun accept(meiziData: Ganks<ArrayList<GankModel>>?) {
                         meiziData?.let {
-                            showMeiziList(meiziData.results)
+                            showMeiziList(meiziData.results!!)
                             hideProgress()
                         }
                     }
