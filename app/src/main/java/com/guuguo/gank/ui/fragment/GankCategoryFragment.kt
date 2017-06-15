@@ -28,7 +28,7 @@ class GankCategoryFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
-        viewpager.offscreenPageLimit=2
+        viewpager.offscreenPageLimit = 2
         viewpager.adapter = object : MyFragmentPagerAdapter(activity, activity.supportFragmentManager, fragments, titleStrs) {
             override fun initNewFragment(position: Int, fragment: Fragment?, title: String) {
                 val bundle = Bundle()

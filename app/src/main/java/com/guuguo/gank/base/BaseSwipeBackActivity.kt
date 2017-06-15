@@ -66,11 +66,11 @@ abstract class BaseSwipeBackActivity : BaseActivity(), LSwipeBackView {
      * 库默认使用Theme的android:windowbackground作为Fragment的背景,
      * 如果不像使用windowbackground作为背景, 可以通过该方法改变Fragment背景。
      */
-    protected fun setDefaultFragmentBackground(@DrawableRes backgroundRes: Int) {
+    override fun setDefaultFragmentBackground(@DrawableRes backgroundRes: Int) {
         mDefaultFragmentBackground = backgroundRes
     }
 
-    internal fun getDefaultFragmentBackground(): Int {
+    override fun getDefaultFragmentBackground(): Int {
         return mDefaultFragmentBackground
     }
 }

@@ -1,5 +1,6 @@
 package com.guuguo.gank.ui.fragment
 
+import android.os.Bundle
 import android.support.v7.widget.*
 import android.widget.Toast
 import com.guuguo.android.lib.extension.safe
@@ -7,7 +8,7 @@ import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
 //import com.guuguo.gank.app.fragment.SearchRevealFragment
 import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.app.MEIZI_COUNT
+import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.ui.activity.WebViewActivity
@@ -27,15 +28,15 @@ class GankCategoryContentFragment : BaseFragment() {
     companion object {
         val ARG_GANK_TYPE = "ARG_GANK_TYPE"
     }
-
     override fun getLayoutResId(): Int {
         return R.layout.fragment_gank_category_content;
     }
 
-    override fun initVariable() {
-        super.initVariable()
+    override fun initVariable(savedInstanceState: Bundle?) {
+        super.initVariable(savedInstanceState)
         gank_type = arguments[ARG_GANK_TYPE] as String
     }
+
 
     override fun initPresenter() {
     }
@@ -46,7 +47,7 @@ class GankCategoryContentFragment : BaseFragment() {
             onRefresh()
         };
         initRecycler()
-        toolbar.setOnClickListener { recycler.smoothScrollToPosition(0) }
+        activity.getToolBar()?.setOnClickListener { recycler.smoothScrollToPosition(0) }
         swiper.post {
             swiper.isRefreshing = true
             onRefresh()
@@ -129,7 +130,7 @@ class GankCategoryContentFragment : BaseFragment() {
     }
 
     fun showTip(msg: String) {
-        showSnackTip(activity.getContainer(), msg)
+        showSnackTip(contentView!!, msg)
     }
 }
 

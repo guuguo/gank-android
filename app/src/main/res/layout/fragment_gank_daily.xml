@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<include layout="@layout/view_refresh_recycler" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.guuguo.gank.ui.viewmodel.GankDailyViewModel" />
+    </data>
+
+    <com.guuguo.android.lib.view.VerticalSwipeRefreshLayout
+        android:id="@+id/swiper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.GankDailyFragment"
+       >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="20dp" />
+    </com.guuguo.android.lib.view.VerticalSwipeRefreshLayout>
+</layout>

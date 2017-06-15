@@ -1,5 +1,6 @@
 package com.guuguo.gank.model.entity
 
+import com.tencent.bugly.proguard.w
 import java.io.Serializable
 import java.util.*
 
@@ -9,7 +10,7 @@ import java.util.*
 class GankModel : Serializable {
     var _id: String = ""
     var createdAt: Date? = null
-    var desc: String=""
+    var desc: String = ""
     var publishedAt: Date? = null
     var source: String? = null
     var type: String = ""
@@ -24,6 +25,10 @@ class GankModel : Serializable {
             if (_id == other._id)
                 return true
         return false
+    }
+
+    fun getWidthUrl(width: Int): String {
+        return url + "?imageView2/0/w/" + width.toString()
     }
 
     override fun toString(): String {

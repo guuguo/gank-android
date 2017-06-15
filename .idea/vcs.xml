@@ -3,6 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/../SwipeBackFragment" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../androidLib" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>

@@ -1,10 +1,14 @@
 package com.guuguo.gank.ui.activity
 
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import com.guuguo.gank.R
 import com.guuguo.gank.model.entity.GankModel
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation
+import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.view.simpleview.SimpleViewHelper
+import com.guuguo.gank.R.id.fsv_search
+import com.guuguo.gank.R.id.recycler
 import com.guuguo.gank.ui.adapter.SearchResultAdapter
 import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.base.BaseSwipeBackActivity
@@ -22,14 +26,10 @@ class SearchActivity : BaseSwipeBackActivity() {
         SearchResultAdapter()
     }
 
-    override fun getToolBarResId(): Int {
-        return R.layout.toolbar_search
+    override fun getToolBar(): Toolbar? {
+        return id_tool_bar
     }
-
-    override fun isNavigationButtonVisible(): Boolean {
-        return false
-    }
-
+    override fun isNavigationBack()= false
     override fun getLayoutResId(): Int {
         return R.layout.activity_search
     }
@@ -57,7 +57,7 @@ class SearchActivity : BaseSwipeBackActivity() {
         fsv_search.setOnHomeActionClickListener { activity.finish() }
         fsv_search.setOnQueryChangeListener { oldQuery, newQuery ->
             clearApiCall()
-            page=1
+            page = 1
             search(newQuery)
         }
     }
@@ -87,7 +87,7 @@ class SearchActivity : BaseSwipeBackActivity() {
                     mSearchResultAdapter.addData(searchResult.results!!)
                 }
             }, Consumer<Throwable> { error ->
-                dialogErrorShow(error.message, null)
+                dialogErrorShow(error.message.safe(), null)
             }))
         }
     }

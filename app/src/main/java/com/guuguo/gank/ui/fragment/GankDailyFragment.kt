@@ -1,73 +1,71 @@
 package com.guuguo.gank.ui.fragment
 
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
-import com.guuguo.gank.R.id.*
 import com.guuguo.gank.ui.adapter.MeiziAdapter
-//import com.guuguo.gank.app.fragment.SearchRevealFragment
 import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.presenter.MainPresenter
-import com.guuguo.gank.app.MEIZI
-import com.guuguo.gank.app.MEIZI_COUNT
-import com.guuguo.gank.app.OmeiziDrawable
-import com.guuguo.gank.app.TRANSLATE_GIRL_VIEW
+import com.guuguo.gank.constant.MEIZI
+import com.guuguo.gank.constant.MEIZI_COUNT
+import com.guuguo.gank.constant.OmeiziDrawable
+import com.guuguo.gank.constant.TRANSLATE_GIRL_VIEW
 import com.guuguo.gank.ui.activity.GankActivity
 import com.guuguo.gank.base.BaseFragment
+import com.guuguo.gank.databinding.FragmentGankDailyBinding
+import com.guuguo.gank.ui.viewmodel.GankDailyViewModel
 import com.guuguo.gank.view.IMainView
-import kotterknife.bindView
+import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.io.Serializable
 
 
-class GankDailyFragment : BaseFragment(), IMainView {
+class GankDailyFragment : BaseFragment() {
     var page = 1
     var meiziAdapter = MeiziAdapter()
-
-    val presenter: MainPresenter by lazy { MainPresenter(activity, this) }
-    val recycler: RecyclerView by bindView(R.id.recycler)
-    val swiper: SwipeRefreshLayout by bindView(R.id.swiper)
-
+    lateinit var binding: FragmentGankDailyBinding
+    val viewModel by lazy { GankDailyViewModel(this) }
 
     override fun getLayoutResId(): Int {
-        return R.layout.view_refresh_recycler;
+        return R.layout.fragment_gank_daily;
     }
 
+    override fun setLayoutResId(inflater: LayoutInflater?, resId: Int, container: ViewGroup?): View {
+        binding = DataBindingUtil.inflate(inflater, resId, container, false)
+        binding.viewModel = viewModel
+        return binding.root
+    }
 
     override fun initPresenter() {
-        presenter.init()
     }
 
-    override fun initIView() {
+    override fun initView() {
+        super.initView()
         initSwiper()
         initRecycler()
-        toolbar.setOnClickListener { recycler.smoothScrollToPosition(0) }
-        swiper.post {
-            swiper.isRefreshing = true
-            onRefresh()
-        }
+        activity.getToolBar()?.setOnClickListener { recycler.smoothScrollToPosition(0) }
+        swiper.isRefreshing = true
     }
 
     private fun initRecycler() {
-//        meiziAdapter.openLoadAnimation(ScaleInAnimation())
         meiziAdapter.setOnLoadMoreListener({
             page++
-            presenter.fetchMeiziData(page)
+            viewModel.fetchMeiziData(page)
         }, recycler)
 
-        recycler.layoutManager = StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
+        recycler.layoutManager = LinearLayoutManager(activity)
         recycler.adapter = meiziAdapter
         meiziAdapter.setOnItemChildClickListener { _, view, position ->
             when (view!!.id) {
-                image -> {
+                R.id.image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.getDrawable()
                     val intent = Intent(activity, GankActivity::class.java)
@@ -84,28 +82,20 @@ class GankDailyFragment : BaseFragment(), IMainView {
 
     private fun initSwiper() {
         swiper.setOnRefreshListener {
-            onRefresh()
+            swiper.isRefreshing = true
+            page = 1
+            loadData()
         };
     }
 
-    private fun onRefresh() {
-        page = 1
-        presenter.fetchMeiziData(page)
+    override fun loadData() {
+        viewModel.fetchMeiziData(page)
+        super.loadData()
     }
 
-    override fun showProgress() {
-    }
 
-    override fun hideProgress() {
+    fun setUpMeiziList(lMeiziList: List<GankModel>) {
         swiper.isRefreshing = false
-    }
-
-    override fun showErrorView(e: Throwable) {
-        Toast.makeText(activity, e.message.safe(), Toast.LENGTH_LONG).show()
-    }
-
-
-    override fun showMeiziList(lMeiziList: List<GankModel>) {
         if (lMeiziList.size < MEIZI_COUNT) {
             meiziAdapter.loadMoreEnd(false)
         }
@@ -115,10 +105,6 @@ class GankDailyFragment : BaseFragment(), IMainView {
             meiziAdapter.loadMoreComplete()
             meiziAdapter.addData(lMeiziList)
         }
-    }
-
-    override fun showTip(msg: String) {
-        showSnackTip(activity.getContainer(), msg)
     }
 }
 

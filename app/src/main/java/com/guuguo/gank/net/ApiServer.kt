@@ -21,8 +21,8 @@ object ApiServer {
     val TYPE_FRONT = "前端"
     val TYPE_ALL = "all"
 
-    val gankServer by lazy { GankRetrofit.getRetrofit().create(GankService::class.java) }
-    fun getGankData(type: String, count: Int, page: Int): Observable<Ganks<ArrayList<GankModel>>> = gankServer
+    val gankServer by lazy { MyRetrofit.myRetrofit.create(Service::class.java) }
+    fun getGankData(type: String, count: Int, page: Int): Single<Ganks<ArrayList<GankModel>>> = gankServer
             .getGanHuo(type, count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

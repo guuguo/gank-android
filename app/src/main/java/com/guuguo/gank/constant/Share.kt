@@ -1,4 +1,4 @@
-package com.guuguo.gank.app
+package com.guuguo.gank.constant
 
 import android.graphics.drawable.Drawable
 

@@ -1,4 +1,6 @@
-package com.guuguo.gank.app
+package com.guuguo.gank.constant
+
+import com.google.gson.GsonBuilder
 
 /**
  * Created by guodeqing on 7/2/16.
@@ -14,6 +16,10 @@ val GANK_TITLE = "gank_title"
 val GANK = "gank"
 val TRANSLATE_GIRL_VIEW = "share_girl"
 
+val dataPattern = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+val myGson by lazy {
+    GsonBuilder().setDateFormat(dataPattern).create()
+}
 fun getJson(response: String): String {
     return response.replace("<.*?>".toRegex(), "")
 }

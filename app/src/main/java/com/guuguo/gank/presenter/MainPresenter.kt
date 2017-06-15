@@ -3,7 +3,7 @@ package com.guuguo.gank.presenter
 import android.content.Context
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.net.ApiServer
-import com.guuguo.gank.app.MEIZI_COUNT
+import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.view.IMainView
 import io.reactivex.functions.Consumer

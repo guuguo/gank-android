@@ -2,6 +2,7 @@ package com.guuguo.gank.util;
 
 import android.view.View;
 
+import com.guuguo.android.lib.utils.Utils;
 import com.guuguo.gank.app.MyApplication;
 
 /**
@@ -21,8 +22,9 @@ public class DisplayUtil {
 
     public static float getDensity() {
        if (density <= 0F) {
-            density = MyApplication.Companion.getInstance().getResources().getDisplayMetrics().density;
+            density = Utils.getContext().getResources().getDisplayMetrics().density;
         }
+        
         return density;
     }
 
@@ -45,7 +47,7 @@ public class DisplayUtil {
 
     public static int getScreenWidth() {
         if (screenWidthPixels <= 0) {
-            screenWidthPixels = MyApplication.Companion.getInstance().getResources().getDisplayMetrics().widthPixels;
+            screenWidthPixels = Utils.getContext().getResources().getDisplayMetrics().widthPixels;
         }
         return screenWidthPixels;
     }
@@ -53,7 +55,7 @@ public class DisplayUtil {
 
     public static int getScreenHeight() {
         if (screenHeightPixels <= 0) {
-            screenHeightPixels = MyApplication.Companion.getInstance().getResources().getDisplayMetrics().heightPixels;
+            screenHeightPixels = Utils.getContext().getResources().getDisplayMetrics().heightPixels;
         }
         return screenHeightPixels;
     }

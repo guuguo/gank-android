@@ -2,6 +2,7 @@ package com.guuguo.gank.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,14 +15,11 @@ import android.webkit.WebView
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.base.BaseSwipeBackActivity
+import kotlinx.android.synthetic.main.activity_webview.*
 import kotterknife.bindView
 
 
 class WebViewActivity : BaseSwipeBackActivity(), IBaseView {
-
-    val contentView by bindView<View>(R.id.activity)
-    val mProgress by bindView<SmoothProgressBar>(R.id.progressbar)
-    val mWebView by bindView<WebView>(R.id.wv_web)
 
     var url: String = ""
     var desc: String = ""
@@ -38,14 +36,15 @@ class WebViewActivity : BaseSwipeBackActivity(), IBaseView {
         }
     }
 
-    override fun onBackPressed() {
-        if (mWebView.canGoBack())
-            mWebView.goBack()
+    override fun onBackPressedSupport() {
+        if (wv_web.canGoBack())
+            wv_web.goBack()
         else
-            super.onBackPressed()
+            super.onBackPressedSupport()
     }
 
-    override fun initVariable() {
+    override fun initVariable(savedInstanceState: Bundle?) {
+        super.initVariable(savedInstanceState)
         url = intent.getStringExtra(ARG_URL)
         desc = intent.getStringExtra(ARG_DESC)
     }
@@ -54,13 +53,12 @@ class WebViewActivity : BaseSwipeBackActivity(), IBaseView {
         return desc.safe()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.web_menu, menu)
-        return true
+    override fun getMenuResId(): Int {
+        return R.menu.web_menu
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.menu_browser -> mPresenter.openInBrowser(url)
             R.id.menu_copy -> mPresenter.copyUrl(url)
             R.id.menu_share -> {
@@ -83,22 +81,22 @@ class WebViewActivity : BaseSwipeBackActivity(), IBaseView {
     }
 
     override fun initIView() {
-        mPresenter.loadUrl(mWebView, url)
+        mPresenter.loadUrl(wv_web, url)
     }
 
     override fun hideProgress() {
-        mProgress.visibility = View.GONE
+        progressbar.visibility = View.GONE
     }
 
     override fun showErrorView(e: Throwable) {
     }
 
     override fun showProgress() {
-        mProgress.visibility = View.VISIBLE
+        progressbar.visibility = View.VISIBLE
     }
 
     override fun showTip(msg: String) {
-        showSnackTip(contentView, msg)
+        showSnackTip(container_view, msg)
     }
 
 }

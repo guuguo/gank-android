@@ -32,7 +32,7 @@
 //
 //    var presenter: SearchRevealPresenter? = null
 //
-//    val content by bindView<View>(R.id.content)
+//    val container_view by bindView<View>(R.id.container_view)
 //    val edit_search by bindView<EditText>(R.id.edit_search)
 //    val edit_lay by bindView<LinearLayout>(R.id.edit_lay)
 //    val llItems by bindView<LinearLayout>(R.id.items)
@@ -43,7 +43,7 @@
 //    }
 //
 //    fun onBackPressed(): Boolean {
-//        var mRevealAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, 20f, squareRoot(content.width, content.height))
+//        var mRevealAnimator = ViewAnimationUtils.createCircularReveal(container_view, centerX, centerY, 20f, squareRoot(container_view.width, container_view.height))
 //        mRevealAnimator!!.resume()
 //        mRevealAnimator.addListener(object : Animator.AnimatorListener {
 //            override fun onAnimationStart(p0: Animator?) {
