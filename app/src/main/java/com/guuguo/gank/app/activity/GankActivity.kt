@@ -1,30 +1,42 @@
-package com.guuguo.gank.ui.activity
+package com.guuguo.gank.app.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.flyco.systembar.SystemBarHelper
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
-import com.guuguo.gank.R.id.*
-import com.guuguo.gank.ui.adapter.CategoryGankAdapter
+import com.guuguo.gank.app.adapter.CategoryGankAdapter
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.presenter.DateGankPresenter
 import com.guuguo.gank.constant.MEIZI
 import com.guuguo.gank.constant.OmeiziDrawable
-import com.guuguo.gank.constant.TRANSLATE_GIRL_VIEW
 import com.guuguo.gank.view.IDateGankView
 import kotlinx.android.synthetic.main.activity_gank.*
 import kotlinx.android.synthetic.main.toolbar_gank_detail.*
 import java.util.*
 
 class GankActivity : BaseActivity(), IDateGankView {
+    companion object {
+        val TRANSLATE_GIRL_VIEW = "share_girl_image_view"
+
+        fun intentTo(activity: Activity, image: View, meizi: GankModel) {
+            val intent = Intent(activity, GankActivity::class.java)
+            intent.putExtra(MEIZI, meizi)
+            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image, TRANSLATE_GIRL_VIEW)
+            ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
+            
+        }
+    }
 
     val mGankAdapter by lazy {
         CategoryGankAdapter()
@@ -43,6 +55,10 @@ class GankActivity : BaseActivity(), IDateGankView {
         mPresenter.init()
     }
 
+    override fun initStatusBar() {
+        SystemBarHelper.immersiveStatusBar(activity, 0f)
+        SystemBarHelper.setHeightAndPadding(activity, getToolBar())
+    }
 
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)
@@ -62,7 +78,7 @@ class GankActivity : BaseActivity(), IDateGankView {
             override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int): Boolean {
                 val bean = mGankAdapter.getItem(position)
                 if (view!!.id == R.id.tv_content) {
-                    WebViewActivity.loadWebViewActivity(bean.url, bean.desc, activity)
+                    WebViewActivity.intentTo(bean.url, bean.desc, activity)
                     return true
                 }
                 return false
@@ -71,9 +87,9 @@ class GankActivity : BaseActivity(), IDateGankView {
     }
 
     override fun onBackPressedSupport() {
-        super.onBackPressedSupport()
-        ActivityCompat.finishAfterTransition(activity)
+        supportFinishAfterTransition()
     }
+
     private fun initIvMeizi() {
         iv_head.setImageDrawable(OmeiziDrawable)
         iv_head.setOriginalSize(mGankBean!!.width, mGankBean!!.height)

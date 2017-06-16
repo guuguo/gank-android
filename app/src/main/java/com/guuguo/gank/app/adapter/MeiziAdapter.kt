@@ -1,4 +1,4 @@
-package com.guuguo.gank.ui.adapter
+package com.guuguo.gank.app.adapter
 
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -11,7 +11,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.bumptech.glide.request.target.*
 import com.guuguo.android.lib.extension.getDateSimply
-import com.guuguo.android.lib.view.RatioImageView
+import com.guuguo.android.lib.ui.imageview.RatioImageView
 import com.guuguo.gank.util.DisplayUtil
 import java.util.*
 

@@ -14,7 +14,6 @@ val MEIZI = "meizi"
 val GANK_URL = "gank_url"
 val GANK_TITLE = "gank_title"
 val GANK = "gank"
-val TRANSLATE_GIRL_VIEW = "share_girl"
 
 val dataPattern = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 val myGson by lazy {

@@ -5,7 +5,7 @@
     android:id="@+id/container_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.guuguo.gank.ui.activity.GankActivity">
+    tools:context=".app.activity.GankActivity">
 
 <android.support.v7.widget.Toolbar
     android:layout_width="match_parent"

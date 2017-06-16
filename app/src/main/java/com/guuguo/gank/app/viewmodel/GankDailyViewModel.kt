@@ -1,4 +1,4 @@
-package com.guuguo.gank.ui.viewmodel
+package com.guuguo.gank.app.viewmodel
 
 import android.databinding.BaseObservable
 import com.guuguo.gank.constant.MEIZI_COUNT
@@ -6,7 +6,7 @@ import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.net.http.BaseCallback
-import com.guuguo.gank.ui.fragment.GankDailyFragment
+import com.guuguo.gank.app.fragment.GankDailyFragment
 import io.reactivex.disposables.Disposable
 import java.util.*
 

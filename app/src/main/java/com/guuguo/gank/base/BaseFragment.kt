@@ -12,9 +12,4 @@ import com.guuguo.gank.app.MyApplication
 abstract class BaseFragment : LNBaseFragment() {
     protected var myApplication = MyApplication.instance
 
-    abstract fun initPresenter()
-    override fun initView() {
-        initPresenter()
-        super.initView()
-    }
 }

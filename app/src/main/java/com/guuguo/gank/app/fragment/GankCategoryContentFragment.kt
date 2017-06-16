@@ -1,4 +1,4 @@
-package com.guuguo.gank.ui.fragment
+package com.guuguo.gank.app.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.*
@@ -11,18 +11,21 @@ import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.net.ApiServer
-import com.guuguo.gank.ui.activity.WebViewActivity
-import com.guuguo.gank.ui.adapter.GankAdapter
+import com.guuguo.gank.app.activity.WebViewActivity
+import com.guuguo.gank.app.adapter.GankAdapter
+import com.guuguo.gank.app.viewmodel.GankDailyViewModel
+import com.guuguo.gank.app.viewmodel.WebViewModel
 import com.guuguo.gank.base.BaseFragment
+import com.guuguo.gank.databinding.FragmentGankDailyBinding
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.util.*
 
 
 class GankCategoryContentFragment : BaseFragment() {
+
     var page = 1
     var gankAdapter = GankAdapter()
-
     var gank_type = "Android"
 
     companion object {
@@ -35,10 +38,6 @@ class GankCategoryContentFragment : BaseFragment() {
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)
         gank_type = arguments[ARG_GANK_TYPE] as String
-    }
-
-
-    override fun initPresenter() {
     }
 
     override fun initView() {
@@ -75,7 +74,7 @@ class GankCategoryContentFragment : BaseFragment() {
         recycler.adapter = gankAdapter
         gankAdapter.setOnItemClickListener { _, view, position ->
             val bean = gankAdapter.getItem(position)
-            WebViewActivity.loadWebViewActivity(bean.url, bean.desc, activity)
+            WebViewActivity.intentTo(bean.t.url, bean.t.desc, activity)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.guuguo.gank.ui.fragment
+package com.guuguo.gank.app.fragment
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -9,21 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
-import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
-import com.guuguo.gank.ui.adapter.MeiziAdapter
+import com.guuguo.gank.app.adapter.MeiziAdapter
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.constant.MEIZI
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.constant.OmeiziDrawable
-import com.guuguo.gank.constant.TRANSLATE_GIRL_VIEW
-import com.guuguo.gank.ui.activity.GankActivity
+import com.guuguo.gank.app.activity.GankActivity
 import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.databinding.FragmentGankDailyBinding
-import com.guuguo.gank.ui.viewmodel.GankDailyViewModel
-import com.guuguo.gank.view.IMainView
+import com.guuguo.gank.app.viewmodel.GankDailyViewModel
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.io.Serializable
 
@@ -33,7 +28,7 @@ class GankDailyFragment : BaseFragment() {
     var meiziAdapter = MeiziAdapter()
     lateinit var binding: FragmentGankDailyBinding
     val viewModel by lazy { GankDailyViewModel(this) }
-
+    override fun isNavigationBack()=false
     override fun getLayoutResId(): Int {
         return R.layout.fragment_gank_daily;
     }
@@ -42,9 +37,6 @@ class GankDailyFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, resId, container, false)
         binding.viewModel = viewModel
         return binding.root
-    }
-
-    override fun initPresenter() {
     }
 
     override fun initView() {
@@ -68,10 +60,8 @@ class GankDailyFragment : BaseFragment() {
                 R.id.image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.getDrawable()
-                    val intent = Intent(activity, GankActivity::class.java)
-                    intent.putExtra(MEIZI, meiziAdapter.getItem(position) as Serializable)
-                    val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image, TRANSLATE_GIRL_VIEW)
-                    ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
+                    GankActivity.intentTo(activity,image, meiziAdapter.getItem(position))
+                   
                     true
                 }
                 else -> false

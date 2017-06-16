@@ -1,5 +1,6 @@
 <!--?xml version=1.0 encoding=utf-8?-->
 <resources>
-    <color name="colorPrimary">#11A884</color>
-    
+    <color name="colorPrimary">#3a3b40</color>
+    <color name="colorPrimaryHint">#AA3a3b40</color>
+
 </resources>

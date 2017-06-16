@@ -1,4 +1,4 @@
-package com.guuguo.gank.ui.adapter;
+package com.guuguo.gank.app.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

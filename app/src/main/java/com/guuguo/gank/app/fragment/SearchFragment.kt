@@ -1,7 +1,6 @@
-package com.guuguo.gank.ui.activity
+package com.guuguo.gank.app.fragment
 
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
 import com.guuguo.gank.R
 import com.guuguo.gank.model.entity.GankModel
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation
@@ -9,15 +8,24 @@ import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.view.simpleview.SimpleViewHelper
 import com.guuguo.gank.R.id.fsv_search
 import com.guuguo.gank.R.id.recycler
-import com.guuguo.gank.ui.adapter.SearchResultAdapter
+import com.guuguo.gank.app.activity.WebViewActivity
+import com.guuguo.gank.app.adapter.SearchResultAdapter
+import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.net.ApiServer
-import com.guuguo.gank.base.BaseSwipeBackActivity
 import io.reactivex.functions.Consumer
-import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 
 
-class SearchActivity : BaseSwipeBackActivity() {
+class SearchFragment : BaseFragment() {
+    override fun getToolBar() = id_tool_bar
+
+    companion object {
+        fun getInstance(): SearchFragment {
+            return SearchFragment()
+        }
+    }
+
     val SEARCH_COUNT = 20
 
     var page = 1
@@ -26,13 +34,8 @@ class SearchActivity : BaseSwipeBackActivity() {
         SearchResultAdapter()
     }
 
-    override fun getToolBar(): Toolbar? {
-        return id_tool_bar
-    }
-    override fun isNavigationBack()= false
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_search
-    }
+    override fun isNavigationBack() = false
+    override fun getLayoutResId() = R.layout.fragment_search
 
     var simplerViewHelper: SimpleViewHelper? = null
     override fun initView() {
@@ -48,13 +51,13 @@ class SearchActivity : BaseSwipeBackActivity() {
         mSearchResultAdapter.setOnItemClickListener { _, view, position ->
             val bean = mSearchResultAdapter.getItem(position)
             if (view!!.id == R.id.tv_content) {
-                WebViewActivity.loadWebViewActivity(bean.url, bean.desc, activity)
+                WebViewActivity.intentTo(bean.url, bean.desc, activity)
             }
         }
         simplerViewHelper = SimpleViewHelper(recycler, false)
         simplerViewHelper?.showEmpty("请输入搜索关键字")
 
-        fsv_search.setOnHomeActionClickListener { activity.finish() }
+        fsv_search.setOnHomeActionClickListener { pop() }
         fsv_search.setOnQueryChangeListener { oldQuery, newQuery ->
             clearApiCall()
             page = 1
@@ -62,6 +65,10 @@ class SearchActivity : BaseSwipeBackActivity() {
         }
     }
 
+    override fun onBackPressedSupport(): Boolean {
+        pop()
+        return true
+    }
 
     private fun search(searchText: String) {
         if (searchText.isNullOrEmpty()) {
@@ -87,7 +94,7 @@ class SearchActivity : BaseSwipeBackActivity() {
                     mSearchResultAdapter.addData(searchResult.results!!)
                 }
             }, Consumer<Throwable> { error ->
-                dialogErrorShow(error.message.safe(), null)
+                activity.dialogErrorShow(error.message.safe(), null)
             }))
         }
     }

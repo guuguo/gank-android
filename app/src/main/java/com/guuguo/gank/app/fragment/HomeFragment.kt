@@ -1,6 +1,5 @@
-package com.guuguo.gank.ui.fragment
+package com.guuguo.gank.app.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -12,7 +11,6 @@ import android.widget.TextView
 
 import com.guuguo.gank.R
 import com.guuguo.gank.base.BaseFragment
-import com.guuguo.gank.ui.activity.SearchActivity
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.base_toolbar_common.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -23,7 +21,10 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
     val mFragments: ArrayList<BaseFragment> = arrayListOf()
     var mFragment: BaseFragment? = null
 
-    override fun initPresenter() {
+    companion object {
+        fun getInstance(): HomeFragment {
+            return HomeFragment()
+        }
     }
 
     private val STATE_FRAGMENT_SHOW = "STATE_FRAGMENT_SHOW"
@@ -37,23 +38,25 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
         id_tool_bar.title = title
     }
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-
-        when (item.itemId) {
-            R.id.navigation_daily -> {
-                ViewCompat.setElevation(appbar, 10f)
-                showHideFragment(mFragments[0], mFragment)
-                mFragment = mFragments[0]
-                true
-            }
-            R.id.navigation_category -> {
-                ViewCompat.setElevation(appbar, 0f)
-                showHideFragment(mFragments[1], mFragment)
-                mFragment = mFragments[1]
-                true
+    private val mOnNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
+        override fun onNavigationItemSelected(item: MenuItem): Boolean {
+            when (item.itemId) {
+                R.id.navigation_daily -> {
+                    ViewCompat.setElevation(appbar, 10f)
+                    showHideFragment(mFragments[0], mFragment)
+                    mFragment = mFragments[0]
+                    return true
+                }
+                R.id.navigation_category -> {
+                    ViewCompat.setElevation(appbar, 0f)
+                    showHideFragment(mFragments[1], mFragment)
+                    mFragment = mFragments[1]
+                    return true
+                }
+                else ->
+                    return false
             }
         }
-        false
     }
 
     override fun initVariable(savedInstanceState: Bundle?) {
@@ -79,8 +82,12 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
                 return true
             }
             R.id.menu_search -> {
-                val intent = Intent(activity, SearchActivity::class.java)
-                startActivity(intent);
+                val fragment = activity.findFragment(SearchFragment::class.java)
+                if (fragment == null) {
+                    activity.popTo(HomeFragment::class.java, false, { activity.start(SearchFragment()) })
+                } else {
+                    activity.popTo(SearchFragment::class.java, false)
+                }
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

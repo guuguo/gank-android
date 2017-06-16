@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.guuguo.gank.ui.viewmodel.GankDailyViewModel" />
+            type="com.guuguo.gank.app.viewmodel.GankDailyViewModel" />
     </data>
 
     <com.guuguo.android.lib.view.VerticalSwipeRefreshLayout
         android:id="@+id/swiper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.GankDailyFragment"
+        tools:context=".app.fragment.GankDailyFragment"
        >
 
         <android.support.v7.widget.RecyclerView

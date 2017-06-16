@@ -2,12 +2,12 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_meizi"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/cv_meizi"
-    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp">
+    android:layout_marginTop="10dp">
 
     <LinearLayout
         android:id="@+id/cl_meizi"
@@ -15,13 +15,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.guuguo.android.lib.view.RatioImageView
+        <com.guuguo.android.lib.ui.imageview.RatioImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:transitionName="meiziImage"
+            android:scaleType="centerCrop"
+            android:transitionName="share_girl_image_view"
             app:riv_origin_height="1dp"
             app:riv_origin_width="2dp" />
 
