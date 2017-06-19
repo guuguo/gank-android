@@ -15,11 +15,12 @@ val GANK_URL = "gank_url"
 val GANK_TITLE = "gank_title"
 val GANK = "gank"
 
-val dataPattern = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+val dataPattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+val dataPatternSearch = "yyyy-MM-dd'T'HH:mm:ss.SSS000"
+
 val myGson by lazy {
     GsonBuilder().setDateFormat(dataPattern).create()
 }
-fun getJson(response: String): String {
-    return response.replace("<.*?>".toRegex(), "")
+val myGsonSearch by lazy {
+    GsonBuilder().setDateFormat(dataPatternSearch).create()
 }
-

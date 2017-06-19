@@ -15,11 +15,13 @@ import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
 import com.guuguo.gank.app.adapter.CategoryGankAdapter
+import com.guuguo.gank.app.adapter.GankWithCategoryAdapter
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.presenter.DateGankPresenter
 import com.guuguo.gank.constant.MEIZI
 import com.guuguo.gank.constant.OmeiziDrawable
+import com.guuguo.gank.model.GankSection
 import com.guuguo.gank.view.IDateGankView
 import kotlinx.android.synthetic.main.activity_gank.*
 import kotlinx.android.synthetic.main.toolbar_gank_detail.*
@@ -34,12 +36,12 @@ class GankActivity : BaseActivity(), IDateGankView {
             intent.putExtra(MEIZI, meizi)
             val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image, TRANSLATE_GIRL_VIEW)
             ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
-            
+
         }
     }
 
     val mGankAdapter by lazy {
-        CategoryGankAdapter()
+        GankWithCategoryAdapter()
     }
 
     override fun getHeaderTitle() = mGankBean?.desc.safe()
@@ -74,14 +76,10 @@ class GankActivity : BaseActivity(), IDateGankView {
     private fun initRecycler() {
         rv_gank.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
         rv_gank.adapter = mGankAdapter
-        mGankAdapter.onItemChildClickListener = object : BaseQuickAdapter.OnItemChildClickListener {
-            override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int): Boolean {
+        mGankAdapter.onItemClickListener = object : BaseQuickAdapter.OnItemClickListener {
+            override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
                 val bean = mGankAdapter.getItem(position)
-                if (view!!.id == R.id.tv_content) {
-                    WebViewActivity.intentTo(bean.url, bean.desc, activity)
-                    return true
-                }
-                return false
+                WebViewActivity.intentTo(bean.t.url, bean.t.desc, activity)
             }
         }
     }
@@ -97,7 +95,14 @@ class GankActivity : BaseActivity(), IDateGankView {
     }
 
     override fun showDate(date: ArrayList<GankModel>) {
-        mGankAdapter.setNewData(date)
+        val array = arrayListOf<GankSection>()
+        (0..date.size - 1).forEach {
+            if (it == 0 || date[it].type != date[it - 1].type) {
+                array.add(GankSection(date[it].type))
+            }
+            array.add(GankSection(date[it]))
+        }
+        mGankAdapter.setNewData(array)
     }
 
     override fun hideProgress() {

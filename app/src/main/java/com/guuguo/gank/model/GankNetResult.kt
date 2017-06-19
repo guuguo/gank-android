@@ -1,6 +1,6 @@
 package com.guuguo.gank.model
 
-import com.guuguo.gank.model.entity.SearchResultModel
+import com.guuguo.gank.model.entity.GankModel
 
 /**
  * Created by 大哥哥 on 2016-11-19.
@@ -16,6 +16,6 @@ class GankNetResult {
 
     var count: Int = 0
     var error: Boolean = false
-    var results: List<SearchResultModel>? = null
+    var results: List<GankModel>? = null
 
 }

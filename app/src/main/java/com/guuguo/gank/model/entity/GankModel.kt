@@ -20,6 +20,10 @@ class GankModel : Serializable {
     var images: ArrayList<String> = arrayListOf()
     var width: Int = 0
     var height: Int = 0
+
+    var ganhuo_id = ""
+    var readability = ""
+    
     override fun equals(other: Any?): Boolean {
         if (other is GankModel)
             if (_id == other._id)

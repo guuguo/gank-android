@@ -13,10 +13,8 @@ import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.app.activity.WebViewActivity
 import com.guuguo.gank.app.adapter.GankAdapter
-import com.guuguo.gank.app.viewmodel.GankDailyViewModel
-import com.guuguo.gank.app.viewmodel.WebViewModel
+import com.guuguo.gank.app.adapter.GankWithCategoryAdapter
 import com.guuguo.gank.base.BaseFragment
-import com.guuguo.gank.databinding.FragmentGankDailyBinding
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.util.*
@@ -30,7 +28,15 @@ class GankCategoryContentFragment : BaseFragment() {
 
     companion object {
         val ARG_GANK_TYPE = "ARG_GANK_TYPE"
+        fun newInstance(title: String): GankCategoryContentFragment {
+            val fragment = GankCategoryContentFragment()
+            val bundle = Bundle()
+            bundle.putString(GankCategoryContentFragment.ARG_GANK_TYPE, title)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
+
     override fun getLayoutResId(): Int {
         return R.layout.fragment_gank_category_content;
     }
@@ -47,16 +53,18 @@ class GankCategoryContentFragment : BaseFragment() {
         };
         initRecycler()
         activity.getToolBar()?.setOnClickListener { recycler.smoothScrollToPosition(0) }
-        swiper.post {
-            swiper.isRefreshing = true
-            onRefresh()
-        }
+        swiper.isRefreshing = true
     }
 
     override fun lazyLoad() {
         super.lazyLoad()
-        if (mFirstLazyLoad)
-            fetchGankData(page);
+        if (mFirstLazyLoad) {
+            swiper.isRefreshing = true
+            swiper.postDelayed({
+                onRefresh()
+            }, 200)
+
+        }
     }
 
     override fun onDestroy() {
@@ -74,7 +82,7 @@ class GankCategoryContentFragment : BaseFragment() {
         recycler.adapter = gankAdapter
         gankAdapter.setOnItemClickListener { _, view, position ->
             val bean = gankAdapter.getItem(position)
-            WebViewActivity.intentTo(bean.t.url, bean.t.desc, activity)
+            WebViewActivity.intentTo(bean.url, bean.desc, activity)
         }
     }
 

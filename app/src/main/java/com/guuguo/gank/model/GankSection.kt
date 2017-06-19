@@ -10,11 +10,9 @@ import java.util.*
  */
 
 class GankSection : SectionEntity<GankModel> {
-    var category = ""
 
-    constructor(isHeader: Boolean, header: String, category: String) : super(isHeader, header) {
-        this.category = category
-    }
+    constructor(header: String) : super(true, header) 
 
     constructor(t: GankModel) : super(t)
+
 }

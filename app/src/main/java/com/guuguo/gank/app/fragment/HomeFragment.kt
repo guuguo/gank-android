@@ -78,9 +78,6 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
                 Beta.checkUpgrade()
                 return true
             }
-            android.R.id.home -> {
-                return true
-            }
             R.id.menu_search -> {
                 val fragment = activity.findFragment(SearchFragment::class.java)
                 if (fragment == null) {
@@ -90,7 +87,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
                 }
                 return true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> return false
         }
     }
 

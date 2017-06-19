@@ -6,10 +6,8 @@ import com.guuguo.gank.model.entity.GankModel
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.view.simpleview.SimpleViewHelper
-import com.guuguo.gank.R.id.fsv_search
-import com.guuguo.gank.R.id.recycler
 import com.guuguo.gank.app.activity.WebViewActivity
-import com.guuguo.gank.app.adapter.SearchResultAdapter
+import com.guuguo.gank.app.adapter.GankAdapter
 import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.net.ApiServer
 import io.reactivex.functions.Consumer
@@ -31,7 +29,7 @@ class SearchFragment : BaseFragment() {
     var page = 1
     var mGankBean: GankModel? = null
     val mSearchResultAdapter by lazy {
-        SearchResultAdapter()
+        GankAdapter()
     }
 
     override fun isNavigationBack() = false
