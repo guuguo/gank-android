@@ -53,7 +53,7 @@ class WebViewActivity : BaseActivity() {
             intent.putExtra(ARG_DESC, desc)
             activity.startActivity(intent)
             //设置切换动画，从右边进入，左边退出  n
-            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
@@ -62,7 +62,7 @@ class WebViewActivity : BaseActivity() {
             wv_web.goBack()
         else {
             supportFinishAfterTransition()
-            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 

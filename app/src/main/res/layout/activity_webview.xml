@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.guuguo.gank.app.viewmodel.WebViewModel" />
     </data>
+
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/container_view"
         android:layout_width="match_parent"
@@ -16,27 +18,24 @@
 
         <include layout="@layout/base_toolbar_common" />
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-            <ProgressBar
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                android:max="100"
-                tools:progress="10"
-                android:id="@+id/progressbar"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                />
-
             <WebView
                 android:id="@+id/wv_web"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+                android:layout_height="match_parent" />
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:max="100"
+                tools:progress="10" />
+        </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

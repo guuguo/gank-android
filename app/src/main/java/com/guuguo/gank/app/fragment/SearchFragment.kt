@@ -43,7 +43,7 @@ class SearchFragment : BaseFragment() {
         mSearchResultAdapter.setEnableLoadMore(true)
         mSearchResultAdapter.setOnLoadMoreListener({
             page++
-            search(fsv_search.query)
+            search(edt_search.text.toString())
         }, recycler)
         mSearchResultAdapter.openLoadAnimation(SlideInLeftAnimation())
         mSearchResultAdapter.setOnItemClickListener { _, view, position ->
@@ -54,13 +54,14 @@ class SearchFragment : BaseFragment() {
         }
         simplerViewHelper = SimpleViewHelper(recycler, false)
         simplerViewHelper?.showEmpty("请输入搜索关键字")
+        iv_back.setOnClickListener { pop() }
 
-        fsv_search.setOnHomeActionClickListener { pop() }
-        fsv_search.setOnQueryChangeListener { oldQuery, newQuery ->
-            clearApiCall()
-            page = 1
-            search(newQuery)
-        }
+//        fsv_search.setOnHomeActionClickListener { pop() }
+//        fsv_search.setOnQueryChangeListener { oldQuery, newQuery ->
+//            clearApiCall()
+//            page = 1
+//            search(newQuery)
+//        }
     }
 
     override fun onBackPressedSupport(): Boolean {

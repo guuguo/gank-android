@@ -21,11 +21,10 @@ class GankCategoryFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
-        viewpager.offscreenPageLimit = 2
-        viewpager.adapter = object : MyFragmentPagerAdapter(activity, activity.supportFragmentManager, titleStrs) {
+        viewpager.offscreenPageLimit = 3
+        viewpager.adapter = object : MyFragmentPagerAdapter(activity, childFragmentManager, titleStrs) {
             override fun initNewFragment(position: Int, title: String): Fragment {
                 return GankCategoryContentFragment.newInstance(title)
-
             }
         }
         tabLayout.setupWithViewPager(viewpager)
