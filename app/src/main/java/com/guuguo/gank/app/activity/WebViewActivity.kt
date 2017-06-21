@@ -4,26 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import com.flyco.systembar.SystemBarHelper
 import com.guuguo.gank.R
 
-import com.guuguo.gank.presenter.WebViewPresenter
-import com.guuguo.gank.view.IBaseView
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
-import com.guuguo.gank.R.id.progressbar
-import com.guuguo.gank.R.id.wv_web
 import com.guuguo.gank.app.viewmodel.WebViewModel
 import com.guuguo.gank.base.BaseActivity
-import com.guuguo.gank.base.BaseSwipeBackActivity
 import com.guuguo.gank.databinding.ActivityWebviewBinding
-import com.guuguo.gank.databinding.FragmentGankDailyBinding
 import kotlinx.android.synthetic.main.activity_webview.*
 import kotlinx.android.synthetic.main.base_toolbar_common.*
 

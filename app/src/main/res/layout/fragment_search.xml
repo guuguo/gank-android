@@ -16,5 +16,6 @@
         android:padding="10dp"
         android:paddingBottom="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".app.fragment.GankDailyFragment" />
+        tools:context=".app.fragment.GankDailyFragment"
+        tools:listitem="@layout/item_gank" />
 </LinearLayout>

@@ -9,7 +9,7 @@ import com.guuguo.gank.app.MyApplication;
  * Created by 大哥哥 on 2016/8/26 0026.
  */
 
-public class DisplayUtil {
+public class DisplayExtention {
 
     public static void setPadding(final View view, float left, float top, float right, float bottom) {
         view.setPadding(designedDP2px(left), dip2px(top), designedDP2px(right), dip2px(bottom));

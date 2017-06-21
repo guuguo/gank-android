@@ -54,7 +54,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
                     return true
                 }
                 else ->
-                    return false
+                    return true
             }
         }
     }

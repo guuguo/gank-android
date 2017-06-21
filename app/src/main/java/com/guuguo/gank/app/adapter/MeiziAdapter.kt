@@ -12,7 +12,7 @@ import android.view.View
 import com.bumptech.glide.request.target.*
 import com.guuguo.android.lib.extension.getDateSimply
 import com.guuguo.android.lib.ui.imageview.RatioImageView
-import com.guuguo.gank.util.DisplayUtil
+import com.guuguo.gank.util.DisplayExtention
 import java.util.*
 
 class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
@@ -30,7 +30,7 @@ class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
         holder.setText(R.id.date, gankBean.who+" ◉ "+gankBean.createdAt?.getDateSimply())
                 .addOnClickListener(R.id.image)
 
-        Glide.with(mContext).load(gankBean.getWidthUrl(DisplayUtil.getScreenWidth()))
+        Glide.with(mContext).load(gankBean.getWidthUrl(DisplayExtention.getScreenWidth()))
                 .asBitmap()
                 .placeholder(ColorDrawable(colors[(Math.random() * colors.size).toInt()]))
                 .centerCrop()

@@ -3,7 +3,6 @@ package com.guuguo.gank.net
 import com.google.gson.Gson
 import com.guuguo.android.pikacomic.net.https.TrustAllCerts
 import com.guuguo.gank.constant.GANHUO_API
-import com.guuguo.gank.constant.myGson
 import com.guuguo.gank.constant.myGsonSearch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -24,7 +23,7 @@ object MyRetrofit {
             .retryOnConnectionFailure(false)
             .build()
 
-    fun getGsonConverter(gson: Gson = myGson): GsonConverterFactory {
+    fun getGsonConverter(gson: Gson): GsonConverterFactory {
         return GsonConverterFactory.create(gson)
     }
 
@@ -35,7 +34,7 @@ object MyRetrofit {
 //                .addConverterFactory(getGsonConverter())
                 .addConverterFactory(getGsonConverter(myGsonSearch))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(MyRetrofit.httpClient)
+                .client(httpClient)
                 .build()
     }
 

@@ -70,12 +70,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:1.10.19"
 
     compile project(':androidLib:androidLib')
-    compile project(':SwipeBackFragment:swipeback')
-//    //butterknife
-//    apt "com.jakewharton:butterknife-compiler:$butterknife_version"
-//    compile "com.jakewharton:butterknife:$butterknife_version"
+//    compile project(':SwipeBackFragment:swipeback')
+
 
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

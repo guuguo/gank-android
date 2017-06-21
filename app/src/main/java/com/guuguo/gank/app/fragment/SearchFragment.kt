@@ -1,6 +1,7 @@
 package com.guuguo.gank.app.fragment
 
 import android.support.v7.widget.LinearLayoutManager
+import android.view.inputmethod.EditorInfo
 import com.guuguo.gank.R
 import com.guuguo.gank.model.entity.GankModel
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation
@@ -55,13 +56,18 @@ class SearchFragment : BaseFragment() {
         simplerViewHelper = SimpleViewHelper(recycler, false)
         simplerViewHelper?.showEmpty("请输入搜索关键字")
         iv_back.setOnClickListener { pop() }
-
-//        fsv_search.setOnHomeActionClickListener { pop() }
-//        fsv_search.setOnQueryChangeListener { oldQuery, newQuery ->
-//            clearApiCall()
-//            page = 1
-//            search(newQuery)
-//        }
+        iv_search.setOnClickListener {
+            clearApiCall()
+            page = 1
+            search(edt_search.text.toString())
+        }
+        edt_search.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                page = 1
+                search(edt_search.text.toString())
+                true
+            } else false
+        }
     }
 
     override fun onBackPressedSupport(): Boolean {
