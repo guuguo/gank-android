@@ -5,6 +5,7 @@ import android.view.inputmethod.EditorInfo
 import com.guuguo.gank.R
 import com.guuguo.gank.model.entity.GankModel
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation
+import com.guuguo.android.lib.extension.date
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.view.simpleview.SimpleViewHelper
 import com.guuguo.gank.app.activity.WebViewActivity
@@ -46,12 +47,9 @@ class SearchFragment : BaseFragment() {
             page++
             search(edt_search.text.toString())
         }, recycler)
-        mSearchResultAdapter.openLoadAnimation(SlideInLeftAnimation())
-        mSearchResultAdapter.setOnItemClickListener { _, view, position ->
+        mSearchResultAdapter.setOnItemClickListener { _, _, position ->
             val bean = mSearchResultAdapter.getItem(position)
-            if (view!!.id == R.id.tv_content) {
-                WebViewActivity.intentTo(bean.url, bean.desc, activity)
-            }
+            WebViewActivity.intentTo(bean.url, bean.desc, activity)
         }
         simplerViewHelper = SimpleViewHelper(recycler, false)
         simplerViewHelper?.showEmpty("请输入搜索关键字")

@@ -14,14 +14,13 @@
         android:id="@+id/swiper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".app.fragment.GankDailyFragment"
-       >
+        tools:context=".app.fragment.GankDailyFragment">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="20dp" />
+            tools:listitem="@layout/item_meizi" />
     </com.guuguo.android.lib.view.VerticalSwipeRefreshLayout>
 </layout>

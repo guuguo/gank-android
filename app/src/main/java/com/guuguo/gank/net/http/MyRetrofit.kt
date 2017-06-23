@@ -1,9 +1,9 @@
 package com.guuguo.gank.net
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.guuguo.android.pikacomic.net.https.TrustAllCerts
 import com.guuguo.gank.constant.GANHUO_API
-import com.guuguo.gank.constant.myGsonSearch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -28,14 +28,12 @@ object MyRetrofit {
     }
 
 
-    val myRetrofit: Retrofit by lazy {
-        retrofit2.Retrofit.Builder()
-                .baseUrl(GANHUO_API)
-//                .addConverterFactory(getGsonConverter())
-                .addConverterFactory(getGsonConverter(myGsonSearch))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(httpClient)
-                .build()
-    }
+    fun myRetrofit(gson: Gson): Retrofit =
+            retrofit2.Retrofit.Builder()
+                    .baseUrl(GANHUO_API)
+                    .addConverterFactory(getGsonConverter(gson))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(httpClient)
+                    .build()
 
 }

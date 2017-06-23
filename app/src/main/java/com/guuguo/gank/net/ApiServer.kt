@@ -1,6 +1,10 @@
 package com.guuguo.gank.net
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.guuguo.android.lib.extension.date
+import com.guuguo.gank.constant.dataPattern
+import com.guuguo.gank.constant.myGson
 import com.guuguo.gank.model.*
 import com.guuguo.gank.model.entity.GankModel
 import io.reactivex.Observable
@@ -21,21 +25,21 @@ object ApiServer {
     val TYPE_FRONT = "前端"
     val TYPE_ALL = "all"
 
-    val gankServer by lazy { MyRetrofit.myRetrofit.create(Service::class.java) }
-    fun getGankData(type: String, count: Int, page: Int): Single<Ganks<ArrayList<GankModel>>> = gankServer
+    fun gankServer(gson: Gson = myGson) = MyRetrofit.myRetrofit(gson).create(Service::class.java)
+    fun getGankData(type: String, count: Int, page: Int): Single<Ganks<ArrayList<GankModel>>> = gankServer()
             .getGanHuo(type, count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
     fun getGankOneDayData(date: Date): Single<GankDays> {
         val dateStr = date.date()
-        return gankServer
+        return gankServer()
                 .getGankOneDay(dateStr)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getGankSearchResult(query: String, category: String, count: Int, page: Int): Single<GankNetResult> = gankServer
+    fun getGankSearchResult(query: String, category: String, count: Int, page: Int): Single<GankNetResult> = gankServer()
             .getGankSearchResult(query, category, count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

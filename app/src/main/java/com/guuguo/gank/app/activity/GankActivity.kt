@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.flyco.systembar.SystemBarHelper
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
+import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.R
 import com.guuguo.gank.app.adapter.CategoryGankAdapter
 import com.guuguo.gank.app.adapter.GankWithCategoryAdapter
@@ -30,7 +31,6 @@ import java.util.*
 class GankActivity : BaseActivity(), IDateGankView {
     companion object {
         val TRANSLATE_GIRL_VIEW = "share_girl_image_view"
-
         fun intentTo(activity: Activity, image: View, meizi: GankModel) {
             val intent = Intent(activity, GankActivity::class.java)
             intent.putExtra(MEIZI, meizi)

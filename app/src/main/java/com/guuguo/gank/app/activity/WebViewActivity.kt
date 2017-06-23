@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import com.guuguo.android.lib.extension.initNav
 import com.guuguo.gank.R
 
 import com.guuguo.android.lib.extension.safe
@@ -28,6 +29,7 @@ class WebViewActivity : BaseActivity() {
     override fun getToolBar(): Toolbar? {
         return id_tool_bar
     }
+
     override fun setLayoutResId(layoutResId: Int) {
         binding = DataBindingUtil.setContentView(activity, layoutResId)
         binding.viewModel = viewModel
@@ -46,12 +48,18 @@ class WebViewActivity : BaseActivity() {
         }
     }
 
+    override fun initToolBar() {
+        super.initToolBar()
+        getToolBar()?.setNavigationOnClickListener {
+            activity.finish()
+        }
+    }
+
     override fun onBackPressedSupport() {
         if (wv_web.canGoBack())
             wv_web.goBack()
         else {
             supportFinishAfterTransition()
-//            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
@@ -68,7 +76,6 @@ class WebViewActivity : BaseActivity() {
         return desc.safe()
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_browser -> viewModel.openInBrowser(url)
@@ -79,8 +86,9 @@ class WebViewActivity : BaseActivity() {
                 intent.putExtra(Intent.EXTRA_TEXT, url);
                 startActivity(Intent.createChooser(intent, "分享链接到"));
             }
+            else -> return super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
     override fun loadData() {

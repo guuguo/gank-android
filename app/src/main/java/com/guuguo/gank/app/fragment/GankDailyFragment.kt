@@ -57,7 +57,7 @@ class GankDailyFragment : BaseFragment() {
         recycler.adapter = meiziAdapter
         meiziAdapter.setOnItemChildClickListener { _, view, position ->
             when (view!!.id) {
-                R.id.image -> {
+                R.id.iv_image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.getDrawable()
                     GankActivity.intentTo(activity,image, meiziAdapter.getItem(position))

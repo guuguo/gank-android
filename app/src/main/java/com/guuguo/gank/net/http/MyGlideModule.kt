@@ -15,16 +15,16 @@ import java.io.InputStream
  * 项目 pika
  */
 
-class MyGlideModule : GlideModule {
-    override fun registerComponents(context: Context, glide: Glide) {
-        // 设置长时间读取和断线重连
-        val client = MyRetrofit.commonHttpBuilder
-                .retryOnConnectionFailure(true).build()
-        glide.register(GlideUrl::class.java, InputStream::class.java, OkHttpUrlLoader.Factory(client))
-    }
-
-    override fun applyOptions(context: Context, builder: GlideBuilder) {
-        // 防止图片变绿，在有ALPHA通道的情况下
-        builder.setDecodeFormat(DecodeFormat.PREFER_ARGB_8888)
-    }
-}
+//class MyGlideModule : GlideModule {
+//    override fun registerComponents(context: Context, glide: Glide) {
+//        // 设置长时间读取和断线重连
+//        val client = MyRetrofit.commonHttpBuilder
+//                .retryOnConnectionFailure(true).build()
+//        glide.register(GlideUrl::class.java, InputStream::class.java, OkHttpUrlLoader.Factory(client))
+//    }
+//
+//    override fun applyOptions(context: Context, builder: GlideBuilder) {
+//        // 防止图片变绿，在有ALPHA通道的情况下
+//        builder.setDecodeFormat(DecodeFormat.PREFER_ARGB_8888)
+//    }
+//}

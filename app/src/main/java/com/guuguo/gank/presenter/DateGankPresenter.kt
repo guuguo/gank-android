@@ -29,13 +29,13 @@ class DateGankPresenter(context: Context, iView: IDateGankView) : BasePresenter<
 
     fun getMergeAllGanks(gankDays: GankDays): ArrayList<GankModel> {
         var list = ArrayList<GankModel>()
+        list.addAllSafe(gankDays.results!!.rest)
         list.addAllSafe(gankDays.results!!.Android)
         list.addAllSafe(gankDays.results!!.iOS)
         list.addAllSafe(gankDays.results!!.recommend)
         list.addAllSafe(gankDays.results!!.extend)
         list.addAllSafe(gankDays.results!!.APP)
         list.addAllSafe(gankDays.results!!.web)
-        list.addAllSafe(gankDays.results!!.rest)
         return list
     }
 
