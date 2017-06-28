@@ -6,21 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.BaseObservable
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.guuguo.gank.app.activity.WebViewActivity
-import com.guuguo.gank.constant.MEIZI_COUNT
-import com.guuguo.gank.model.Ganks
-import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.net.ApiServer
-import com.guuguo.gank.net.http.BaseCallback
-import com.guuguo.gank.app.fragment.GankDailyFragment
-import com.guuguo.gank.constant.Option.context
-import io.reactivex.disposables.Disposable
-import java.util.*
 
 
 /**
@@ -33,10 +23,15 @@ class WebViewModel(val activity: WebViewActivity) : BaseObservable() {
         activity.binding.progressbar.visibility = View.VISIBLE
         mWebView.setWebChromeClient(object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
-//                Log.d("guuguo", newProgress.toString())
                 activity.binding.progressbar.progress = newProgress
-                if (newProgress == 100)
+                if (newProgress < 60) {
+                    activity.binding.progressbar.visibility = View.VISIBLE
+                    activity.binding.progressbar.alpha = 1f
+                } else if (newProgress == 100)
                     activity.binding.progressbar.visibility = View.GONE
+                else if (newProgress >= 60) {
+                    activity.binding.progressbar.alpha = (100 - newProgress) * 0.025f
+                }
                 super.onProgressChanged(view, newProgress)
             }
         })
@@ -67,8 +62,7 @@ class WebViewModel(val activity: WebViewActivity) : BaseObservable() {
     }
 
     fun copyUrl(url: String) {
-        val myClipboard: ClipboardManager
-        myClipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val myClipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val myClip: ClipData
         val text = url
         myClip = ClipData.newPlainText("text", text)

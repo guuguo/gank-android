@@ -1,9 +1,6 @@
 package com.guuguo.gank.app.fragment
 
-import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +9,6 @@ import android.widget.ImageView
 import com.guuguo.gank.R
 import com.guuguo.gank.app.adapter.MeiziAdapter
 import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.constant.MEIZI
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.constant.OmeiziDrawable
 import com.guuguo.gank.app.activity.GankActivity
@@ -20,7 +16,6 @@ import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.databinding.FragmentGankDailyBinding
 import com.guuguo.gank.app.viewmodel.GankDailyViewModel
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
-import java.io.Serializable
 
 
 class GankDailyFragment : BaseFragment() {
@@ -28,7 +23,7 @@ class GankDailyFragment : BaseFragment() {
     var meiziAdapter = MeiziAdapter()
     lateinit var binding: FragmentGankDailyBinding
     val viewModel by lazy { GankDailyViewModel(this) }
-    override fun isNavigationBack()=false
+    override fun isNavigationBack() = false
     override fun getLayoutResId(): Int {
         return R.layout.fragment_gank_daily;
     }
@@ -50,7 +45,7 @@ class GankDailyFragment : BaseFragment() {
     private fun initRecycler() {
         meiziAdapter.setOnLoadMoreListener({
             page++
-            viewModel.fetchMeiziData(page)
+            viewModel.getMeiziDataFromNet(page)
         }, recycler)
 
         recycler.layoutManager = LinearLayoutManager(activity)
@@ -60,8 +55,8 @@ class GankDailyFragment : BaseFragment() {
                 R.id.iv_image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.getDrawable()
-                    GankActivity.intentTo(activity,image, meiziAdapter.getItem(position))
-                   
+                    GankActivity.intentTo(activity, image, meiziAdapter.getItem(position))
+
                     true
                 }
                 else -> false
@@ -79,7 +74,8 @@ class GankDailyFragment : BaseFragment() {
     }
 
     override fun loadData() {
-        viewModel.fetchMeiziData(page)
+        viewModel.getMeiziData()
+        viewModel.getMeiziDataFromNet(page)
         super.loadData()
     }
 

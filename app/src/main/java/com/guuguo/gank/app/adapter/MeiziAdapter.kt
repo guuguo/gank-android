@@ -10,7 +10,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.bumptech.glide.request.target.*
-import com.guuguo.android.lib.extension.getDateSimply
 import com.guuguo.android.lib.extension.getTimeSpanUntilDay
 import com.guuguo.android.lib.ui.imageview.RatioImageView
 import com.guuguo.gank.util.DisplayExtention
