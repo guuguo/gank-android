@@ -79,7 +79,8 @@ class GankActivity : BaseActivity(), IDateGankView {
         mGankAdapter.onItemClickListener = object : BaseQuickAdapter.OnItemClickListener {
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
                 val bean = mGankAdapter.getItem(position)
-                WebViewActivity.intentTo(bean.t.url, bean.t.desc, activity)
+                if (!bean.isHeader)
+                    WebViewActivity.intentTo(bean.t.url, bean.t.desc, activity)
             }
         }
     }
