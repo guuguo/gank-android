@@ -12,8 +12,8 @@ android {
         applicationId "com.guuguo.gank"
         minSdkVersion 16
         targetSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
-        versionCode 7
-        versionName "0.5"
+        versionCode 8
+        versionName "0.6"
         ndk {
             //设置支持的SO库架构
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'

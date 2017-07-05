@@ -17,8 +17,8 @@ object MyRetrofit {
     val commonHttpBuilder = OkHttpClient.Builder()
             .sslSocketFactory(TrustAllCerts.createSSLSocketFactory())
             .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
-            .connectTimeout(10, TimeUnit.MINUTES)
-            .readTimeout(10, TimeUnit.MINUTES)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
     val httpClient = commonHttpBuilder
             .retryOnConnectionFailure(false)
             .build()

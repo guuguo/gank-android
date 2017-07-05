@@ -67,8 +67,8 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
             loadMultipleRootFragment(R.id.container_view, 0, *mFragments.toTypedArray())
             mFragment = mFragments[0]
         } else {
-            mFragments[0] = findFragment(GankDailyFragment::class.java)
-            mFragments[1] = findFragment(GankCategoryFragment::class.java)
+            mFragments.add(findFragment(GankDailyFragment::class.java))
+            mFragments.add(findFragment(GankCategoryFragment::class.java))
         }
     }
 

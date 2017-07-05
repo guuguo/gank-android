@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.flyco.systembar.SystemBarHelper
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
+import com.guuguo.android.lib.extension.showTipWithAction
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.R
 import com.guuguo.gank.app.adapter.CategoryGankAdapter
@@ -111,7 +112,9 @@ class GankActivity : BaseActivity(), IDateGankView {
     }
 
     override fun showErrorView(e: Throwable) {
-        showSnackTip(container_view, e.message.safe())
+        showTipWithAction(container_view, e.message.safe(),"重试", View.OnClickListener{
+            mPresenter.fetchDate(mGankBean!!.publishedAt!!)
+        })
     }
 
     override fun showProgress() {
