@@ -107,15 +107,8 @@ class GankActivity : BaseActivity(), IDateGankView {
         ViewCompat.setTransitionName(iv_head, TRANSLATE_GIRL_VIEW)
     }
 
-    override fun showDate(date: ArrayList<GankModel>) {
-        val array = arrayListOf<GankSection>()
-        (0..date.size - 1).forEach {
-            if (it == 0 || date[it].type != date[it - 1].type) {
-                array.add(GankSection(date[it].type))
-            }
-            array.add(GankSection(date[it]))
-        }
-        mGankAdapter.setNewData(array)
+    override fun showDate(date: ArrayList<GankSection>) {
+        mGankAdapter.setNewData(date)
     }
 
     override fun showTip(msg: String) {

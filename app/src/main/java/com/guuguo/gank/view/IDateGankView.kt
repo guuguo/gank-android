@@ -1,6 +1,7 @@
 package com.guuguo.gank.view
 
 import com.guuguo.gank.model.GankDays
+import com.guuguo.gank.model.GankSection
 import com.guuguo.gank.model.entity.GankModel
 import java.util.*
 
@@ -10,5 +11,5 @@ import java.util.*
  */
 interface IDateGankView : IBaseView {
 
-    fun showDate(date:ArrayList<GankModel>)
+    fun showDate(date:ArrayList<GankSection>)
 }
