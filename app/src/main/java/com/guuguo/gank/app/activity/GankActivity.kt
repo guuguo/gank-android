@@ -11,10 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.flyco.systembar.SystemBarHelper
-import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.extension.showSnackTip
-import com.guuguo.android.lib.extension.showTipWithAction
-import com.guuguo.android.lib.extension.toast
+import com.guuguo.android.lib.extension.*
 import com.guuguo.gank.R
 import com.guuguo.gank.app.adapter.CategoryGankAdapter
 import com.guuguo.gank.app.adapter.GankWithCategoryAdapter
@@ -56,6 +53,20 @@ class GankActivity : BaseActivity(), IDateGankView {
 
     override fun initPresenter() {
         mPresenter.init()
+    }
+
+    override fun hideProgress() {
+        progressbar.visibility = View.GONE
+    }
+
+    override fun showErrorView(e: Throwable) {
+        showTipWithAction(container_view, e.message.safe(), "重试", View.OnClickListener {
+            mPresenter.fetchDate(mGankBean!!.publishedAt!!)
+        })
+    }
+
+    override fun showProgress() {
+        progressbar.visibility = View.VISIBLE
     }
 
     override fun initStatusBar() {
@@ -105,20 +116,6 @@ class GankActivity : BaseActivity(), IDateGankView {
             array.add(GankSection(date[it]))
         }
         mGankAdapter.setNewData(array)
-    }
-
-    override fun hideProgress() {
-        progressbar.visibility = View.GONE
-    }
-
-    override fun showErrorView(e: Throwable) {
-        showTipWithAction(container_view, e.message.safe(),"重试", View.OnClickListener{
-            mPresenter.fetchDate(mGankBean!!.publishedAt!!)
-        })
-    }
-
-    override fun showProgress() {
-        progressbar.visibility = View.VISIBLE
     }
 
     override fun showTip(msg: String) {

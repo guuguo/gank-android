@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.widget.TextView
 
 import com.guuguo.gank.R
+import com.guuguo.gank.app.activity.AboutActivity
 import com.guuguo.gank.base.BaseFragment
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.base_toolbar_common.*
@@ -74,10 +75,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when (item!!.itemId) {
-            R.id.menu_check_up -> {
-                Beta.checkUpgrade()
-                return true
-            }
+            R.id.menu_check_up -> Beta.checkUpgrade()
             R.id.menu_search -> {
                 val fragment = activity.findFragment(SearchFragment::class.java)
                 if (fragment == null) {
@@ -85,10 +83,11 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
                 } else {
                     activity.popTo(SearchFragment::class.java, false)
                 }
-                return true
             }
+            R.id.menu_about -> AboutActivity.intentTo(activity)
             else -> return false
         }
+        return true
     }
 
     override fun initView() {

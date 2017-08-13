@@ -41,6 +41,6 @@ class DateGankPresenter(context: Context, iView: IDateGankView) : BasePresenter<
 
     fun <T> ArrayList<T>.addAllSafe(list: List<T>?) {
         if (list != null)
-            addAll(list!!)
+            addAll(list)
     }
 }

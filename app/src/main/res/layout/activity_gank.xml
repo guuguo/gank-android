@@ -10,18 +10,28 @@
 
     <include layout="@layout/toolbar_gank_detail" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_gank"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingBottom="40dp"
+            android:paddingTop="10dp"
+            tools:listitem="@layout/item_gank" />
 
         <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
             android:id="@+id/progressbar"
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:indeterminate="true"
-            app:spb_color="@color/blue"
+            app:spb_color="@color/colorPrimary"
             app:spb_mirror_mode="false"
             app:spb_progressiveStart_activated="true"
             app:spb_progressiveStart_speed="1.5"
@@ -31,15 +41,5 @@
             app:spb_speed="2.0"
             app:spb_stroke_separator_length="4dp"
             app:spb_stroke_width="4dp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_gank"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:paddingBottom="40dp"
-            android:paddingTop="10dp" />
-
-    </LinearLayout>
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -15,6 +15,7 @@ val MEIZI = "meizi"
 val GANK_URL = "gank_url"
 val GANK_TITLE = "gank_title"
 val GANK = "gank"
+val MY_DEBUG = true
 
 val dataPattern = "yyyy-MM-dd'T'HH:mm:ss"
 

@@ -38,6 +38,7 @@
         </activity>
         <activity android:name="com.guuguo.gank.app.activity.GankActivity" />
         <activity android:name="com.guuguo.gank.app.activity.WebViewActivity" />
+        <activity android:name="com.guuguo.gank.app.activity.AboutActivity" />
         <!-- bugly -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
