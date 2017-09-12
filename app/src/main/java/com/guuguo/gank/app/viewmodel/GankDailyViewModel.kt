@@ -2,6 +2,7 @@ package com.guuguo.gank.app.viewmodel
 
 import android.databinding.BaseObservable
 import com.google.gson.reflect.TypeToken
+import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
@@ -13,6 +14,7 @@ import com.guuguo.gank.constant.myGson
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
+import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.util.*
 
 
@@ -22,6 +24,7 @@ import java.util.*
  */
 class GankDailyViewModel(val fragment: GankDailyFragment) : BaseObservable() {
     val activity = fragment.activity
+    var hideLoading: () -> Unit = {}
 
     fun getMeiziDataFromNet(page: Int) {
         Single.zip(ApiServer.getGankData(ApiServer.TYPE_FULI, MEIZI_COUNT, page), ApiServer.getGankData(ApiServer.TYPE_REST, MEIZI_COUNT, page),
@@ -30,14 +33,15 @@ class GankDailyViewModel(val fragment: GankDailyFragment) : BaseObservable() {
                         a.desc = b.desc
                         a.who = b.who
                         a
-                    })
+                    }).safe()
                 })
                 .subscribe(object : BaseCallback<List<GankModel>>() {
-                    override fun onSubscribe(d: Disposable?) {
+                    override fun onSubscribe(d: Disposable) {
                         fragment.addApiCall(d)
                     }
 
                     override fun onApiLoadError(msg: String) {
+                        hideLoading()
                         activity.dialogErrorShow(msg)
                     }
 

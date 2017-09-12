@@ -34,7 +34,7 @@ class GankActivity : BaseActivity(), IDateGankView {
             intent.putExtra(MEIZI, meizi)
             val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image, TRANSLATE_GIRL_VIEW)
             ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
-
+//            activity.startActivity(intent)
         }
     }
 
@@ -69,6 +69,12 @@ class GankActivity : BaseActivity(), IDateGankView {
         progressbar.visibility = View.VISIBLE
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(mGankAdapter.itemCount!=0)
+            progressbar.visibility = View.GONE
+
+    }
     override fun initStatusBar() {
         SystemBarHelper.immersiveStatusBar(activity, 0f)
         SystemBarHelper.setHeightAndPadding(activity, getToolBar())

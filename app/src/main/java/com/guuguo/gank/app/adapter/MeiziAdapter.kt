@@ -27,7 +27,7 @@ class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
     override fun convert(holder: BaseViewHolder, gankBean: GankModel) {
         val image = holder.getView<View>(R.id.iv_image) as RatioImageView
 
-        holder.setText(R.id.date, gankBean.who + " · " + gankBean.createdAt?.getTimeSpanUntilDay())
+        holder.setText(R.id.date, gankBean.who + " · " + gankBean.publishedAt?.getTimeSpanUntilDay())
                 .setText(R.id.tv_desc, gankBean.desc)
                 .addOnClickListener(R.id.iv_image)
         

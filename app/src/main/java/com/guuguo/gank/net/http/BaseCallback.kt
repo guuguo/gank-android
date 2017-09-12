@@ -26,7 +26,7 @@ abstract class BaseCallback<T> : SingleObserver<T> {
 //        }
     }
 
-    override fun onError(e: Throwable?) {
+    override fun onError(e: Throwable) {
         if (e != null) {
             when (e) {
                 is SocketTimeoutException -> onApiLoadError(BaseApplication.get().getString(R.string.state_network_timeout))

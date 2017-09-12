@@ -40,6 +40,7 @@ class GankDailyFragment : BaseFragment() {
         initRecycler()
         activity.getToolBar()?.setOnClickListener { recycler.smoothScrollToPosition(0) }
         swiper.isRefreshing = true
+        viewModel.hideLoading = { swiper.isRefreshing = false }
     }
 
     private fun initRecycler() {

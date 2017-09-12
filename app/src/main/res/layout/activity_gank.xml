@@ -26,20 +26,26 @@
             android:paddingTop="10dp"
             tools:listitem="@layout/item_gank" />
 
-        <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+        <ProgressBar
             android:id="@+id/progressbar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="4dp"
             android:indeterminate="true"
-            app:spb_color="@color/colorPrimary"
-            app:spb_mirror_mode="false"
-            app:spb_progressiveStart_activated="true"
-            app:spb_progressiveStart_speed="1.5"
-            app:spb_progressiveStop_speed="3.4"
-            app:spb_reversed="false"
-            app:spb_sections_count="4"
-            app:spb_speed="2.0"
-            app:spb_stroke_separator_length="4dp"
-            app:spb_stroke_width="4dp" />
+            android:layout_height="6dp" />
+        <!--<fr.castorflex.android.smoothprogressbar.SmoothProgressBar-->
+        <!--android:id="@+id/progressbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="4dp"-->
+        <!--android:indeterminate="true"-->
+        <!--app:spb_color="@color/colorPrimary"-->
+        <!--app:spb_mirror_mode="false"-->
+        <!--app:spb_progressiveStart_activated="true"-->
+        <!--app:spb_progressiveStart_speed="1.5"-->
+        <!--app:spb_progressiveStop_speed="3.4"-->
+        <!--app:spb_reversed="false"-->
+        <!--app:spb_sections_count="4"-->
+        <!--app:spb_speed="2.0"-->
+        <!--app:spb_stroke_separator_length="4dp"-->
+        <!--app:spb_stroke_width="4dp" />-->
     </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

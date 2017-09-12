@@ -112,7 +112,7 @@ dependencies {
     // view
     compile 'com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar'
     compile 'com.github.arimorty:floatingsearchview:2.0.3'
-    compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
+//    compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
     compile 'com.github.Lauzy:LBehavior:1.0.2'
     compile 'am.widget:wraplayout:1.2.0'
     compile 'com.github.jrvansuita:MaterialAbout:0.1.2'
