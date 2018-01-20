@@ -1,23 +1,21 @@
 package com.guuguo.gank.app.fragment
 
+//import com.guuguo.gank.app.fragment.SearchRevealFragment
 import android.os.Bundle
-import android.support.v7.widget.*
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
-//import com.guuguo.gank.app.fragment.SearchRevealFragment
-import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.constant.MEIZI_COUNT
-import com.guuguo.gank.model.Ganks
-import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.app.activity.WebViewActivity
 import com.guuguo.gank.app.adapter.GankAdapter
-import com.guuguo.gank.app.adapter.GankWithCategoryAdapter
 import com.guuguo.gank.base.BaseFragment
+import com.guuguo.gank.constant.MEIZI_COUNT
+import com.guuguo.gank.model.Ganks
+import com.guuguo.gank.model.entity.GankModel
+import com.guuguo.gank.net.ApiServer
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.util.*
 
@@ -45,7 +43,7 @@ class GankCategoryContentFragment : BaseFragment() {
 
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)
-        gank_type = arguments[ARG_GANK_TYPE] as String
+        gank_type = arguments!![ARG_GANK_TYPE] as String
     }
 
     override fun initView() {
@@ -83,7 +81,7 @@ class GankCategoryContentFragment : BaseFragment() {
         recycler.layoutManager = LinearLayoutManager(activity)
         recycler.adapter = gankAdapter
         gankAdapter.setOnItemClickListener { _, view, position ->
-            val bean = gankAdapter.getItem(position)
+            val bean = gankAdapter.getItem(position)!!
             WebViewActivity.intentTo(bean.url, bean.desc, activity)
         }
     }

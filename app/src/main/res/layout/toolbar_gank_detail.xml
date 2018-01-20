@@ -14,7 +14,7 @@
         app:contentScrim="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlwaysCollapsed|snap">
 
-        <com.guuguo.android.lib.ui.imageview.RatioImageView
+        <com.guuguo.android.lib.widget.RatioImageView
             android:id="@+id/iv_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

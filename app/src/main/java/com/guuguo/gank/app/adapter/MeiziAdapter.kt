@@ -1,17 +1,18 @@
 package com.guuguo.gank.app.adapter
 
-import com.bumptech.glide.Glide
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
-import com.guuguo.gank.R
-import com.guuguo.gank.model.entity.GankModel
-
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
-import com.bumptech.glide.request.target.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.BitmapImageViewTarget
+import com.bumptech.glide.request.target.ImageViewTarget
+import com.bumptech.glide.request.target.SizeReadyCallback
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
 import com.guuguo.android.lib.extension.getTimeSpanUntilDay
-import com.guuguo.android.lib.ui.imageview.RatioImageView
+import com.guuguo.android.lib.widget.RatioImageView
+import com.guuguo.gank.R
+import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.util.DisplayExtention
 import java.util.*
 
@@ -44,7 +45,7 @@ class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
     }
 
     override fun getItemId(position: Int): Long {
-        return getItem(position).url.hashCode().toLong()
+        return getItem(position)!!.url.hashCode().toLong()
     }
 
 }

@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.guuguo.gank.R
+import com.guuguo.gank.app.activity.GankActivity
 import com.guuguo.gank.app.adapter.MeiziAdapter
-import com.guuguo.gank.model.entity.GankModel
+import com.guuguo.gank.app.viewmodel.GankDailyViewModel
+import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.constant.OmeiziDrawable
-import com.guuguo.gank.app.activity.GankActivity
-import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.databinding.FragmentGankDailyBinding
-import com.guuguo.gank.app.viewmodel.GankDailyViewModel
+import com.guuguo.gank.model.entity.GankModel
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 
 
@@ -29,7 +29,7 @@ class GankDailyFragment : BaseFragment() {
     }
 
     override fun setLayoutResId(inflater: LayoutInflater?, resId: Int, container: ViewGroup?): View {
-        binding = DataBindingUtil.inflate(inflater, resId, container, false)
+        binding = DataBindingUtil.inflate(inflater!!, resId, container, false)
         binding.viewModel = viewModel
         return binding.root
     }
@@ -56,7 +56,7 @@ class GankDailyFragment : BaseFragment() {
                 R.id.iv_image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.getDrawable()
-                    GankActivity.intentTo(activity, image, meiziAdapter.getItem(position))
+                    GankActivity.intentTo(activity, image, meiziAdapter.getItem(position)!!)
 
                     true
                 }

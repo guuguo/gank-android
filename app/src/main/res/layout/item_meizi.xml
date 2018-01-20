@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.guuguo.android.lib.ui.imageview.RatioImageView
+    <com.guuguo.android.lib.widget.RatioImageView
         android:id="@+id/iv_image"
         android:layout_width="0dp"
         android:layout_height="192dp"

@@ -2,15 +2,13 @@ package com.guuguo.gank.app.fragment
 
 import android.support.v7.widget.LinearLayoutManager
 import android.view.inputmethod.EditorInfo
-import com.guuguo.gank.R
-import com.guuguo.gank.model.entity.GankModel
-import com.chad.library.adapter.base.animation.SlideInLeftAnimation
-import com.guuguo.android.lib.extension.date
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.view.simpleview.SimpleViewHelper
+import com.guuguo.android.lib.widget.simpleview.SimpleViewHelper
+import com.guuguo.gank.R
 import com.guuguo.gank.app.activity.WebViewActivity
 import com.guuguo.gank.app.adapter.GankAdapter
 import com.guuguo.gank.base.BaseFragment
+import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -48,7 +46,7 @@ class SearchFragment : BaseFragment() {
             search(edt_search.text.toString())
         }, recycler)
         mSearchResultAdapter.setOnItemClickListener { _, _, position ->
-            val bean = mSearchResultAdapter.getItem(position)
+            val bean = mSearchResultAdapter.getItem(position)!!
             WebViewActivity.intentTo(bean.url, bean.desc, activity)
         }
         simplerViewHelper = SimpleViewHelper(recycler, false)

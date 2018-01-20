@@ -1,6 +1,6 @@
 package com.guuguo.gank.constant
 
-import com.guuguo.android.util.Preference
+import com.guuguo.android.lib.app.Preference
 import com.guuguo.gank.app.MyApplication
 
 

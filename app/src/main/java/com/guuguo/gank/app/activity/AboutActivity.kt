@@ -43,6 +43,6 @@ class AboutActivity : BaseActivity() {
                     Beta.checkUpgrade()
                 })
                 .build()
-        (findViewById(R.id.content) as FrameLayout).addView(view)
+        (findViewById<FrameLayout>(R.id.content)).addView(view)
     }
 }

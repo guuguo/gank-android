@@ -9,19 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:contentInsetStart="0dp"
+        app:contentInsetStart="0dp"
         android:theme="@style/Toolbar.Dark"
         android:title=""
+        app:titleMarginStart="0dp"
         app:titleTextColor="@color/white100">
 
-        <com.flyco.roundview.RoundRelativeLayout
+        <com.guuguo.android.lib.widget.roundview.RoundRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            app:rv_backgroundColor="@color/white"
-            app:rv_cornerRadius="3dp">
+            app:rv_backgroundColor="@color/black20"
+            app:rv_isRadiusHalfHeight="true"
+            android:layout_marginLeft="10dp"
+            >
 
             <ImageButton
                 android:id="@+id/iv_back"
@@ -32,7 +35,7 @@
                 android:layout_marginLeft="3dp"
                 android:background="?selectableItemBackgroundBorderless"
                 android:padding="7dp"
-                app:srcCompat="@drawable/ic_arrow_back_24dp" />
+                app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
 
             <ImageButton
                 android:id="@+id/iv_search"
@@ -43,7 +46,7 @@
                 android:layout_marginRight="3dp"
                 android:background="?selectableItemBackgroundBorderless"
                 android:padding="7dp"
-                android:tint="@color/black60"
+                android:tint="@color/white40"
                 app:srcCompat="@drawable/ic_search" />
 
             <EditText
@@ -60,12 +63,12 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:singleLine="true"
-                android:textColor="@color/black80"
-                android:textColorHint="@color/black40"
+                android:textColor="@color/white80"
+                android:textColorHint="@color/white40"
                 android:textCursorDrawable="@null"
                 android:textSize="16sp" />
 
-        </com.flyco.roundview.RoundRelativeLayout>
+        </com.guuguo.android.lib.widget.roundview.RoundRelativeLayout>
 
     </android.support.v7.widget.Toolbar>
 

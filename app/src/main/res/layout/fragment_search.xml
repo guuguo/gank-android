@@ -48,6 +48,7 @@
         app:srcCompat="@drawable/ic_close_black" />
 
     <android.support.v7.widget.RecyclerView
+        android:padding="10dp"
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

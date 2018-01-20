@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../androidLib/androidLib/androidLib-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/androidLib/androidLib-androidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\guodeqing\myDevelope\android studio project\gankIO\gank.iml" filepath="E:\guodeqing\myDevelope\android studio project\gankIO\gank.iml" />
-      <module fileurl="file://E:\guodeqing\myDevelope\android studio project\androidLib\gank-androidLib.iml" filepath="E:\guodeqing\myDevelope\android studio project\androidLib\gank-androidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/gankIO.iml" filepath="$PROJECT_DIR$/gankIO.iml" />
       <module fileurl="file://$PROJECT_DIR$/../androidLib/gankIO-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/gankIO-androidLib.iml" />
     </modules>

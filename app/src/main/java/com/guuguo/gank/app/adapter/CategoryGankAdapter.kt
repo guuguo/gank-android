@@ -1,12 +1,11 @@
 package com.guuguo.gank.app.adapter
 
+import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.guuguo.android.lib.extension.dpToPx
 import com.guuguo.gank.R
 import com.guuguo.gank.model.entity.GankModel
-
-import android.widget.TextView
-import com.guuguo.android.lib.extension.dpToPx
 
 
 class CategoryGankAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
@@ -16,7 +15,7 @@ class CategoryGankAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
 
     override fun convert(holder: BaseViewHolder, gankBean: GankModel) {
 
-        holder.setVisible(R.id.tv_category, holder.layoutPosition == 0 || !gankBean.type.equals(getItem(holder.layoutPosition - 1).type))
+        holder.setVisible(R.id.tv_category, holder.layoutPosition == 0 || !gankBean.type.equals(getItem(holder.layoutPosition - 1)!!.type))
                 .setText(R.id.tv_category, gankBean.type)
                 .setText(R.id.tv_content, gankBean.desc)
                 .addOnClickListener(R.id.tv_content)

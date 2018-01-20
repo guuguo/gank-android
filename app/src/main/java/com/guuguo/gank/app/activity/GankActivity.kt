@@ -71,7 +71,7 @@ class GankActivity : BaseActivity(), IDateGankView {
 
     override fun onResume() {
         super.onResume()
-        if(mGankAdapter.itemCount!=0)
+        if(mGankAdapter.data.size!=0)
             progressbar.visibility = View.GONE
 
     }
@@ -96,7 +96,7 @@ class GankActivity : BaseActivity(), IDateGankView {
         rv_gank.adapter = mGankAdapter
         mGankAdapter.onItemClickListener = object : BaseQuickAdapter.OnItemClickListener {
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-                val bean = mGankAdapter.getItem(position)
+                val bean = mGankAdapter.getItem(position)!!
                 if (!bean.isHeader)
                     WebViewActivity.intentTo(bean.t.url, bean.t.desc, activity)
             }
