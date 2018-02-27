@@ -17,7 +17,7 @@ class MyApplication : BaseApplication() {
     override fun init() {
         Utils.init(this)
         LogUtil.init(MY_DEBUG)
-        instance = INSTANCE as MyApplication?;
+        instance = get() as MyApplication?
         initBugly()
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); }
 

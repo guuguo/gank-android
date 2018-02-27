@@ -98,17 +98,16 @@ class GankCategoryContentFragment : BaseFragment() {
     }
 
     private fun fetchGankData(page: Int) {
-        ApiServer.getGankData(gank_type, MEIZI_COUNT, page)
+        ApiServer.getGankData(gank_type, MEIZI_COUNT, page).compose(bindToLifecycle())
                 .subscribe(object : SingleObserver<Ganks<ArrayList<GankModel>>> {
+                    override fun onSubscribe(d: Disposable) {
+                    }
+
                     override fun onSuccess(meiziData: Ganks<ArrayList<GankModel>>) {
                         meiziData.let {
                             showMeiziList(meiziData.results!!)
                             hideProgress()
                         }
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                        addApiCall(d)
                     }
 
                     override fun onError(error: Throwable) {

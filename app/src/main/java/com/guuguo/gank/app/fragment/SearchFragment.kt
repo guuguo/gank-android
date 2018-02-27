@@ -53,7 +53,6 @@ class SearchFragment : BaseFragment() {
         simplerViewHelper?.showEmpty("请输入搜索关键字")
         iv_back.setOnClickListener { pop() }
         iv_search.setOnClickListener {
-            clearApiCall()
             page = 1
             search(edt_search.text.toString())
         }
@@ -72,13 +71,13 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun search(searchText: String) {
-        if (searchText.isNullOrEmpty()) {
+        if (searchText.isEmpty()) {
             simplerViewHelper?.showEmpty("请输入搜索关键字")
         } else {
             if (page == 1) {
                 simplerViewHelper?.showLoading("正在加载搜索结果")
             }
-            addApiCall(ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, SEARCH_COUNT, page).subscribe(Consumer {
+            ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, SEARCH_COUNT, page).compose(bindToLifecycle()).subscribe({
                 searchResult ->
                 simplerViewHelper?.restore()
 
@@ -94,9 +93,9 @@ class SearchFragment : BaseFragment() {
                         mSearchResultAdapter.loadMoreEnd()
                     mSearchResultAdapter.addData(searchResult.results!!)
                 }
-            }, Consumer<Throwable> { error ->
+            }, { error ->
                 activity.dialogErrorShow(error.message.safe(), null)
-            }))
+            })
         }
     }
 }

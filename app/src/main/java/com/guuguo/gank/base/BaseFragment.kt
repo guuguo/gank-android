@@ -1,7 +1,6 @@
 package com.guuguo.gank.base
 
 import com.guuguo.android.lib.app.LBaseFragmentSupport
-import com.guuguo.android.lib.app.LNBaseFragment
 import com.guuguo.gank.app.MyApplication
 
 /**

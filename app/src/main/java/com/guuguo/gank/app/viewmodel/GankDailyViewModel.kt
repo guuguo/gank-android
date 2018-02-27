@@ -35,9 +35,9 @@ class GankDailyViewModel(val fragment: GankDailyFragment) : BaseObservable() {
                         a
                     }).safe()
                 })
+                .compose(activity.bindToLifecycle())
                 .subscribe(object : BaseCallback<List<GankModel>>() {
                     override fun onSubscribe(d: Disposable) {
-                        fragment.addApiCall(d)
                     }
 
                     override fun onApiLoadError(msg: String) {

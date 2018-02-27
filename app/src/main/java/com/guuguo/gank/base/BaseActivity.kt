@@ -1,7 +1,6 @@
 package com.guuguo.gank.base
 
 import com.guuguo.android.lib.app.LBaseActivitySupport
-import com.guuguo.android.lib.app.LNBaseActivity
 import com.guuguo.gank.app.MyApplication
 
 /**
