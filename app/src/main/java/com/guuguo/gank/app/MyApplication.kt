@@ -23,6 +23,7 @@ class MyApplication : BaseApplication() {
 
     companion object {
         var instance: MyApplication? = null
+        get() = BaseApplication.get()
     }
 
 
