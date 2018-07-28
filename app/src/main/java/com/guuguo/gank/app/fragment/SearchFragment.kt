@@ -1,6 +1,6 @@
 package com.guuguo.gank.app.fragment
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.inputmethod.EditorInfo
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.widget.simpleview.SimpleViewHelper

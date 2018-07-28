@@ -1,6 +1,6 @@
 package com.guuguo.gank.app.viewmodel
 
-import android.databinding.BaseObservable
+import androidx.databinding.BaseObservable
 import com.google.gson.reflect.TypeToken
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.constant.MEIZI_COUNT

@@ -2,13 +2,10 @@ package com.guuguo.gank.app.activity;
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.widget.FrameLayout
-import com.guuguo.gank.R
 import com.guuguo.gank.base.BaseActivity
 import com.tencent.bugly.beta.Beta
 import com.vansuita.materialabout.builder.AboutBuilder
-import kotlinx.android.synthetic.main.base_toolbar_common.*
 
 class AboutActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_simple_back

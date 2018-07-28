@@ -1,7 +1,7 @@
 package com.guuguo.gank.app
 
 import android.app.Application
-import android.support.v7.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate
 import com.guuguo.android.lib.BaseApplication
 import com.guuguo.android.lib.utils.LogUtil
 import com.guuguo.android.lib.utils.Utils

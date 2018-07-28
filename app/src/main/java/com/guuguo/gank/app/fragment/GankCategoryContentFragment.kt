@@ -2,7 +2,7 @@ package com.guuguo.gank.app.fragment
 
 //import com.guuguo.gank.app.fragment.SearchRevealFragment
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showSnackTip

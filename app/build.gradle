@@ -6,11 +6,11 @@ apply plugin: 'kotlin-kapt'
 //apply plugin: 'com.android.databinding'
 
 android {
-    compileSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
+    compileSdkVersion COMPILE_SDK_VERSION
     defaultConfig {
         applicationId "com.guuguo.gank"
-        minSdkVersion 17
-        targetSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
         versionCode 10
         versionName "0.9"
         ndk {
@@ -61,17 +61,17 @@ android {
         enabled = true
     }
 
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.0'
 }
 kapt {
     generateStubs = true
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.github.guuguo:redtea:master'
+    implementation 'com.github.guuguo.redtea:androidLibx:1.1.0'
 
     //test
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha3', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
@@ -86,18 +86,18 @@ dependencies {
     
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    kapt "com.android.databinding:compiler:${android_plugin_version}"
+    kapt "androidx.databinding:databinding-compiler:${ANDROID_PLUGIN_VERSION}"
 
     //support
-    implementation "com.android.support:support-vector-drawable:$support_version"
-    implementation "com.android.support:cardview-v7:$support_version"
+    implementation "androidx.vectordrawable:vectordrawable:$support_version"
+    implementation "androidx.cardview:cardview:$support_version"
 
 
     // function
     implementation "com.tencent.bugly:crashreport_upgrade:$bugly_upgrade"
     implementation 'com.github.nisrulz:easydeviceinfo-base:2.3.2'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.36'
-    implementation 'com.github.bumptech.glide:glide:4.2.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
 
     //retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'

@@ -4,7 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.databinding.BaseObservable
+import androidx.databinding.BaseObservable
 import android.net.Uri
 import android.view.View
 import android.webkit.WebChromeClient
