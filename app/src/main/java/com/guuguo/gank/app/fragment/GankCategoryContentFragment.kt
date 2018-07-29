@@ -2,10 +2,10 @@ package com.guuguo.gank.app.fragment
 
 //import com.guuguo.gank.app.fragment.SearchRevealFragment
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.R
 import com.guuguo.gank.app.activity.WebViewActivity
 import com.guuguo.gank.app.adapter.GankAdapter
@@ -15,7 +15,7 @@ import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
 import io.reactivex.SingleObserver
-import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_webview.*
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.util.*
 
@@ -99,16 +99,13 @@ class GankCategoryContentFragment : BaseFragment() {
 
     private fun fetchGankData(page: Int) {
         ApiServer.getGankData(gank_type, MEIZI_COUNT, page)
+                .compose(bindToLifecycle())
                 .subscribe(object : SingleObserver<Ganks<ArrayList<GankModel>>> {
                     override fun onSuccess(meiziData: Ganks<ArrayList<GankModel>>) {
                         meiziData.let {
                             showMeiziList(meiziData.results!!)
                             hideProgress()
                         }
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                        addApiCall(d)
                     }
 
                     override fun onError(error: Throwable) {
@@ -142,7 +139,7 @@ class GankCategoryContentFragment : BaseFragment() {
     }
 
     fun showTip(msg: String) {
-        showSnackTip(contentView!!, msg)
+        Snackbar.make(container_view, msg, Snackbar.LENGTH_SHORT)
     }
 }
 

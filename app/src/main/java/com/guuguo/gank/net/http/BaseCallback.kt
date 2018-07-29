@@ -56,6 +56,6 @@ abstract class BaseCallback<T> : SingleObserver<T> {
         }
     }
 
-    abstract fun onApiLoadError(msg: String)
+    open fun onApiLoadError(msg: String){}
 
 }

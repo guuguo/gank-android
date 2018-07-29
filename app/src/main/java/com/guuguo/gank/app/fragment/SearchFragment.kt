@@ -1,6 +1,5 @@
 package com.guuguo.gank.app.fragment
 
-import android.support.v7.widget.LinearLayoutManager
 import android.view.inputmethod.EditorInfo
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.widget.simpleview.SimpleViewHelper
@@ -78,25 +77,26 @@ class SearchFragment : BaseFragment() {
             if (page == 1) {
                 simplerViewHelper?.showLoading("正在加载搜索结果")
             }
-            addApiCall(ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, SEARCH_COUNT, page).subscribe(Consumer {
-                searchResult ->
-                simplerViewHelper?.restore()
+            ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, SEARCH_COUNT, page)
+                    .compose(bindToLifecycle())
+                    .subscribe({ searchResult ->
+                        simplerViewHelper?.restore()
 
-                if (page == 1) {
-                    if (searchResult.count == 0)
-                        simplerViewHelper?.showEmpty("搜索结果为空")
-                    else {
-                        mSearchResultAdapter.setNewData(searchResult.results)
-                    }
-                } else {
-                    mSearchResultAdapter.loadMoreComplete()
-                    if (searchResult.count < SEARCH_COUNT)
-                        mSearchResultAdapter.loadMoreEnd()
-                    mSearchResultAdapter.addData(searchResult.results!!)
-                }
-            }, Consumer<Throwable> { error ->
-                activity.dialogErrorShow(error.message.safe(), null)
-            }))
+                        if (page == 1) {
+                            if (searchResult.count == 0)
+                                simplerViewHelper?.showEmpty("搜索结果为空")
+                            else {
+                                mSearchResultAdapter.setNewData(searchResult.results)
+                            }
+                        } else {
+                            mSearchResultAdapter.loadMoreComplete()
+                            if (searchResult.count < SEARCH_COUNT)
+                                mSearchResultAdapter.loadMoreEnd()
+                            mSearchResultAdapter.addData(searchResult.results!!)
+                        }
+                    }, { error ->
+                        activity.dialogErrorShow(error.message.safe(), null)
+                    }).isDisposed
         }
     }
 }
