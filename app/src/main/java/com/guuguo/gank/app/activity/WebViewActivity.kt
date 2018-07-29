@@ -4,13 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import com.guuguo.android.lib.extension.initNav
 import com.guuguo.gank.R
 
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.extension.showSnackTip
 import com.guuguo.gank.app.viewmodel.WebViewModel
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.databinding.ActivityWebviewBinding
@@ -97,7 +97,7 @@ class WebViewActivity : BaseActivity() {
     }
 
     fun showTip(msg: String) {
-        showSnackTip(container_view, msg)
+        Snackbar.make(container_view, msg,Snackbar.LENGTH_SHORT)
     }
 
 }

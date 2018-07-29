@@ -3,6 +3,7 @@ package com.guuguo.gank.app.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
@@ -60,9 +61,9 @@ class GankActivity : BaseActivity(), IDateGankView {
     }
 
     override fun showErrorView(e: Throwable) {
-        showTipWithAction(container_view, e.message.safe(), "重试", View.OnClickListener {
+        Snackbar.make(container_view, e.message.safe(),Snackbar.LENGTH_LONG).setAction("重试") {
             mPresenter.fetchDate(mGankBean!!.publishedAt!!)
-        })
+        }
     }
 
     override fun showProgress() {
@@ -118,6 +119,6 @@ class GankActivity : BaseActivity(), IDateGankView {
     }
 
     override fun showTip(msg: String) {
-        showSnackTip(container_view, msg)
+        Snackbar.make(container_view, msg,Snackbar.LENGTH_SHORT)
     }
 }

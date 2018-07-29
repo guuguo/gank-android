@@ -3,7 +3,6 @@ package com.guuguo.gank.util;
 import android.view.View;
 
 import com.guuguo.android.lib.utils.Utils;
-import com.guuguo.gank.app.MyApplication;
 
 /**
  * Created by 大哥哥 on 2016/8/26 0026.

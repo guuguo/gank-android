@@ -7,6 +7,7 @@ import com.guuguo.gank.R
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.guuguo.android.lib.extension.getTimeSpan
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.model.entity.GankModel
@@ -23,7 +24,7 @@ class GankAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
         val image = holder.getView<ImageView>(R.id.iv_image)
         if (gankBean.images.safe().isNotEmpty()) {
             image.visibility = View.VISIBLE
-            Glide.with(mContext).load(gankBean.images[0]).asBitmap().centerCrop().into(image)
+            Glide.with(mContext).asBitmap().load(gankBean.images[0]).apply(RequestOptions().centerCrop()).into(image)
         } else {
             image.visibility = View.GONE
         }

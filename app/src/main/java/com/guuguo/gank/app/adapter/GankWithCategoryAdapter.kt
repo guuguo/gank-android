@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.guuguo.gank.R
 
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseSectionQuickAdapter
 import com.guuguo.android.lib.extension.getTimeSpan
 import com.guuguo.android.lib.extension.safe
@@ -29,7 +30,7 @@ class GankWithCategoryAdapter : BaseSectionQuickAdapter<GankSection, BaseViewHol
         val image = holder.getView<ImageView>(R.id.iv_image)
         if (gankBean.t.images.safe().isNotEmpty()) {
             image.visibility = View.VISIBLE
-            Glide.with(mContext).load(gankBean.t.images[0]).asBitmap().centerCrop().into(image)
+            Glide.with(mContext).asBitmap().load(gankBean.t.images[0]).apply(RequestOptions().centerCrop()).into(image)
         } else {
             image.visibility = View.GONE
         }
