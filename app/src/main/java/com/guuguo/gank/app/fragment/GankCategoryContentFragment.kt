@@ -15,6 +15,7 @@ import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
 import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_webview.*
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.util.*
@@ -101,6 +102,10 @@ class GankCategoryContentFragment : BaseFragment() {
         ApiServer.getGankData(gank_type, MEIZI_COUNT, page)
                 .compose(bindToLifecycle())
                 .subscribe(object : SingleObserver<Ganks<ArrayList<GankModel>>> {
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
                     override fun onSuccess(meiziData: Ganks<ArrayList<GankModel>>) {
                         meiziData.let {
                             showMeiziList(meiziData.results!!)

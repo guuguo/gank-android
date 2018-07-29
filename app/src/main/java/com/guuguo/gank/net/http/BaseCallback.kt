@@ -6,6 +6,7 @@ import com.guuguo.android.lib.BaseApplication
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.pikacomic.net.http.ResponseModel
 import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.ConnectException
@@ -56,6 +57,8 @@ abstract class BaseCallback<T> : SingleObserver<T> {
         }
     }
 
+    override fun onSubscribe(d: Disposable) {
+    }
     open fun onApiLoadError(msg: String){}
 
 }

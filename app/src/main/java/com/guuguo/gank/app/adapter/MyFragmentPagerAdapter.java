@@ -1,10 +1,11 @@
 package com.guuguo.gank.app.adapter;
 
 import android.content.Context;
-import java.util.HashMap;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import java.util.HashMap;
 
 
 /**

@@ -10,7 +10,7 @@ android {
     buildToolsVersion BUILD_TOOLS_VERSION
     defaultConfig {
         applicationId "com.guuguo.gank"
-        minSdkVersion 19
+        minSdkVersion MIN_SDK_VERSION
         targetSdkVersion TARGET_SDK_VERSION
         versionCode 10
         versionName "0.9"
@@ -63,9 +63,9 @@ android {
     }
 
 }
-kapt {
-    generateStubs = true
-}
+//kapt {
+//    generateStubs = true
+//}
 repositories {
     jcenter()
     maven { url "https://jitpack.io" }
@@ -85,14 +85,17 @@ dependencies {
     implementation('com.github.guuguo.androidLib:androidLib:1.1.6.6',
             { exclude group: 'com.android.support' })
 
-    kapt "androidx.databinding:databinding-compiler:$ANDROID_PLUGIN_VERSION"
+//    kapt "androidx.databinding:databinding-compiler:$ANDROID_PLUGIN_VERSION"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
-//    kapt "com.android.databinding:compiler:$ANDROID_PLUGIN_VERSION"
+    kapt "com.android.databinding:compiler:$ANDROID_PLUGIN_VERSION"
 
     //support
     implementation "com.android.support:support-vector-drawable:$SUPPORT_VERSION"
     implementation "com.android.support:cardview-v7:$SUPPORT_VERSION"
-    implementation "androidx.recyclerview:recyclerview:$ANDROIDX_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:design:$SUPPORT_VERSION"
+    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
 
     //test
     testImplementation 'junit:junit:4.12'

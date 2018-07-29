@@ -1,7 +1,6 @@
 package com.guuguo.gank.base
 
 import com.guuguo.android.lib.app.LBaseActivitySupport
-import com.guuguo.android.lib.app.LNBaseActivity
 import com.guuguo.gank.app.App
 
 /**
@@ -9,7 +8,7 @@ import com.guuguo.gank.app.App
  */
 
 abstract class BaseActivity : LBaseActivitySupport() {
-    protected var myApplication = App.instance
+    protected var myApplication = App.get()
 
     open fun initPresenter() {}
     override fun initView() {

@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.target.SizeReadyCallback
@@ -31,13 +32,15 @@ class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
         holder.setText(R.id.date, gankBean.who + " · " + gankBean.publishedAt?.getTimeSpanUntilDay())
                 .setText(R.id.tv_desc, gankBean.desc)
                 .addOnClickListener(R.id.iv_image)
-        
-        Glide.with(mContext).load(gankBean.getWidthUrl(DisplayExtention.getScreenWidth()))
-                .asBitmap()
-                .placeholder(ColorDrawable(colors[(Math.random() * colors.size).toInt()]))
-                .centerCrop()
+
+        Glide.with(mContext).asBitmap()
+                .load(gankBean.getWidthUrl(DisplayExtention.getScreenWidth()))
+                .apply(RequestOptions()
+                        .placeholder(ColorDrawable(colors[(Math.random() * colors.size).toInt()]))
+                        .centerCrop())
                 .into(object : BitmapImageViewTarget(image) {
-                    override fun getSize(cb: SizeReadyCallback?) {
+                    override fun getSize(cb: SizeReadyCallback) {
+                        super.getSize(cb)
                         cb?.onSizeReady(ImageViewTarget.SIZE_ORIGINAL, ImageViewTarget.SIZE_ORIGINAL)
                     }
                 })

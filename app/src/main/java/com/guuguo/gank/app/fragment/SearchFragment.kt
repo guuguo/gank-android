@@ -1,5 +1,6 @@
 package com.guuguo.gank.app.fragment
 
+import android.support.v7.widget.LinearLayoutManager
 import android.view.inputmethod.EditorInfo
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.widget.simpleview.SimpleViewHelper
@@ -48,11 +49,10 @@ class SearchFragment : BaseFragment() {
             val bean = mSearchResultAdapter.getItem(position)!!
             WebViewActivity.intentTo(bean.url, bean.desc, activity)
         }
-        simplerViewHelper = SimpleViewHelper(recycler, false)
+        simplerViewHelper = SimpleViewHelper(recycler)
         simplerViewHelper?.showEmpty("请输入搜索关键字")
         iv_back.setOnClickListener { pop() }
         iv_search.setOnClickListener {
-            clearApiCall()
             page = 1
             search(edt_search.text.toString())
         }
