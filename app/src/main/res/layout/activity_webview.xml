@@ -37,5 +37,20 @@
                 android:max="100"
                 tools:progress="10" />
         </FrameLayout>
+
+        <android.support.design.bottomappbar.BottomAppBar
+            android:id="@+id/bottombar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:hideOnScroll="true"
+            style="@style/Widget.MaterialComponents.BottomAppBar"
+            app:navigationIcon="@drawable/ic_dashboard_black_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/bottombar" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>

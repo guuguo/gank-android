@@ -10,7 +10,6 @@ import com.guuguo.gank.app.adapter.GankAdapter
 import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
-import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 
@@ -50,7 +49,7 @@ class SearchFragment : BaseFragment() {
             WebViewActivity.intentTo(bean.url, bean.desc, activity)
         }
         simplerViewHelper = SimpleViewHelper(recycler)
-        simplerViewHelper?.showEmpty("请输入搜索关键字")
+        simplerViewHelper?.showEmpty("请输入搜索关键字",imgRes = R.drawable.empty_cute_girl_box)
         iv_back.setOnClickListener { pop() }
         iv_search.setOnClickListener {
             page = 1
@@ -63,6 +62,7 @@ class SearchFragment : BaseFragment() {
                 true
             } else false
         }
+
     }
 
     override fun onBackPressedSupport(): Boolean {
@@ -72,7 +72,7 @@ class SearchFragment : BaseFragment() {
 
     private fun search(searchText: String) {
         if (searchText.isNullOrEmpty()) {
-            simplerViewHelper?.showEmpty("请输入搜索关键字")
+            simplerViewHelper?.showEmpty("请输入搜索关键字",imgRes = R.drawable.empty_cute_girl_box)
         } else {
             if (page == 1) {
                 simplerViewHelper?.showLoading("正在加载搜索结果")
@@ -84,7 +84,7 @@ class SearchFragment : BaseFragment() {
 
                         if (page == 1) {
                             if (searchResult.count == 0)
-                                simplerViewHelper?.showEmpty("搜索结果为空")
+                                simplerViewHelper?.showEmpty("搜索结果为空",imgRes = R.drawable.empty_cute_girl_box)
                             else {
                                 mSearchResultAdapter.setNewData(searchResult.results)
                             }

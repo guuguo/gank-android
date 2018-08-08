@@ -80,9 +80,7 @@ dependencies {
     testImplementation "junit:junit:4.12"
     testImplementation "org.mockito:mockito-core:1.10.19"
 
-//    implementation project(':androidLib:androidLib')
-//    implementation 'com.github.guuguo:androidLib:1.0.0'
-    implementation('com.github.guuguo.androidLib:androidLib:1.1.6.6',
+    implementation("com.github.guuguo.androidLib:androidLib:$GUUGUO_ANDROIDLIB",
             { exclude group: 'com.android.support' })
 
 //    kapt "androidx.databinding:databinding-compiler:$ANDROID_PLUGIN_VERSION"

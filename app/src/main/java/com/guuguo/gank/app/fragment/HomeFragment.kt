@@ -39,24 +39,22 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
         id_tool_bar.title = title
     }
 
-    private val mOnNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
-        override fun onNavigationItemSelected(item: MenuItem): Boolean {
-            when (item.itemId) {
-                R.id.navigation_daily -> {
-                    ViewCompat.setElevation(appbar, 10f)
-                    showHideFragment(mFragments[0], mFragment)
-                    mFragment = mFragments[0]
-                    return true
-                }
-                R.id.navigation_category -> {
-                    ViewCompat.setElevation(appbar, 0f)
-                    showHideFragment(mFragments[1], mFragment)
-                    mFragment = mFragments[1]
-                    return true
-                }
-                else ->
-                    return true
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_daily -> {
+                ViewCompat.setElevation(appbar, 10f)
+                showHideFragment(mFragments[0], mFragment)
+                mFragment = mFragments[0]
+                true
             }
+            R.id.navigation_category -> {
+                ViewCompat.setElevation(appbar, 0f)
+                showHideFragment(mFragments[1], mFragment)
+                mFragment = mFragments[1]
+                true
+            }
+            else ->
+                true
         }
     }
 
@@ -79,7 +77,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
             R.id.menu_search -> {
                 val fragment = activity.findFragment(SearchFragment::class.java)
                 if (fragment == null) {
-                    activity.popTo(HomeFragment::class.java, false, { activity.start(SearchFragment()) })
+                    activity.popTo(HomeFragment::class.java, false) { activity.start(SearchFragment()) }
                 } else {
                     activity.popTo(SearchFragment::class.java, false)
                 }

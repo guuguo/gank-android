@@ -82,7 +82,7 @@ class WebViewActivity : BaseActivity() {
             R.id.menu_copy -> viewModel.copyUrl(url)
             R.id.menu_share -> {
                 val intent = Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
+                intent.type = "text/plain";
                 intent.putExtra(Intent.EXTRA_TEXT, url);
                 startActivity(Intent.createChooser(intent, "分享链接到"));
             }
