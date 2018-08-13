@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 //apply plugin: 'com.android.databinding'
+def static gitVersionCode() {
+    new Date().format("yyMMdd", TimeZone.getTimeZone("UTC")).toInteger()
+}
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
@@ -12,7 +15,7 @@ android {
         applicationId "com.guuguo.gank"
         minSdkVersion MIN_SDK_VERSION
         targetSdkVersion TARGET_SDK_VERSION
-        versionCode 10
+        versionCode gitVersionCode()
         versionName "0.9"
         ndk {
             //设置支持的SO库架构
@@ -22,50 +25,53 @@ android {
     }
 
     signingConfigs {
-        release {
-            keyAlias 'mimi'
-            keyPassword 'guuguo123'
-            storeFile file('mimi.jks')
-            storePassword 'android'
-        }
-        debug {
+        config {
             keyAlias 'mimi'
             keyPassword 'guuguo123'
             storeFile file('mimi.jks')
             storePassword 'android'
         }
     }
+
     buildTypes {
-        release {
-            debuggable false
-            jniDebuggable false
-            zipAlignEnabled true
-            shrinkResources false
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-        }
         debug {
-            debuggable true
-            jniDebuggable true
-            zipAlignEnabled true
-            shrinkResources false
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            versionNameSuffix 'd'
+        }
 
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def fileName = output.outputFile.name
+            outputFileName = fileName.replace("app", "gank-${variant.versionName}-${variant.versionCode}")
+        }
+    }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     dataBinding {
         enabled = true
     }
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
-//kapt {
-//    generateStubs = true
-//}
+
 repositories {
     jcenter()
     maven { url "https://jitpack.io" }
@@ -74,26 +80,31 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2',{
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation "junit:junit:4.12"
     testImplementation "org.mockito:mockito-core:1.10.19"
 
-    implementation("com.github.guuguo.androidLib:androidLib:$GUUGUO_ANDROIDLIB",
-            { exclude group: 'com.android.support' })
+    implementation project(':androidLib')
 
-//    kapt "androidx.databinding:databinding-compiler:$ANDROID_PLUGIN_VERSION"
+//    implementation("com.github.guuguo.androidLib:androidLib:$GUUGUO_ANDROIDLIB",
+//    implementation "com.github.guuguo.androidLib:dialog:$GUUGUO_ANDROIDLIB"
+//    implementation "com.github.guuguo.androidLib:drawable:$GUUGUO_ANDROIDLIB"
+//    implementation "com.github.guuguo.androidLib:roundview:$GUUGUO_ANDROIDLIB"
+//    implementation "com.github.guuguo.androidLib:utils:$GUUGUO_ANDROIDLIB"
+//    implementation "com.github.guuguo.androidLib:widget:$GUUGUO_ANDROIDLIB"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
     kapt "com.android.databinding:compiler:$ANDROID_PLUGIN_VERSION"
 
     //support
     implementation "com.android.support:support-vector-drawable:$SUPPORT_VERSION"
     implementation "com.android.support:cardview-v7:$SUPPORT_VERSION"
-    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
-    implementation "com.android.support:design:$SUPPORT_VERSION"
-    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
+//    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+//    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+//    implementation "com.android.support:design:$SUPPORT_VERSION"
+//    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
 
     //test
     testImplementation 'junit:junit:4.12'
@@ -105,12 +116,14 @@ dependencies {
     // function
     implementation "com.tencent.bugly:crashreport_upgrade:$BUGLY_UPGRADE"
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    implementation('com.github.bumptech.glide:glide:4.7.1') {
+        exclude group: "com.android.support"
+    }
     //retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    implementation 'com.github.bumptech.glide:okhttp3-integration:4.2.0@aar'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.5.0@aar'
 
     // view
     implementation 'com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar'
@@ -119,6 +132,8 @@ dependencies {
     implementation 'am.widget:wraplayout:1.2.0'
     implementation 'com.github.jrvansuita:MaterialAbout:0.1.9'
 
+    //web
+    implementation 'com.just.agentweb:agentweb:4.0.2'
 }
 
 repositories {

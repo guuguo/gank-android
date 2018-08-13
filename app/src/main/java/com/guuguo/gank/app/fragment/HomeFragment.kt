@@ -32,7 +32,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
     private var mTextMessage: TextView? = null
     override fun getHeaderTitle() = "gank"
     override fun getMenuResId() = R.menu.main_menu
-    override fun getToolBar() = id_tool_bar
+    override fun getToolBar() = contentView?.findViewById<Toolbar>(R.id.id_tool_bar)
     override fun getLayoutResId() = R.layout.fragment_main
 
     override fun setTitle(title: String) {
@@ -53,8 +53,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
                 mFragment = mFragments[1]
                 true
             }
-            else ->
-                true
+            else -> true
         }
     }
 

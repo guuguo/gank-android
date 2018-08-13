@@ -36,7 +36,7 @@ class GankModel : Serializable {
     }
 
     override fun toString(): String {
-        return "GankModel(_id=$_id, createdAt=$createdAt, desc=$desc, publishedAt=$publishedAt, source=$source, type=$type, url=$url, used=$used, who=$who, width=$width, height=$height)"
+        return "GankModel(_id=$_id, createdAt=$createdAt, desc=$desc, publishedAt=$publishedAt, source=$source, type=$type, mUrl=$url, used=$used, who=$who, width=$width, height=$height)"
     }
 
 }
