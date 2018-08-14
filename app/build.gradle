@@ -100,13 +100,13 @@ dependencies {
     implementation "com.android.support:cardview-v7:$SUPPORT_VERSION"
 
     // ViewModel and LiveData
-    annotationProcessor "android.arch.lifecycle:compiler:$ROOM_VERSION"
+    kapt  "android.arch.lifecycle:compiler:$ROOM_VERSION"
     implementation "android.arch.lifecycle:reactivestreams:$ROOM_VERSION"
 
 
     // Room
     testImplementation "android.arch.persistence.room:testing:$ROOM_VERSION"
-    annotationProcessor "android.arch.persistence.room:compiler:$ROOM_VERSION"
+    kapt  "android.arch.persistence.room:compiler:$ROOM_VERSION"
     implementation "android.arch.persistence.room:runtime:$ROOM_VERSION"
     implementation "android.arch.persistence.room:rxjava2:$ROOM_VERSION"
 // optional - Guava support for Room, including Optional and ListenableFuture

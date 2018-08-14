@@ -95,12 +95,10 @@ class GankActivity : BaseActivity(), IDateGankView {
     private fun initRecycler() {
         rv_gank.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
         rv_gank.adapter = mGankAdapter
-        mGankAdapter.onItemClickListener = object : BaseQuickAdapter.OnItemClickListener {
-            override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-                val bean = mGankAdapter.getItem(position)!!
-                if (!bean.isHeader)
-                    WebViewActivity.intentTo(bean.t.url, bean.t.desc, activity)
-            }
+        mGankAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            val bean = mGankAdapter.getItem(position)!!
+            if (!bean.isHeader)
+                WebViewActivity.intentTo(bean.t, activity)
         }
     }
 

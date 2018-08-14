@@ -11,6 +11,7 @@ import android.widget.TextView
 
 import com.guuguo.gank.R
 import com.guuguo.gank.app.activity.AboutActivity
+import com.guuguo.gank.app.fragment.GankCategoryContentFragment.Companion.GANK_TYPE_STAR
 import com.guuguo.gank.base.BaseFragment
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.base_toolbar_common.*
@@ -53,6 +54,12 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
                 mFragment = mFragments[1]
                 true
             }
+            R.id.navigation_star -> {
+            ViewCompat.setElevation(appbar, 0f)
+            showHideFragment(mFragments[2], mFragment)
+            mFragment = mFragments[2]
+            true
+        }
             else -> true
         }
     }
@@ -62,11 +69,13 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
         if (savedInstanceState == null) {
             mFragments.add(GankDailyFragment())
             mFragments.add(GankCategoryFragment())
+            mFragments.add(GankCategoryContentFragment.newInstance(GankCategoryContentFragment.GANK_TYPE_STAR))
             loadMultipleRootFragment(R.id.container_view, 0, *mFragments.toTypedArray())
             mFragment = mFragments[0]
         } else {
             mFragments.add(findFragment(GankDailyFragment::class.java))
             mFragments.add(findFragment(GankCategoryFragment::class.java))
+            mFragments.add(findFragment(GankCategoryContentFragment::class.java))
         }
     }
 

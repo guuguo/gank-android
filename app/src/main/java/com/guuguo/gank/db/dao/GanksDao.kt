@@ -6,6 +6,7 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 
 import com.guuguo.gank.model.entity.GankModel
+import io.reactivex.Completable
 
 import io.reactivex.Flowable
 
@@ -14,7 +15,7 @@ import io.reactivex.Flowable
 interface GankDao {
 
     @Query("SELECT * FROM gank ORDER BY _id DESC")
-    fun loadGanks(): Flowable<List<GankModel>>
+    fun getGanks(): Flowable<List<GankModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGanks(newsList: List<GankModel>)

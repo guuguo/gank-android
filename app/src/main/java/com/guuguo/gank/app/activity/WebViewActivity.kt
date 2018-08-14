@@ -18,6 +18,7 @@ import com.guuguo.gank.R
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.BuildConfig
+import com.guuguo.gank.app.activity.WebViewActivity.Companion.ARG_GANK
 import com.guuguo.gank.app.viewmodel.WebViewModel
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.databinding.ActivityWebviewBinding
@@ -28,6 +29,9 @@ import kotlinx.android.synthetic.main.activity_webview.*
 import kotlinx.android.synthetic.main.base_toolbar_common.*
 import com.just.agentweb.BaseIndicatorView
 import com.just.agentweb.NestedScrollAgentWebView
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.io.Serializable
 
 open class WebViewActivity : BaseActivity() {
@@ -53,7 +57,7 @@ open class WebViewActivity : BaseActivity() {
 
     companion object {
         val ARG_GANK = "ARG_GANK"
-        fun intentTo(bean: Serializable, activity: Activity) {
+        fun intentTo(bean: GankModel, activity: Activity) {
             var intent = Intent(activity, WebViewActivity::class.java)
             intent.putExtra(ARG_GANK, bean)
             activity.startActivity(intent)
@@ -82,6 +86,7 @@ open class WebViewActivity : BaseActivity() {
         binding.fab.setOnClickListener {
             "收藏".toast()
             GankRepository.insertGank(gank)
+                    .subscribe()
         }
     }
 
@@ -93,13 +98,13 @@ open class WebViewActivity : BaseActivity() {
 
     var mUrl: String = ""
     var desc: String = ""
-   lateinit var gank:GankModel
+    lateinit var gank: GankModel
 
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)
         gank = intent.getSerializableExtra(ARG_GANK) as GankModel
-        mUrl=gank.url
-        desc=gank.desc
+        mUrl = gank.url
+        desc = gank.desc
     }
 
     override fun getHeaderTitle(): String {

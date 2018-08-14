@@ -5,15 +5,24 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.guuguo.android.lib.extension.log
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.R
+import com.guuguo.gank.R.id.container_view
+import com.guuguo.gank.R.id.swiper
 import com.guuguo.gank.app.activity.WebViewActivity
 import com.guuguo.gank.app.adapter.GankAdapter
+import com.guuguo.gank.app.fragment.GankCategoryContentFragment.Companion.GANK_TYPE_STAR
 import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
+import com.guuguo.gank.net.EmptyConsumer
+import com.guuguo.gank.net.ErrorConsumer
+import com.guuguo.gank.source.GankRepository
+import com.just.agentweb.LogUtils
+import com.trello.rxlifecycle2.android.FragmentEvent
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_webview.*
@@ -29,6 +38,7 @@ class GankCategoryContentFragment : BaseFragment() {
 
     companion object {
         val ARG_GANK_TYPE = "ARG_GANK_TYPE"
+        val GANK_TYPE_STAR = "GANK_TYPE_STAR"
         fun newInstance(title: String): GankCategoryContentFragment {
             val fragment = GankCategoryContentFragment()
             val bundle = Bundle()
@@ -83,14 +93,14 @@ class GankCategoryContentFragment : BaseFragment() {
         recycler.adapter = gankAdapter
         gankAdapter.setOnItemClickListener { _, view, position ->
             val bean = gankAdapter.getItem(position)!!
-            WebViewActivity.intentTo(bean.url, bean.desc, activity)
+            WebViewActivity.intentTo(bean, activity)
         }
     }
 
     private fun initSwiper() {
         swiper.setOnRefreshListener {
             onRefresh()
-        };
+        }
     }
 
     private fun onRefresh() {
@@ -98,27 +108,35 @@ class GankCategoryContentFragment : BaseFragment() {
         fetchGankData(page)
     }
 
+    private fun setLocalCommentList(meiziData: Ganks<ArrayList<GankModel>>) {
+        meiziData.let {
+            showMeiziList(meiziData.results!!)
+            hideProgress()
+        }
+    }
+
     private fun fetchGankData(page: Int) {
-        ApiServer.getGankData(gank_type, MEIZI_COUNT, page)
-                .compose(bindToLifecycle())
-                .subscribe(object : SingleObserver<Ganks<ArrayList<GankModel>>> {
-                    override fun onSubscribe(d: Disposable) {
-
-                    }
-
-                    override fun onSuccess(meiziData: Ganks<ArrayList<GankModel>>) {
-                        meiziData.let {
-                            showMeiziList(meiziData.results!!)
-                            hideProgress()
+        when (gank_type) {
+            GANK_TYPE_STAR -> {
+                GankRepository.getStarGanks()
+                        .doOnNext(this::showMeiziList)
+                        .doOnNext {
+                            gankAdapter.loadMoreEnd()
+                            swiper.isRefreshing=false
                         }
-                    }
+                        .subscribe(EmptyConsumer(), ErrorConsumer())
+            }
+            else -> {
+                ApiServer.getGankData(gank_type, MEIZI_COUNT, page)
+                        .compose(bindToLifecycle())
+                        .doOnError { throwable ->
+                            ("initLocalCommentList doOnError: " + throwable.toString()).log()
+                        }
+                        .doOnNext(this::setLocalCommentList)
+                        .subscribe(EmptyConsumer(), ErrorConsumer())
 
-                    override fun onError(error: Throwable) {
-                        showErrorView(error)
-                        hideProgress()
-                    }
-
-                })
+            }
+        }
     }
 
 

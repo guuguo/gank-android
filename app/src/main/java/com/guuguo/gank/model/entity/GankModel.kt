@@ -26,7 +26,7 @@ class GankModel : Serializable {
     var used: String? = null
     var who: String? = null
     @TypeConverters(RoomDataConverter::class)
-    var images: ArrayList<String> = arrayListOf()
+    var images: List<String> = listOf()
     var width: Int = 0
     var height: Int = 0
 
