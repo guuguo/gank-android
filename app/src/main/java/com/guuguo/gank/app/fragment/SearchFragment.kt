@@ -46,7 +46,7 @@ class SearchFragment : BaseFragment() {
         }, recycler)
         mSearchResultAdapter.setOnItemClickListener { _, _, position ->
             val bean = mSearchResultAdapter.getItem(position)!!
-            WebViewActivity.intentTo(bean.url, bean.desc, activity)
+            WebViewActivity.intentTo(bean, activity)
         }
         simplerViewHelper = SimpleViewHelper(recycler)
         simplerViewHelper?.showEmpty("请输入搜索关键字",imgRes = R.drawable.empty_cute_girl_box)

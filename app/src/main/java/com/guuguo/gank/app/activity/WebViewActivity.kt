@@ -21,13 +21,16 @@ import com.guuguo.gank.BuildConfig
 import com.guuguo.gank.app.viewmodel.WebViewModel
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.databinding.ActivityWebviewBinding
+import com.guuguo.gank.model.entity.GankModel
+import com.guuguo.gank.source.GankRepository
 import com.just.agentweb.AgentWeb
 import kotlinx.android.synthetic.main.activity_webview.*
 import kotlinx.android.synthetic.main.base_toolbar_common.*
 import com.just.agentweb.BaseIndicatorView
 import com.just.agentweb.NestedScrollAgentWebView
+import java.io.Serializable
 
-class WebViewActivity : BaseActivity() {
+open class WebViewActivity : BaseActivity() {
 
     lateinit var binding: ActivityWebviewBinding
     val viewModel by lazy { WebViewModel(this) }
@@ -49,12 +52,10 @@ class WebViewActivity : BaseActivity() {
     }
 
     companion object {
-        val ARG_URL = "ARG_URL"
-        val ARG_DESC = "ARG_DESC"
-        fun intentTo(url: String, desc: String, activity: Activity) {
+        val ARG_GANK = "ARG_GANK"
+        fun intentTo(bean: Serializable, activity: Activity) {
             var intent = Intent(activity, WebViewActivity::class.java)
-            intent.putExtra(ARG_URL, url)
-            intent.putExtra(ARG_DESC, desc)
+            intent.putExtra(ARG_GANK, bean)
             activity.startActivity(intent)
             //设置切换动画，从右边进入，左边退出  n
 //            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -80,17 +81,9 @@ class WebViewActivity : BaseActivity() {
 //        binding.bottombar.inflateMenu(getMenuResId())
         binding.fab.setOnClickListener {
             "收藏".toast()
+            GankRepository.insertGank(gank)
         }
     }
-
-//    override fun initToolBar() {
-//        super.initToolBar()
-//        getHeaderTitle().let {
-//            binding.bottombar.title = it
-//        }
-//        setSupportActionBar(binding.bottombar)
-//        binding.bottombar.initNav()
-//    }
 
     override fun onBackPressedSupport() {
         val back = mAgentWeb.back()
@@ -100,11 +93,13 @@ class WebViewActivity : BaseActivity() {
 
     var mUrl: String = ""
     var desc: String = ""
-    var mTitle = ""
+   lateinit var gank:GankModel
+
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)
-        mUrl = intent.getStringExtra(ARG_URL)
-        desc = intent.getStringExtra(ARG_DESC)
+        gank = intent.getSerializableExtra(ARG_GANK) as GankModel
+        mUrl=gank.url
+        desc=gank.desc
     }
 
     override fun getHeaderTitle(): String {
@@ -119,7 +114,7 @@ class WebViewActivity : BaseActivity() {
                 val intent = Intent(Intent.ACTION_SEND);
                 intent.type = "text/plain";
                 intent.putExtra(Intent.EXTRA_TEXT, mUrl);
-                startActivity(Intent.createChooser(intent, "分享链接到"));
+                startActivity(Intent.createChooser(intent, "分享链接到"))
             }
             else -> return super.onOptionsItemSelected(item)
         }

@@ -1,6 +1,22 @@
 <!--?xml version=1.0 encoding=utf-8?-->
 <resources>
-    <color name="colorPrimary">#3a3b40</color>
-    <color name="colorPrimaryHint">#AA3a3b40</color>
 
+
+    <color name="primary_50">#e2eaf2</color>
+    <color name="primary_100">#b6cbdf</color>
+    <color name="primary_200">#85a9ca</color>
+    <color name="primary_300">#5487b4</color>
+    <color name="primary_400">#306da4</color>
+    <color name="primary_500">#0b5394</color>
+    <color name="primary_600">#0a4c8c</color>
+    <color name="primary_700">#084281</color>
+    <color name="primary_800">#063977</color>
+    <color name="primary_900">#032965</color>
+    <color name="primary_A100">#95b6ff</color>
+    <color name="primary_A200">#6294ff</color>
+    <color name="primary_A400">#2f71ff</color>
+    <color name="primary_A700">#155fff</color>
+
+    <color name="colorPrimary">@color/primary_500</color>
+    <color name="colorPrimaryHint">#AA3a3b40</color>
 </resources>
