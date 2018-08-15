@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_check_up"
-        android:title="检查更新"
+        android:title="@string/check_upgrade"
         app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/menu_about"
-        android:title="关于"
+        android:title="@string/about"
         app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_search"
-        android:title="搜索"
-        app:showAsAction="always" />
+        android:title="@string/search"
+        app:showAsAction="ifRoom" />
 
 </menu>

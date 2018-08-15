@@ -2,6 +2,7 @@ package com.guuguo.gank.app.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -10,19 +11,19 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
-import com.guuguo.android.lib.extension.inflater
-import com.guuguo.android.lib.extension.initNav
+import com.guuguo.android.lib.extension.*
 import com.guuguo.gank.R
 
-import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.BuildConfig
 import com.guuguo.gank.app.activity.WebViewActivity.Companion.ARG_GANK
 import com.guuguo.gank.app.viewmodel.WebViewModel
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.databinding.ActivityWebviewBinding
 import com.guuguo.gank.model.entity.GankModel
+import com.guuguo.gank.net.EmptyConsumer
+import com.guuguo.gank.net.ErrorConsumer
 import com.guuguo.gank.source.GankRepository
 import com.just.agentweb.AgentWeb
 import kotlinx.android.synthetic.main.activity_webview.*
@@ -31,6 +32,8 @@ import com.just.agentweb.BaseIndicatorView
 import com.just.agentweb.NestedScrollAgentWebView
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Action
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import java.io.Serializable
 
@@ -68,6 +71,14 @@ open class WebViewActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
+        GankRepository.getGankById(gank._id)
+                .doOnSuccess {
+                    isFavorite = it != null
+                    refreshFab()
+                 }
+                .doOnComplete {
+                    refreshFab()
+                }.subscribe()
         mAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(getWebContentParentView()!!, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
                 .run {
@@ -76,17 +87,47 @@ open class WebViewActivity : BaseActivity() {
                     } ?: useDefaultIndicator()
                 }
                 .setWebView(NestedScrollAgentWebView(activity))
+                .setWebViewClient(object : WebViewClient() {
+                    override fun onPageFinished(view: WebView?, url: String?) {
+                        super.onPageFinished(view, url)
+                        binding.refresh.isRefreshing = false
+                    }
+                })
                 .createAgentWeb()
                 .ready()
                 .go(getUrl())
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true)
         }
+        binding.refresh.setOnRefreshListener {
+            mAgentWeb.urlLoader.reload()
+        }
 //        binding.bottombar.inflateMenu(getMenuResId())
         binding.fab.setOnClickListener {
-            "收藏".toast()
-            GankRepository.insertGank(gank)
-                    .subscribe()
+            if (isFavorite) {
+                GankRepository.deleteGank(gank).doOnComplete {
+                    "已成功移除收藏".toast()
+                    isFavorite = !isFavorite
+                    refreshFab()
+                }.subscribe()
+            } else {
+                GankRepository.insertGank(gank).doOnComplete {
+                    "已成功加入收藏".toast()
+                    isFavorite = !isFavorite
+                    refreshFab()
+                }.subscribe()
+            }
+
+        }
+    }
+
+    private fun refreshFab() {
+        if (!isFavorite) {
+            binding.fab.setImageResource(R.mipmap.star)
+            binding.fab.backgroundTintList = ColorStateList.valueOf(getColorCompat(R.color.colorAccent))
+        } else {
+            binding.fab.setImageResource(R.drawable.widget_state_success)
+            binding.fab.backgroundTintList = ColorStateList.valueOf(getColorCompat(R.color.color_blue_light))
         }
     }
 
@@ -100,6 +141,7 @@ open class WebViewActivity : BaseActivity() {
     var desc: String = ""
     lateinit var gank: GankModel
 
+    var isFavorite = false
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)
         gank = intent.getSerializableExtra(ARG_GANK) as GankModel
@@ -116,9 +158,9 @@ open class WebViewActivity : BaseActivity() {
             R.id.menu_browser -> viewModel.openInBrowser(mUrl)
             R.id.menu_copy -> viewModel.copyUrl(mUrl)
             R.id.menu_share -> {
-                val intent = Intent(Intent.ACTION_SEND);
-                intent.type = "text/plain";
-                intent.putExtra(Intent.EXTRA_TEXT, mUrl);
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/plain"
+                intent.putExtra(Intent.EXTRA_TEXT, mUrl)
                 startActivity(Intent.createChooser(intent, "分享链接到"))
             }
             else -> return super.onOptionsItemSelected(item)

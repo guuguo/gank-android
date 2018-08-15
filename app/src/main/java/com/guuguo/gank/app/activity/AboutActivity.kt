@@ -39,9 +39,9 @@ class AboutActivity : BaseActivity() {
                 .setWrapScrollView(true)
                 .setLinksAnimated(true)
                 .setShowAsCard(true)
-                .addAction(R.mipmap.update, "检查更新", { v ->
+                .addAction(R.mipmap.update, "检查更新") {
                     Beta.checkUpgrade()
-                })
+                }
                 .build()
         (findViewById<FrameLayout>(R.id.content)).addView(view)
     }

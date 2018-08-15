@@ -7,6 +7,7 @@ import com.guuguo.gank.app.fragment.HomeFragment
 class MainActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_main
     override val backExitStyle = BACK_WAIT_TIME
+    override fun isNavigationBack()=false
     override fun initView() {
         super.initView()
         loadRootFragment(R.id.container_view, HomeFragment.getInstance())

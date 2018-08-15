@@ -35,7 +35,6 @@ class GankActivity : BaseActivity(), IDateGankView {
             intent.putExtra(MEIZI, meizi)
             val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image, TRANSLATE_GIRL_VIEW)
             ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
-//            activity.startActivity(intent)
         }
     }
 

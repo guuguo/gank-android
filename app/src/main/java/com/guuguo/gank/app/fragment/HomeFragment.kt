@@ -22,7 +22,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     val mFragments: ArrayList<BaseFragment> = arrayListOf()
     var mFragment: BaseFragment? = null
-
+    override fun isNavigationBack()=false
     companion object {
         fun getInstance(): HomeFragment {
             return HomeFragment()

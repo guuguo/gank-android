@@ -37,8 +37,8 @@ class GankCategoryContentFragment : BaseFragment() {
     var gank_type = "Android"
 
     companion object {
-        val ARG_GANK_TYPE = "ARG_GANK_TYPE"
-        val GANK_TYPE_STAR = "GANK_TYPE_STAR"
+        const val ARG_GANK_TYPE = "ARG_GANK_TYPE"
+        const val GANK_TYPE_STAR = "GANK_TYPE_STAR"
         fun newInstance(title: String): GankCategoryContentFragment {
             val fragment = GankCategoryContentFragment()
             val bundle = Bundle()
@@ -59,22 +59,16 @@ class GankCategoryContentFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
-        swiper.setOnRefreshListener {
-            onRefresh()
-        };
         initRecycler()
         activity.getToolBar()?.setOnClickListener { recycler.smoothScrollToPosition(0) }
-        swiper.isRefreshing = true
     }
 
     override fun lazyLoad() {
         super.lazyLoad()
         if (mFirstLazyLoad) {
-            swiper.isRefreshing = true
-            swiper.postDelayed({
-                onRefresh()
-            }, 200)
-
+            onRefresh()
+        }else if(gank_type== GANK_TYPE_STAR){
+            onRefresh()
         }
     }
 
@@ -97,12 +91,6 @@ class GankCategoryContentFragment : BaseFragment() {
         }
     }
 
-    private fun initSwiper() {
-        swiper.setOnRefreshListener {
-            onRefresh()
-        }
-    }
-
     private fun onRefresh() {
         page = 1
         fetchGankData(page)
@@ -119,10 +107,9 @@ class GankCategoryContentFragment : BaseFragment() {
         when (gank_type) {
             GANK_TYPE_STAR -> {
                 GankRepository.getStarGanks()
-                        .doOnNext(this::showMeiziList)
-                        .doOnNext {
+                        .doOnSuccess (this::showMeiziList)
+                        .doOnSuccess {
                             gankAdapter.loadMoreEnd()
-                            swiper.isRefreshing=false
                         }
                         .subscribe(EmptyConsumer(), ErrorConsumer())
             }
@@ -141,7 +128,7 @@ class GankCategoryContentFragment : BaseFragment() {
 
 
     fun hideProgress() {
-        swiper.isRefreshing = false
+        dialogDismiss()
     }
 
     fun showErrorView(e: Throwable) {
