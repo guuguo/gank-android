@@ -10,7 +10,6 @@ import com.guuguo.gank.app.adapter.GankAdapter
 import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
-import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 
@@ -47,13 +46,12 @@ class SearchFragment : BaseFragment() {
         }, recycler)
         mSearchResultAdapter.setOnItemClickListener { _, _, position ->
             val bean = mSearchResultAdapter.getItem(position)!!
-            WebViewActivity.intentTo(bean.url, bean.desc, activity)
+            WebViewActivity.intentTo(bean, activity)
         }
-        simplerViewHelper = SimpleViewHelper(recycler, false)
-        simplerViewHelper?.showEmpty("请输入搜索关键字")
+        simplerViewHelper = SimpleViewHelper(recycler)
+        simplerViewHelper?.showEmpty("请输入搜索关键字",imgRes = R.drawable.empty_cute_girl_box)
         iv_back.setOnClickListener { pop() }
         iv_search.setOnClickListener {
-            clearApiCall()
             page = 1
             search(edt_search.text.toString())
         }
@@ -64,6 +62,7 @@ class SearchFragment : BaseFragment() {
                 true
             } else false
         }
+
     }
 
     override fun onBackPressedSupport(): Boolean {
@@ -73,30 +72,31 @@ class SearchFragment : BaseFragment() {
 
     private fun search(searchText: String) {
         if (searchText.isNullOrEmpty()) {
-            simplerViewHelper?.showEmpty("请输入搜索关键字")
+            simplerViewHelper?.showEmpty("请输入搜索关键字",imgRes = R.drawable.empty_cute_girl_box)
         } else {
             if (page == 1) {
                 simplerViewHelper?.showLoading("正在加载搜索结果")
             }
-            addApiCall(ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, SEARCH_COUNT, page).subscribe(Consumer {
-                searchResult ->
-                simplerViewHelper?.restore()
+            ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, SEARCH_COUNT, page)
+                    .compose(bindToLifecycle())
+                    .subscribe({ searchResult ->
+                        simplerViewHelper?.restore()
 
-                if (page == 1) {
-                    if (searchResult.count == 0)
-                        simplerViewHelper?.showEmpty("搜索结果为空")
-                    else {
-                        mSearchResultAdapter.setNewData(searchResult.results)
-                    }
-                } else {
-                    mSearchResultAdapter.loadMoreComplete()
-                    if (searchResult.count < SEARCH_COUNT)
-                        mSearchResultAdapter.loadMoreEnd()
-                    mSearchResultAdapter.addData(searchResult.results!!)
-                }
-            }, Consumer<Throwable> { error ->
-                activity.dialogErrorShow(error.message.safe(), null)
-            }))
+                        if (page == 1) {
+                            if (searchResult.count == 0)
+                                simplerViewHelper?.showEmpty("搜索结果为空",imgRes = R.drawable.empty_cute_girl_box)
+                            else {
+                                mSearchResultAdapter.setNewData(searchResult.results)
+                            }
+                        } else {
+                            mSearchResultAdapter.loadMoreComplete()
+                            if (searchResult.count < SEARCH_COUNT)
+                                mSearchResultAdapter.loadMoreEnd()
+                            mSearchResultAdapter.addData(searchResult.results!!)
+                        }
+                    }, { error ->
+                        activity.dialogErrorShow(error.message.safe(), null)
+                    }).isDisposed
         }
     }
 }

@@ -25,7 +25,7 @@ class GankDailyFragment : BaseFragment() {
     val viewModel by lazy { GankDailyViewModel(this) }
     override fun isNavigationBack() = false
     override fun getLayoutResId(): Int {
-        return R.layout.fragment_gank_daily;
+        return R.layout.fragment_gank_daily
     }
 
     override fun setLayoutResId(inflater: LayoutInflater?, resId: Int, container: ViewGroup?): View {

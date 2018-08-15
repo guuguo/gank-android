@@ -11,6 +11,7 @@ import android.widget.TextView
 
 import com.guuguo.gank.R
 import com.guuguo.gank.app.activity.AboutActivity
+import com.guuguo.gank.app.fragment.GankCategoryContentFragment.Companion.GANK_TYPE_STAR
 import com.guuguo.gank.base.BaseFragment
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.base_toolbar_common.*
@@ -21,7 +22,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     val mFragments: ArrayList<BaseFragment> = arrayListOf()
     var mFragment: BaseFragment? = null
-
+    override fun isNavigationBack()=false
     companion object {
         fun getInstance(): HomeFragment {
             return HomeFragment()
@@ -32,31 +33,34 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
     private var mTextMessage: TextView? = null
     override fun getHeaderTitle() = "gank"
     override fun getMenuResId() = R.menu.main_menu
-    override fun getToolBar() = id_tool_bar
+    override fun getToolBar() = contentView?.findViewById<Toolbar>(R.id.id_tool_bar)
     override fun getLayoutResId() = R.layout.fragment_main
 
     override fun setTitle(title: String) {
         id_tool_bar.title = title
     }
 
-    private val mOnNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
-        override fun onNavigationItemSelected(item: MenuItem): Boolean {
-            when (item.itemId) {
-                R.id.navigation_daily -> {
-                    ViewCompat.setElevation(appbar, 10f)
-                    showHideFragment(mFragments[0], mFragment)
-                    mFragment = mFragments[0]
-                    return true
-                }
-                R.id.navigation_category -> {
-                    ViewCompat.setElevation(appbar, 0f)
-                    showHideFragment(mFragments[1], mFragment)
-                    mFragment = mFragments[1]
-                    return true
-                }
-                else ->
-                    return true
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_daily -> {
+                ViewCompat.setElevation(appbar, 10f)
+                showHideFragment(mFragments[0], mFragment)
+                mFragment = mFragments[0]
+                true
             }
+            R.id.navigation_category -> {
+                ViewCompat.setElevation(appbar, 0f)
+                showHideFragment(mFragments[1], mFragment)
+                mFragment = mFragments[1]
+                true
+            }
+            R.id.navigation_star -> {
+            ViewCompat.setElevation(appbar, 0f)
+            showHideFragment(mFragments[2], mFragment)
+            mFragment = mFragments[2]
+            true
+        }
+            else -> true
         }
     }
 
@@ -65,11 +69,13 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
         if (savedInstanceState == null) {
             mFragments.add(GankDailyFragment())
             mFragments.add(GankCategoryFragment())
+            mFragments.add(GankCategoryContentFragment.newInstance(GankCategoryContentFragment.GANK_TYPE_STAR))
             loadMultipleRootFragment(R.id.container_view, 0, *mFragments.toTypedArray())
             mFragment = mFragments[0]
         } else {
             mFragments.add(findFragment(GankDailyFragment::class.java))
             mFragments.add(findFragment(GankCategoryFragment::class.java))
+            mFragments.add(findFragment(GankCategoryContentFragment::class.java))
         }
     }
 
@@ -79,7 +85,7 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
             R.id.menu_search -> {
                 val fragment = activity.findFragment(SearchFragment::class.java)
                 if (fragment == null) {
-                    activity.popTo(HomeFragment::class.java, false, { activity.start(SearchFragment()) })
+                    activity.popTo(HomeFragment::class.java, false) { activity.start(SearchFragment()) }
                 } else {
                     activity.popTo(SearchFragment::class.java, false)
                 }

@@ -3,6 +3,7 @@ package com.guuguo.gank.app.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
@@ -34,7 +35,6 @@ class GankActivity : BaseActivity(), IDateGankView {
             intent.putExtra(MEIZI, meizi)
             val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image, TRANSLATE_GIRL_VIEW)
             ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
-//            activity.startActivity(intent)
         }
     }
 
@@ -60,9 +60,9 @@ class GankActivity : BaseActivity(), IDateGankView {
     }
 
     override fun showErrorView(e: Throwable) {
-        showTipWithAction(container_view, e.message.safe(), "重试", View.OnClickListener {
+        Snackbar.make(container_view, e.message.safe(),Snackbar.LENGTH_LONG).setAction("重试") {
             mPresenter.fetchDate(mGankBean!!.publishedAt!!)
-        })
+        }
     }
 
     override fun showProgress() {
@@ -94,12 +94,10 @@ class GankActivity : BaseActivity(), IDateGankView {
     private fun initRecycler() {
         rv_gank.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
         rv_gank.adapter = mGankAdapter
-        mGankAdapter.onItemClickListener = object : BaseQuickAdapter.OnItemClickListener {
-            override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-                val bean = mGankAdapter.getItem(position)!!
-                if (!bean.isHeader)
-                    WebViewActivity.intentTo(bean.t.url, bean.t.desc, activity)
-            }
+        mGankAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            val bean = mGankAdapter.getItem(position)!!
+            if (!bean.isHeader)
+                WebViewActivity.intentTo(bean.t, activity)
         }
     }
 
@@ -118,6 +116,6 @@ class GankActivity : BaseActivity(), IDateGankView {
     }
 
     override fun showTip(msg: String) {
-        showSnackTip(container_view, msg)
+        Snackbar.make(container_view, msg,Snackbar.LENGTH_SHORT)
     }
 }
