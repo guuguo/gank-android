@@ -10,6 +10,7 @@ import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.ViewGroup
@@ -20,11 +21,13 @@ import com.guuguo.android.lib.extension.*
 import com.guuguo.gank.R
 
 import com.guuguo.gank.BuildConfig
+import com.guuguo.gank.R.id.container_view
 import com.guuguo.gank.app.gank.viewmodel.WebViewModel
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.databinding.ActivityWebviewBinding
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.source.GankRepository
+import com.guuguo.gank.widget.WebLoadingIndicator
 import com.just.agentweb.AgentWeb
 import kotlinx.android.synthetic.main.activity_webview.*
 import com.just.agentweb.BaseIndicatorView
@@ -37,7 +40,7 @@ open class WebViewActivity : BaseActivity() {
 
     open fun getUrl() = mUrl
     open fun getWebContentParentView() = findViewById<ViewGroup>(R.id.content)
-    open fun getCustomIndicator(): BaseIndicatorView? = null
+    open fun getCustomIndicator(): BaseIndicatorView? = WebLoadingIndicator(activity)
 
     override fun getToolBar(): Toolbar? = binding.bottombar
     override fun getMenuResId() = R.menu.web_menu

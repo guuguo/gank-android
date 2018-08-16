@@ -20,14 +20,7 @@ import kotlinx.android.synthetic.main.toolbar_search.*
 
 class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
     override fun getToolBar() = id_tool_bar
-
     val viewModel by lazy { SearchViewModel() }
-
-    companion object {
-        fun getInstance(): SearchFragment {
-            return SearchFragment()
-        }
-    }
 
     var page = 1
     val mSearchResultAdapter by lazy {
