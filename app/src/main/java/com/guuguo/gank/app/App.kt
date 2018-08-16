@@ -1,12 +1,14 @@
 package com.guuguo.gank.app
 
+import android.content.Context
 import android.content.Intent
+import android.support.multidex.MultiDex
 import android.support.v7.app.AppCompatDelegate
 import com.guuguo.android.lib.BaseApplication
 import com.guuguo.android.lib.utils.LogUtil
 import com.guuguo.android.lib.utils.Utils
 import com.guuguo.gank.BuildConfig
-import com.guuguo.gank.app.activity.UpgradeActivity
+import com.guuguo.gank.app.gank.activity.UpgradeActivity
 import com.guuguo.gank.constant.MY_DEBUG
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
@@ -28,6 +30,15 @@ class App : BaseApplication() {
         fun get() = BaseApplication.get() as App
     }
 
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        try {
+            MultiDex.install(this)
+        } catch (ignored: RuntimeException) {
+            // Multidex support doesn't play well with Robolectric yet
+        }
+    }
     private fun initBugly() {
         Beta.upgradeListener = UpgradeListener { _, strategy, _, _ ->
             if (strategy != null) {

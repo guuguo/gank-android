@@ -1,13 +1,16 @@
-package com.guuguo.gank.app.activity
+package com.guuguo.gank.app.gank.activity
 
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.Toolbar
-import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.webkit.WebView
@@ -17,30 +20,20 @@ import com.guuguo.android.lib.extension.*
 import com.guuguo.gank.R
 
 import com.guuguo.gank.BuildConfig
-import com.guuguo.gank.app.activity.WebViewActivity.Companion.ARG_GANK
-import com.guuguo.gank.app.viewmodel.WebViewModel
+import com.guuguo.gank.app.gank.viewmodel.WebViewModel
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.databinding.ActivityWebviewBinding
 import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.net.EmptyConsumer
-import com.guuguo.gank.net.ErrorConsumer
 import com.guuguo.gank.source.GankRepository
 import com.just.agentweb.AgentWeb
 import kotlinx.android.synthetic.main.activity_webview.*
-import kotlinx.android.synthetic.main.base_toolbar_common.*
 import com.just.agentweb.BaseIndicatorView
 import com.just.agentweb.NestedScrollAgentWebView
-import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Action
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
-import java.io.Serializable
 
 open class WebViewActivity : BaseActivity() {
 
     lateinit var binding: ActivityWebviewBinding
-    val viewModel by lazy { WebViewModel(this) }
+    val viewModel by lazy { WebViewModel() }
 
     open fun getUrl() = mUrl
     open fun getWebContentParentView() = findViewById<ViewGroup>(R.id.content)
@@ -68,7 +61,20 @@ open class WebViewActivity : BaseActivity() {
 //            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
+    fun openInBrowser(url: String) {
+        val intent = Intent()
+        intent.action = "android.intent.action.VIEW"
+        val contentUrl = Uri.parse(url)
+        intent.data = contentUrl
+        activity.startActivity(intent)
+    }
 
+    fun copyUrl(url: String) {
+        val myClipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val myClip: ClipData = ClipData.newPlainText("text", url)
+        myClipboard.primaryClip = myClip
+        showTip("已成功复制")
+    }
     override fun initView() {
         super.initView()
         GankRepository.getGankById(gank._id)
@@ -155,8 +161,8 @@ open class WebViewActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_browser -> viewModel.openInBrowser(mUrl)
-            R.id.menu_copy -> viewModel.copyUrl(mUrl)
+            R.id.menu_browser -> openInBrowser(mUrl)
+            R.id.menu_copy -> copyUrl(mUrl)
             R.id.menu_share -> {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"

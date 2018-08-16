@@ -1,20 +1,22 @@
-package com.guuguo.gank.app.fragment
+package com.guuguo.gank.app.gank.fragment
 
 import android.support.v7.widget.LinearLayoutManager
 import android.view.inputmethod.EditorInfo
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.widget.simpleview.SimpleViewHelper
 import com.guuguo.gank.R
-import com.guuguo.gank.app.activity.WebViewActivity
-import com.guuguo.gank.app.adapter.GankAdapter
+import com.guuguo.gank.R.id.iv_search
+import com.guuguo.gank.app.gank.activity.WebViewActivity
+import com.guuguo.gank.app.gank.adapter.GankAdapter
 import com.guuguo.gank.base.BaseFragment
+import com.guuguo.gank.databinding.FragmentSearchBinding
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 
 
-class SearchFragment : BaseFragment() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     override fun getToolBar() = id_tool_bar
 
     companion object {
@@ -36,7 +38,7 @@ class SearchFragment : BaseFragment() {
 
     var simplerViewHelper: SimpleViewHelper? = null
     override fun initView() {
-
+        super.initView()
         recycler.layoutManager = LinearLayoutManager(activity)
         recycler.adapter = mSearchResultAdapter
         mSearchResultAdapter.setEnableLoadMore(true)
@@ -49,7 +51,7 @@ class SearchFragment : BaseFragment() {
             WebViewActivity.intentTo(bean, activity)
         }
         simplerViewHelper = SimpleViewHelper(recycler)
-        simplerViewHelper?.showEmpty("请输入搜索关键字",imgRes = R.drawable.empty_cute_girl_box)
+        simplerViewHelper?.showEmpty("请输入搜索关键字", imgRes = R.drawable.empty_cute_girl_box)
         iv_back.setOnClickListener { pop() }
         iv_search.setOnClickListener {
             page = 1
@@ -72,7 +74,7 @@ class SearchFragment : BaseFragment() {
 
     private fun search(searchText: String) {
         if (searchText.isNullOrEmpty()) {
-            simplerViewHelper?.showEmpty("请输入搜索关键字",imgRes = R.drawable.empty_cute_girl_box)
+            simplerViewHelper?.showEmpty("请输入搜索关键字", imgRes = R.drawable.empty_cute_girl_box)
         } else {
             if (page == 1) {
                 simplerViewHelper?.showLoading("正在加载搜索结果")
@@ -84,7 +86,7 @@ class SearchFragment : BaseFragment() {
 
                         if (page == 1) {
                             if (searchResult.count == 0)
-                                simplerViewHelper?.showEmpty("搜索结果为空",imgRes = R.drawable.empty_cute_girl_box)
+                                simplerViewHelper?.showEmpty("搜索结果为空", imgRes = R.drawable.empty_cute_girl_box)
                             else {
                                 mSearchResultAdapter.setNewData(searchResult.results)
                             }

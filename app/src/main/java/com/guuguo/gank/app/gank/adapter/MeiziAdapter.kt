@@ -1,4 +1,4 @@
-package com.guuguo.gank.app.adapter
+package com.guuguo.gank.app.gank.adapter
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

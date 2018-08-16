@@ -1,27 +1,26 @@
-package com.guuguo.gank.app.fragment
+package com.guuguo.gank.app.gank.fragment
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.widget.TextView
+import com.guuguo.android.lib.app.LBaseFragmentSupport
 
 import com.guuguo.gank.R
-import com.guuguo.gank.app.activity.AboutActivity
-import com.guuguo.gank.app.fragment.GankCategoryContentFragment.Companion.GANK_TYPE_STAR
+import com.guuguo.gank.app.gank.activity.AboutActivity
 import com.guuguo.gank.base.BaseFragment
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.base_toolbar_common.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
-class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
+class HomeFragment : LBaseFragmentSupport(), Toolbar.OnMenuItemClickListener {
 
-    val mFragments: ArrayList<BaseFragment> = arrayListOf()
-    var mFragment: BaseFragment? = null
+    val mFragments: ArrayList<LBaseFragmentSupport> = arrayListOf()
+    var mFragment: LBaseFragmentSupport? = null
     override fun isNavigationBack()=false
     companion object {
         fun getInstance(): HomeFragment {
@@ -40,6 +39,9 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
         id_tool_bar.title = title
     }
 
+    override fun initToolbar() {
+        super.initToolbar()
+    }
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_daily -> {
@@ -99,7 +101,6 @@ class HomeFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
     override fun initView() {
         super.initView()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        getToolBar()?.navigationIcon = ContextCompat.getDrawable(activity, R.drawable.ic_launcher_xml)
         getToolBar()?.inflateMenu(getMenuResId())
         getToolBar()?.setOnMenuItemClickListener(this)
     }

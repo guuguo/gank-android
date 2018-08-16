@@ -1,4 +1,4 @@
-package com.guuguo.gank.app.viewmodel
+package com.guuguo.gank.base
 
 import android.databinding.BaseObservable
 import android.databinding.ObservableBoolean

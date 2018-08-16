@@ -1,4 +1,4 @@
-package com.guuguo.gank.app.activity
+package com.guuguo.gank.app.gank.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -14,8 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.flyco.systembar.SystemBarHelper
 import com.guuguo.android.lib.extension.*
 import com.guuguo.gank.R
-import com.guuguo.gank.app.adapter.CategoryGankAdapter
-import com.guuguo.gank.app.adapter.GankWithCategoryAdapter
+import com.guuguo.gank.app.gank.adapter.GankWithCategoryAdapter
 import com.guuguo.gank.base.BaseActivity
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.presenter.DateGankPresenter

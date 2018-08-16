@@ -1,8 +1,7 @@
-package com.guuguo.gank.app.activity;
+package com.guuguo.gank.app.gank.activity;
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.widget.FrameLayout
 import com.guuguo.gank.R
 import com.guuguo.gank.base.BaseActivity

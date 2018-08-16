@@ -1,20 +1,16 @@
-package com.guuguo.gank.app.viewmodel
+package com.guuguo.gank.app.gank.viewmodel
 
 import android.databinding.BaseObservable
 import com.google.gson.reflect.TypeToken
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.gank.app.fragment.GankDailyFragment
+import com.guuguo.gank.app.gank.fragment.GankDailyFragment
 import com.guuguo.gank.constant.LocalData
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.constant.myGson
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
-import com.guuguo.gank.net.http.BaseCallback
-import com.tencent.bugly.proguard.t
 import io.reactivex.Flowable
-import io.reactivex.Single
-import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.guuguo.gank.app.fragment
+package com.guuguo.gank.app.gank.fragment
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.LinearLayoutManager
@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.guuguo.android.lib.app.LBaseFragmentSupport
 import com.guuguo.gank.R
-import com.guuguo.gank.app.activity.GankActivity
-import com.guuguo.gank.app.adapter.MeiziAdapter
-import com.guuguo.gank.app.viewmodel.GankDailyViewModel
+import com.guuguo.gank.app.gank.activity.GankActivity
+import com.guuguo.gank.app.gank.adapter.MeiziAdapter
+import com.guuguo.gank.app.gank.viewmodel.GankDailyViewModel
 import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.constant.OmeiziDrawable
@@ -18,7 +19,7 @@ import com.guuguo.gank.model.entity.GankModel
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 
 
-class GankDailyFragment : BaseFragment() {
+class GankDailyFragment : LBaseFragmentSupport() {
     var page = 1
     var meiziAdapter = MeiziAdapter()
     lateinit var binding: FragmentGankDailyBinding

@@ -1,4 +1,5 @@
 package com.guuguo.gank.model.other
+
 import android.support.annotation.IntDef
 
 
@@ -8,14 +9,15 @@ class RefreshListModel<T> {
     @RefreshType
     var refreshType: Int = REFRESH
 
-    val isUpdateType: Boolean
-        get() = UPDATE == refreshType
+    fun isRefresh() = refreshType == REFRESH
+    var isEnd: Boolean = false
 
     @IntDef(REFRESH, UPDATE)
     @Retention(AnnotationRetention.SOURCE)
     annotation class RefreshType
 
     fun setRefresh() {
+        isEnd = false
         refreshType = REFRESH
     }
 
@@ -24,12 +26,12 @@ class RefreshListModel<T> {
     }
 
     fun setRefresh(list: List<T>) {
-        refreshType = REFRESH
+        setRefresh()
         this.list = list
     }
 
     fun setUpdate(list: List<T>) {
-        refreshType = UPDATE
+        setUpdate()
         this.list = list
     }
 

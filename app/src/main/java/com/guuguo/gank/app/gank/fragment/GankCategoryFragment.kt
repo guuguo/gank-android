@@ -1,18 +1,19 @@
-package com.guuguo.gank.app.fragment
+package com.guuguo.gank.app.gank.fragment
 
-import android.os.Bundle
 import android.support.v4.app.Fragment
+import com.guuguo.android.lib.app.LBaseFragmentSupport
 import com.guuguo.gank.R
+import com.guuguo.gank.R.id.tabLayout
+import com.guuguo.gank.R.id.viewpager
 //import com.guuguo.gank.app.fragment.SearchRevealFragment
-import com.guuguo.gank.app.adapter.MyFragmentPagerAdapter
+import com.guuguo.gank.app.gank.adapter.MyFragmentPagerAdapter
 import com.guuguo.gank.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_category_gank.*
 import kotlinx.android.synthetic.main.layout_viewpager.*
-import java.util.*
 
 
-class GankCategoryFragment : BaseFragment() {
-    var currentFragment: BaseFragment? = null
+class GankCategoryFragment : LBaseFragmentSupport() {
+    var currentFragment: LBaseFragmentSupport? = null
     val titleStrs = arrayOf("Android", "iOS", "前端")
 
     override fun getLayoutResId(): Int {

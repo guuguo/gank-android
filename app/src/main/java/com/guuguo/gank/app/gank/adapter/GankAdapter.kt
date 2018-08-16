@@ -1,4 +1,4 @@
-package com.guuguo.gank.app.adapter
+package com.guuguo.gank.app.gank.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -22,7 +22,7 @@ class GankAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
         holder.setText(R.id.tv_content, gankBean.desc)
                 .setText(R.id.tv_hint, gankBean.who + " · " + gankBean.publishedAt?.getTimeSpan())
         val image = holder.getView<ImageView>(R.id.iv_image)
-        if (gankBean.images.safe().isNotEmpty()) {
+        if (gankBean.images.isNotEmpty()) {
             image.visibility = View.VISIBLE
             Glide.with(mContext).asBitmap().load(gankBean.images[0]).apply(RequestOptions().centerCrop()).into(image)
         } else {

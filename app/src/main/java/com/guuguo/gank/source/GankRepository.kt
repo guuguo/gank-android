@@ -7,6 +7,7 @@ import io.reactivex.Completable
 
 import io.reactivex.Flowable
 import io.reactivex.Maybe
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -21,6 +22,10 @@ object GankRepository {
     }
 
     fun<T>  Maybe<T>.api(): Maybe<T> {
+        return this.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+    fun<T> Single<T>.api(): Single<T> {
         return this.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

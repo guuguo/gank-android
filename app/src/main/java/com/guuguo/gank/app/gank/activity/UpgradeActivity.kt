@@ -1,11 +1,10 @@
-package com.guuguo.gank.app.activity;
+package com.guuguo.gank.app.gank.activity;
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.TextView
-import com.guuguo.android.lib.app.LBaseActivitySupport
 import com.guuguo.android.lib.extension.formatDecimal
 import com.guuguo.android.lib.extension.formatTime
 import com.guuguo.android.lib.utils.FileUtil

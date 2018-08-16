@@ -22,6 +22,7 @@ android {
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -69,7 +70,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    dataBinding{
+        enabled = true
+    }
 }
 
 repositories {
@@ -99,10 +102,17 @@ dependencies {
     implementation "com.android.support:support-vector-drawable:$SUPPORT_VERSION"
     implementation "com.android.support:cardview-v7:$SUPPORT_VERSION"
 
+    //multi
+    api 'com.android.support:multidex:1.0.3'
+
     // ViewModel and LiveData
     kapt  "android.arch.lifecycle:compiler:$ROOM_VERSION"
     implementation "android.arch.lifecycle:reactivestreams:$ROOM_VERSION"
 
+    //paging
+    def paging_version = "1.0.1"
+    implementation "android.arch.paging:runtime:$paging_version"
+    implementation "android.arch.paging:rxjava2:$paging_version"
 
     // Room
     testImplementation "android.arch.persistence.room:testing:$ROOM_VERSION"
