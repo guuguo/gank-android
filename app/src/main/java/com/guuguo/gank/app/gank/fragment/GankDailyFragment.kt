@@ -58,11 +58,9 @@ class GankDailyFragment : LBaseFragmentSupport() {
                     val image = view as ImageView
                     OmeiziDrawable = view.getDrawable()
                     GankActivity.intentTo(activity, image, meiziAdapter.getItem(position)!!)
-
                     true
                 }
                 else -> false
-
             }
         }
     }

@@ -1,21 +1,15 @@
 package com.guuguo.gank.app.gank.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
-import android.databinding.BaseObservable
-import com.guuguo.android.lib.extension.log
 import com.guuguo.gank.app.gank.fragment.GankCategoryContentFragment
-import com.guuguo.gank.app.gank.fragment.GankDailyFragment
 import com.guuguo.gank.base.BaseListViewModel
 import com.guuguo.gank.constant.MEIZI_COUNT
-import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.model.other.RefreshListModel
 import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.net.EmptyConsumer
 import com.guuguo.gank.net.ErrorConsumer
 import com.guuguo.gank.source.GankRepository
-import io.reactivex.MaybeSource
-import java.util.ArrayList
 
 
 /**
@@ -27,22 +21,22 @@ class GankCategoryContentViewModel : BaseListViewModel() {
     private val TAG = this::class.java.name
 
     private val refreshListModel = RefreshListModel<GankModel>()
-     val ganksListLiveData = MutableLiveData<RefreshListModel<GankModel>>()
+    val ganksListLiveData = MutableLiveData<RefreshListModel<GankModel>>()
 
     override fun refreshData(refresh: Boolean) {
         when (gank_type) {
             GankCategoryContentFragment.GANK_TYPE_STAR -> {
                 GankRepository.getStarGanks()
-                        .doOnSubscribe { refreshing.set(true) }
+                        .doOnSubscribe { isLoading.value = (true) }
                         .doOnSuccess(this::showMeiziList)
-                        .doOnError { isError.set(it);refreshing.set(false) }
+                        .doOnError { isError.value = it;isLoading.value = (false) }
                         .subscribe(EmptyConsumer(), ErrorConsumer())
             }
             else -> {
                 ApiServer.getGankData(gank_type, MEIZI_COUNT, page)
-                        .doOnSubscribe { refreshing.set(true) }
-                        .doOnTerminate { refreshing.set(false) }
-                        .doOnError { isError.set(it) }
+                        .doOnSubscribe { isLoading.value = true }
+                        .doOnTerminate { isLoading.value = false }
+                        .doOnError { isError.value = it }
                         .doOnNext {
                             it?.let {
                                 showMeiziList(it.results!!)
@@ -63,7 +57,7 @@ class GankCategoryContentViewModel : BaseListViewModel() {
             refreshListModel.setUpdate(lMeiziList)
         }
         ganksListLiveData.value = refreshListModel
-        refreshing.set(false)
+        isLoading.value = false
     }
 
 

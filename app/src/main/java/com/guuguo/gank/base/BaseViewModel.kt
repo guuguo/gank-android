@@ -1,5 +1,7 @@
 package com.guuguo.gank.base
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.databinding.BaseObservable
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -13,63 +15,63 @@ import io.reactivex.disposables.CompositeDisposable
 
 open class BaseViewModel : BaseObservable() {
 
-    var isError = ObservableField<Throwable>()
-    var isEmpty = ObservableBoolean(false)
-    var isRunning = ObservableBoolean(false)
+    var isError = MutableLiveData<Throwable>()
+    var isEmpty =MutableLiveData<Boolean>()
+    var isLoading = MutableLiveData<Boolean>()
 
     protected open var disposable = CompositeDisposable()
 
-    protected open fun checkEmpty(`object`: Any) {
-        checkEmpty(isEmpty, `object`)
-    }
-
-    protected open fun checkEmpty(isEmpty: ObservableBoolean, `object`: Any?) {
-        val emptyFlag = `object` == null
-        if (emptyFlag != isEmpty.get()) {
-            isEmpty.set(emptyFlag)
-        }
-    }
-
-    protected open fun checkEmpty(list: List<*>) {
-        checkEmpty(isEmpty, list)
-    }
-
-    protected open fun checkEmpty(isEmpty: ObservableBoolean, list: List<*>?) {
-        val emptyFlag = list == null || list.isEmpty()
-        if (emptyFlag != isEmpty.get()) {
-            isEmpty.set(emptyFlag)
-        }
-    }
-
-    protected open fun <T> setDataObject(`object`: T, field: ObservableField<T>) {
-        setDataObject(isEmpty, `object`, field)
-    }
-
-    protected open fun <T> setDataObject(isEmpty: ObservableBoolean?, `object`: T,
-                                         field: ObservableField<T>?) {
-        if (field == null || isEmpty == null) {
-            return
-        }
-        checkEmpty(isEmpty, `object`)
-        if (!isEmpty.get()) {
-            field.set(`object`)
-        }
-    }
-
-    protected open fun <T> setDataList(list: List<T>, observableList: ObservableList<T>?) {
-        setDataList(isEmpty, list, observableList)
-    }
-
-    protected open fun <T> setDataList(isEmpty: ObservableBoolean?, list: List<T>, observableList: ObservableList<T>?) {
-        if (observableList == null || isEmpty == null) {
-            return
-        }
-        checkEmpty(isEmpty, list)
-        if (!isEmpty.get()) {
-            observableList.clear()
-            observableList.addAll(list)
-        }
-    }
+//    protected open fun checkEmpty(`object`: Any) {
+//        checkEmpty(isEmpty, `object`)
+//    }
+//
+//    protected open fun checkEmpty(isEmpty: ObservableBoolean, `object`: Any?) {
+//        val emptyFlag = `object` == null
+//        if (emptyFlag != isEmpty.get()) {
+//            isEmpty.set(emptyFlag)
+//        }
+//    }
+//
+//    protected open fun checkEmpty(list: List<*>) {
+//        checkEmpty(isEmpty, list)
+//    }
+//
+//    protected open fun checkEmpty(isEmpty: ObservableBoolean, list: List<*>?) {
+//        val emptyFlag = list == null || list.isEmpty()
+//        if (emptyFlag != isEmpty.get()) {
+//            isEmpty.set(emptyFlag)
+//        }
+//    }
+//
+//    protected open fun <T> setDataObject(`object`: T, field: ObservableField<T>) {
+//        setDataObject(isEmpty, `object`, field)
+//    }
+//
+//    protected open fun <T> setDataObject(isEmpty: ObservableBoolean?, `object`: T,
+//                                         field: ObservableField<T>?) {
+//        if (field == null || isEmpty == null) {
+//            return
+//        }
+//        checkEmpty(isEmpty, `object`)
+//        if (!isEmpty.get()) {
+//            field.set(`object`)
+//        }
+//    }
+//
+//    protected open fun <T> setDataList(list: List<T>, observableList: ObservableList<T>?) {
+//        setDataList(isEmpty, list, observableList)
+//    }
+//
+//    protected open fun <T> setDataList(isEmpty: ObservableBoolean?, list: List<T>, observableList: ObservableList<T>?) {
+//        if (observableList == null || isEmpty == null) {
+//            return
+//        }
+//        checkEmpty(isEmpty, list)
+//        if (!isEmpty.get()) {
+//            observableList.clear()
+//            observableList.addAll(list)
+//        }
+//    }
 
     fun clear() {
         disposable.clear()

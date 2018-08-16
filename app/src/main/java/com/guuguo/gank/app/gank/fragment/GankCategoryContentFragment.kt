@@ -19,6 +19,7 @@ class GankCategoryContentFragment : BaseListFragment<FragmentGankCategoryContent
 
     val viewModel by lazy { GankCategoryContentViewModel() }
     override fun getLayoutResId() = R.layout.fragment_gank_category_content
+    override fun isCanLoadMore() = viewModel.gank_type != GANK_TYPE_STAR
 
     companion object {
         const val ARG_GANK_TYPE = "ARG_GANK_TYPE"
@@ -62,11 +63,6 @@ class GankCategoryContentFragment : BaseListFragment<FragmentGankCategoryContent
         if (mFirstLazyLoad) {
             onRefresh()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mFirstLazyLoad = true
     }
 
     override fun initRecycler() {
