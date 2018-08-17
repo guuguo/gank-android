@@ -53,7 +53,7 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
     }
 
     override fun loadingStatusChange(it: Boolean) {
-        if (it.safe() && isRefresh) {
+        if (it.safe() && viewModel.isRefresh) {
             simplerViewHelper?.showLoading("正在加载搜索结果")
         } else if (!it.safe()) {
             simplerViewHelper?.restore()

@@ -1,6 +1,7 @@
 package com.guuguo.gank.base
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
 import android.databinding.Observable
 import android.databinding.ViewDataBinding
 import android.support.annotation.CallSuper
@@ -22,10 +23,7 @@ abstract class BaseListFragment<VB : ViewDataBinding> : BaseFragment<VB>(), Swip
     private var listViewModel: BaseListViewModel? = null
 
     open fun isCanLoadMore() = true
-    //状态是加载更多还是刷新
-    var isRefresh = true
-    protected val layout: Int
-        get() = R.layout.frag_base_list
+    override fun getLayoutResId() = R.layout.frag_base_list
 
     override fun setupBaseViewModel(viewModel: BaseViewModel?) {
         this.listViewModel = viewModel as BaseListViewModel?
@@ -33,10 +31,12 @@ abstract class BaseListFragment<VB : ViewDataBinding> : BaseFragment<VB>(), Swip
     }
 
     override fun loadingStatusChange(it: Boolean) {
-        if (it && isRefresh) {
-            swipeRefresh?.isRefreshing = true
-        } else if (!it) {
-            swipeRefresh?.isRefreshing = false
+        listViewModel?.apply {
+            if (it && isRefresh) {
+                swipeRefresh?.isRefreshing = true
+            } else if (!it) {
+                swipeRefresh?.isRefreshing = false
+            }
         }
     }
 
@@ -67,13 +67,11 @@ abstract class BaseListFragment<VB : ViewDataBinding> : BaseFragment<VB>(), Swip
     }
 
     override fun onRefresh() {
-        isRefresh = true
-        listViewModel?.fetchData(isRefresh)
+        listViewModel?.fetchData(true)
     }
 
     fun onLoadMore() {
-        isRefresh = false
-        listViewModel?.fetchData(isRefresh)
+        listViewModel?.fetchData(false)
     }
 
 }

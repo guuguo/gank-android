@@ -11,7 +11,7 @@
     </data>
 
     <com.guuguo.android.lib.widget.VerticalSwipeRefreshLayout
-        android:id="@+id/swiper"
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".app.gank.fragment.GankDailyFragment">

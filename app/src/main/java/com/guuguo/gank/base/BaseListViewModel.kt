@@ -1,7 +1,5 @@
 package com.guuguo.gank.base
 
-import com.guuguo.android.lib.extension.safe
-
 /**
  * Copyright ©2017 by ruzhan
  */
@@ -9,7 +7,8 @@ import com.guuguo.android.lib.extension.safe
 abstract class BaseListViewModel : BaseViewModel() {
 
     protected var page: Int = 0
-    protected var isRefresh: Boolean = false
+    //状态是加载更多还是刷新
+    var isRefresh: Boolean = false
 
     abstract fun refreshData(refresh: Boolean)
 
@@ -24,7 +23,7 @@ abstract class BaseListViewModel : BaseViewModel() {
         }
 
         isRefresh = refresh
-        isLoading.value = (true)
+        isLoading.value = true
         refreshData(refresh)
     }
 
