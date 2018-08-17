@@ -2,13 +2,14 @@ package com.guuguo.gank.base
 
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
-import android.databinding.Observable
 import android.databinding.ViewDataBinding
 import android.support.annotation.CallSuper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.guuguo.android.lib.app.LBaseFragmentSupport
+import com.guuguo.android.lib.extension.dialogDismiss
+import com.guuguo.android.lib.extension.dialogLoadingShow
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.R

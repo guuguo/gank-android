@@ -13,6 +13,7 @@ import android.os.Parcelable
 import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
@@ -25,9 +26,7 @@ import com.guuguo.android.dialog.dialog.TipDialog
 import com.guuguo.android.dialog.dialog.base.IWarningDialog
 import com.guuguo.android.dialog.utils.DialogHelper
 import com.guuguo.android.lib.BaseApplication
-import com.guuguo.android.lib.extension.initNav
-import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.extension.toast
+import com.guuguo.android.lib.extension.*
 import com.guuguo.android.lib.utils.FileUtil
 import com.guuguo.android.lib.utils.MemoryLeakUtil
 import com.guuguo.android.lib.utils.systembar.SystemBarHelper
@@ -277,34 +276,6 @@ abstract class LBaseActivitySupport : SupportActivity(), IView<ActivityEvent> {
         }.isDisposed
     }
 
-    override fun dialogLoadingShow(msg: String, canTouchCancel: Boolean, maxDelay: Long, listener: DialogInterface.OnDismissListener?) {
-        DialogHelper.dialogLoadingShow(activity, msg, canTouchCancel, maxDelay, listener)
-    }
-
-    override fun dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
-        DialogHelper.dialogStateShow(activity, msg, listener, TipDialog.STATE_STYLE.error, delayTime.toLong())
-    }
-
-    override fun dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
-        DialogHelper.dialogStateShow(activity, msg, listener, TipDialog.STATE_STYLE.success, delayTime.toLong())
-    }
-
-    override fun dialogMsgShow(msg: String, btnText: String, listener: (() -> Unit)?): IWarningDialog? {
-        return DialogHelper.dialogMsgShow(activity, msg, btnText, listener)
-    }
-
-    override fun dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)?): IWarningDialog? {
-        return DialogHelper.dialogWarningShow(activity, msg, cancelStr, confirmStr, listener)
-    }
-
-    override
-    fun showDialogOnMain(dialog: Dialog) {
-        DialogHelper.showDialogOnMain(activity, dialog)
-    }
-
-    override fun dialogDismiss() {
-        DialogHelper.dialogDismiss()
-    }
 
     open fun dialogTakePhotoShow(takePhotoListener: DialogInterface.OnClickListener, pickPhotoListener: DialogInterface.OnClickListener) {
         if (FileUtil.isExternalStorageMounted()) {
@@ -385,4 +356,6 @@ abstract class LBaseActivitySupport : SupportActivity(), IView<ActivityEvent> {
         }
     }
 }
+
+
 

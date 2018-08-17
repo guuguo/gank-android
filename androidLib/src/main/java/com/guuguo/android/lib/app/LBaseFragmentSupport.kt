@@ -125,31 +125,31 @@ abstract class LBaseFragmentSupport : SupportFragment(), IView<FragmentEvent> {
     open val isFullScreen: Boolean
         get() = false
 
-    override fun dialogLoadingShow(msg: String, canTouchCancel: Boolean, maxDelay: Long, listener: DialogInterface.OnDismissListener?) {
-        DialogHelper.dialogLoadingShow(activity, msg, canTouchCancel, maxDelay, listener)
-    }
-
-    override fun dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
-        DialogHelper.dialogStateShow(activity, msg, listener, TipDialog.STATE_STYLE.error, delayTime.toLong())
-    }
-
-    override fun dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
-        DialogHelper.dialogStateShow(activity, msg, listener, TipDialog.STATE_STYLE.success, delayTime.toLong())
-    }
-
-    override fun dialogMsgShow(msg: String, btnText: String, listener: (() -> Unit)?): IWarningDialog? {
-        return DialogHelper.dialogMsgShow(activity, msg, btnText, listener)
-    }
-
-    override fun dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)?): IWarningDialog? {
-        return DialogHelper.dialogWarningShow(activity, msg, cancelStr, confirmStr, listener)
-    }
-
-    override fun showDialogOnMain(dialog: Dialog) {
-        DialogHelper.showDialogOnMain(activity, dialog)
-    }
-
-    override fun dialogDismiss() {
-        DialogHelper.dialogDismiss()
-    }
+//    override fun dialogLoadingShow(msg: String, canTouchCancel: Boolean, maxDelay: Long, listener: DialogInterface.OnDismissListener?) {
+//        DialogHelper.dialogLoadingShow(activity, msg, canTouchCancel, maxDelay, listener)
+//    }
+//
+//    override fun dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
+//        DialogHelper.dialogStateShow(activity, msg, listener, TipDialog.STATE_STYLE.error, delayTime.toLong())
+//    }
+//
+//    override fun dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
+//        DialogHelper.dialogStateShow(activity, msg, listener, TipDialog.STATE_STYLE.success, delayTime.toLong())
+//    }
+//
+//    override fun dialogMsgShow(msg: String, btnText: String, listener: (() -> Unit)?): IWarningDialog? {
+//        return DialogHelper.dialogMsgShow(activity, msg, btnText, listener)
+//    }
+//
+//    override fun dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)?): IWarningDialog? {
+//        return DialogHelper.dialogWarningShow(activity, msg, cancelStr, confirmStr, listener)
+//    }
+//
+//    override fun showDialogOnMain(dialog: Dialog) {
+//        DialogHelper.showDialogOnMain(activity, dialog)
+//    }
+//
+//    override fun dialogDismiss() {
+//        DialogHelper.dialogDismiss()
+//    }
 }

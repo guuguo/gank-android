@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.guuguo.android.lib.app.LBaseActivitySupport
+import com.guuguo.android.lib.extension.dialogDismiss
+import com.guuguo.android.lib.extension.dialogLoadingShow
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.R
