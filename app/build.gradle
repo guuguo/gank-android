@@ -119,7 +119,6 @@ dependencies {
     kapt  "android.arch.persistence.room:compiler:$ROOM_VERSION"
     implementation "android.arch.persistence.room:runtime:$ROOM_VERSION"
     implementation "android.arch.persistence.room:rxjava2:$ROOM_VERSION"
-// optional - Guava support for Room, including Optional and ListenableFuture
     implementation "android.arch.persistence.room:guava:$ROOM_VERSION"
 
 
@@ -129,6 +128,7 @@ dependencies {
     implementation('com.github.bumptech.glide:glide:4.7.1') {
         exclude group: "com.android.support"
     }
+
     //retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
@@ -136,11 +136,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.5.0@aar'
 
     // view
-    implementation 'com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar'
-    implementation 'com.github.arimorty:floatingsearchview:2.0.3'
     implementation 'com.github.Lauzy:LBehavior:1.0.2'
-    implementation 'am.widget:wraplayout:1.2.0'
     implementation 'com.github.jrvansuita:MaterialAbout:0.1.9'
+    implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'
+    implementation 'com.github.iielse:ImageWatcher:1.1.2'
 
     //web
     implementation 'com.just.agentweb:agentweb:4.0.2'

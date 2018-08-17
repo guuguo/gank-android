@@ -5,9 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.bumptech.glide.request.target.ImageViewTarget
-import com.bumptech.glide.request.target.SizeReadyCallback
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.guuguo.android.lib.extension.getTimeSpanUntilDay
@@ -25,7 +23,6 @@ class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
     val colors = arrayListOf(Color.parseColor("#bbdefb"), Color.parseColor("#90caf9")
             , Color.parseColor("#64b5f6"), Color.parseColor("#42a5f5"), Color.parseColor("#2196f3")
             , Color.parseColor("#1e88e5"), Color.parseColor("#1976d2"), Color.parseColor("#1565c0"))
-    val random = Random(1)
     override fun convert(holder: BaseViewHolder, gankBean: GankModel) {
         val image = holder.getView<View>(R.id.iv_image) as RatioImageView
 
@@ -37,13 +34,8 @@ class MeiziAdapter : BaseQuickAdapter<GankModel, BaseViewHolder> {
                 .load(gankBean.getWidthUrl(DisplayExtention.getScreenWidth()))
                 .apply(RequestOptions()
                         .placeholder(ColorDrawable(colors[(Math.random() * colors.size).toInt()]))
-                        .centerCrop())
-                .into(object : BitmapImageViewTarget(image) {
-                    override fun getSize(cb: SizeReadyCallback) {
-                        super.getSize(cb)
-                        cb?.onSizeReady(ImageViewTarget.SIZE_ORIGINAL, ImageViewTarget.SIZE_ORIGINAL)
-                    }
-                })
+                        .centerCrop().override(ImageViewTarget.SIZE_ORIGINAL,ImageViewTarget.SIZE_ORIGINAL))
+                .into(image)
 
     }
 

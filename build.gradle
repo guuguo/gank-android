@@ -43,7 +43,7 @@ buildscript {
         AROUTER_API_VERSION = '1.3.1'
         AROUTER_COMPILER_VERSION = '1.1.4'
 
-        BUGLY_UPGRADE = '1.3.4'
+        BUGLY_UPGRADE = '1.3.5'
         BUTTERKNIFE_VERSION = '8.8.1'
         CONSTRAINT_LAYOUT_VERSION = '1.1.1'
         GSON_VERSION = '2.8.0'

@@ -37,7 +37,7 @@
             app:elevation="5dp"
             app:fabAlignmentMode="end"
             app:hideOnScroll="true"
-            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:navigationIcon="@drawable/ic_arrow_back_24dp"
             app:popupTheme="@style/ToolbarPopupTheme" />
 
         <android.support.design.widget.FloatingActionButton
