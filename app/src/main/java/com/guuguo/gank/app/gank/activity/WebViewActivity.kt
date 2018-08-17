@@ -1,41 +1,37 @@
 package com.guuguo.gank.app.gank.activity
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
-import com.guuguo.android.lib.extension.*
-import com.guuguo.gank.R
-
+import com.guuguo.android.lib.extension.getColorCompat
+import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.BuildConfig
-import com.guuguo.gank.R.id.container_view
+import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.viewmodel.WebViewModel
-import com.guuguo.gank.base.BaseActivity
+import com.guuguo.gank.base.MBaseActivity
 import com.guuguo.gank.databinding.ActivityWebviewBinding
 import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.source.GankRepository
 import com.guuguo.gank.widget.WebLoadingIndicator
 import com.just.agentweb.AgentWeb
-import kotlinx.android.synthetic.main.activity_webview.*
 import com.just.agentweb.BaseIndicatorView
 import com.just.agentweb.NestedScrollAgentWebView
+import kotlinx.android.synthetic.main.activity_webview.*
 
-open class WebViewActivity : BaseActivity() {
+open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
 
-    lateinit var binding: ActivityWebviewBinding
     val viewModel by lazy { WebViewModel() }
 
     open fun getUrl() = mUrl
@@ -49,9 +45,17 @@ open class WebViewActivity : BaseActivity() {
 
     lateinit var mAgentWeb: AgentWeb
 
-    override fun setLayoutResId(layoutResId: Int) {
-        binding = DataBindingUtil.setContentView(activity, layoutResId)
-        binding.viewModel = viewModel
+    override fun initViewModelCallBack() {
+        super.initViewModelCallBack()
+        viewModel.isFavorite.observe(this, Observer {
+            if (it != true) {
+                binding.fab.setImageResource(R.mipmap.star)
+                binding.fab.backgroundTintList = ColorStateList.valueOf(getColorCompat(R.color.colorAccent))
+            } else {
+                binding.fab.setImageResource(R.drawable.widget_state_success)
+                binding.fab.backgroundTintList = ColorStateList.valueOf(getColorCompat(R.color.color_blue_light))
+            }
+        })
     }
 
     companion object {
@@ -60,34 +64,12 @@ open class WebViewActivity : BaseActivity() {
             var intent = Intent(activity, WebViewActivity::class.java)
             intent.putExtra(ARG_GANK, bean)
             activity.startActivity(intent)
-            //设置切换动画，从右边进入，左边退出  n
-//            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
-    fun openInBrowser(url: String) {
-        val intent = Intent()
-        intent.action = "android.intent.action.VIEW"
-        val contentUrl = Uri.parse(url)
-        intent.data = contentUrl
-        activity.startActivity(intent)
-    }
 
-    fun copyUrl(url: String) {
-        val myClipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val myClip: ClipData = ClipData.newPlainText("text", url)
-        myClipboard.primaryClip = myClip
-        showTip("已成功复制")
-    }
     override fun initView() {
         super.initView()
-        GankRepository.getGankById(gank._id)
-                .doOnSuccess {
-                    isFavorite = it != null
-                    refreshFab()
-                 }
-                .doOnComplete {
-                    refreshFab()
-                }.subscribe()
+        viewModel.checkFavorite()
         mAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(getWebContentParentView()!!, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
                 .run {
@@ -111,32 +93,8 @@ open class WebViewActivity : BaseActivity() {
         binding.refresh.setOnRefreshListener {
             mAgentWeb.urlLoader.reload()
         }
-//        binding.bottombar.inflateMenu(getMenuResId())
         binding.fab.setOnClickListener {
-            if (isFavorite) {
-                GankRepository.deleteGank(gank).doOnComplete {
-                    "已成功移除收藏".toast()
-                    isFavorite = !isFavorite
-                    refreshFab()
-                }.subscribe()
-            } else {
-                GankRepository.insertGank(gank).doOnComplete {
-                    "已成功加入收藏".toast()
-                    isFavorite = !isFavorite
-                    refreshFab()
-                }.subscribe()
-            }
-
-        }
-    }
-
-    private fun refreshFab() {
-        if (!isFavorite) {
-            binding.fab.setImageResource(R.mipmap.star)
-            binding.fab.backgroundTintList = ColorStateList.valueOf(getColorCompat(R.color.colorAccent))
-        } else {
-            binding.fab.setImageResource(R.drawable.widget_state_success)
-            binding.fab.backgroundTintList = ColorStateList.valueOf(getColorCompat(R.color.color_blue_light))
+            viewModel.likeChanged()
         }
     }
 
@@ -148,14 +106,12 @@ open class WebViewActivity : BaseActivity() {
 
     var mUrl: String = ""
     var desc: String = ""
-    lateinit var gank: GankModel
 
-    var isFavorite = false
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)
-        gank = intent.getSerializableExtra(ARG_GANK) as GankModel
-        mUrl = gank.url
-        desc = gank.desc
+        viewModel.gank = intent.getSerializableExtra(ARG_GANK) as GankModel
+        mUrl = viewModel.gank.url
+        desc = viewModel.gank.desc
     }
 
     override fun getHeaderTitle(): String {
@@ -167,14 +123,32 @@ open class WebViewActivity : BaseActivity() {
             R.id.menu_browser -> openInBrowser(mUrl)
             R.id.menu_copy -> copyUrl(mUrl)
             R.id.menu_share -> {
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "text/plain"
-                intent.putExtra(Intent.EXTRA_TEXT, mUrl)
-                startActivity(Intent.createChooser(intent, "分享链接到"))
+                shareUrl()
             }
             else -> return super.onOptionsItemSelected(item)
         }
         return true
+    }
+    fun openInBrowser(url: String) {
+        val intent = Intent()
+        intent.action = "android.intent.action.VIEW"
+        val contentUrl = Uri.parse(url)
+        intent.data = contentUrl
+        activity.startActivity(intent)
+    }
+
+    fun copyUrl(url: String) {
+        val myClipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val myClip: ClipData = ClipData.newPlainText("text", url)
+        myClipboard.primaryClip = myClip
+        showTip("已成功复制")
+    }
+
+    private fun shareUrl() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, mUrl)
+        startActivity(Intent.createChooser(intent, "分享链接到"))
     }
 
     fun showTip(msg: String) {

@@ -4,6 +4,9 @@ import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.annotation.CallSuper
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.guuguo.android.lib.app.LBaseActivitySupport
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
@@ -30,6 +33,7 @@ abstract class MBaseActivity<VB : ViewDataBinding> : LBaseActivitySupport() {
         setupBaseViewModel(viewModel)
     }
 
+    //父类只处理了网络请求的 观察
     protected open fun setupBaseViewModel(viewModel: BaseViewModel?) {
         if (viewModel == null) {
             return
@@ -67,3 +71,6 @@ abstract class MBaseActivity<VB : ViewDataBinding> : LBaseActivitySupport() {
 
     }
 }
+
+
+

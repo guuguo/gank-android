@@ -19,11 +19,11 @@ class DateGankPresenter(context: Context, iView: IDateGankView) : BasePresenter<
     fun fetchDate(date: Date) {
         iView.showProgress()
         subscription = ApiServer.getGankOneDayData(date)
-                .subscribe(Consumer {
+                .subscribe({
                     gankDays ->
                     iView.showDate(getMergeAllGanks(gankDays))
                     iView.hideProgress()
-                }, Consumer<kotlin.Throwable> { error ->
+                }, { error ->
                     iView.showErrorView(error)
                     iView.hideProgress()
                 })
