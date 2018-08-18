@@ -8,7 +8,6 @@ import com.guuguo.gank.app.App
  */
 
 abstract class BaseActivity : LBaseActivitySupport() {
-    protected var myApplication = App.get()
 
     open fun initPresenter() {}
     override fun initView() {

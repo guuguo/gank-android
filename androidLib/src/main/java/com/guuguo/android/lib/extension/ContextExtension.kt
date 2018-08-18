@@ -37,11 +37,11 @@ fun Activity.dialogLoadingShow(msg: String, canTouchCancel: Boolean = false, max
     DialogHelper.dialogLoadingShow(this, msg, canTouchCancel, maxDelay, listener)
 }
 
-fun Activity.dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
+fun Activity.dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener? = null, delayTime: Int = 1500) {
     DialogHelper.dialogStateShow(this, msg, listener, TipDialog.STATE_STYLE.error, delayTime.toLong())
 }
 
-fun Activity.dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
+fun Activity.dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener? = null, delayTime: Int = 800) {
     DialogHelper.dialogStateShow(this, msg, listener, TipDialog.STATE_STYLE.success, delayTime.toLong())
 }
 
@@ -49,7 +49,7 @@ fun Activity.dialogMsgShow(msg: String, btnText: String, listener: (() -> Unit)?
     return DialogHelper.dialogMsgShow(this, msg, btnText, listener)
 }
 
-fun Activity.dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)?): IWarningDialog? {
+fun Activity.dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)? = null): IWarningDialog? {
     return DialogHelper.dialogWarningShow(this, msg, cancelStr, confirmStr, listener)
 }
 
@@ -62,15 +62,15 @@ fun Activity.dialogDismiss() {
 }
 
 
-fun LBaseFragmentSupport.dialogLoadingShow(msg: String, canTouchCancel: Boolean, maxDelay: Long, listener: DialogInterface.OnDismissListener?) {
+fun LBaseFragmentSupport.dialogLoadingShow(msg: String, canTouchCancel: Boolean = false, maxDelay: Long = 0, listener: DialogInterface.OnDismissListener? = null) {
     DialogHelper.dialogLoadingShow(activity, msg, canTouchCancel, maxDelay, listener)
 }
 
-fun LBaseFragmentSupport.dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
+fun LBaseFragmentSupport.dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener? = null, delayTime: Int = 1500) {
     DialogHelper.dialogStateShow(activity, msg, listener, TipDialog.STATE_STYLE.error, delayTime.toLong())
 }
 
-fun LBaseFragmentSupport.dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener?, delayTime: Int) {
+fun LBaseFragmentSupport.dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener? = null, delayTime: Int = 800) {
     DialogHelper.dialogStateShow(activity, msg, listener, TipDialog.STATE_STYLE.success, delayTime.toLong())
 }
 
@@ -78,7 +78,7 @@ fun LBaseFragmentSupport.dialogMsgShow(msg: String, btnText: String, listener: (
     return DialogHelper.dialogMsgShow(activity, msg, btnText, listener)
 }
 
-fun LBaseFragmentSupport.dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)?): IWarningDialog? {
+fun LBaseFragmentSupport.dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)? = null): IWarningDialog? {
     return DialogHelper.dialogWarningShow(activity, msg, cancelStr, confirmStr, listener)
 }
 
