@@ -3,6 +3,8 @@
 ---------
 一款基于GankIo开发的练手项目。
 
+[下载](https://www.coolapk.com/apk/174903)
+
 **应用截图**
 -----------
 ![image](https://github.com/GUUGUO/gank/blob/master/screenshot/Screenshot_20170629-213425.png?raw=true)
