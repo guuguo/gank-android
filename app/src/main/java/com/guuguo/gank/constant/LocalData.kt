@@ -1,7 +1,7 @@
 package com.guuguo.gank.constant
 
 import com.guuguo.android.lib.utils.Preference
-import com.guuguo.gank.app.MyApplication
+import com.guuguo.gank.app.App
 
 
 /**
@@ -9,7 +9,7 @@ import com.guuguo.gank.app.MyApplication
  */
 
 object LocalData {
-    private val mContext by lazy { MyApplication.instance!! }
+    private val mContext by lazy { App.get()!! }
     var userName by Preference(mContext, "")
     var gankDaily by Preference(mContext, "")
 

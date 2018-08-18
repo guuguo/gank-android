@@ -7,6 +7,7 @@ import com.guuguo.gank.model.GankSection
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.view.IDateGankView
+import io.reactivex.functions.Consumer
 import java.util.*
 
 /**
@@ -18,7 +19,8 @@ class DateGankPresenter(context: Context, iView: IDateGankView) : BasePresenter<
     fun fetchDate(date: Date) {
         iView.showProgress()
         subscription = ApiServer.getGankOneDayData(date)
-                .subscribe({ gankDays ->
+                .subscribe({
+                    gankDays ->
                     iView.showDate(getMergeAllGanks(gankDays))
                     iView.hideProgress()
                 }, { error ->

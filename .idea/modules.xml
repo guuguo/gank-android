@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../androidLib/androidLib/androidLib-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/androidLib/androidLib-androidLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidLib/androidLib.iml" filepath="$PROJECT_DIR$/androidLib/androidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/gank.iml" filepath="$PROJECT_DIR$/gank.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../androidLib/gank-androidLib.iml" filepath="$PROJECT_DIR$/../androidLib/gank-androidLib.iml" />
-      <module fileurl="file://E:\guuguo\dev\androidStudioProject\gank\gankIO.iml" filepath="E:\guuguo\dev\androidStudioProject\gank\gankIO.iml" />
-      <module fileurl="file://E:\guuguo\dev\androidStudioProject\androidLib\gankIO-androidLib.iml" filepath="E:\guuguo\dev\androidStudioProject\androidLib\gankIO-androidLib.iml" />
     </modules>
   </component>
 </project>

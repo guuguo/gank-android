@@ -7,6 +7,7 @@ import com.guuguo.gank.model.GankDays
 import com.guuguo.gank.model.GankNetResult
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
+import io.reactivex.Flowable
 import io.reactivex.Single
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -23,14 +24,13 @@ import java.util.concurrent.TimeUnit
  */
 interface Service {
     @GET("data/{type}/{count}/{page}")
-    fun getGanHuo(@Path("type") type: String, @Path("count") count: Int, @Path("page") page: Int)
-            : Single<Ganks<ArrayList<GankModel>>>
+    fun getGanHuo(@Path("type") type: String, @Path("count") count: Int, @Path("page") page: Int)  : Flowable<Ganks<ArrayList<GankModel>>>
 
     @GET("day/{date}")
-    fun getGankOneDay(@Path("date") date: String): Single<GankDays>
+    fun getGankOneDay(@Path("date") date: String): Flowable<GankDays>
 
     @GET("search/query/{query}/category/{category}/count/{count}/page/{page} ")
-    fun getGankSearchResult(@Path("query") query: String, @Path("category") category: String, @Path("count") count: Int, @Path("page") page: Int): Single<GankNetResult>
+    fun getGankSearchResult(@Path("query") query: String, @Path("category") category: String, @Path("count") count: Int, @Path("page") page: Int): Flowable<GankNetResult>
 
     companion object {
         private const val GANHUO_API = "https://gank.io/api/"

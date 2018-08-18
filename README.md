@@ -1,7 +1,7 @@
 # gank 第三方客户端
 **介绍**
 ---------
-一款基于GankIo开发的练手项目。项目采用  MVP+Retrofit + RxJava开发。
+一款基于GankIo开发的练手项目。
 
 **应用截图**
 -----------
@@ -15,15 +15,11 @@
 
 **特性**
 -----------
-* MVP的项目应用
+* MVVM的项目应用
+* Room LiveData 等的使用
 * retrofit+rxjava配合使用
 * 共享元素动画
 * kotlin的使用
 
-**使用到的开源库**
------------
 
-* 网络请求：retrofit2
-* rxjava2
-* 图片加载：glide
 
