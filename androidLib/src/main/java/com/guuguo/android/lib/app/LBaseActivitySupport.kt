@@ -2,18 +2,15 @@ package com.guuguo.android.lib.app
 
 import android.Manifest
 import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
@@ -23,7 +20,6 @@ import android.view.WindowManager
 import com.guuguo.android.R
 import com.guuguo.android.dialog.dialog.NormalListDialog
 import com.guuguo.android.dialog.dialog.TipDialog
-import com.guuguo.android.dialog.dialog.base.IWarningDialog
 import com.guuguo.android.dialog.utils.DialogHelper
 import com.guuguo.android.lib.BaseApplication
 import com.guuguo.android.lib.extension.*

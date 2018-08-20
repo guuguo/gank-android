@@ -87,7 +87,7 @@
 # 包含有类名->混淆后类名的映射关系
 # 然后使用printmapping指定映射文件的名称
 -verbose
--printmapping proguardMapping.txt
+-printmapping proguardMapping.txtA
 #保持 native 方法不被混淆
 -keepclasseswithmembernames class * {
     native <methods>;
@@ -106,8 +106,6 @@
     public <init>(android.content.Context, android.util.AttributeSet, int);
     public void set*(...);
 }
-
--keep  class * extends java.lang.annotation.Annotation
 
 #保持 Parcelable 不被混淆
 -keep class * implements android.os.Parcelable {
@@ -242,7 +240,13 @@
 -keepclassmembers class ** {
     @org.greenrobot.eventbus.Subscribe <methods>;
 }
+
+#agentweb
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
+-keep class com.just.agentweb.** {
+    *;
+}
+-dontwarn com.just.agentweb.**
 
 # Only required if you use AsyncExecutor
 -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
@@ -259,9 +263,7 @@
 -keep class com.shuyu.gsyvideoplayer.** { *; }
 
 -keep class com.kyleduo.switchbutton.**{*;}
-#Arouter
--keep public class com.alibaba.android.arouter.routes.**{*;}
--keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
+
 #UMeng
 -dontwarn com.taobao.**
 -dontwarn anet.channel.**
