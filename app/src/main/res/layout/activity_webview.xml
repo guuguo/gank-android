@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.guuguo.gank.app.viewmodel.WebViewModel" />
+            type="com.guuguo.gank.app.gank.viewmodel.WebViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".app.activity.WebViewActivity">
+        tools:context=".app.gank.activity.WebViewActivity">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/refresh"
@@ -37,7 +37,7 @@
             app:elevation="5dp"
             app:fabAlignmentMode="end"
             app:hideOnScroll="true"
-            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:navigationIcon="@drawable/ic_arrow_back_24dp"
             app:popupTheme="@style/ToolbarPopupTheme" />
 
         <android.support.design.widget.FloatingActionButton

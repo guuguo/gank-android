@@ -1,11 +1,7 @@
 package com.guuguo.gank.db.dao
 
 import android.arch.persistence.room.*
-
 import com.guuguo.gank.model.entity.GankModel
-import io.reactivex.Completable
-
-import io.reactivex.Flowable
 import io.reactivex.Maybe
 
 

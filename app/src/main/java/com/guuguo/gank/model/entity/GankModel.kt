@@ -33,22 +33,22 @@ class GankModel : Serializable {
     var ganhuo_id = ""
     var readability = ""
 
-    constructor( _id: String, createdAt: Date?, desc: String, publishedAt: Date?, source: String?, type: String, url: String, used: String?, who: String?, images: ArrayList<String>, width: Int, height: Int, ganhuo_id: String, readability: String) {
-        this._id = _id
-        this.createdAt = createdAt
-        this.desc = desc
-        this.publishedAt = publishedAt
-        this.source = source
-        this.type = type
-        this.url = url
-        this.used = used
-        this.who = who
-        this.images = images
-        this.width = width
-        this.height = height
-        this.ganhuo_id = ganhuo_id
-        this.readability = readability
-    }
+//    constructor( _id: String, createdAt: Date?, desc: String, publishedAt: Date?, source: String?, type: String, url: String, used: String?, who: String?, images: List<String>, width: Int, height: Int, ganhuo_id: String, readability: String) {
+//        this._id = _id
+//        this.createdAt = createdAt
+//        this.desc = desc
+//        this.publishedAt = publishedAt
+//        this.source = source
+//        this.type = type
+//        this.url = url
+//        this.used = used
+//        this.who = who
+//        this.images = images
+//        this.width = width
+//        this.height = height
+//        this.ganhuo_id = ganhuo_id
+//        this.readability = readability
+//    }
 
     constructor()
 

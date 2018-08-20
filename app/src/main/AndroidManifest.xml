@@ -23,22 +23,22 @@
         tools:ignore="GoogleAppIndexingWarning"
        >
         <activity
-            android:name="com.guuguo.gank.app.activity.MainActivity"
+            android:name="com.guuguo.gank.app.gank.activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.guuguo.gank.app.activity.GankActivity" />
-        <activity android:name="com.guuguo.gank.app.activity.WebViewActivity" />
-        <activity android:name="com.guuguo.gank.app.activity.AboutActivity" />
+        <activity android:name="com.guuguo.gank.app.gank.activity.GankActivity" />
+        <activity android:name="com.guuguo.gank.app.gank.activity.WebViewActivity" />
+        <activity android:name="com.guuguo.gank.app.gank.activity.AboutActivity" />
         <!-- bugly -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:theme="@android:style/Theme.Translucent" />
         <activity
-            android:name=".app.activity.UpgradeActivity"
+            android:name="com.guuguo.gank.app.gank.activity.UpgradeActivity"
             android:theme="@android:style/Theme.Translucent" />
 
     </application>

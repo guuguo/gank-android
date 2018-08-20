@@ -14,19 +14,19 @@ import com.trello.rxlifecycle2.LifecycleProvider
 interface IView<E> : LifecycleProvider<E> {
     fun loadData()
 
-    fun dialogLoadingShow(msg: String, canTouchCancel: Boolean = false, maxDelay: Long = 0, listener: DialogInterface.OnDismissListener? = null)
-
-    fun dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener? = null, delayTime: Int = 1500)
-
-    fun dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener? = null, delayTime: Int = 800)
-
-    fun dialogMsgShow(msg: String, btnText: String, listener: (() -> Unit)?): IWarningDialog?
-
-    fun dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)? = null): IWarningDialog?
-
-    fun showDialogOnMain(dialog: Dialog)
-
-    fun dialogDismiss()
+//    fun dialogLoadingShow(msg: String, canTouchCancel: Boolean = false, maxDelay: Long = 0, listener: DialogInterface.OnDismissListener? = null)
+//
+//    fun dialogErrorShow(msg: String, listener: DialogInterface.OnDismissListener? = null, delayTime: Int = 1500)
+//
+//    fun dialogCompleteShow(msg: String, listener: DialogInterface.OnDismissListener? = null, delayTime: Int = 800)
+//
+//    fun dialogMsgShow(msg: String, btnText: String, listener: (() -> Unit)?): IWarningDialog?
+//
+//    fun dialogWarningShow(msg: String, cancelStr: String, confirmStr: String, listener: (() -> Unit)? = null): IWarningDialog?
+//
+//    fun showDialogOnMain(dialog: Dialog)
+//
+//    fun dialogDismiss()
 
     var activity: LBaseActivitySupport
 }
