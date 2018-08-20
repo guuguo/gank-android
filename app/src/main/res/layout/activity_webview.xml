@@ -7,35 +7,45 @@
 
         <variable
             name="viewModel"
-            type="com.guuguo.gank.app.viewmodel.WebViewModel" />
+            type="com.guuguo.gank.app.gank.viewmodel.WebViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".app.activity.WebViewActivity">
+        tools:context=".app.gank.activity.WebViewActivity">
 
-        <include layout="@layout/base_toolbar_common" />
-
-        <FrameLayout
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="match_parent">
 
-            <WebView
-                android:id="@+id/wv_web"
+            <FrameLayout
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-            <ProgressBar
-                android:id="@+id/progressbar"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:max="100"
-                tools:progress="10" />
-        </FrameLayout>
+        <android.support.design.bottomappbar.BottomAppBar
+            android:id="@+id/bottombar"
+            style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:theme="@style/Toolbar.Dark"
+            app:elevation="5dp"
+            app:fabAlignmentMode="end"
+            app:hideOnScroll="true"
+            app:navigationIcon="@drawable/ic_arrow_back_24dp"
+            app:popupTheme="@style/ToolbarPopupTheme" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/star"
+            android:tint="@color/white"
+            app:layout_anchor="@id/bottombar" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>
