@@ -11,10 +11,14 @@ import android.support.annotation.VisibleForTesting
 import com.guuguo.gank.db.converter.RoomDataConverter
 import com.guuguo.gank.db.dao.GankDao
 import com.guuguo.gank.model.entity.GankModel
+import android.arch.persistence.db.SupportSQLiteDatabase
+import android.arch.persistence.room.migration.Migration
+
 
 @Database(entities = [(GankModel::class)], version = 1, exportSchema = false)
 @TypeConverters(RoomDataConverter::class)
 abstract class GankAppDatabase : RoomDatabase() {
+
 
     private val isDatabaseCreated = MutableLiveData<Boolean>()
 
@@ -36,12 +40,18 @@ abstract class GankAppDatabase : RoomDatabase() {
 
         private var INSTANCE: GankAppDatabase? = null
 
+        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+
+            }
+        }
 
         operator fun get(context: Context): GankAppDatabase {
             if (INSTANCE == null) {
                 synchronized(GankAppDatabase::class.java) {
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(context, GankAppDatabase::class.java, DATABASE_NAME)
+                                .addMigrations(MIGRATION_1_2)
                                 .build()
                         INSTANCE!!.updateDatabaseCreated(context)
                     }
@@ -49,5 +59,7 @@ abstract class GankAppDatabase : RoomDatabase() {
             }
             return INSTANCE!!
         }
+
+
     }
 }

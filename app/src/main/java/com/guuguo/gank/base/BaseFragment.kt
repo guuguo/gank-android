@@ -7,9 +7,9 @@ import android.support.annotation.CallSuper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.guuguo.android.lib.app.LBaseFragmentSupport
-import com.guuguo.android.lib.extension.dialogDismiss
-import com.guuguo.android.lib.extension.dialogLoadingShow
+import com.guuguo.android.dialog.utils.dialogDismiss
+import com.guuguo.android.dialog.utils.dialogLoadingShow
+import com.guuguo.android.lib.app.LBaseFragment
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.R
@@ -19,7 +19,7 @@ import netError
  * Created by guodeqing on 7/23/16.
  */
 
-abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragmentSupport() {
+abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment() {
     protected open lateinit var binding: VB
     private var viewModel: BaseViewModel? = null
     private lateinit var runCallBack: RunCallBack
@@ -57,9 +57,9 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragmentSupport() {
 
     protected open fun loadingStatusChange(isRunning: Boolean) {
         if (isRunning) {
-            dialogLoadingShow(getString(R.string.wait))
+            activity.dialogLoadingShow(getString(R.string.wait))
         } else {
-            dialogDismiss()
+            activity.dialogDismiss()
         }
     }
 

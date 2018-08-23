@@ -1,6 +1,7 @@
 package com.guuguo.gank.app.gank.fragment
 
 import android.support.v4.app.Fragment
+import com.guuguo.android.lib.app.LBaseFragment
 import com.guuguo.android.lib.app.LBaseFragmentSupport
 import com.guuguo.gank.R
 import com.guuguo.gank.R.id.tabLayout
@@ -12,8 +13,8 @@ import kotlinx.android.synthetic.main.fragment_category_gank.*
 import kotlinx.android.synthetic.main.layout_viewpager.*
 
 
-class GankCategoryFragment : LBaseFragmentSupport() {
-    var currentFragment: LBaseFragmentSupport? = null
+class GankCategoryFragment : LBaseFragment() {
+    var currentFragment: LBaseFragment? = null
     val titleStrs = arrayOf("Android", "iOS", "前端")
 
     override fun getLayoutResId(): Int {

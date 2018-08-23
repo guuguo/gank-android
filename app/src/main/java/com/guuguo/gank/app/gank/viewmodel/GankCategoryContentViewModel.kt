@@ -51,6 +51,9 @@ class GankCategoryContentViewModel : BaseListViewModel() {
         if (lMeiziList.size < MEIZI_COUNT) {
             refreshListModel.isEnd = true
         }
+
+        isEmpty.value = isRefresh&&lMeiziList.isEmpty()
+
         if (page == 1) {
             refreshListModel.setRefresh(lMeiziList)
         } else {

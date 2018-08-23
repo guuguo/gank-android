@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import top.guuguo.stethomodule.StethoUtils
 import java.util.concurrent.TimeUnit
 
 /**
@@ -17,6 +18,7 @@ object MyRetrofit {
             .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
+            .also { StethoUtils.configureInterceptor(it) }
     val httpClient = commonHttpBuilder
             .retryOnConnectionFailure(false)
             .build()

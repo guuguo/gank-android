@@ -28,7 +28,8 @@ class SearchViewModel : BaseListViewModel() {
                 .doOnTerminate { isLoading.value = false }
                 .doOnError { isError.value = it }
                 .doOnNext { searchResult ->
-                    if (page == 1) {
+                    searchResult.results?.forEach { it._id = it.ganhuo_id }
+                    if (isRefresh) {
                         if (searchResult.count == 0)
                             isEmpty.value = true
                         else {

@@ -4,12 +4,9 @@ import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.annotation.CallSuper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.guuguo.android.lib.app.LBaseActivitySupport
-import com.guuguo.android.lib.extension.dialogDismiss
-import com.guuguo.android.lib.extension.dialogLoadingShow
+import com.guuguo.android.dialog.utils.dialogDismiss
+import com.guuguo.android.dialog.utils.dialogLoadingShow
+import com.guuguo.android.lib.app.LBaseActivity
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.R
@@ -19,7 +16,7 @@ import netError
  * Created by guodeqing on 7/23/16.
  */
 
-abstract class MBaseActivity<VB : ViewDataBinding> : LBaseActivitySupport() {
+abstract class MBaseActivity<VB : ViewDataBinding> : LBaseActivity() {
     protected open lateinit var binding: VB
     private var viewModel: BaseViewModel? = null
     private lateinit var runCallBack: RunCallBack

@@ -1,6 +1,7 @@
 package com.guuguo.gank.app.gank.fragment
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.guuguo.android.lib.extension.safe
@@ -56,11 +57,18 @@ class GankCategoryContentFragment : BaseListFragment<FragmentGankCategoryContent
                 }
             }
         })
+        viewModel.isEmpty.observe(this, Observer {
+            if (it == true) {
+                binding.stateLayout.showEmpty("没有数据呢")
+            } else {
+                binding.stateLayout.restore()
+            }
+        })
     }
 
     override fun lazyLoad() {
         super.lazyLoad()
-        if (mFirstLazyLoad) {
+        if (mFirstLazyLoad|| viewModel.gank_type == GANK_TYPE_STAR) {
             onRefresh()
         }
     }
@@ -72,8 +80,14 @@ class GankCategoryContentFragment : BaseListFragment<FragmentGankCategoryContent
         recycler.adapter = gankAdapter
         gankAdapter.setOnItemClickListener { _, _, position ->
             val bean = gankAdapter.getItem(position)!!
-            WebViewActivity.intentTo(bean, activity)
+            WebViewActivity.intentTo(bean, this)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == WebViewActivity.ACTIVITY_WEBVIEW && viewModel.gank_type == GANK_TYPE_STAR)
+            onRefresh()
     }
 }
 

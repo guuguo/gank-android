@@ -10,12 +10,14 @@ import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
+import com.guuguo.android.lib.app.LBaseFragment
 import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.BuildConfig
@@ -60,10 +62,16 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
 
     companion object {
         val ARG_GANK = "ARG_GANK"
+        val ACTIVITY_WEBVIEW = 0x102
         fun intentTo(bean: GankModel, activity: Activity) {
-            var intent = Intent(activity, WebViewActivity::class.java)
+            val intent = Intent(activity, WebViewActivity::class.java)
             intent.putExtra(ARG_GANK, bean)
-            activity.startActivity(intent)
+            activity.startActivityForResult(intent,ACTIVITY_WEBVIEW)
+        }
+        fun intentTo(bean: GankModel, fragment: LBaseFragment) {
+            val intent = Intent(fragment.activity, WebViewActivity::class.java)
+            intent.putExtra(ARG_GANK, bean)
+            fragment.startActivityForResult(intent,ACTIVITY_WEBVIEW)
         }
     }
 
@@ -78,21 +86,21 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
                     } ?: useDefaultIndicator()
                 }
                 .setWebView(NestedScrollAgentWebView(activity))
-                .setWebViewClient(object : WebViewClient() {
-                    override fun onPageFinished(view: WebView?, url: String?) {
-                        super.onPageFinished(view, url)
-                        binding.refresh.isRefreshing = false
-                    }
-                })
+//                .setWebViewClient(object : WebViewClient() {
+//                    override fun onPageFinished(view: WebView?, url: String?) {
+//                        super.onPageFinished(view, url)
+//                        binding.refresh.isRefreshing = false
+//                    }
+//                })
                 .createAgentWeb()
                 .ready()
                 .go(getUrl())
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true)
         }
-        binding.refresh.setOnRefreshListener {
-            mAgentWeb.urlLoader.reload()
-        }
+//        binding.refresh.setOnRefreshListener {
+//            mAgentWeb.urlLoader.reload()
+//        }
         binding.fab.setOnClickListener {
             viewModel.likeChanged()
         }

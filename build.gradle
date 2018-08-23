@@ -1,8 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript { 
-    ext.kotlin_version = '1.2.50'
-
 
     ext {
         MIN_SDK_VERSION = 19
@@ -10,16 +8,20 @@ buildscript {
         TARGET_SDK_VERSION = 28
         BUILD_TOOLS_VERSION = '28.0.2'
 
-        ANDROID_PLUGIN_VERSION = '3.1.0'
+        ANDROID_PLUGIN_VERSION = '3.3.0-alpha06'
         KOTLIN_VERSION = '1.2.50'
         MULTIDEX_VERSION = '1.0.3'
 
-        GUUGUO_ANDROIDLIB = "1.1.8.6"
+//        GUUGUO_ANDROIDLIB = "1.1.8.6"
+        GUUGUO_ANDROIDLIB = "0823861a22"
+
         //support
+        NAV_VERSION = "1.0.0-alpha05"
         SUPPORT_VERSION = '28.0.0-rc01'
         ANDROIDX_VERSION = "1.0.0-rc01"
         ROOM_VERSION="1.1.1"
 
+        STETHO_VERSION="1.5.0"
         //rxjava
         RXJAVA_VERSION = '2.1.12'
         RXKOTLIN_VERSION = '2.2.0'
@@ -95,7 +97,8 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:${ANDROID_PLUGIN_VERSION}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" }
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$NAV_VERSION"
+    }
     allprojects {
         repositories {
             google()

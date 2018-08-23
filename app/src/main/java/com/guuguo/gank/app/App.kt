@@ -14,6 +14,7 @@ import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.beta.upgrade.UpgradeListener
 import com.tencent.bugly.crashreport.CrashReport
+import top.guuguo.stethomodule.StethoUtils
 
 /**
  * Created by guodeqing on 16/3/7.
@@ -23,7 +24,11 @@ class App : BaseApplication() {
         Utils.init(this)
         LogUtil.init(MY_DEBUG)
         initBugly()
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); }
+        if (BuildConfig.DEBUG) {
+            StethoUtils.init(this)
+        }
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
 
     companion object {

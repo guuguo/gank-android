@@ -16,7 +16,7 @@ android {
         minSdkVersion MIN_SDK_VERSION
         targetSdkVersion TARGET_SDK_VERSION
         versionCode gitVersionCode()
-        versionName "1.2"
+        versionName "1.3"
         ndk {
             //设置支持的SO库架构
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
@@ -75,7 +75,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dataBinding{
+    dataBinding {
         enabled = true
     }
 }
@@ -89,7 +89,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //test
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2',{
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
@@ -99,9 +99,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'org.hamcrest:hamcrest-library:1.3'
-    implementation project(':androidLib')
+
+//    implementation project(':androidLib')
+    implementation project(':stethomodule')
+    implementation "com.github.guuguo.androidLib:androidLib:$GUUGUO_ANDROIDLIB"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
-    kapt "com.android.databinding:compiler:$ANDROID_PLUGIN_VERSION"
+//    kapt "com.android.databinding:compiler:$ANDROID_PLUGIN_VERSION"
 
     //support
     implementation "com.android.support:support-vector-drawable:$SUPPORT_VERSION"
@@ -111,21 +115,42 @@ dependencies {
     api 'com.android.support:multidex:1.0.3'
 
     // ViewModel and LiveData
-    kapt  "android.arch.lifecycle:compiler:$ROOM_VERSION"
+    kapt "android.arch.lifecycle:compiler:$ROOM_VERSION"
     implementation "android.arch.lifecycle:reactivestreams:$ROOM_VERSION"
+
+    //support
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:design:$SUPPORT_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    kapt "androidx.databinding:databinding-compiler:$ANDROID_PLUGIN_VERSION"
+
+    //stetho
+    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
+    debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
     //paging
     def paging_version = "1.0.1"
     implementation "android.arch.paging:runtime:$paging_version"
     implementation "android.arch.paging:rxjava2:$paging_version"
 
+    //navigation
+    implementation "android.arch.navigation:navigation-fragment-ktx:$NAV_VERSION"
+    implementation "android.arch.navigation:navigation-fragment:$NAV_VERSION" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-ui:$NAV_VERSION"
+    implementation "android.arch.navigation:navigation-ui-ktx:$NAV_VERSION" // use -ktx for Kotlin
+
+    // optional - Test helpers
+    androidTestImplementation "android.arch.navigation:navigation-testing:$NAV_VERSION"
+    // use -ktx for Kotlin
+
     // Room
     testImplementation "android.arch.persistence.room:testing:$ROOM_VERSION"
-    kapt  "android.arch.persistence.room:compiler:$ROOM_VERSION"
+    kapt "android.arch.persistence.room:compiler:$ROOM_VERSION"
     implementation "android.arch.persistence.room:runtime:$ROOM_VERSION"
     implementation "android.arch.persistence.room:rxjava2:$ROOM_VERSION"
     implementation "android.arch.persistence.room:guava:$ROOM_VERSION"
-
 
     // function
     implementation "com.tencent.bugly:crashreport_upgrade:$BUGLY_UPGRADE"
@@ -138,7 +163,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    implementation 'com.github.bumptech.glide:okhttp3-integration:4.5.0@aar'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.7.1@aar'
 
     // view
     implementation 'com.github.Lauzy:LBehavior:1.0.2'
