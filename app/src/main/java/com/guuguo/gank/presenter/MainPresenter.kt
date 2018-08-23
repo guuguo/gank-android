@@ -18,18 +18,14 @@ class MainPresenter(context: Context, iView: IMainView) : BasePresenter<IMainVie
     fun fetchMeiziData(page: Int) {
         iView.showProgress()
         subscription = ApiServer.getGankData(ApiServer.TYPE_FULI, MEIZI_COUNT, page)
-                .subscribe(object : Consumer<Ganks<ArrayList<GankModel>>> {
-                    override fun accept(meiziData: Ganks<ArrayList<GankModel>>) {
-                        meiziData.let {
-                            iView.showMeiziList(meiziData.results!!)
-                            iView.hideProgress()
-                        }
-                    }
-                }, object : Consumer<kotlin.Throwable> {
-                    override fun accept(error: Throwable) {
-                        iView.showErrorView(error)
+                .subscribe({ meiziData ->
+                    meiziData.let {
+                        iView.showMeiziList(meiziData.results!!)
                         iView.hideProgress()
                     }
+                }, { error ->
+                    iView.showErrorView(error)
+                    iView.hideProgress()
                 })
 
     }

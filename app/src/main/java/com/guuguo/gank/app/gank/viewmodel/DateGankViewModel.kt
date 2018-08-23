@@ -1,32 +1,31 @@
-package com.guuguo.gank.presenter
+package com.guuguo.gank.app.gank.viewmodel
 
-import android.content.Context
+import android.arch.lifecycle.MutableLiveData
 import com.guuguo.android.lib.extension.safe
+import com.guuguo.gank.base.BaseViewModel
 import com.guuguo.gank.model.GankDays
 import com.guuguo.gank.model.GankSection
 import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
-import com.guuguo.gank.view.IDateGankView
-import io.reactivex.functions.Consumer
+import com.guuguo.gank.net.EmptyConsumer
+import com.guuguo.gank.net.ErrorConsumer
 import java.util.*
 
 /**
  * 主界面presenter
  * Created by panl on 15/12/24.
  */
-class DateGankPresenter(context: Context, iView: IDateGankView) : BasePresenter<IDateGankView>(context, iView) {
+class DateGankViewModel : BaseViewModel() {
+
+    val gankDayLiveData = MutableLiveData<ArrayList<GankSection>>()
 
     fun fetchDate(date: Date) {
-        iView.showProgress()
-        subscription = ApiServer.getGankOneDayData(date)
-                .subscribe({
-                    gankDays ->
-                    iView.showDate(getMergeAllGanks(gankDays))
-                    iView.hideProgress()
-                }, { error ->
-                    iView.showErrorView(error)
-                    iView.hideProgress()
-                })
+        ApiServer.getGankOneDayData(date)
+                .doOnSubscribe { isLoading.value = true }
+                .doOnTerminate { isLoading.value = false }
+                .doOnError { isError.value = it }
+                .doOnNext { gankDayLiveData.value = getMergeAllGanks(it) }
+                .subscribe(EmptyConsumer(),ErrorConsumer()).isDisposed
     }
 
     fun getMergeAllGanks(gankDays: GankDays): ArrayList<GankSection> {

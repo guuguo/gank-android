@@ -21,6 +21,7 @@ abstract class BaseListFragment<VB : ViewDataBinding> : BaseFragment<VB>(), Swip
     protected open var swipeRefresh: SwipeRefreshLayout? = null
     protected open var recyclerView: RecyclerView? = null
     private var listViewModel: BaseListViewModel? = null
+    override fun getViewModel(): BaseViewModel? =listViewModel
 
     open fun isCanLoadMore() = true
     override fun getLayoutResId() = R.layout.frag_base_list

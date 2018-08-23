@@ -24,6 +24,7 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment() {
     private var viewModel: BaseViewModel? = null
     private lateinit var runCallBack: RunCallBack
 
+    open fun getViewModel(): BaseViewModel? = null
     @CallSuper
     override fun initView() {
         super.initView()
@@ -32,7 +33,7 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment() {
 
     @CallSuper
     protected open fun initViewModelCallBack() {
-        setupBaseViewModel(viewModel)
+        setupBaseViewModel(getViewModel())
     }
 
     //父类只处理了网络请求的 观察

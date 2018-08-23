@@ -49,6 +49,7 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
 
     override fun initViewModelCallBack() {
         super.initViewModelCallBack()
+        setupBaseViewModel(viewModel)
         viewModel.isFavorite.observe(this, Observer {
             if (it != true) {
                 binding.fab.setImageResource(R.mipmap.star)

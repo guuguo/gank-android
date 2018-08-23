@@ -13,6 +13,8 @@ import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.app.gank.activity.WebViewActivity
 import com.guuguo.gank.base.BaseViewModel
 import com.guuguo.gank.model.entity.GankModel
+import com.guuguo.gank.net.EmptyConsumer
+import com.guuguo.gank.net.ErrorConsumer
 import com.guuguo.gank.source.GankRepository
 
 
@@ -42,7 +44,7 @@ class WebViewModel : BaseViewModel() {
         GankRepository.getGankById(gank._id)
                 .doOnSuccess { isFavorite.value = it != null }
                 .doOnComplete { isFavorite.value = false }
-                .subscribe()
+                .subscribe(EmptyConsumer(), ErrorConsumer()).isDisposed
     }
 }
 

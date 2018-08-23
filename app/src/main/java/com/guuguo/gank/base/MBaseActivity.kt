@@ -21,15 +21,15 @@ abstract class MBaseActivity<VB : ViewDataBinding> : LBaseActivity() {
     private var viewModel: BaseViewModel? = null
     private lateinit var runCallBack: RunCallBack
 
+    open fun getViewModel(): BaseViewModel? = null
     @CallSuper
     override fun initView() {
         super.initView()
         initViewModelCallBack()
     }
 
-    @CallSuper
     protected open fun initViewModelCallBack() {
-        setupBaseViewModel(viewModel)
+        setupBaseViewModel(getViewModel())
     }
 
     //父类只处理了网络请求的 观察
@@ -67,7 +67,6 @@ abstract class MBaseActivity<VB : ViewDataBinding> : LBaseActivity() {
         override fun onChanged(t: Boolean?) {
             loadingStatusChange(t.safe())
         }
-
     }
 }
 

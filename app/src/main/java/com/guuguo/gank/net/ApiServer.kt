@@ -36,5 +36,4 @@ object ApiServer {
     fun getGankData(type: String, count: Int, page: Int) = gankServer().getGanHuo(type, count, page).api()
     fun getGankOneDayData(date: Date)= gankServer().getGankOneDay(date.date()).api()
     fun getGankSearchResult(query: String, category: String, count: Int, page: Int) = gankServer().getGankSearchResult(query, category, count, page).api()
-
 }

@@ -1,45 +1,51 @@
 package com.guuguo.gank.app.gank.activity
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.support.annotation.NonNull
+import android.support.annotation.Nullable
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.SparseArray
 import android.view.View
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.github.ielse.imagewatcher.ImageWatcher
 import com.github.ielse.imagewatcher.ImageWatcherHelper
+import com.guuguo.android.lib.extension.log
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.utils.systembar.SystemBarHelper
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.adapter.GankWithCategoryAdapter
-import com.guuguo.gank.base.BaseActivity
+import com.guuguo.gank.app.gank.viewmodel.DateGankViewModel
+import com.guuguo.gank.base.BaseViewModel
+import com.guuguo.gank.base.MBaseActivity
 import com.guuguo.gank.constant.MEIZI
 import com.guuguo.gank.constant.OmeiziDrawable
-import com.guuguo.gank.model.GankSection
+import com.guuguo.gank.databinding.ActivityGankBinding
 import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.presenter.DateGankPresenter
-import com.guuguo.gank.view.IDateGankView
+import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_gank.*
 import kotlinx.android.synthetic.main.toolbar_gank_detail.*
-import java.util.*
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.support.annotation.NonNull
-import android.support.annotation.Nullable
-import android.util.SparseArray
-import android.widget.ImageView
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.transition.Transition
-import com.github.ielse.imagewatcher.ImageWatcher
+import java.util.concurrent.TimeUnit
 
 
-class GankActivity : BaseActivity(), IDateGankView {
+class GankActivity : MBaseActivity<ActivityGankBinding>() {
     companion object {
         val TRANSLATE_GIRL_VIEW = "share_girl_image_view"
         fun intentTo(activity: Activity, image: View, meizi: GankModel) {
@@ -49,6 +55,9 @@ class GankActivity : BaseActivity(), IDateGankView {
             ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
         }
     }
+
+    val viewModel by lazy { DateGankViewModel() }
+    override fun getViewModel(): BaseViewModel? = viewModel
 
     val mGankAdapter by lazy {
         GankWithCategoryAdapter()
@@ -61,31 +70,41 @@ class GankActivity : BaseActivity(), IDateGankView {
     var mGankBean: GankModel? = null
 
 
-    val mPresenter by lazy { DateGankPresenter(activity, this) }
-
-    override fun initPresenter() {
-        mPresenter.init()
+    override fun initViewModelCallBack() {
+        super.initViewModelCallBack()
+        viewModel.isError.observe(this, Observer {
+            it?.let {
+                Snackbar.make(container_view, it.message.safe(), Snackbar.LENGTH_LONG).setAction("重试") {
+                    viewModel.fetchDate(mGankBean!!.publishedAt!!)
+                }
+            }
+        })
+        viewModel.gankDayLiveData.observe(this, Observer {
+            mGankAdapter.setNewData(it)
+        })
     }
 
-    override fun hideProgress() {
-        progressbar.visibility = View.GONE
+    private var delayLoadingDispose: Disposable? = null  //延迟出现 如果网络很快就不出现了
+    override fun loadingStatusChange(isRunning: Boolean) {
+        "isRunning isRunning:$isRunning".log()
+        if (isRunning) delayLoadingDispose = Observable.timer(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    progressbar.visibility = View.VISIBLE
+                    "progressbar VISIBLE".log()
+                }
+        else progressbar.visibility = View.GONE;delayLoadingDispose?.dispose()
     }
 
-    override fun showErrorView(e: Throwable) {
-        Snackbar.make(container_view, e.message.safe(), Snackbar.LENGTH_LONG).setAction("重试") {
-            mPresenter.fetchDate(mGankBean!!.publishedAt!!)
-        }
+    override fun initView() {
+        super.initView()
+        initIvMeizi()
+        initRecycler()
     }
 
-    override fun showProgress() {
-        progressbar.visibility = View.VISIBLE
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (mGankAdapter.data.size != 0)
-            progressbar.visibility = View.GONE
-
+    override fun loadData() {
+        super.loadData()
+        viewModel.fetchDate(mGankBean!!.publishedAt!!)
     }
 
     override fun initStatusBar() {
@@ -98,11 +117,6 @@ class GankActivity : BaseActivity(), IDateGankView {
         mGankBean = intent.getSerializableExtra(MEIZI) as GankModel?
     }
 
-    override fun initIView() {
-        initIvMeizi()
-        mPresenter.fetchDate(mGankBean!!.publishedAt!!)
-        initRecycler()
-    }
 
     private fun initRecycler() {
         rv_gank.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
@@ -138,13 +152,6 @@ class GankActivity : BaseActivity(), IDateGankView {
         ViewCompat.setTransitionName(iv_head, TRANSLATE_GIRL_VIEW)
     }
 
-    override fun showDate(date: ArrayList<GankSection>) {
-        mGankAdapter.setNewData(date)
-    }
-
-    override fun showTip(msg: String) {
-        Snackbar.make(container_view, msg, Snackbar.LENGTH_SHORT)
-    }
 }
 
 internal class SimpleLoader : ImageWatcher.Loader {
