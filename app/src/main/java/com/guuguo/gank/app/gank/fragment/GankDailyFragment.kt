@@ -69,7 +69,7 @@ class GankDailyFragment : BaseListFragment<FragmentGankDailyBinding>() {
                 R.id.iv_image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.drawable
-                    GankActivity.intentTo(activity, image, meiziAdapter.getItem(position)!!)
+                    GankActivity.intentTo(activity, image, ArrayList(meiziAdapter.data),position)
                     true
                 }
                 else -> false

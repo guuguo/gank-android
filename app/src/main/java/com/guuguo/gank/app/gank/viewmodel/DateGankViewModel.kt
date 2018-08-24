@@ -9,6 +9,7 @@ import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.net.EmptyConsumer
 import com.guuguo.gank.net.ErrorConsumer
+import io.reactivex.disposables.Disposable
 import java.util.*
 
 /**
@@ -19,13 +20,16 @@ class DateGankViewModel : BaseViewModel() {
 
     val gankDayLiveData = MutableLiveData<ArrayList<GankSection>>()
 
+    var disposeble: Disposable? = null
     fun fetchDate(date: Date) {
-        ApiServer.getGankOneDayData(date)
+        if (disposeble?.isDisposed == false)
+            disposeble?.dispose()
+        disposeble = ApiServer.getGankOneDayData(date)
                 .doOnSubscribe { isLoading.value = true }
                 .doOnTerminate { isLoading.value = false }
                 .doOnError { isError.value = it }
                 .doOnNext { gankDayLiveData.value = getMergeAllGanks(it) }
-                .subscribe(EmptyConsumer(),ErrorConsumer()).isDisposed
+                .subscribe(EmptyConsumer(), ErrorConsumer())
     }
 
     fun getMergeAllGanks(gankDays: GankDays): ArrayList<GankSection> {

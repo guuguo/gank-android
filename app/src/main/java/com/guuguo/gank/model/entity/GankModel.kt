@@ -1,19 +1,22 @@
 package com.guuguo.gank.model.entity
 
 import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.TypeConverters
+import android.os.Parcel
+import android.os.Parcelable
 import android.support.annotation.NonNull
+import com.guuguo.android.lib.extension.formatTime
+import com.guuguo.gank.constant.datePattern
 import com.guuguo.gank.db.converter.RoomDataConverter
-import java.io.Serializable
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
  * Created by guodeqing on 7/24/16.
  */
 @Entity(tableName = "gank")
-class GankModel : Serializable {
+class GankModel() : Parcelable {
     @NonNull
     @PrimaryKey
     var _id: String = ""
@@ -33,6 +36,23 @@ class GankModel : Serializable {
     var ganhuo_id = ""
     var readability = ""
 
+    constructor(parcel: Parcel) : this() {
+        _id = parcel.readString()
+        desc = parcel.readString()
+        source = parcel.readString()
+        type = parcel.readString()
+        url = parcel.readString()
+        used = parcel.readString()
+        who = parcel.readString()
+        images = parcel.createStringArrayList()
+        width = parcel.readInt()
+        height = parcel.readInt()
+        ganhuo_id = parcel.readString()
+        readability = parcel.readString()
+        createdAt =  SimpleDateFormat(datePattern).parse(parcel.readString())
+        publishedAt =  SimpleDateFormat(datePattern).parse(parcel.readString())
+    }
+
 //    constructor( _id: String, createdAt: Date?, desc: String, publishedAt: Date?, source: String?, type: String, url: String, used: String?, who: String?, images: List<String>, width: Int, height: Int, ganhuo_id: String, readability: String) {
 //        this._id = _id
 //        this.createdAt = createdAt
@@ -50,8 +70,6 @@ class GankModel : Serializable {
 //        this.readability = readability
 //    }
 
-    constructor()
-
     override fun equals(other: Any?): Boolean {
         if (other is GankModel)
             if (_id == other._id)
@@ -65,6 +83,37 @@ class GankModel : Serializable {
 
     override fun toString(): String {
         return "GankModel(_id=$_id, createdAt=$createdAt, desc=$desc, publishedAt=$publishedAt, source=$source, type=$type, mUrl=$url, used=$used, who=$who, width=$width, height=$height)"
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(_id)
+        parcel.writeString(desc)
+        parcel.writeString(source)
+        parcel.writeString(type)
+        parcel.writeString(url)
+        parcel.writeString(used)
+        parcel.writeString(who)
+        parcel.writeStringList(images)
+        parcel.writeInt(width)
+        parcel.writeInt(height)
+        parcel.writeString(ganhuo_id)
+        parcel.writeString(readability)
+        parcel.writeString(SimpleDateFormat(datePattern).format(createdAt))
+        parcel.writeString(SimpleDateFormat(datePattern).format(publishedAt))
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<GankModel> {
+        override fun createFromParcel(parcel: Parcel): GankModel {
+            return GankModel(parcel)
+        }
+
+        override fun newArray(size: Int): Array<GankModel?> {
+            return arrayOfNulls(size)
+        }
     }
 
 }

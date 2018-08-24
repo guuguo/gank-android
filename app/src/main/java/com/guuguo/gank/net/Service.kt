@@ -2,13 +2,12 @@ package com.guuguo.gank.net
 
 import com.google.gson.GsonBuilder
 import com.guuguo.android.pikacomic.net.https.TrustAllCerts
-import com.guuguo.gank.constant.dataPattern
+import com.guuguo.gank.constant.datePattern
 import com.guuguo.gank.model.GankDays
 import com.guuguo.gank.model.GankNetResult
 import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import io.reactivex.Flowable
-import io.reactivex.Single
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -57,7 +56,7 @@ interface Service {
 
         fun getGsonConverter(): GsonConverterFactory {
             return GsonConverterFactory
-                    .create(GsonBuilder().setDateFormat(dataPattern).create())
+                    .create(GsonBuilder().setDateFormat(datePattern).create())
         }
     }
 }

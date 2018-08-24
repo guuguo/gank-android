@@ -1,17 +1,9 @@
 package com.guuguo.gank.net
 
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.guuguo.android.lib.extension.date
-import com.guuguo.gank.R.id.date
-import com.guuguo.gank.constant.dataPattern
 import com.guuguo.gank.constant.myGson
-import com.guuguo.gank.model.*
-import com.guuguo.gank.model.entity.GankModel
-import com.guuguo.gank.net.ApiServer.gankServer
 import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*

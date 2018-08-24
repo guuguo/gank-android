@@ -7,53 +7,53 @@
 
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/container_view"
+    <com.guuguo.android.lib.widget.SwipeNavigationLayout
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".app.gank.activity.GankActivity">
+        android:layout_height="match_parent">
 
-
-        <include layout="@layout/toolbar_gank_detail" />
-
-        <FrameLayout
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/container_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            tools:context=".app.gank.activity.GankActivity">
 
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_gank"
+            <include layout="@layout/toolbar_gank_detail" />
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:paddingTop="10dp"
-                android:paddingBottom="40dp"
-                tools:listitem="@layout/item_gank" />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <!--<ProgressBar-->
-            <!--android:id="@+id/progressbar"-->
-            <!--style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:indeterminate="true"-->
-            <!--android:layout_height="6dp" />-->
-            <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
-                android:id="@+id/progressbar"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:indeterminate="true"
-                app:spb_color="@color/colorPrimary"
-                app:spb_mirror_mode="false"
-                app:spb_progressiveStart_activated="true"
-                app:spb_progressiveStart_speed="1.5"
-                app:spb_progressiveStop_speed="3.4"
-                app:spb_reversed="false"
-                app:spb_sections_count="4"
-                app:spb_speed="2.0"
-                app:spb_stroke_separator_length="4dp"
-                app:spb_stroke_width="4dp" />
-        </FrameLayout>
-    </android.support.design.widget.CoordinatorLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_gank"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="40dp"
+                    tools:listitem="@layout/item_gank" />
+
+                <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                    android:id="@+id/progressbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    app:spb_color="@color/colorPrimary"
+                    app:spb_mirror_mode="false"
+                    app:spb_progressiveStart_activated="true"
+                    app:spb_progressiveStart_speed="1.5"
+                    app:spb_progressiveStop_speed="3.4"
+                    app:spb_reversed="false"
+                    app:spb_sections_count="4"
+                    app:spb_speed="2.0"
+                    app:spb_stroke_separator_length="4dp"
+                    app:spb_stroke_width="4dp" />
+            </FrameLayout>
+        </android.support.design.widget.CoordinatorLayout>
+    </com.guuguo.android.lib.widget.SwipeNavigationLayout>
 </layout>

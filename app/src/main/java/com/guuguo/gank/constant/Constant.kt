@@ -15,9 +15,9 @@ val GANK_TITLE = "gank_title"
 val GANK = "gank"
 val MY_DEBUG = true
 
-val dataPattern = "yyyy-MM-dd'T'HH:mm:ss"
+val datePattern = "yyyy-MM-dd'T'HH:mm:ss"
 
 val myGson by lazy {
-    GsonBuilder().setDateFormat(dataPattern).create()
+    GsonBuilder().setDateFormat(datePattern).create()
 }
 
