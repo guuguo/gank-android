@@ -42,6 +42,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_gank.*
 import kotlinx.android.synthetic.main.toolbar_gank_detail.*
+import netError
 import java.util.concurrent.TimeUnit
 
 
@@ -73,10 +74,11 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
     override fun initViewModelCallBack() {
         super.initViewModelCallBack()
         viewModel.isError.observe(this, Observer {
+            it?.log("错误了")
             it?.let {
-                Snackbar.make(container_view, it.message.safe(), Snackbar.LENGTH_LONG).setAction("重试") {
+                Snackbar.make(binding.containerView, it.netError().safe(), Snackbar.LENGTH_INDEFINITE).setAction("重试") {
                     viewModel.fetchDate(mGankBean!!.publishedAt!!)
-                }
+                }.show()
             }
         })
         viewModel.gankDayLiveData.observe(this, Observer {
@@ -87,13 +89,15 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
     private var delayLoadingDispose: Disposable? = null  //延迟出现 如果网络很快就不出现了
     override fun loadingStatusChange(isRunning: Boolean) {
         "isRunning isRunning:$isRunning".log()
-        if (isRunning) delayLoadingDispose = Observable.timer(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    progressbar.visibility = View.VISIBLE
-                    "progressbar VISIBLE".log()
-                }
-        else progressbar.visibility = View.GONE;delayLoadingDispose?.dispose()
+        if (isRunning) {
+            delayLoadingDispose = Observable.timer(500, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        progressbar.visibility = View.VISIBLE
+                    }
+        } else {
+            progressbar.visibility = View.GONE;delayLoadingDispose?.dispose()
+        }
     }
 
     override fun initView() {
