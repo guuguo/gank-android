@@ -31,7 +31,7 @@ class GankDailyFragment : BaseListFragment<FragmentGankDailyBinding>() {
 
     override fun initView() {
         super.initView()
-        activity.getToolBar()?.setOnClickListener { recycler.smoothScrollToPosition(0) }
+        mActivity.getToolBar()?.setOnClickListener { recycler.smoothScrollToPosition(0) }
     }
 
     override fun initViewModelCallBack() {

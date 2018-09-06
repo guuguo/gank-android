@@ -118,7 +118,7 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
 
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)
-        viewModel.gank = intent.getSerializableExtra(ARG_GANK) as GankModel
+        viewModel.gank = intent.getParcelableExtra(ARG_GANK) as GankModel
         mUrl = viewModel.gank.url
         desc = viewModel.gank.desc
     }

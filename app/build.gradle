@@ -114,13 +114,11 @@ dependencies {
     //multi
     api 'com.android.support:multidex:1.0.3'
 
-    // ViewModel and LiveData
-    kapt "android.arch.lifecycle:compiler:$ROOM_VERSION"
-    implementation "android.arch.lifecycle:reactivestreams:$ROOM_VERSION"
+    api 'com.github.florent37:viewanimator:1.0.5'
 
     //support
     implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
-    implementation "com.android.support:design:$SUPPORT_VERSION"
+    implementation "com.android.support:design:$SUPPORT_DESIGN_VERSION"
     implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
     implementation "com.android.support:support-v4:$SUPPORT_VERSION"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
@@ -129,6 +127,10 @@ dependencies {
     //stetho
     debugImplementation 'com.facebook.stetho:stetho:1.5.0'
     debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+    // ViewModel and LiveData
+    kapt "android.arch.lifecycle:compiler:$ROOM_VERSION"
+    implementation "android.arch.lifecycle:reactivestreams:$ROOM_VERSION"
 
     //paging
     def paging_version = "1.0.1"

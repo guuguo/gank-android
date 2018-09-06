@@ -23,6 +23,9 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment() {
     protected open lateinit var binding: VB
     private var viewModel: BaseViewModel? = null
     private lateinit var runCallBack: RunCallBack
+    val mActivity by lazy {
+        activity as BaseActivity
+    }
 
     open fun getViewModel(): BaseViewModel? = null
     @CallSuper

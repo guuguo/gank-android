@@ -86,11 +86,11 @@ class HomeFragment : LBaseFragment(), Toolbar.OnMenuItemClickListener {
         when (item!!.itemId) {
             R.id.menu_check_up -> Beta.checkUpgrade()
             R.id.menu_search -> {
-                val fragment = activity.findFragment(SearchFragment::class.java)
+                val fragment = findFragment(SearchFragment::class.java)
                 if (fragment == null) {
-                    activity.popTo(HomeFragment::class.java, false) { activity.start(SearchFragment()) }
+                    popTo(HomeFragment::class.java, false) { start(SearchFragment()) }
                 } else {
-                    activity.popTo(SearchFragment::class.java, false)
+                   popTo(SearchFragment::class.java, false)
                 }
             }
             R.id.menu_about -> AboutActivity.intentTo(activity)

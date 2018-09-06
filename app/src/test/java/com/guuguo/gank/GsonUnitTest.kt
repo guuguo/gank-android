@@ -16,7 +16,7 @@ class GsonUnitTest {
     @Test
     @Throws(Exception::class)
     fun gson() {
-        assertEquals("2002/01/02", myGson.fromJson("{'createdAt':'2017-06-13T07:15:29.423Z'}", GankModel::class.java).createdAt?.date())
+        assertEquals("2017/06/13", myGson.fromJson("{'createdAt':'2017-06-13T07:15:29.423Z'}", GankModel::class.java).createdAt?.date())
     }
 
     fun transport(weight: Int, lenght: Int) {}
