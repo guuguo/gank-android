@@ -10,6 +10,7 @@ import com.guuguo.gank.app.gank.adapter.MeiziAdapter
 import com.guuguo.gank.app.gank.viewmodel.GankDailyViewModel
 import com.guuguo.gank.base.BaseListFragment
 import com.guuguo.gank.constant.OmeiziDrawable
+import com.guuguo.gank.constant.OmeiziDrawableStr
 import com.guuguo.gank.databinding.FragmentGankDailyBinding
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
 
@@ -69,6 +70,7 @@ class GankDailyFragment : BaseListFragment<FragmentGankDailyBinding>() {
                 R.id.iv_image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.drawable
+                    OmeiziDrawableStr=meiziAdapter.getItem(position)?.images?.getOrNull(0).safe()
                     GankActivity.intentTo(activity, image, ArrayList(meiziAdapter.data),position)
                     true
                 }

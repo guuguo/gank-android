@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/gankCategoryFragment">
+
+
+    <fragment
+        android:id="@+id/dailyFragment"
+        android:name="com.guuguo.gank.app.gank.fragment.GankDailyFragment"
+        android:label="DailyFragment"
+        tools:layout="@layout/view_recycler" />
+
+    <fragment
+        android:id="@+id/gankCategoryFragment"
+        android:name="com.guuguo.gank.app.gank.fragment.GankCategoryFragment"
+        android:label="GankCategoryFragment"
+        tools:layout="@layout/fragment_category_gank" />
+    <fragment
+        android:id="@+id/gankCategoryContentFragment"
+        android:name="com.guuguo.gank.app.gank.fragment.GankCategoryContentFragment"
+        android:label="GankCategoryContentFragment"
+        tools:layout="@layout/fragment_gank_category_content">
+        <argument
+            android:name="ARG_GANK_TYPE"
+            android:defaultValue="GANK_TYPE_STAR" />
+    </fragment>
+
+
+</navigation>

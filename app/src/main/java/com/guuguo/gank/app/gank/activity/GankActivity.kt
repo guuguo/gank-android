@@ -43,6 +43,7 @@ import com.guuguo.gank.base.BaseViewModel
 import com.guuguo.gank.base.MBaseActivity
 import com.guuguo.gank.constant.MEIZI
 import com.guuguo.gank.constant.OmeiziDrawable
+import com.guuguo.gank.constant.OmeiziDrawableStr
 import com.guuguo.gank.databinding.ActivityGankBinding
 import com.guuguo.gank.model.entity.GankModel
 import io.reactivex.Completable
@@ -185,6 +186,10 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
     var iwHelper: ImageWatcherHelper? = null
     private fun initIvMeizi() {
         mGankBean?.let {
+            if (OmeiziDrawableStr == mGankBean?.images?.getOrNull(0)) {
+                iv_head.setImageDrawable(OmeiziDrawable)
+                return
+            }
             if (mGankBean!!.width > 0) {
                 iv_head.setOriginalSize(mGankBean!!.width, mGankBean!!.height)
                 Glide.with(iv_head).load(mGankBean?.url).apply(RequestOptions().override(ImageViewTarget.SIZE_ORIGINAL, ImageViewTarget.SIZE_ORIGINAL)).into(iv_head)
@@ -211,7 +216,7 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
             iv_head.setOnClickListener {
                 val mapping = SparseArray<ImageView>() // 这个请自行理解，
                 mapping.put(mGankPosition, iv_head)
-                val dataList = mGankList?.map { Uri.parse(it?.url)}//被显示的图片们;
+                val dataList = mGankList?.map { Uri.parse(it?.url) }//被显示的图片们;
                 iwHelper = ImageWatcherHelper.with(this, SimpleLoader())
                 iwHelper?.show(iv_head, mapping, dataList)
             }

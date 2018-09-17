@@ -8,3 +8,4 @@ import android.graphics.drawable.Drawable
 
 // 默认每页加载数量
 var OmeiziDrawable: Drawable? = null
+var OmeiziDrawableStr: String? = null

@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_daily"
+        android:id="@id/dailyFragment"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/daily" />
 
     <item
-        android:id="@+id/navigation_category"
+        android:id="@id/gankCategoryFragment"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/category" />
     <item
-        android:id="@+id/navigation_star"
+        android:id="@id/gankCategoryContentFragment"
         android:icon="@drawable/ic_spa_black_24dp"
         android:title="@string/star" />
 

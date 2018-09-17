@@ -25,6 +25,7 @@
                 android:clipToPadding="false"
                 android:padding="10dp"
                 android:paddingBottom="20dp"
+                tools:listitem="@layout/item_gank"
                 tools:context=".app.gank.fragment.GankDailyFragment" />
         </com.guuguo.android.lib.widget.simpleview.StateLayout>
     </com.guuguo.android.lib.widget.VerticalSwipeRefreshLayout>
