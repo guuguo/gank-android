@@ -18,6 +18,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
 import android.view.View
+import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -125,6 +128,8 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
 
     override fun initView() {
         super.initView()
+        animationFadOut = AnimationUtils.loadAnimation(activity, R.anim.fade_out)
+        animationFadIn = AnimationUtils.loadAnimation(activity, R.anim.fade_in)
         initIvMeizi()
         initRecycler()
         binding.navigation.setNavigationListener(object : SwipeNavigationLayout.NavigationListener {
@@ -132,9 +137,8 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
                 if (mGankPosition > 0) {
                     mGankPosition--
                     mGankBean = mGankList?.getOrNull(mGankPosition)
-                    loadData()
-                    initIvMeizi()
-                    supportActionBar!!.title = getHeaderTitle()
+
+                    animateLoad()
                 } else {
                     "上面没有了".toast()
                 }
@@ -144,15 +148,32 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
                 if (mGankPosition < mGankList?.size.safe() - 1) {
                     mGankPosition++
                     mGankBean = mGankList?.getOrNull(mGankPosition)
-                    loadData()
-                    initIvMeizi()
-                    supportActionBar!!.title = getHeaderTitle()
 
+                    animateLoad()
                 } else {
                     "下面去上一页加载吧".toast()
                 }
             }
         })
+    }
+
+    lateinit var animationFadOut: Animation
+    lateinit var animationFadIn: Animation
+
+    fun animateLoad() {
+        animationFadOut.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {}
+            override fun onAnimationStart(p0: Animation?) {}
+
+            override fun onAnimationEnd(p0: Animation?) {
+                loadData()
+                initIvMeizi()
+                supportActionBar?.title = getHeaderTitle()
+                animationFadIn.setAnimationListener(null)
+                binding.containerView.startAnimation(animationFadIn)
+            }
+        })
+        binding.containerView.startAnimation(animationFadOut)
     }
 
     override fun loadData() {
@@ -176,9 +197,9 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
         }
     }
 
-    override fun onBackPressedSupport() {
+    override fun onBackPressed() {
         if (iwHelper?.handleBackPressed() != true) {
-            super.onBackPressedSupport()
+            super.onBackPressed()
             supportFinishAfterTransition()
         }
     }

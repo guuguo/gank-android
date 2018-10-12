@@ -67,12 +67,13 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
         fun intentTo(bean: GankModel, activity: Activity) {
             val intent = Intent(activity, WebViewActivity::class.java)
             intent.putExtra(ARG_GANK, bean)
-            activity.startActivityForResult(intent,ACTIVITY_WEBVIEW)
+            activity.startActivityForResult(intent, ACTIVITY_WEBVIEW)
         }
+
         fun intentTo(bean: GankModel, fragment: LBaseFragment) {
             val intent = Intent(fragment.activity, WebViewActivity::class.java)
             intent.putExtra(ARG_GANK, bean)
-            fragment.startActivityForResult(intent,ACTIVITY_WEBVIEW)
+            fragment.startActivityForResult(intent, ACTIVITY_WEBVIEW)
         }
     }
 
@@ -107,10 +108,9 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
         }
     }
 
-    override fun onBackPressedSupport() {
+    override fun onBackPressed() {
         val back = mAgentWeb.back()
-        if (!back)
-            super.onBackPressedSupport()
+        if (!back) super.onBackPressed()
     }
 
     var mUrl: String = ""
@@ -138,6 +138,7 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
         }
         return true
     }
+
     fun openInBrowser(url: String) {
         val intent = Intent()
         intent.action = "android.intent.action.VIEW"

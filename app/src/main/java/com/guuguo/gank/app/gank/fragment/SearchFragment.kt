@@ -1,19 +1,18 @@
 package com.guuguo.gank.app.gank.fragment
 
 import android.arch.lifecycle.Observer
-import android.databinding.Observable
 import android.support.v7.widget.LinearLayoutManager
 import android.view.inputmethod.EditorInfo
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.widget.simpleview.SimpleViewHelper
 import com.guuguo.gank.R
-import com.guuguo.gank.R.id.iv_search
 import com.guuguo.gank.app.gank.activity.WebViewActivity
 import com.guuguo.gank.app.gank.adapter.GankAdapter
 import com.guuguo.gank.app.gank.viewmodel.SearchViewModel
 import com.guuguo.gank.base.BaseListFragment
 import com.guuguo.gank.databinding.FragmentSearchBinding
-import com.guuguo.gank.model.entity.GankModel
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 
@@ -68,7 +67,9 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
         }
         simplerViewHelper = SimpleViewHelper(recycler)
         simplerViewHelper?.showEmpty("请输入搜索关键字", imgRes = R.drawable.empty_cute_girl_box)
-        iv_back.setOnClickListener { pop() }
+        iv_back.setOnClickListener {
+            findNavController().popBackStack()
+        }
         iv_search.setOnClickListener {
             viewModel.searchText = edt_search.text.toString()
             viewModel.fetchData(true)
@@ -87,10 +88,5 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
         super.initRecycler()
         binding.recycler.layoutManager = LinearLayoutManager(activity)
         binding.recycler.adapter = mSearchResultAdapter
-    }
-
-    override fun onBackPressedSupport(): Boolean {
-        pop()
-        return true
     }
 }
