@@ -15,13 +15,6 @@
         android:orientation="vertical"
         app:layout_scrollFlags="scroll|enterAlways|snap">
 
-        <!--<androidx.appcompat.widget.Toolbar-->
-        <!--android:id="@+id/id_tool_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--app:popupTheme="@style/ToolbarPopupTheme" >-->
-
-        <!--</androidx.appcompat.widget.Toolbar>-->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/search_card"
             android:layout_width="match_parent"
@@ -70,7 +63,6 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             app:tabIndicatorColor="@color/white"
-            app:tabIndicatorFullWidth="false"
             app:tabRippleColor="@color/transparent">
 
             <com.google.android.material.tabs.TabItem

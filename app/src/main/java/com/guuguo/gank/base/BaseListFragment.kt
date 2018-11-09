@@ -1,14 +1,10 @@
 package com.guuguo.gank.base
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.databinding.Observable
-import androidx.databinding.ViewDataBinding
 import androidx.annotation.CallSuper
 import androidx.core.content.ContextCompat
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.guuguo.android.lib.extension.safe
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.guuguo.gank.R
 import com.guuguo.gank.helper.LoadMoreHelper
 
@@ -18,8 +14,8 @@ import com.guuguo.gank.helper.LoadMoreHelper
 
 abstract class BaseListFragment<VB : ViewDataBinding> : BaseFragment<VB>(), androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
 
-    protected open var swipeRefresh: androidx.swiperefreshlayout.widget.SwipeRefreshLayout? = null
-    protected open var recyclerView: androidx.recyclerview.widget.RecyclerView? = null
+    protected open var swipeRefresh: SwipeRefreshLayout? = null
+    protected open var recyclerView: RecyclerView? = null
     private var listViewModel: BaseListViewModel? = null
     override fun getViewModel(): BaseViewModel? =listViewModel
 
@@ -51,8 +47,8 @@ abstract class BaseListFragment<VB : ViewDataBinding> : BaseFragment<VB>(), andr
     protected open fun initRecycler() {
         recyclerView = binding.root.findViewById(R.id.recycler)
         if (isCanLoadMore())
-            recyclerView?.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
+            recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     if (LoadMoreHelper.isLoadMore(recyclerView, newState)) {
                         onLoadMore()

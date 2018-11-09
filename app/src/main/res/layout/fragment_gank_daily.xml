@@ -10,21 +10,14 @@
             type="com.guuguo.gank.app.gank.viewmodel.GankDailyViewModel" />
     </data>
 
-    <com.guuguo.android.lib.widget.VerticalSwipeRefreshLayout
-        android:id="@+id/refresh"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/day_main_base_bg"
-        tools:context=".app.gank.fragment.GankDailyFragment">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:paddingLeft="8dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="10dp"
-            android:id="@+id/recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            tools:listitem="@layout/item_meizi" />
-    </com.guuguo.android.lib.widget.VerticalSwipeRefreshLayout>
+        android:clipToPadding="false"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="10dp"
+        tools:listitem="@layout/item_meizi" />
 </layout>

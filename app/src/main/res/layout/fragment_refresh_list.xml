@@ -7,9 +7,8 @@
 
     </data>
 
-
-    <com.guuguo.android.lib.widget.simpleview.StateLayout
-        android:id="@+id/state_layout"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,6 +20,6 @@
             android:paddingBottom="20dp"
             tools:context=".app.gank.fragment.GankDailyFragment"
             tools:listitem="@layout/item_gank" />
-    </com.guuguo.android.lib.widget.simpleview.StateLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>
