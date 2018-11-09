@@ -1,9 +1,9 @@
 package com.guuguo.gank.app.gank.fragment
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.activity.WebViewActivity
@@ -76,7 +76,7 @@ class GankCategoryContentFragment : BaseListFragment<FragmentGankCategoryContent
     override fun initRecycler() {
         super.initRecycler()
 
-        recycler.layoutManager = LinearLayoutManager(activity)
+        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         recycler.adapter = gankAdapter
         gankAdapter.setOnItemClickListener { _, _, position ->
             val bean = gankAdapter.getItem(position)!!

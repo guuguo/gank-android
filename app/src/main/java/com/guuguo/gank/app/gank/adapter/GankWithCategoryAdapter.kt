@@ -2,6 +2,7 @@ package com.guuguo.gank.app.gank.adapter
 
 import android.view.View
 import android.widget.ImageView
+import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseViewHolder
 import com.guuguo.gank.R
 
@@ -11,6 +12,7 @@ import com.chad.library.adapter.base.BaseSectionQuickAdapter
 import com.guuguo.android.lib.extension.getTimeSpan
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.model.GankSection
+import com.guuguo.gank.util.dataBind
 
 
 class GankWithCategoryAdapter : BaseSectionQuickAdapter<GankSection, BaseViewHolder> {

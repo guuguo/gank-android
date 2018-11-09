@@ -1,12 +1,12 @@
 package com.guuguo.gank.app.gank.viewmodel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.databinding.BaseObservable
+import androidx.databinding.BaseObservable
 import android.net.Uri
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast

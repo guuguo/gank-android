@@ -7,13 +7,15 @@
 
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/base_toolbar_common" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/base_toolbar_common" />
 
         <fragment
             android:id="@+id/nav_host"
@@ -24,16 +26,5 @@
             app:defaultNavHost="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background='@color/white'
-            app:itemTextColor="@color/selector_navigation_item_text"
-            app:layout_behavior="@string/bottom_view_behavior"
-            app:menu="@menu/navigation" />
-
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

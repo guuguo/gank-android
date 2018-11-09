@@ -7,26 +7,28 @@
 
     </data>
 
+
     <com.guuguo.android.lib.widget.VerticalSwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".app.fragment.GankDailyFragment">
 
+
         <com.guuguo.android.lib.widget.simpleview.StateLayout
-            android:layout_width="match_parent"
             android:id="@+id/state_layout"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:padding="10dp"
                 android:paddingBottom="20dp"
-                tools:listitem="@layout/item_gank"
-                tools:context=".app.gank.fragment.GankDailyFragment" />
+                tools:context=".app.gank.fragment.GankDailyFragment"
+                tools:listitem="@layout/item_gank" />
         </com.guuguo.android.lib.widget.simpleview.StateLayout>
     </com.guuguo.android.lib.widget.VerticalSwipeRefreshLayout>
+
 </layout>

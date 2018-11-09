@@ -1,6 +1,6 @@
 package com.guuguo.gank.app.gank.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.base.BaseListViewModel
 import com.guuguo.gank.constant.MEIZI_COUNT

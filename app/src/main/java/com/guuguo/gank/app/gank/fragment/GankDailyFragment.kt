@@ -1,7 +1,7 @@
 package com.guuguo.gank.app.gank.fragment
 
-import android.arch.lifecycle.Observer
-import android.support.v7.widget.LinearLayoutManager
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.ImageView
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.R
@@ -63,7 +63,7 @@ class GankDailyFragment : BaseListFragment<FragmentGankDailyBinding>() {
             viewModel.fetchData(false)
         }, recycler)
 
-        recycler.layoutManager = LinearLayoutManager(activity)
+        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         recycler.adapter = meiziAdapter
         meiziAdapter.setOnItemChildClickListener { _, view, position ->
             when (view!!.id) {

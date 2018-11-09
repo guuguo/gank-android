@@ -1,7 +1,7 @@
 package com.guuguo.gank.app.gank.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
-import android.databinding.BaseObservable
+import androidx.lifecycle.MutableLiveData
+import androidx.databinding.BaseObservable
 import com.google.gson.reflect.TypeToken
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.R.id.swiper

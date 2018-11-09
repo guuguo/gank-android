@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme.day.background"
         tools:replace="android:appComponentFactory"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:appComponentFactory="whateverString"
         tools:ignore="GoogleAppIndexingWarning"
        >

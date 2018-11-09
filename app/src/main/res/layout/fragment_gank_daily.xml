@@ -14,9 +14,13 @@
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/day_main_base_bg"
         tools:context=".app.gank.fragment.GankDailyFragment">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingLeft="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="10dp"
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

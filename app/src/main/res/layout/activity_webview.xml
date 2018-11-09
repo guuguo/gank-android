@@ -10,7 +10,7 @@
             type="com.guuguo.gank.app.gank.viewmodel.WebViewModel" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +27,7 @@
                 android:layout_height="match_parent" />
         <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
-        <android.support.design.bottomappbar.BottomAppBar
+        <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottombar"
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
             android:layout_width="match_parent"
@@ -40,12 +40,12 @@
             app:navigationIcon="@drawable/ic_arrow_back_24dp"
             app:popupTheme="@style/ToolbarPopupTheme" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/star"
             android:tint="@color/white"
             app:layout_anchor="@id/bottombar" />
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

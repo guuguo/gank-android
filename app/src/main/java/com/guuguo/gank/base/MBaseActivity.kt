@@ -1,9 +1,9 @@
 package com.guuguo.gank.base
 
-import android.arch.lifecycle.Observer
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.support.annotation.CallSuper
+import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.annotation.CallSuper
 import com.guuguo.android.dialog.utils.dialogDismiss
 import com.guuguo.android.dialog.utils.dialogLoadingShow
 import com.guuguo.android.lib.app.LBaseActivity

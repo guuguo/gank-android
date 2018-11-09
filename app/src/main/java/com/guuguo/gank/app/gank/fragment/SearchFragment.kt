@@ -1,11 +1,12 @@
 package com.guuguo.gank.app.gank.fragment
 
-import android.arch.lifecycle.Observer
-import android.support.v7.widget.LinearLayoutManager
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.inputmethod.EditorInfo
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
+import com.guuguo.android.lib.extension.hideKeyboard
 import com.guuguo.android.lib.extension.safe
+import com.guuguo.android.lib.extension.showKeyboard
 import com.guuguo.android.lib.widget.simpleview.SimpleViewHelper
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.activity.WebViewActivity
@@ -81,12 +82,16 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
                 true
             } else false
         }
-
+        edt_search.showKeyboard()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        edt_search?.hideKeyboard()
+    }
     override fun initRecycler() {
         super.initRecycler()
-        binding.recycler.layoutManager = LinearLayoutManager(activity)
+        binding.recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         binding.recycler.adapter = mSearchResultAdapter
     }
 }

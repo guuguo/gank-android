@@ -1,27 +1,23 @@
 package com.guuguo.gank.app.gank.activity
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.NonNull
-import android.support.annotation.Nullable
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.ViewCompat
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -44,12 +40,10 @@ import com.guuguo.gank.app.gank.adapter.GankWithCategoryAdapter
 import com.guuguo.gank.app.gank.viewmodel.DateGankViewModel
 import com.guuguo.gank.base.BaseViewModel
 import com.guuguo.gank.base.MBaseActivity
-import com.guuguo.gank.constant.MEIZI
 import com.guuguo.gank.constant.OmeiziDrawable
 import com.guuguo.gank.constant.OmeiziDrawableStr
 import com.guuguo.gank.databinding.ActivityGankBinding
 import com.guuguo.gank.model.entity.GankModel
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -61,9 +55,9 @@ import java.util.concurrent.TimeUnit
 
 class GankActivity : MBaseActivity<ActivityGankBinding>() {
     companion object {
-        val TRANSLATE_GIRL_VIEW = "share_girl_image_view"
-        val ARG_GANK_POSITION = "ARG_GANK_POSITION"
-        val ARG_GANK_LIST = "ARG_GANK_LIST"
+        const val TRANSLATE_GIRL_VIEW = "share_girl_image_view"
+        const val ARG_GANK_POSITION = "ARG_GANK_POSITION"
+        const val ARG_GANK_LIST = "ARG_GANK_LIST"
 
         fun intentTo(activity: Activity, image: View, meizi: ArrayList<GankModel>, position: Int) {
             val intent = Intent(activity, GankActivity::class.java)
@@ -77,7 +71,7 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
     val viewModel by lazy { DateGankViewModel() }
     override fun getViewModel(): BaseViewModel? = viewModel
 
-    val mGankAdapter by lazy {
+    private val mGankAdapter by lazy {
         GankWithCategoryAdapter()
     }
 
@@ -95,7 +89,7 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
         viewModel.isError.observe(this, Observer {
             it?.log("错误了")
             it?.let {
-                Snackbar.make(binding.containerView, it.netError().safe(), Snackbar.LENGTH_INDEFINITE).setAction("重试") {
+                com.google.android.material.snackbar.Snackbar.make(binding.containerView, it.netError().safe(), com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE).setAction("重试") {
                     viewModel.fetchDate(mGankList?.getOrNull(mGankPosition)!!.publishedAt!!)
                 }.show()
             }
@@ -188,7 +182,7 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
 
 
     private fun initRecycler() {
-        rv_gank.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
+        rv_gank.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity) as androidx.recyclerview.widget.RecyclerView.LayoutManager?
         rv_gank.adapter = mGankAdapter
         mGankAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val bean = mGankAdapter.getItem(position)!!

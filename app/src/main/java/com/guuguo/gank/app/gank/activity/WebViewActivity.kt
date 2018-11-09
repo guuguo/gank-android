@@ -1,7 +1,6 @@
 package com.guuguo.gank.app.gank.activity
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -9,14 +8,13 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v7.widget.Toolbar
+import android.os.Parcelable
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.LinearLayout
+import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import com.guuguo.android.lib.app.LBaseFragment
 import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.extension.safe
@@ -66,13 +64,13 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
         val ACTIVITY_WEBVIEW = 0x102
         fun intentTo(bean: GankModel, activity: Activity) {
             val intent = Intent(activity, WebViewActivity::class.java)
-            intent.putExtra(ARG_GANK, bean)
+            intent.putExtra(ARG_GANK, bean as Parcelable)
             activity.startActivityForResult(intent, ACTIVITY_WEBVIEW)
         }
 
         fun intentTo(bean: GankModel, fragment: LBaseFragment) {
             val intent = Intent(fragment.activity, WebViewActivity::class.java)
-            intent.putExtra(ARG_GANK, bean)
+            intent.putExtra(ARG_GANK, bean as Parcelable)
             fragment.startActivityForResult(intent, ACTIVITY_WEBVIEW)
         }
     }
@@ -162,7 +160,7 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
     }
 
     fun showTip(msg: String) {
-        Snackbar.make(container_view, msg, Snackbar.LENGTH_SHORT)
+        com.google.android.material.snackbar.Snackbar.make(container_view, msg, com.google.android.material.snackbar.Snackbar.LENGTH_SHORT)
     }
 
 }

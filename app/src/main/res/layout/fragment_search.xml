@@ -31,7 +31,7 @@
             app:layout_constraintTop_toBottomOf="@id/ic_bar"
             app:srcCompat="@drawable/ic_close_black" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:padding="10dp"
             android:id="@+id/recycler"
             android:layout_width="match_parent"

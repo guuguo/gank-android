@@ -1,8 +1,10 @@
 package com.guuguo.gank.app.gank.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.guuguo.android.lib.extension.safe
+import com.guuguo.android.lib.utils.cache.ACacheTransform
 import com.guuguo.gank.base.BaseViewModel
+import com.guuguo.gank.constant.ACacheTransformF
 import com.guuguo.gank.model.GankDays
 import com.guuguo.gank.model.GankSection
 import com.guuguo.gank.model.entity.GankModel
@@ -25,10 +27,11 @@ class DateGankViewModel : BaseViewModel() {
         if (disposeble?.isDisposed == false)
             disposeble?.dispose()
         disposeble = ApiServer.getGankOneDayData(date)
+                .compose(ACacheTransformF<GankDays>("getGankOneDayData${date.time}").fromCacheIfValide())
                 .doOnSubscribe { isLoading.value = true }
                 .doOnTerminate { isLoading.value = false }
                 .doOnError { isError.value = it }
-                .doOnNext { gankDayLiveData.value = getMergeAllGanks(it) }
+                .doOnNext { gankDayLiveData.value = getMergeAllGanks(it.first) }
                 .subscribe(EmptyConsumer(), ErrorConsumer())
     }
 

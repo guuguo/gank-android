@@ -2,8 +2,8 @@ package com.guuguo.gank.app
 
 import android.content.Context
 import android.content.Intent
-import android.support.multidex.MultiDex
-import android.support.v7.app.AppCompatDelegate
+import androidx.multidex.MultiDex
+import androidx.appcompat.app.AppCompatDelegate
 import com.guuguo.android.lib.BaseApplication
 import com.guuguo.android.lib.utils.LogUtil
 import com.guuguo.android.lib.utils.Utils

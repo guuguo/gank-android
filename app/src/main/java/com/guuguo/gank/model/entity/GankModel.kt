@@ -1,14 +1,16 @@
 package com.guuguo.gank.model.entity
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.TypeConverters
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import com.guuguo.android.lib.extension.formatTime
+import com.guuguo.android.lib.extension.getTimeSpanUntilDay
 import com.guuguo.gank.constant.datePattern
 import com.guuguo.gank.db.converter.RoomDataConverter
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +18,7 @@ import java.util.*
  * Created by guodeqing on 7/24/16.
  */
 @Entity(tableName = "gank")
-class GankModel() : Parcelable {
+class GankModel() : Parcelable,Serializable {
     @NonNull
     @PrimaryKey
     var _id: String = ""
@@ -49,26 +51,11 @@ class GankModel() : Parcelable {
         height = parcel.readInt()
         ganhuo_id = parcel.readString()
         readability = parcel.readString()
-        createdAt =  SimpleDateFormat(datePattern).parse(parcel.readString())
-        publishedAt =  SimpleDateFormat(datePattern).parse(parcel.readString())
+        createdAt = SimpleDateFormat(datePattern).parse(parcel.readString())
+        publishedAt = SimpleDateFormat(datePattern).parse(parcel.readString())
     }
 
-//    constructor( _id: String, createdAt: Date?, desc: String, publishedAt: Date?, source: String?, type: String, url: String, used: String?, who: String?, images: List<String>, width: Int, height: Int, ganhuo_id: String, readability: String) {
-//        this._id = _id
-//        this.createdAt = createdAt
-//        this.desc = desc
-//        this.publishedAt = publishedAt
-//        this.source = source
-//        this.type = type
-//        this.url = url
-//        this.used = used
-//        this.who = who
-//        this.images = images
-//        this.width = width
-//        this.height = height
-//        this.ganhuo_id = ganhuo_id
-//        this.readability = readability
-//    }
+    fun getPublishTimeStr()=publishedAt?.getTimeSpanUntilDay()
 
     override fun equals(other: Any?): Boolean {
         if (other is GankModel)

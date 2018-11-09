@@ -2,12 +2,13 @@ package com.guuguo.gank.model
 
 import com.google.gson.annotations.SerializedName
 import com.guuguo.gank.model.entity.GankModel
+import java.io.Serializable
 import java.util.*
 
 /**
  * Created by guodeqing on 7/24/16.
  */
-class GankDayResult {
+class GankDayResult: Serializable {
     var date: Long = 0
 
     var Android: ArrayList<GankModel>? = null

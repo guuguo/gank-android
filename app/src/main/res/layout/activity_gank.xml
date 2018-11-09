@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/container_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -27,7 +27,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_gank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -54,6 +54,6 @@
                     app:spb_stroke_separator_length="4dp"
                     app:spb_stroke_width="4dp" />
             </FrameLayout>
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </com.guuguo.android.lib.widget.SwipeNavigationLayout>
 </layout>

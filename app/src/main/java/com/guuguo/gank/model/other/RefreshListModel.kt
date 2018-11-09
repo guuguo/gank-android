@@ -1,6 +1,6 @@
 package com.guuguo.gank.model.other
 
-import android.support.annotation.IntDef
+import androidx.annotation.IntDef
 
 
 class RefreshListModel<T> {

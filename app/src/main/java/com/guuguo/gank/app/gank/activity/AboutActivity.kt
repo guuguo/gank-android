@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.base_toolbar_common.*
 class AboutActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_simple_back
     override fun getHeaderTitle() = "关于"
-    override fun getToolBar() = id_tool_bar
+//    override fun getToolBar() = id_tool_bar
 
     companion object {
         val ACTIVITY_ABOUT = 12
