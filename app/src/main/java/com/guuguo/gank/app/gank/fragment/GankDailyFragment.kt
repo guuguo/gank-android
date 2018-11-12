@@ -13,6 +13,7 @@ import com.guuguo.gank.constant.OmeiziDrawable
 import com.guuguo.gank.constant.OmeiziDrawableStr
 import com.guuguo.gank.databinding.FragmentGankDailyBinding
 import kotlinx.android.synthetic.main.view_refresh_recycler.*
+import java.lang.ref.WeakReference
 
 
 class GankDailyFragment : BaseListFragment<FragmentGankDailyBinding>() {
@@ -69,7 +70,7 @@ class GankDailyFragment : BaseListFragment<FragmentGankDailyBinding>() {
             when (view!!.id) {
                 R.id.iv_image -> {
                     val image = view as ImageView
-                    OmeiziDrawable = view.drawable
+                    OmeiziDrawable = WeakReference(view.drawable)
                     OmeiziDrawableStr=meiziAdapter.getItem(position)?.url
                     GankActivity.intentTo(activity, image, ArrayList(meiziAdapter.data),position)
                     true

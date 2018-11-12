@@ -8,9 +8,11 @@ import android.os.Parcelable
 import androidx.annotation.NonNull
 import com.guuguo.android.lib.extension.formatTime
 import com.guuguo.android.lib.extension.getTimeSpanUntilDay
+import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.constant.datePattern
 import com.guuguo.gank.db.converter.RoomDataConverter
 import java.io.Serializable
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,7 +20,7 @@ import java.util.*
  * Created by guodeqing on 7/24/16.
  */
 @Entity(tableName = "gank")
-class GankModel() : Parcelable,Serializable {
+class GankModel() : Parcelable, Serializable {
     @NonNull
     @PrimaryKey
     var _id: String = ""
@@ -51,11 +53,19 @@ class GankModel() : Parcelable,Serializable {
         height = parcel.readInt()
         ganhuo_id = parcel.readString()
         readability = parcel.readString()
-        createdAt = SimpleDateFormat(datePattern).parse(parcel.readString())
-        publishedAt = SimpleDateFormat(datePattern).parse(parcel.readString())
+        createdAt = try {
+            SimpleDateFormat(datePattern).parse(parcel.readString())
+        } catch (e: Exception) {
+            Date()
+        }
+        publishedAt = try {
+            SimpleDateFormat(datePattern).parse(parcel.readString())
+        } catch (e: Exception) {
+            Date()
+        }
     }
 
-    fun getPublishTimeStr()=publishedAt?.getTimeSpanUntilDay()
+    fun getPublishTimeStr() = publishedAt?.getTimeSpanUntilDay()
 
     override fun equals(other: Any?): Boolean {
         if (other is GankModel)
@@ -85,8 +95,8 @@ class GankModel() : Parcelable,Serializable {
         parcel.writeInt(height)
         parcel.writeString(ganhuo_id)
         parcel.writeString(readability)
-        parcel.writeString(SimpleDateFormat(datePattern).format(createdAt))
-        parcel.writeString(SimpleDateFormat(datePattern).format(publishedAt))
+        parcel.writeString(createdAt?.let { SimpleDateFormat(datePattern).format(it) }.safe())
+        parcel.writeString(publishedAt?.let { SimpleDateFormat(datePattern).format(publishedAt).safe() })
     }
 
     override fun describeContents(): Int {

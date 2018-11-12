@@ -204,8 +204,8 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
 
             if (mGankBean!!.width > 0) {
                 iv_head.setOriginalSize(mGankBean!!.width, mGankBean!!.height)
-                if (!OmeiziDrawableStr.isNullOrEmpty() && OmeiziDrawableStr == mGankBean?.url) {
-                    iv_head.setImageDrawable(OmeiziDrawable)
+                if (!OmeiziDrawableStr.isNullOrEmpty() && OmeiziDrawableStr == mGankBean?.url && OmeiziDrawable.get() != null) {
+                    iv_head.setImageDrawable(OmeiziDrawable.get())
                 } else {
                     Glide.with(iv_head).load(mGankBean?.url).apply(RequestOptions().override(ImageViewTarget.SIZE_ORIGINAL, ImageViewTarget.SIZE_ORIGINAL)).into(iv_head)
                 }

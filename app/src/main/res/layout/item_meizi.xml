@@ -10,10 +10,11 @@
             type="com.guuguo.gank.model.entity.GankModel" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:foreground="?selectableItemBackground"
         app:cardCornerRadius="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
+                android:background="?selectableItemBackground"
                 android:scaleType="centerCrop"
                 android:transitionName="share_girl_image_view"
                 app:layout_constraintDimensionRatio="15:7"
@@ -84,5 +86,5 @@
                 tools:text="asdasdasdasdasd" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 </layout>
