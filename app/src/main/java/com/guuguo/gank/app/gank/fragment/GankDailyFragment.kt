@@ -70,7 +70,7 @@ class GankDailyFragment : BaseListFragment<FragmentGankDailyBinding>() {
                 R.id.iv_image -> {
                     val image = view as ImageView
                     OmeiziDrawable = view.drawable
-                    OmeiziDrawableStr=meiziAdapter.getItem(position)?.images?.getOrNull(0).safe()
+                    OmeiziDrawableStr=meiziAdapter.getItem(position)?.url
                     GankActivity.intentTo(activity, image, ArrayList(meiziAdapter.data),position)
                     true
                 }

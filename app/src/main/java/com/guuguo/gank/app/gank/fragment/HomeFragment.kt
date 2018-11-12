@@ -13,6 +13,7 @@ import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.google.android.material.tabs.TabLayout
 import com.guuguo.android.lib.extension.dpToPx
 import com.guuguo.gank.R
@@ -60,6 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
     override fun initView() {
         super.initView()
         mNavHostFragment = childFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+//        NavigationUI.setupWithNavController(binding.navigation, mNavHostFragment.navController)
         ViewCompat.setElevation(binding.toolbar,8.dpToPx().toFloat())
         binding.toolbar.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {

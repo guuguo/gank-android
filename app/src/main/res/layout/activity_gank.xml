@@ -7,10 +7,10 @@
 
     </data>
 
-    <com.guuguo.android.lib.widget.SwipeNavigationLayout
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<com.guuguo.android.lib.widget.SwipeNavigationLayout-->
+        <!--android:id="@+id/navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/container_view"
@@ -55,5 +55,5 @@
                     app:spb_stroke_width="4dp" />
             </FrameLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </com.guuguo.android.lib.widget.SwipeNavigationLayout>
+    <!--</com.guuguo.android.lib.widget.SwipeNavigationLayout>-->
 </layout>

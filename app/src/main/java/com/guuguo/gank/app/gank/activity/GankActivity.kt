@@ -126,29 +126,29 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
         animationFadIn = AnimationUtils.loadAnimation(activity, R.anim.fade_in)
         initIvMeizi()
         initRecycler()
-        binding.navigation.setNavigationListener(object : SwipeNavigationLayout.NavigationListener {
-            override fun navigationBack() {
-                if (mGankPosition > 0) {
-                    mGankPosition--
-                    mGankBean = mGankList?.getOrNull(mGankPosition)
-
-                    animateLoad()
-                } else {
-                    "上面没有了".toast()
-                }
-            }
-
-            override fun navigationNext() {
-                if (mGankPosition < mGankList?.size.safe() - 1) {
-                    mGankPosition++
-                    mGankBean = mGankList?.getOrNull(mGankPosition)
-
-                    animateLoad()
-                } else {
-                    "下面去上一页加载吧".toast()
-                }
-            }
-        })
+//        binding.navigation.setNavigationListener(object : SwipeNavigationLayout.NavigationListener {
+//            override fun navigationBack() {
+//                if (mGankPosition > 0) {
+//                    mGankPosition--
+//                    mGankBean = mGankList?.getOrNull(mGankPosition)
+//
+//                    animateLoad()
+//                } else {
+//                    "上面没有了".toast()
+//                }
+//            }
+//
+//            override fun navigationNext() {
+//                if (mGankPosition < mGankList?.size.safe() - 1) {
+//                    mGankPosition++
+//                    mGankBean = mGankList?.getOrNull(mGankPosition)
+//
+//                    animateLoad()
+//                } else {
+//                    "下面去上一页加载吧".toast()
+//                }
+//            }
+//        })
     }
 
     lateinit var animationFadOut: Animation
@@ -201,13 +201,14 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
     var iwHelper: ImageWatcherHelper? = null
     private fun initIvMeizi() {
         mGankBean?.let {
-            if (OmeiziDrawableStr == mGankBean?.images?.getOrNull(0)) {
-                iv_head.setImageDrawable(OmeiziDrawable)
-                return
-            }
+
             if (mGankBean!!.width > 0) {
                 iv_head.setOriginalSize(mGankBean!!.width, mGankBean!!.height)
-                Glide.with(iv_head).load(mGankBean?.url).apply(RequestOptions().override(ImageViewTarget.SIZE_ORIGINAL, ImageViewTarget.SIZE_ORIGINAL)).into(iv_head)
+                if (!OmeiziDrawableStr.isNullOrEmpty() && OmeiziDrawableStr == mGankBean?.url) {
+                    iv_head.setImageDrawable(OmeiziDrawable)
+                } else {
+                    Glide.with(iv_head).load(mGankBean?.url).apply(RequestOptions().override(ImageViewTarget.SIZE_ORIGINAL, ImageViewTarget.SIZE_ORIGINAL)).into(iv_head)
+                }
                 ViewCompat.setTransitionName(iv_head, TRANSLATE_GIRL_VIEW)
             } else {
                 Glide.with(iv_head).asBitmap()
