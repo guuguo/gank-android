@@ -27,4 +27,5 @@ dependencies {
     //stetho
     debugApi "com.facebook.stetho:stetho:$STETHO_VERSION"
     debugApi "com.facebook.stetho:stetho-okhttp3:$STETHO_VERSION"
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }
