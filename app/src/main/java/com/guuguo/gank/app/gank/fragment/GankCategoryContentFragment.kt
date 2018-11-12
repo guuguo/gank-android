@@ -3,8 +3,11 @@ package com.guuguo.gank.app.gank.fragment
 import androidx.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.guuguo.android.lib.extension.safe
+import com.guuguo.android.lib.widget.simpleview.SimpleViewHolder
+import com.guuguo.android.lib.widget.simpleview.StateLayout
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.activity.WebViewActivity
 import com.guuguo.gank.app.gank.adapter.GankAdapter
@@ -43,6 +46,8 @@ class GankCategoryContentFragment : BaseListFragment<FragmentGankCategoryContent
     override fun initView() {
         super.initView()
         mActivity.getToolBar()?.setOnClickListener { recycler.smoothScrollToPosition(0) }
+        StateLayout.loadingDrawableClass = null
+        binding.stateLayout.showLoading("")
     }
 
     override fun initViewModelCallBack() {
@@ -68,7 +73,7 @@ class GankCategoryContentFragment : BaseListFragment<FragmentGankCategoryContent
 
     override fun lazyLoad() {
         super.lazyLoad()
-        if (mFirstLazyLoad|| viewModel.gank_type == GANK_TYPE_STAR) {
+        if (mFirstLazyLoad || viewModel.gank_type == GANK_TYPE_STAR) {
             onRefresh()
         }
     }

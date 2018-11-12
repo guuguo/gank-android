@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.artemzin.rxjava:proguard-rules:1.2.7.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-proguard-rules-1.2.7.0.aar/c59557814c25bd27f69d5cd961d3c877/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-proguard-rules-1.2.7.0.aar/c59557814c25bd27f69d5cd961d3c877/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

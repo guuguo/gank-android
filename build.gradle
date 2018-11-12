@@ -13,7 +13,7 @@ buildscript {
         MULTIDEX_VERSION = '1.0.3'
 
 //        GUUGUO_ANDROIDLIB = "1.1.8.6"
-        GUUGUO_ANDROIDLIB = "1.2.1"
+        GUUGUO_ANDROIDLIB = "43996e0310"//"1.2.1"
 
         //support
         SUPPORT_VERSION = '1.0.0'
