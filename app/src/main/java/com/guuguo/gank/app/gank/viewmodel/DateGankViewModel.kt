@@ -13,6 +13,7 @@ import com.guuguo.gank.net.EmptyConsumer
 import com.guuguo.gank.net.ErrorConsumer
 import io.reactivex.disposables.Disposable
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * 主界面presenter
@@ -22,17 +23,14 @@ class DateGankViewModel : BaseViewModel() {
 
     val gankDayLiveData = MutableLiveData<ArrayList<GankSection>>()
 
-    var disposeble: Disposable? = null
     fun fetchDate(date: Date) {
-        if (disposeble?.isDisposed == false)
-            disposeble?.dispose()
-        disposeble = ApiServer.getGankOneDayData(date)
+        ApiServer.getGankOneDayData(date)
                 .compose(ACacheTransformF<GankDays>("getGankOneDayData${date.time}").fromCacheIfValide())
                 .doOnSubscribe { isLoading.value = true }
                 .doOnTerminate { isLoading.value = false }
-                .doOnError { isError.value = it }
+                .doOnError { isError.value = it;it.printStackTrace() }
                 .doOnNext { gankDayLiveData.value = getMergeAllGanks(it.first) }
-                .subscribe(EmptyConsumer(), ErrorConsumer())
+                .subscribe(EmptyConsumer(), ErrorConsumer()).isDisposed
     }
 
     fun getMergeAllGanks(gankDays: GankDays): ArrayList<GankSection> {

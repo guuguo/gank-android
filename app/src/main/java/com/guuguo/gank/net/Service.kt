@@ -39,8 +39,8 @@ interface Service {
             val commonHttpBuilder = OkHttpClient.Builder()
                     .sslSocketFactory(TrustAllCerts.createSSLSocketFactory())
                     .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
-                    .connectTimeout(10, TimeUnit.SECONDS)
-                    .readTimeout(10, TimeUnit.SECONDS)
+                    .connectTimeout(7, TimeUnit.SECONDS)
+                    .readTimeout(7, TimeUnit.SECONDS)
             val httpClient = commonHttpBuilder
                     .retryOnConnectionFailure(false)
                     .build()

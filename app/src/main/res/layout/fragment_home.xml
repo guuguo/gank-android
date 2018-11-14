@@ -17,23 +17,24 @@
             android:id="@+id/toolbar"
             layout="@layout/base_toolbar_common" />
 
+
         <fragment
             android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            app:navGraph="@navigation/nav_gank"
             app:defaultNavHost="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:navGraph="@navigation/nav_gank" />
 
         <!--<com.google.android.material.bottomnavigation.BottomNavigationView-->
-            <!--android:id="@+id/navigation"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom"-->
-            <!--android:background='@color/white'-->
-            <!--app:itemTextColor="@color/selector_navigation_item_text"-->
-            <!--app:layout_behavior="@string/bottom_view_behavior"-->
-            <!--app:menu="@menu/navigation" />-->
+        <!--android:id="@+id/navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:background='@color/white'-->
+        <!--app:itemTextColor="@color/selector_navigation_item_text"-->
+        <!--app:layout_behavior="@string/bottom_view_behavior"-->
+        <!--app:menu="@menu/navigation" />-->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

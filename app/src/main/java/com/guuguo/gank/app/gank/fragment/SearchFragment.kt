@@ -89,6 +89,7 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
         super.onDestroyView()
         edt_search?.hideKeyboard()
     }
+
     override fun initRecycler() {
         super.initRecycler()
         binding.recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)

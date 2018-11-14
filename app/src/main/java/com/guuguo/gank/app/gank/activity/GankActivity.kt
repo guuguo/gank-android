@@ -30,11 +30,10 @@ import com.bumptech.glide.request.transition.Transition
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.github.ielse.imagewatcher.ImageWatcher
 import com.github.ielse.imagewatcher.ImageWatcherHelper
+import com.google.android.material.snackbar.Snackbar
 import com.guuguo.android.lib.extension.log
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.extension.toast
-import com.guuguo.android.lib.utils.systembar.SystemBarHelper
-import com.guuguo.android.lib.widget.SwipeNavigationLayout
+import com.guuguo.android.lib.systembar.SystemBarHelper
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.adapter.GankWithCategoryAdapter
 import com.guuguo.gank.app.gank.viewmodel.DateGankViewModel
@@ -44,6 +43,8 @@ import com.guuguo.gank.constant.OmeiziDrawable
 import com.guuguo.gank.constant.OmeiziDrawableStr
 import com.guuguo.gank.databinding.ActivityGankBinding
 import com.guuguo.gank.model.entity.GankModel
+import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -89,7 +90,7 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
         viewModel.isError.observe(this, Observer {
             it?.log("错误了")
             it?.let {
-                com.google.android.material.snackbar.Snackbar.make(binding.containerView, it.netError().safe(), com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE).setAction("重试") {
+                Snackbar.make(binding.containerView, it.netError().safe(), com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE).setAction("重试") {
                     viewModel.fetchDate(mGankList?.getOrNull(mGankPosition)!!.publishedAt!!)
                 }.show()
             }
@@ -182,7 +183,7 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
 
 
     private fun initRecycler() {
-        rv_gank.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity) as androidx.recyclerview.widget.RecyclerView.LayoutManager?
+        rv_gank.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         rv_gank.adapter = mGankAdapter
         mGankAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val bean = mGankAdapter.getItem(position)!!
