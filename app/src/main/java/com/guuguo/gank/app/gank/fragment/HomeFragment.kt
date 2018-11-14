@@ -97,7 +97,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
 //                    1 -> ViewCompat.setElevation(binding.toolbar, 0f)
 //                    else -> ViewCompat.setElevation(binding.toolbar, 8.dpToPx().toFloat())
 //                }
-                onNavDestinationSelected(id, mNavHostFragment.navController, false)
+                onNavDestinationSelected(id, mNavHostFragment.navController, true)
             }
         })
         getToolBar()?.inflateMenu(getMenuResId())
@@ -149,13 +149,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
     }
 
     internal fun onNavDestinationSelected(id: Int, navController: NavController, popUp: Boolean): Boolean {
-        val builder = NavOptions.Builder().setLaunchSingleTop(true).setEnterAnim(R.anim.nav_default_enter_anim).setExitAnim(R.anim.nav_default_exit_anim).setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim).setPopExitAnim(androidx.navigation.ui.R.anim.nav_default_pop_exit_anim)
-        if (popUp) {
-            builder.setPopUpTo(R.id.nav_host, false)
-        }
-
+        val builder = NavOptions.Builder().setClearTask(true)
+//        builder.setPopUpTo(R.id.nav_host, true)
         val options = builder.build()
-
         try {
             navController.navigate(id, null as Bundle?, options)
             return true
