@@ -10,20 +10,20 @@
         android:name="com.guuguo.gank.app.gank.fragment.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_to_search"
-            app:destination="@+id/searchFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+        <!--<action-->
+            <!--android:id="@+id/action_to_search"-->
+            <!--app:destination="@+id/searchFragment"-->
+            <!--app:enterAnim="@anim/fade_in"-->
+            <!--app:exitAnim="@anim/fade_out"-->
+            <!--app:popEnterAnim="@anim/fade_in"-->
+            <!--app:popExitAnim="@anim/fade_out" />-->
     </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.guuguo.gank.app.gank.fragment.SearchFragment"
-        android:label="SearchFragment"
-        tools:layout="@layout/fragment_search">
-    </fragment>
+    <!--<fragment-->
+        <!--android:id="@+id/searchFragment"-->
+        <!--android:name="com.guuguo.gank.app.gank.fragment.SearchActivity"-->
+        <!--android:label="SearchFragment"-->
+        <!--tools:layout="@layout/fragment_search">-->
+    <!--</fragment>-->
 
 
 </navigation>

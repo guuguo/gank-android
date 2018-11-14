@@ -1,25 +1,35 @@
 package com.guuguo.gank.app.gank.fragment
 
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.app.Activity
+import android.content.Intent
+import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.navigation.fragment.findNavController
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.lifecycle.Observer
 import com.guuguo.android.lib.extension.hideKeyboard
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.showKeyboard
-import com.guuguo.android.lib.widget.simpleview.SimpleViewHelper
+import com.guuguo.android.lib.widget.simpleview.StateLayout
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.activity.WebViewActivity
 import com.guuguo.gank.app.gank.adapter.GankAdapter
 import com.guuguo.gank.app.gank.viewmodel.SearchViewModel
-import com.guuguo.gank.base.BaseListFragment
+import com.guuguo.gank.base.BaseListActivity
 import com.guuguo.gank.databinding.FragmentSearchBinding
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.toolbar_search.*
 
 
-class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
-    override fun getToolBar() = id_tool_bar
+class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
+    companion object {
+        const val TRANSLATE_VIEW = "share_search"
+
+        fun intentTo(activity: Activity, view: View) {
+            val intent = Intent(activity, SearchActivity::class.java)
+            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, TRANSLATE_VIEW)
+            ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
+        }
+    }
     val viewModel by lazy { SearchViewModel() }
 
     var page = 1
@@ -30,7 +40,6 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
     override fun isNavigationBack() = false
     override fun getLayoutResId() = R.layout.fragment_search
 
-    var simplerViewHelper: SimpleViewHelper? = null
     override fun initViewModelCallBack() {
         super.initViewModelCallBack()
         setupBaseViewModel(viewModel)
@@ -45,18 +54,19 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
         })
         viewModel.isEmpty.observe(this, Observer {
             if (it == true)
-                simplerViewHelper?.showEmpty("搜索结果为空", imgRes = R.drawable.empty_cute_girl_box)
+                binding.state.showEmpty("搜索结果为空")
             else {
-                simplerViewHelper?.restore()
+                binding.state.restore()
             }
         })
     }
 
     override fun loadingStatusChange(it: Boolean) {
-        if (it.safe() && viewModel.isRefresh) {
-            simplerViewHelper?.showLoading("正在加载搜索结果")
+        if (it) {
+            edt_search.hideKeyboard()
+            binding.state.showLoading("")
         } else if (!it.safe()) {
-            simplerViewHelper?.restore()
+            binding.state.restore()
         }
     }
 
@@ -66,10 +76,11 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
             val bean = mSearchResultAdapter.getItem(position)!!
             WebViewActivity.intentTo(bean, activity)
         }
-        simplerViewHelper = SimpleViewHelper(recycler)
-        simplerViewHelper?.showEmpty("请输入搜索关键字", imgRes = R.drawable.empty_cute_girl_box)
+        StateLayout.loadingDrawableClass = null
+        binding.state.showEmpty("请输入搜索关键字")
+
         iv_back.setOnClickListener {
-            findNavController().popBackStack()
+           onBackPressed()
         }
         iv_search.setOnClickListener {
             viewModel.searchText = edt_search.text.toString()
@@ -85,11 +96,10 @@ class SearchFragment : BaseListFragment<FragmentSearchBinding>() {
         edt_search.showKeyboard()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         edt_search?.hideKeyboard()
     }
-
     override fun initRecycler() {
         super.initRecycler()
         binding.recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)

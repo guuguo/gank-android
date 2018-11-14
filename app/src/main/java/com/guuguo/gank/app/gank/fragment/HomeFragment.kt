@@ -63,8 +63,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         when (item!!.itemId) {
             R.id.menu_check_up -> Beta.checkUpgrade()
             R.id.menu_search -> {
-                val nav = NavOptions.Builder().setPopUpTo(R.id.searchFragment, true).build()
-                findNavController().navigate(R.id.action_to_search, null, nav)
+//                val nav = NavOptions.Builder().setPopUpTo(R.id.searchFragment, true).build()
+//                findNavController().navigate(R.id.action_to_search, null, nav)
+                SearchActivity.intentTo(activity,binding.toolbar.search_card)
             }
             R.id.menu_about -> AboutActivity.intentTo(activity)
             else -> return false
@@ -103,8 +104,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         getToolBar()?.inflateMenu(getMenuResId())
         getToolBar()?.setOnMenuItemClickListener(this)
         binding.toolbar.search_card.setOnClickListener {
-            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, binding.toolbar.search_card, "share_search")
-            findNavController().navigate(R.id.action_to_search)
+//            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, binding.toolbar.search_card, "share_search")
+//            findNavController().navigate(R.id.action_to_search)
+            SearchActivity.intentTo(activity,binding.toolbar.search_card)
 //            FragmentNavigator(activity,childFragmentManager,)
         }
     }
