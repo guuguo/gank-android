@@ -14,7 +14,7 @@ android {
         minSdkVersion MIN_SDK_VERSION
         targetSdkVersion TARGET_SDK_VERSION
         versionCode gitVersionCode()
-        versionName "1.5"
+        versionName "1.6"
         ndk {
             //设置支持的SO库架构
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
@@ -107,7 +107,7 @@ dependencies {
     api 'com.github.florent37:viewanimator:1.1.1'
 
     //support
-    implementation "androidx.vectordrawable:vectordrawable:$ANDROIDX_VERSION"
+    implementation "androidx.vectordrawable:vectordrawable:$SUPPORT_VERSION"
     implementation "androidx.cardview:cardview:$SUPPORT_VERSION"
     implementation "androidx.appcompat:appcompat:$ANDROIDX_VERSION"
     implementation "com.google.android.material:material:$SUPPORT_DESIGN_VERSION"
@@ -146,7 +146,7 @@ dependencies {
 
     // function
     implementation "com.tencent.bugly:crashreport_upgrade:$BUGLY_UPGRADE"
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44'
     implementation('com.github.bumptech.glide:glide:4.8.0') {
         exclude group: "com.android.support"
     }
@@ -164,6 +164,11 @@ dependencies {
     implementation 'com.tapadoo.android:alerter:3.0.1'
     //web
     implementation 'com.just.agentweb:agentweb:4.0.2'
+
+    //dagger
+    implementation 'com.google.dagger:dagger:2.19'
+    implementation 'com.google.dagger:dagger-android-support:2.19'
+    kapt 'com.google.dagger:dagger-compiler:2.19'
 }
 
 repositories {

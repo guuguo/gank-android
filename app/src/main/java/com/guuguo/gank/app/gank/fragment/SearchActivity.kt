@@ -29,8 +29,8 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
             val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, TRANSLATE_VIEW)
             ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
         }
-    }
     val viewModel by lazy { SearchViewModel() }
+    }
 
     var page = 1
     val mSearchResultAdapter by lazy {
@@ -93,12 +93,12 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
                 true
             } else false
         }
-        edt_search.showKeyboard()
+        edt_search.postDelayed({edt_search.showKeyboard()},200)
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         edt_search?.hideKeyboard()
+        super.onDestroy()
     }
     override fun initRecycler() {
         super.initRecycler()

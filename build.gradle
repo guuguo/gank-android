@@ -12,18 +12,18 @@ buildscript {
         KOTLIN_VERSION = '1.2.71'
         MULTIDEX_VERSION = '1.0.3'
 
-//        GUUGUO_ANDROIDLIB = "1.1.8.6"
-        GUUGUO_ANDROIDLIB = "43996e0310"//"1.2.1"
+//        GUUGUO_ANDROIDLIB = "1.1.9.3"
+        GUUGUO_ANDROIDLIB = "797bc4b4e5"//"1.2.1"
 
         //support
         SUPPORT_VERSION = '1.0.0'
         SUPPORT_DESIGN_VERSION = '1.0.0'
-        ANDROIDX_VERSION = "1.0.1"
+        ANDROIDX_VERSION = "1.0.2"
         LIFECYCLE_VERSION = '2.0.0'
         PAGING_VERSION = '2.1.0-beta01'
         ROOM_VERSION = '2.0.0-rc01'
-        NAV_VERSION = "1.0.0-alpha07"
-        NAVIGATION_UI_KTX = "1.0.0-alpha06"
+        NAV_VERSION = "1.0.0-alpha08"
+        NAVIGATION_UI_KTX = "1.0.0-alpha08"
 
         STETHO_VERSION = "1.5.0"
         //rxjava

@@ -1,43 +1,27 @@
 package com.guuguo.gank.app.gank.fragment
 
 import android.animation.Animator
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewAnimationUtils
-import androidx.annotation.ColorInt
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.get
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.google.android.material.tabs.TabLayout
 import com.guuguo.android.lib.extension.dpToPx
 import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.systembar.SystemBarHelper
 import com.guuguo.android.lib.utils.DisplayUtil
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.activity.AboutActivity
-import com.guuguo.gank.app.gank.activity.GankActivity
 import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.databinding.FragmentHomeBinding
 import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.proguard.t
 import kotlinx.android.synthetic.main.base_toolbar_common.*
 import kotlinx.android.synthetic.main.base_toolbar_common.view.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.toolbar_search.view.*
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClickListener {
     override fun isNavigationBack() = false
@@ -48,7 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         }
     }
 
-    override fun getHeaderTitle() = "gank"
+    override fun getHeaderTitle() = "Gank"
     override fun getMenuResId() = R.menu.main_menu
     override fun getToolBar() = contentView?.findViewById<Toolbar>(R.id.id_tool_bar)
     override fun getLayoutResId() = R.layout.fragment_home
@@ -151,11 +135,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
     }
 
     internal fun onNavDestinationSelected(id: Int, navController: NavController, popUp: Boolean): Boolean {
-        val builder = NavOptions.Builder().setClearTask(true)
-//        builder.setPopUpTo(R.id.nav_host, true)
-        val options = builder.build()
         try {
-            navController.navigate(id, null as Bundle?, options)
+            navController.popBackStack()
+            navController.navigate(id)
             return true
         } catch (var6: IllegalArgumentException) {
             return false

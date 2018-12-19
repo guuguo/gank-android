@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.jrvansuita:MaterialAbout:0.1.9@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-MaterialAbout-0.1.9.aar/2d452a59d09508b14a890bcb64c8d220/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-MaterialAbout-0.1.9.aar/e3656f16bd6380d58d40c9606e6b1a5e/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-MaterialAbout-0.1.9.aar/2d452a59d09508b14a890bcb64c8d220/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-MaterialAbout-0.1.9.aar/2d452a59d09508b14a890bcb64c8d220/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-MaterialAbout-0.1.9.aar/e3656f16bd6380d58d40c9606e6b1a5e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-MaterialAbout-0.1.9.aar/e3656f16bd6380d58d40c9606e6b1a5e/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
