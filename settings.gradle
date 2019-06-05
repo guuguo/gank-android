@@ -1,6 +1,1 @@
-include ':app', ':stethomodule'/*,':androidLib', ':ganktv', , ':SwipeBackFragment'
-project(':androidLib').projectDir = new File('../androidLib/')
-include ':androidLib:androidLib'*/
-
-//project(':SwipeBackFragment').projectDir = new File('../SwipeBackFragment/')
-//include ':SwipeBackFragment:swipeback'
+include(":app",":stethomodule")

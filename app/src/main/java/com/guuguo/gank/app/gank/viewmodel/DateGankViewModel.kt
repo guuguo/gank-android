@@ -2,7 +2,6 @@ package com.guuguo.gank.app.gank.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.utils.cache.ACacheTransform
 import com.guuguo.gank.base.BaseViewModel
 import com.guuguo.gank.constant.ACacheTransformF
 import com.guuguo.gank.model.GankDays
@@ -11,9 +10,7 @@ import com.guuguo.gank.model.entity.GankModel
 import com.guuguo.gank.net.ApiServer
 import com.guuguo.gank.net.EmptyConsumer
 import com.guuguo.gank.net.ErrorConsumer
-import io.reactivex.disposables.Disposable
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * 主界面presenter

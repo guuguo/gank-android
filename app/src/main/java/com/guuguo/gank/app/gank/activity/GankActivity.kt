@@ -52,7 +52,6 @@ import kotlinx.android.synthetic.main.activity_gank.*
 import kotlinx.android.synthetic.main.toolbar_gank_detail.*
 import netError
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 
 class GankActivity : MBaseActivity<ActivityGankBinding>() {
