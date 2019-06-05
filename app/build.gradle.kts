@@ -4,8 +4,7 @@ plugins {
     id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
 }
-fun gitVersionCode() = 1
-//    Date().format("yyMMdd", TimeZone.getTimeZone("UTC")).toInteger()
+fun gitVersionCode() = 1//Date().format("yyMMdd", java.util.TimeZone.getTimeZone("UTC")).toInteger()
 
 android {
     compileSdkVersion(AndroidSdk.compile)
@@ -15,10 +14,10 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = gitVersionCode()
         versionName = "1.6"
-        // ndk {
-        //     //设置支持的SO库架构
-        //     abiFilters("armeabi", "x86", "armeabi-v7a", "x86_64", "arm64-v8a")
-        // }
+        ndk {
+            //设置支持的SO库架构
+            abiFilters("armeabi", "x86", "armeabi-v7a", "x86_64", "arm64-v8a")
+        }
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
     }
@@ -27,7 +26,7 @@ android {
         create("config") {
             keyAlias = "mimi"
             keyPassword = "guuguo123"
-            // storeFile（file ("mimi.jks")）
+            storeFile = file("mimi.jks")
             storePassword = "android"
         }
     }
@@ -39,29 +38,31 @@ android {
             isMinifyEnabled = false
             isShrinkResources = false
             isZipAlignEnabled = true
+            signingConfig = signingConfigs.getByName("config")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            // signingConfig = signingConfigs.config
         }
 
         getByName("release") {
             isMinifyEnabled = false
             isShrinkResources = false
             isZipAlignEnabled = true
+            signingConfig = signingConfigs.getByName("config")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            // signingConfig = signingConfigs.config
         }
     }
 
-    // applicationVariants.all { variant ->
-    //     variant.outputs.all { output ->
-    //         val fileName = output.outputFile.name
-    //         outputFileName = fileName.replace("app", "gank-${variant.versionName}-${variant.versionCode}")
-    //     }
-    // }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            val fileName = output.outputFile.name
+            fileName.replace("app", "gank-${variant.versionName}-${variant.versionCode}")
 
-    // sourceSets {
-    //     main.java.srcDirs.add( "src/main/kotlin")
-    // }
+            true
+        }
+    }
+
+    sourceSets {
+        getByName("main").java.srcDirs("src/main/kotlin")
+    }
     dataBinding {
         isEnabled = true
     }
@@ -74,14 +75,9 @@ android {
     }
 }
 
-//repositories {
-//    jcenter()
-//    maven { url "https://jitpack.io" }
-//    mavenCentral()
-//}
 
 dependencies {
-    //    implementation(fileTree(dir: "libs", include: ["*.jar"])）
+    implementation(fileTree(hashMapOf("dir" to "libs", "include" to arrayOf("*.jar"))))
 
     testImplementation(Deps.mockito.core)
     testImplementation(Deps.mockito.all)
