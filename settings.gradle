@@ -1,1 +1,4 @@
-include(":app",":stethomodule")
+include(":app", ":stethomodule")
+
+setBinding(new Binding([gradle: this]))
+evaluate(new File(settingsDir,"gank_flutter/.android/include_flutter.groovy"))

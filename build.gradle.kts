@@ -1,4 +1,4 @@
-import java.net.URI
+import org.gradle.internal.impldep.aQute.bnd.osgi.Constants.options
 
 buildscript {
 
@@ -11,6 +11,7 @@ buildscript {
     dependencies {
         classpath(BuildPlugins.androidGradlePlugin)
         classpath(BuildPlugins.kotlinGradlePlugin)
+        classpath("com.novoda:bintray-release:0.9")
     }
 }
 
@@ -21,8 +22,8 @@ allprojects {
             dirs("libs")
         }
 
-        maven { url = URI("http://www.guuguo.top/") }
-        maven { url = URI("http://dl.bintray.com/kotlin/kotlin-eap") }
+        maven { setUrl("http://www.guuguo.top/") }
+        maven { setUrl("http://dl.bintray.com/kotlin/kotlin-eap") }
     }
 }
 tasks.register("clean").configure {

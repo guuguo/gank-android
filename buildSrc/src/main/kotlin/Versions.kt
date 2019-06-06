@@ -54,8 +54,8 @@ private object versions {
     const val dividerview = "1.0.2"
     const val flowlayout = "1.14.0"
     const val exoplayer = "2.8.0"
-
-    const val bugly = "1.3.5"
+    const val stetho = "1.5.1"
+    const val bugly = "1.4.0"
 
 }
 
@@ -97,6 +97,11 @@ object Deps {
     object androidx {
         const val ktx = "androidx.core:core-ktx:${versions.ktx}"
         const val vectordrawable = "androidx.vectordrawable:vectordrawable:${versions.support}"
+    }
+
+    object stetho {
+        const val runtime = "com.facebook.stetho:stetho:${versions.stetho}"
+        const val okhttp3 = "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
     }
 
     object room {
@@ -214,6 +219,10 @@ object Deps {
         const val rx_binding_recyclerview =
             "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7-kotlin:${versions.rx_binding}"
     }
+    object bugly{
+        const val upgrade = "com.tencent.bugly:crashreport_upgrade:${versions.bugly}"
+
+    }
 
     const val dexmaker = "com.linkedin.dexmaker:dexmaker-mockito:${versions.dexmaker}"
 
@@ -252,7 +261,6 @@ object Deps {
     const val rx_android = "io.reactivex.rxjava2:rxandroid:${versions.rx_android}"
 
     const val gson = "com.google.code.gson:gson:${versions.gson}"
-    const val bugly = "com.tencent.bugly:crashreport_upgrade:${versions.bugly}"
 
 
     object build_versions {
@@ -271,4 +279,5 @@ fun addRepos(handler: RepositoryHandler) {
     handler.mavenCentral()
     handler.maven { url = URI("https://jitpack.io") }
 }
+
 fun currentTime() = SimpleDateFormat("yyMMdd", Locale.CHINESE).format(Date()).toInt()

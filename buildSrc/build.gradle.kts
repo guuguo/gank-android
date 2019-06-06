@@ -4,6 +4,7 @@ repositories {
 
 plugins {
     `kotlin-dsl`
+    groovy
 }
 kotlinDslPluginOptions {
     experimentalWarning.set(false)

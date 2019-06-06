@@ -1,17 +1,13 @@
-import Deps.arouter.api
-import Deps.dagger.android
-import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
-
 plugins {
     id("com.android.library")
 }
 
 android {
-    compileSdkVersion(28)
+    compileSdkVersion(AndroidSdk.compile)
 
     defaultConfig {
-        minSdkVersion(15)
-        targetSdkVersion(28)
+        minSdkVersion(AndroidSdk.min)
+        targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
 
@@ -22,7 +18,7 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
 
@@ -30,7 +26,7 @@ android {
 
 dependencies {
     //stetho
-//    debugApi("com.facebook.stetho:stetho:${STETHO_VERSION}")
-//    debugApi("com.facebook.stetho:stetho-okhttp3:$STETHO_VERSION")
+    debugApi(Deps.stetho.runtime)
+    debugApi(Deps.stetho.okhttp3)
     api("com.squareup.okhttp3:okhttp:3.14.1")
 }

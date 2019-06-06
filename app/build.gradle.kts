@@ -1,3 +1,6 @@
+import Deps.dagger.android
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
@@ -120,23 +123,21 @@ dependencies {
     implementation(Deps.retrofit.gson)
     implementation(Deps.retrofit.rxjava2)
     implementation(Deps.retrofit.mock)
-//    implementation(Deps.dagger.runtime)
-//    implementation(Deps.dagger.android_support)
-//    kapt(Deps.dagger.compiler)
+
+    implementation(Deps.dagger.runtime)
+    implementation(Deps.dagger.android_support)
+    kapt(Deps.dagger.compiler)
 
     implementation(Deps.agentweb.basic)
-    implementation(Deps.bugly)
+    implementation(Deps.bugly.upgrade)
 
     implementation(Deps.kotlin.stdlib)
 
     implementation("com.github.florent37:viewanimator:1.1.1")
-    // implementation("androidx.lifecycle:lifecycle-reactivestreams:$LIFECYCLE_VERSION"
 
-    //         //paging
-    // implementation ("android.arch.paging:rxjava2:$PAGING_VERSION")
+    implementation(project(":flutter_boost"))
+    implementation(project(":xservice_kit"))
 
-    //         // function
-    // implementation ("com.tencent.bugly:crashreport_upgrade:$BUGLY_UPGRADE")
     implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44")
     implementation("com.github.bumptech.glide:glide:4.9.0")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.9.0@aar")
