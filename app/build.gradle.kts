@@ -4,7 +4,7 @@ plugins {
     id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
 }
-fun gitVersionCode() = 1//Date().format("yyMMdd", java.util.TimeZone.getTimeZone("UTC")).toInteger()
+fun gitVersionCode() = currentTime()//Date().format("yyMMdd", java.util.TimeZone.getTimeZone("UTC")).toInteger()
 
 android {
     compileSdkVersion(AndroidSdk.compile)

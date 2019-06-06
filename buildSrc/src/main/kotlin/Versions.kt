@@ -1,5 +1,8 @@
+import org.apache.tools.ant.taskdefs.Local
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import java.net.URI
+import java.text.SimpleDateFormat
+import java.util.*
 
 private object versions {
     const val arch_core = "1.1.1"
@@ -268,3 +271,4 @@ fun addRepos(handler: RepositoryHandler) {
     handler.mavenCentral()
     handler.maven { url = URI("https://jitpack.io") }
 }
+fun currentTime() = SimpleDateFormat("yyMMdd", Locale.CHINESE).format(Date()).toInt()
