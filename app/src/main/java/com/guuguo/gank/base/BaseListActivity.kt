@@ -1,5 +1,6 @@
 package com.guuguo.gank.base
 
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.databinding.Observable
@@ -11,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.R
 import com.guuguo.gank.helper.LoadMoreHelper
+import com.guuguo.gank.util.ThemeUtils
 
 /**
  * Copyright ©2017 by ruzhan
  */
 
-abstract class BaseListActivity<VB : ViewDataBinding> : MBaseActivity<VB>(), androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
+abstract class BaseListActivity<VB : ViewDataBinding> : MBaseActivity<VB>(), SwipeRefreshLayout.OnRefreshListener {
 
-    protected open var swipeRefresh: androidx.swiperefreshlayout.widget.SwipeRefreshLayout? = null
-    protected open var recyclerView: androidx.recyclerview.widget.RecyclerView? = null
+    protected open var swipeRefresh: SwipeRefreshLayout? = null
+    protected open var recyclerView: RecyclerView? = null
     private var listViewModel: BaseListViewModel? = null
 
     open fun isCanLoadMore() = true
@@ -29,6 +31,7 @@ abstract class BaseListActivity<VB : ViewDataBinding> : MBaseActivity<VB>(), and
         this.listViewModel = viewModel as BaseListViewModel?
         super.setupBaseViewModel(viewModel)
     }
+
 
     override fun loadingStatusChange(it: Boolean) {
         listViewModel?.apply {
@@ -50,8 +53,8 @@ abstract class BaseListActivity<VB : ViewDataBinding> : MBaseActivity<VB>(), and
     protected open fun initRecycler() {
         recyclerView = binding.root.findViewById(R.id.recycler)
         if (isCanLoadMore())
-            recyclerView?.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
+            recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     if (LoadMoreHelper.isLoadMore(recyclerView, newState)) {
                         onLoadMore()

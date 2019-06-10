@@ -47,7 +47,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_marginEnd="7dp"
                         android:transitionName="share_search"
-                        app:cardBackgroundColor="@color/white">
+                        app:cardBackgroundColor="?containerBackgroundLayer2">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"

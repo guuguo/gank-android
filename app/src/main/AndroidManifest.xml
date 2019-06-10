@@ -22,7 +22,7 @@
                  android:theme="@style/MyTheme.Light"
                  tools:replace="android:appComponentFactory,android:allowBackup"
                  android:networkSecurityConfig="@xml/network_security_config"
-                 android:appComponentFactory="whateverString"
+                 android:appComponentFactory="androidx.core.app.CoreComponentFactory"
                  tools:ignore="GoogleAppIndexingWarning"
     >
         <activity

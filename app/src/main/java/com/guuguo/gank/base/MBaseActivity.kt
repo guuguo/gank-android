@@ -1,5 +1,6 @@
 package com.guuguo.gank.base
 
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -10,6 +11,7 @@ import com.guuguo.android.lib.app.LBaseActivity
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.R
+import com.guuguo.gank.util.ThemeUtils
 import netError
 
 /**
@@ -27,7 +29,10 @@ abstract class MBaseActivity<VB : ViewDataBinding> : LBaseActivity() {
         super.initView()
         initViewModelCallBack()
     }
-
+    override fun initVariable(savedInstanceState: Bundle?) {
+        super.initVariable(savedInstanceState)
+        ThemeUtils.onActivityCreateSetTheme(activity)
+    }
     protected open fun initViewModelCallBack() {
         setupBaseViewModel(getViewModel())
     }

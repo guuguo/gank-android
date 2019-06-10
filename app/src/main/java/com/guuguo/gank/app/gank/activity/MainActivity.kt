@@ -7,11 +7,15 @@ import com.guuguo.gank.R
 import com.guuguo.gank.base.BaseActivity
 import android.view.ViewGroup
 import android.os.Build.VERSION
+import android.os.Bundle
 import android.view.View
+import com.guuguo.gank.base.MBaseActivity
+import com.guuguo.gank.databinding.ActivityMainBinding
+import com.guuguo.gank.util.ThemeUtils
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : MBaseActivity<ActivityMainBinding>() {
     override fun getLayoutResId() = R.layout.activity_main
     override fun initStatusBar() {
         val decorView = window.decorView as ViewGroup
@@ -20,7 +24,7 @@ class MainActivity : BaseActivity() {
             if (translucentView == null) {
                 translucentView = View(decorView.context)
                 translucentView.id = R.id.systembar_foreground_view
-                val lp = android.view.ViewGroup.LayoutParams(-1, SystemBarHelper.getStatusBarHeight(decorView.context))
+                val lp = ViewGroup.LayoutParams(-1, SystemBarHelper.getStatusBarHeight(decorView.context))
                 decorView.addView(translucentView, lp)
             }
 
@@ -28,4 +32,6 @@ class MainActivity : BaseActivity() {
         }
         SystemBarHelper.tintStatusBar(activity, getColorCompat(R.color.colorPrimary), 0.2f)
     }
+
+
 }

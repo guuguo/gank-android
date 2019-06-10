@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.guuguo.android.dialog.utils.dialogDismiss
 import com.guuguo.android.dialog.utils.dialogLoadingShow
+import com.guuguo.android.lib.app.LBaseActivity
 import com.guuguo.android.lib.app.LBaseFragment
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
@@ -24,7 +25,7 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment() {
     private var viewModel: BaseViewModel? = null
     private lateinit var runCallBack: RunCallBack
     val mActivity by lazy {
-        activity as BaseActivity
+        activity as LBaseActivity
     }
 
     open fun getViewModel(): BaseViewModel? = null

@@ -1,6 +1,10 @@
 package com.guuguo.gank.app.gank.fragment
 
 import android.animation.Animator
+import android.app.Activity
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -10,7 +14,9 @@ import android.widget.AdapterView
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.guuguo.android.dialog.dialog.NormalListDialog
 import com.guuguo.android.dialog.utils.OnOperItemClickL
@@ -24,6 +30,7 @@ import com.guuguo.gank.base.BaseFragment
 import com.guuguo.gank.databinding.FragmentHomeBinding
 import com.guuguo.gank.util.ThemeUtils
 import com.tencent.bugly.beta.Beta
+import com.tencent.bugly.proguard.t
 import kotlinx.android.synthetic.main.base_toolbar_common.*
 import kotlinx.android.synthetic.main.base_toolbar_common.view.*
 
@@ -76,6 +83,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         }
 //        binding.toolbar.tvTitle.setOnClickListener {  }
 //        SystemBarHelper.setPadding(activity, binding.toolbar.ll_bar)
+        findNavController()
         mNavHostFragment = childFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
 //        NavigationUI.setupWithNavController(binding.navigation, mNavHostFragment.navController)
 //        ViewCompat.setElevation(binding.toolbar, 8.dpToPx().toFloat())
@@ -109,16 +117,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
             SearchActivity.intentTo(activity, binding.toolbar.searchCard)
 //            FragmentNavigator(activity,childFragmentManager,)
         }
+        val color=getBgColor(0)
+        binding.toolbar.vBarRevealColor.setBackgroundColor(color)
+        activity.findViewById<View?>(R.id.systembar_statusbar_view)?.setBackgroundColor(color)
+        activity.findViewById<View?>(R.id.systembar_foreground_view)?.setBackgroundColor(color)
+    }
+
+    inline fun <reified T> Context.getThemeRes(resAttr: Int): T? {
+        val attrs = intArrayOf(resAttr)
+        val typedArray = this.obtainStyledAttributes(attrs)
+        var res: T? = null
+        when (T::class) {
+            Int::class -> res = typedArray.getColor(0, Color.BLACK) as T
+            Boolean::class -> res = typedArray.getBoolean(0, false) as T
+            Drawable::class -> res = typedArray.getDrawable(0) as T
+        }
+        typedArray.recycle()
+        return res
     }
 
     /**执行 reveal 动画*/
     private fun revealColor(t: TabLayout.Tab?) {
-        val color = when (t?.position) {
-            0 -> activity.getColorCompat(R.color.colorPrimary)
-            1 -> activity.getColorCompat(R.color.color_red_ccfa3c55)
-            2 -> activity.getColorCompat(R.color.colorPrimaryBlue)
-            else -> activity.getColorCompat(R.color.colorPrimary)
-        }
+        val color: Int = getBgColor(t?.position.safe())
         //reveal动画
         val location = IntArray(2) //view的位置
         val view = t?.view as View
@@ -160,6 +180,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
             anim2.start()
         } else {
         }
+    }
+
+    private fun getBgColor(t: Int): Int {
+        val color: Int = if (!ThemeUtils.sThemeDark) when (t) {
+            0 -> activity.getColorCompat(R.color.colorPrimary)
+            1 -> activity.getColorCompat(R.color.color_red_ccfa3c55)
+            2 -> activity.getColorCompat(R.color.colorPrimaryBlue)
+            else -> activity.getColorCompat(R.color.colorPrimary)
+        } else {
+            activity.getThemeRes<Int>(R.attr.containerBackgroundLayer1).safe(Color.BLACK)
+        }
+        return color
     }
 
     internal fun onNavDestinationSelected(id: Int, navController: NavController, popUp: Boolean): Boolean {

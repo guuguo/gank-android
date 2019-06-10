@@ -132,6 +132,7 @@ dependencies {
     implementation(Deps.bugly.upgrade)
 
     implementation(Deps.kotlin.stdlib)
+    implementation(Deps.wildAndroidKtx)
 
     implementation("com.github.florent37:viewanimator:1.1.1")
 
