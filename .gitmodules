@@ -1,6 +1,3 @@
-[submodule "buildSrc"]
-	path = buildSrc
-	url = https://github.com/guuguo/buildSrc.git
 [submodule "gank_flutter"]
 	path = gank_flutter
 	url = https://github.com/guuguo/gank_flutter.git
