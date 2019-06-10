@@ -135,8 +135,8 @@ dependencies {
 
     implementation("com.github.florent37:viewanimator:1.1.1")
 
-    implementation(project(":flutter_boost"))
-    implementation(project(":xservice_kit"))
+//    implementation(project(":flutter_boost"))
+//    implementation(project(":xservice_kit"))
 
     implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44")
     implementation("com.github.bumptech.glide:glide:4.9.0")
