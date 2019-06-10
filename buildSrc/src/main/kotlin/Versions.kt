@@ -50,7 +50,8 @@ private object versions {
     const val smart_refresh_layout = "1.1.0-alpha-12"
     const val statusbar = "1.5.1"
     const val rx_binding = "2.2.0"
-    const val androidlib = "1.0.2"
+    const val xiaojunKtx="1.2.10"
+    const val androidlib = "1.0.4"
     const val dividerview = "1.0.2"
     const val flowlayout = "1.14.0"
     const val exoplayer = "2.8.0"
@@ -223,7 +224,7 @@ object Deps {
         const val upgrade = "com.tencent.bugly:crashreport_upgrade:${versions.bugly}"
 
     }
-
+    const val wildAndroidKtx = "com.lxj:androidktx:${versions.xiaojunKtx}-x"
     const val dexmaker = "com.linkedin.dexmaker:dexmaker-mockito:${versions.dexmaker}"
 
     const val constraint_layout = "androidx.constraintlayout:constraintlayout:${versions.constraint_layout}"
