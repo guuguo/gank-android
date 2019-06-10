@@ -12,6 +12,11 @@ import android.view.View
 import com.guuguo.gank.base.MBaseActivity
 import com.guuguo.gank.databinding.ActivityMainBinding
 import com.guuguo.gank.util.ThemeUtils
+import com.mikepenz.materialdrawer.Drawer
+import com.mikepenz.materialdrawer.DrawerBuilder
+import com.mikepenz.materialdrawer.model.DividerDrawerItem
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -32,6 +37,5 @@ class MainActivity : MBaseActivity<ActivityMainBinding>() {
         }
         SystemBarHelper.tintStatusBar(activity, getColorCompat(R.color.colorPrimary), 0.2f)
     }
-
 
 }

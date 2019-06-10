@@ -3,6 +3,8 @@ package com.guuguo.gank.app.gank.fragment
 import androidx.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.guuguo.android.lib.extension.safe
@@ -36,7 +38,6 @@ class GankCategoryContentFragment : BaseListFragment<FragmentGankCategoryContent
             return fragment
         }
     }
-
 
     override fun initVariable(savedInstanceState: Bundle?) {
         super.initVariable(savedInstanceState)

@@ -1,25 +1,19 @@
 package com.guuguo.gank.app.gank.fragment
 
 import android.animation.Animator
-import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewAnimationUtils
-import android.widget.AdapterView
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.guuguo.android.dialog.dialog.NormalListDialog
-import com.guuguo.android.dialog.utils.OnOperItemClickL
 import com.guuguo.android.lib.extension.dpToPx
 import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.extension.safe
@@ -27,12 +21,17 @@ import com.guuguo.android.lib.utils.DisplayUtil
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.activity.AboutActivity
 import com.guuguo.gank.base.BaseFragment
+import com.guuguo.gank.constant.AppLocalData
 import com.guuguo.gank.databinding.FragmentHomeBinding
 import com.guuguo.gank.util.ThemeUtils
+import com.mikepenz.materialdrawer.Drawer
+import com.mikepenz.materialdrawer.DrawerBuilder
+import com.mikepenz.materialdrawer.model.DividerDrawerItem
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.proguard.t
 import kotlinx.android.synthetic.main.base_toolbar_common.*
-import kotlinx.android.synthetic.main.base_toolbar_common.view.*
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClickListener {
     override fun isNavigationBack() = false
@@ -80,6 +79,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
                         }
                     }
                 }.show()
+            //if you want to update the items at a later time it is recommended to keep it in a variable
+            val item1 = PrimaryDrawerItem().withIdentifier(1).withName("夜间模式")
+            val item2 = SecondaryDrawerItem().withIdentifier(2).withName("关于")
+
+//create the drawer and remember the `Drawer` result object
+            val result = DrawerBuilder()
+                .withActivity(activity)
+                .withToolbar(getToolBar()!!)
+                .addDrawerItems(
+                    item1,
+                    DividerDrawerItem(),
+                    item2,
+                    SecondaryDrawerItem().withName("设置")
+                )
+                .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
+                    override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                        // do something with the clicked item :D
+                        return false
+                    }
+                })
+                .build()
         }
 //        binding.toolbar.tvTitle.setOnClickListener {  }
 //        SystemBarHelper.setPadding(activity, binding.toolbar.ll_bar)
@@ -117,7 +137,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
             SearchActivity.intentTo(activity, binding.toolbar.searchCard)
 //            FragmentNavigator(activity,childFragmentManager,)
         }
-        val color=getBgColor(0)
+        val color = getBgColor(0)
         binding.toolbar.vBarRevealColor.setBackgroundColor(color)
         activity.findViewById<View?>(R.id.systembar_statusbar_view)?.setBackgroundColor(color)
         activity.findViewById<View?>(R.id.systembar_foreground_view)?.setBackgroundColor(color)
@@ -183,7 +203,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
     }
 
     private fun getBgColor(t: Int): Int {
-        val color: Int = if (!ThemeUtils.sThemeDark) when (t) {
+        val color: Int = if (!AppLocalData.isDark) when (t) {
             0 -> activity.getColorCompat(R.color.colorPrimary)
             1 -> activity.getColorCompat(R.color.color_red_ccfa3c55)
             2 -> activity.getColorCompat(R.color.colorPrimaryBlue)
