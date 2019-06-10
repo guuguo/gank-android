@@ -29,14 +29,17 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
             val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, TRANSLATE_VIEW)
             ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle())
         }
-    val viewModel by lazy { SearchViewModel() }
+
     }
+
+    val viewModel by lazy { SearchViewModel() }
 
     var page = 1
     val mSearchResultAdapter by lazy {
         GankAdapter()
     }
 
+    override fun isCanLoadMore() = false
     override fun isNavigationBack() = false
     override fun getLayoutResId() = R.layout.fragment_search
 
@@ -50,6 +53,11 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
                 } else {
                     mSearchResultAdapter.addData(it.list?.toMutableList().safe())
                 }
+                if (it.isEnd) {
+                    mSearchResultAdapter.loadMoreEnd()
+                } else {
+                    mSearchResultAdapter.setEnableLoadMore(true)
+                }
             }
         })
         viewModel.isEmpty.observe(this, Observer {
@@ -62,7 +70,7 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
     }
 
     override fun loadingStatusChange(it: Boolean) {
-        if (it) {
+        if (it && viewModel.isRefresh) {
             edt_search.hideKeyboard()
             binding.state.showLoading("")
         } else if (!it.safe()) {
@@ -72,6 +80,9 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
 
     override fun initView() {
         super.initView()
+        mSearchResultAdapter.setOnLoadMoreListener({
+            viewModel.fetchData(false)
+        }, binding.recycler)
         mSearchResultAdapter.setOnItemClickListener { _, _, position ->
             val bean = mSearchResultAdapter.getItem(position)!!
             WebViewActivity.intentTo(bean, activity)
@@ -80,7 +91,7 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
         binding.state.showEmpty("请输入搜索关键字")
 
         iv_back.setOnClickListener {
-           onBackPressed()
+            onBackPressed()
         }
         iv_search.setOnClickListener {
             viewModel.searchText = edt_search.text.toString()
@@ -93,13 +104,14 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
                 true
             } else false
         }
-        edt_search.postDelayed({edt_search.showKeyboard()},200)
+        edt_search.postDelayed({ edt_search.showKeyboard() }, 200)
     }
 
     override fun onDestroy() {
         edt_search?.hideKeyboard()
         super.onDestroy()
     }
+
     override fun initRecycler() {
         super.initRecycler()
         binding.recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)

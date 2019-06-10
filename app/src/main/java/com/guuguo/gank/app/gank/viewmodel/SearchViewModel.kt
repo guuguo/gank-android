@@ -24,26 +24,27 @@ class SearchViewModel : BaseListViewModel() {
 
     override fun refreshData(refresh: Boolean) {
         ApiServer.getGankSearchResult(searchText, ApiServer.TYPE_ALL, MEIZI_COUNT, page)
-                .doOnSubscribe { isLoading.value = true }
-                .doOnTerminate { isLoading.value = false }
-                .doOnError { isError.value = it }
-                .doOnNext { searchResult ->
-                    searchResult.results?.forEach { it._id = it.ganhuo_id }
-                    if (isRefresh) {
-                        if (searchResult.count == 0)
-                            isEmpty.value = true
-                        else {
-                            isEmpty.value = false
-                            refreshListModel.setRefresh(searchResult.results.safe())
-                        }
+            .doOnSubscribe { isLoading.value = true }
+            .doOnTerminate { isLoading.value = false }
+            .doOnError { isError.value = it }
+            .doOnNext { searchResult ->
+                searchResult.results?.forEach { it._id = it.ganhuo_id }
+                if (isRefresh) {
+                    if (searchResult.count == 0) {
+                        isEmpty.value = true
                     } else {
                         isEmpty.value = false
-                        refreshListModel.setUpdate(searchResult.results!!)
+                        refreshListModel.setRefresh(searchResult.results.safe())
                     }
-                    ganksListLiveData.value = refreshListModel
+                } else {
+                    isEmpty.value = false
+                    refreshListModel.setUpdate(searchResult.results!!)
                 }
-                .subscribe(EmptyConsumer(), ErrorConsumer())
-                .isDisposed
+                refreshListModel.isEnd = searchResult.count < MEIZI_COUNT
+                ganksListLiveData.value = refreshListModel
+            }
+            .subscribe(EmptyConsumer(), ErrorConsumer())
+            .isDisposed
 
     }
 }
