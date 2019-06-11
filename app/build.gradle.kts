@@ -1,4 +1,5 @@
 import Deps.dagger.android
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
@@ -33,7 +34,10 @@ android {
             storePassword = "android"
         }
     }
-
+    packagingOptions {
+        exclude("META-INF/library_release.kotlin_module")
+        exclude("META-INF/*_release.kotlin_module")
+    }
     buildTypes {
 
         getByName("debug") {
@@ -102,11 +106,11 @@ dependencies {
     implementation(Deps.navigation.fragment_ktx)
 
     implementation(Deps.room.runtime)
-    kapt(Deps.room.compiler)
     implementation(Deps.room.rxjava2)
+    kapt(Deps.room.compiler)
     // testimplementation(Deps.room.testing)
 
-    implementation(Deps.support.cardview)
+//    implementation(Deps.support.cardview)
     implementation(Deps.support.app_compat)
     implementation(Deps.support.design)
     implementation(Deps.support.recyclerview)
@@ -147,6 +151,9 @@ dependencies {
     implementation("com.github.castorflex.smoothprogressbar:library:1.1.0")
     implementation("com.github.iielse:ImageWatcher:1.1.2")
     implementation("com.tapadoo.android:alerter:3.0.1")
-
+    implementation("com.mikepenz:materialdrawer:6.1.2")
+    {
+        exclude("com.google.android.material")
+    }
 }
 

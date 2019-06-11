@@ -12,7 +12,7 @@ import com.guuguo.gank.helper.LoadMoreHelper
  * Copyright ©2017 by ruzhan
  */
 
-abstract class BaseListFragment<VB : ViewDataBinding> : BaseFragment<VB>(), androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
+abstract class BaseListFragment<VB : ViewDataBinding> : BaseFragment<VB>(),SwipeRefreshLayout.OnRefreshListener {
 
     protected open var swipeRefresh: SwipeRefreshLayout? = null
     protected open var recyclerView: RecyclerView? = null

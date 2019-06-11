@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp">
-
-        <LinearLayout
+    </data>
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+    >
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="?containerBackgroundLayer2"
-                app:tabRippleColor="#08000000"
-                app:tabGravity="fill"
-                app:tabSelectedTextColor="@color/colorPrimary"
-                app:tabIndicatorColor="@color/colorPrimary"
-                app:tabMode="scrollable"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:background="@color/black10" />
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewpager"
+        <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp">
 
-            </androidx.viewpager.widget.ViewPager>
-            <!--<include layout="@layout/layout_viewpager" />-->
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-</FrameLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="?containerBackgroundLayer2"
+                        app:tabRippleColor="#08000000"
+                        app:tabGravity="fill"
+                        app:tabSelectedTextColor="@color/colorPrimary"
+                        app:tabIndicatorColor="@color/colorPrimary"
+                        app:tabMode="scrollable"/>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:background="@color/black10"/>
+
+                <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </androidx.viewpager.widget.ViewPager>
+                <!--<include layout="@layout/layout_viewpager" />-->
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+</layout>

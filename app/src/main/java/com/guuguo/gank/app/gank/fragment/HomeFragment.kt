@@ -1,25 +1,20 @@
 package com.guuguo.gank.app.gank.fragment
 
 import android.animation.Animator
-import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewAnimationUtils
-import android.widget.AdapterView
+import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.guuguo.android.dialog.dialog.NormalListDialog
-import com.guuguo.android.dialog.utils.OnOperItemClickL
 import com.guuguo.android.lib.extension.dpToPx
 import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.extension.safe
@@ -27,12 +22,19 @@ import com.guuguo.android.lib.utils.DisplayUtil
 import com.guuguo.gank.R
 import com.guuguo.gank.app.gank.activity.AboutActivity
 import com.guuguo.gank.base.BaseFragment
+import com.guuguo.gank.constant.AppLocalData
 import com.guuguo.gank.databinding.FragmentHomeBinding
 import com.guuguo.gank.util.ThemeUtils
+import com.mikepenz.iconics.typeface.GenericFont
+import com.mikepenz.iconics.typeface.IIcon
+import com.mikepenz.materialdrawer.AccountHeaderBuilder
+import com.mikepenz.materialdrawer.Drawer
+import com.mikepenz.materialdrawer.DrawerBuilder
+import com.mikepenz.materialdrawer.icons.MaterialDrawerFont
+import com.mikepenz.materialdrawer.model.*
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.proguard.t
 import kotlinx.android.synthetic.main.base_toolbar_common.*
-import kotlinx.android.synthetic.main.base_toolbar_common.view.*
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClickListener {
     override fun isNavigationBack() = false
@@ -52,6 +54,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         tv_title.text = title
     }
 
+    private var anim2: Animator? = null
+    private var anim: Animator? = null
     lateinit var mNavHostFragment: NavHostFragment
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -68,25 +72,49 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         return true
     }
 
+    lateinit var drawer: Drawer
     override fun initView() {
         super.initView()
+        val slideTextColor: Int = activity.getThemeRes(android.R.attr.textColorPrimary)!!
+
+        drawer = DrawerBuilder()
+            .withActivity(activity)
+            .withSliderBackgroundColor(activity.getThemeRes(R.attr.containerBackgroundLayer2)!!)
+            .withAccountHeader(
+                AccountHeaderBuilder()
+                    .withActivity(activity)
+                    .withTextColor(slideTextColor)
+                    .withSelectionListEnabled(false)
+                    .addProfiles(
+                        ProfileDrawerItem().withName("guuguo").withEmail("guuguo@qq.com").withIcon(R.mipmap.avatar_squre)
+                    ).withPaddingBelowHeader(true)
+                    .build()
+            )
+            .withHeaderPadding(true)
+            .addDrawerItems(
+                SwitchDrawerItem().withName("夜间模式").withIdentifier(1).withTextColor(slideTextColor).withChecked(
+                    AppLocalData.isDark
+                ).withOnCheckedChangeListener { drawerItem, buttonView, isChecked ->
+                    ThemeUtils.changeToTheme(activity)
+                }.withSelectable(false),
+                SecondaryDrawerItem().withName("关于").withIdentifier(2).withSelectable(false).withTextColor(
+                    slideTextColor
+                )
+            )
+            .withOnDrawerItemClickListener { view, position, drawerItem ->
+                // do something with the clicked item :D
+                when (drawerItem.identifier) {
+                    2L -> AboutActivity.intentTo(activity)
+                }
+                false
+            }
+            .build()
         binding.toolbar.imageView2.setOnClickListener {
-            NormalListDialog(activity, arrayOf("黑夜", "关于"))
-                .apply {
-                    setOnOperItemClickL { parent, view, position, id ->
-                        when (position) {
-                            0 -> ThemeUtils.changeToTheme(activity)
-                            1 -> AboutActivity.intentTo(activity)
-                        }
-                    }
-                }.show()
+            drawer.openDrawer()
         }
-//        binding.toolbar.tvTitle.setOnClickListener {  }
-//        SystemBarHelper.setPadding(activity, binding.toolbar.ll_bar)
+
         findNavController()
         mNavHostFragment = childFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-//        NavigationUI.setupWithNavController(binding.navigation, mNavHostFragment.navController)
-//        ViewCompat.setElevation(binding.toolbar, 8.dpToPx().toFloat())
         binding.toolbar.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
             }
@@ -102,22 +130,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
                     2 -> R.id.gankCategoryContentFragment
                     else -> R.id.dailyFragment
                 }
-//                when (t?.position) {
-//                    1 -> ViewCompat.setElevation(binding.toolbar, 0f)
-//                    else -> ViewCompat.setElevation(binding.toolbar, 8.dpToPx().toFloat())
-//                }
                 onNavDestinationSelected(id, mNavHostFragment.navController, true)
             }
         })
         getToolBar()?.inflateMenu(getMenuResId())
         getToolBar()?.setOnMenuItemClickListener(this)
         binding.toolbar.tvTitle.setOnClickListener {
-            //            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, binding.toolbar.search_card, "share_search")
-//            findNavController().navigate(R.id.action_to_search)
             SearchActivity.intentTo(activity, binding.toolbar.searchCard)
-//            FragmentNavigator(activity,childFragmentManager,)
         }
-        val color=getBgColor(0)
+        val color = getBgColor(0)
         binding.toolbar.vBarRevealColor.setBackgroundColor(color)
         activity.findViewById<View?>(R.id.systembar_statusbar_view)?.setBackgroundColor(color)
         activity.findViewById<View?>(R.id.systembar_foreground_view)?.setBackgroundColor(color)
@@ -153,21 +174,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         val sysbarForeground = activity.findViewById<View?>(R.id.systembar_foreground_view)
         sysbar?.setBackgroundColor(color)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val anim = ViewAnimationUtils.createCircularReveal(
+            anim = ViewAnimationUtils.createCircularReveal(
                 binding.toolbar.vBarRevealColor,
                 location[0] + view.width.safe() / 2,
                 location[1] + view.height.safe() + 20.dpToPx(),
                 20.dpToPx().toFloat(),
                 radius.toFloat()
             )
-            val anim2 = ViewAnimationUtils.createCircularReveal(
+            anim2 = ViewAnimationUtils.createCircularReveal(
                 sysbar,
                 location[0] + view.width.safe() / 2,
                 location[1] + view.height.safe() + 20.dpToPx(),
                 20.dpToPx().toFloat(),
                 radius.toFloat()
             )
-            anim.addListener(object : Animator.AnimatorListener {
+            anim?.addListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) {}
                 override fun onAnimationCancel(animation: Animator?) {}
                 override fun onAnimationStart(animation: Animator?) {}
@@ -176,14 +197,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
                     sysbarForeground?.setBackgroundColor(color)
                 }
             })
-            anim.start()
-            anim2.start()
+            anim?.start()
+            anim2?.start()
         } else {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        anim?.cancel()
+        anim2?.cancel()
+    }
+
     private fun getBgColor(t: Int): Int {
-        val color: Int = if (!ThemeUtils.sThemeDark) when (t) {
+        val color: Int = if (!AppLocalData.isDark) when (t) {
             0 -> activity.getColorCompat(R.color.colorPrimary)
             1 -> activity.getColorCompat(R.color.color_red_ccfa3c55)
             2 -> activity.getColorCompat(R.color.colorPrimaryBlue)

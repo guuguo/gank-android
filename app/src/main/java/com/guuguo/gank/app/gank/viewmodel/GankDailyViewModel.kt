@@ -1,13 +1,10 @@
 package com.guuguo.gank.app.gank.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.databinding.BaseObservable
 import com.google.gson.reflect.TypeToken
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.gank.R.id.swiper
-import com.guuguo.gank.app.gank.fragment.GankDailyFragment
 import com.guuguo.gank.base.BaseListViewModel
-import com.guuguo.gank.constant.LocalData
+import com.guuguo.gank.constant.AppLocalData
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.constant.myGson
 import com.guuguo.gank.model.Ganks
@@ -16,7 +13,6 @@ import com.guuguo.gank.model.other.RefreshListModel
 import com.guuguo.gank.net.ApiServer
 import io.reactivex.Flowable
 import io.reactivex.functions.BiFunction
-import kotlinx.android.synthetic.main.view_refresh_recycler.*
 import java.util.*
 
 
@@ -37,7 +33,7 @@ class GankDailyViewModel : BaseListViewModel() {
                 .subscribe({
                     it.let {
                         if (page == 1)
-                            LocalData.gankDaily = myGson.toJson(it)
+                            AppLocalData.gankDaily = myGson.toJson(it)
                         setUpMeiziList(it)
                     }
                 }, {
@@ -50,7 +46,7 @@ class GankDailyViewModel : BaseListViewModel() {
     val ganksListLiveData = MutableLiveData<RefreshListModel<GankModel>>()
 
     fun getMeiziData() {
-        val tempStr = LocalData.gankDaily
+        val tempStr = AppLocalData.gankDaily
         if (tempStr.isNotEmpty())
             setUpMeiziList(myGson.fromJson(tempStr, object : TypeToken<ArrayList<GankModel>>() {}.type))
     }

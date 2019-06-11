@@ -1,5 +1,6 @@
 package com.guuguo.gank.base
 
+import android.content.Context
 import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -27,6 +28,7 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment() {
     val mActivity by lazy {
         activity as LBaseActivity
     }
+
 
     open fun getViewModel(): BaseViewModel? = null
     @CallSuper
