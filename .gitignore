@@ -18,7 +18,6 @@
 local.properties
 
 *.imlc
-.gradle
 /androidLib/*/build
 
 # User-specific configurations
