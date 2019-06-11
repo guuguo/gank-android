@@ -15,6 +15,7 @@ import android.webkit.WebView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.guuguo.android.lib.app.LBaseFragment
 import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.extension.safe
@@ -160,7 +161,7 @@ open class WebViewActivity : MBaseActivity<ActivityWebviewBinding>() {
     }
 
     fun showTip(msg: String) {
-        com.google.android.material.snackbar.Snackbar.make(container_view, msg, com.google.android.material.snackbar.Snackbar.LENGTH_SHORT)
+        Snackbar.make(container_view, msg, Snackbar.LENGTH_SHORT).show()
     }
 
 }
