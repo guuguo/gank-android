@@ -17,7 +17,7 @@ android {
         minSdkVersion(AndroidSdk.min)
         targetSdkVersion(AndroidSdk.target)
         versionCode = gitVersionCode()
-        versionName = "1.6"
+        versionName = "1.7"
         ndk {
             //设置支持的SO库架构
             abiFilters("armeabi", "x86", "armeabi-v7a", "x86_64", "arm64-v8a")
@@ -42,7 +42,7 @@ android {
 
         getByName("debug") {
             versionNameSuffix = "d"
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             isShrinkResources = false
             isZipAlignEnabled = true
             signingConfig = signingConfigs.getByName("config")
@@ -50,7 +50,7 @@ android {
         }
 
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             isShrinkResources = false
             isZipAlignEnabled = true
             signingConfig = signingConfigs.getByName("config")
@@ -90,7 +90,6 @@ dependencies {
     testImplementation(Deps.mockito.all)
     testImplementation(Deps.junit)
 
-    androidTestImplementation(Deps.support.annotations)
     androidTestImplementation(Deps.atsl.runner)
     androidTestImplementation(Deps.atsl.rules)
     androidTestImplementation(Deps.espresso.core)
@@ -111,6 +110,7 @@ dependencies {
     // testimplementation(Deps.room.testing)
 
 //    implementation(Deps.support.cardview)
+    implementation(Deps.support.annotations)
     implementation(Deps.support.app_compat)
     implementation(Deps.support.design)
     implementation(Deps.support.recyclerview)
