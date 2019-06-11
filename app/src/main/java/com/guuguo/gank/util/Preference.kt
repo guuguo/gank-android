@@ -1,10 +1,8 @@
 package com.guuguo.gank.util
 
-import android.content.Context
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.guuguo.gank.app.App
-import com.lxj.androidktx.AndroidKtxConfig.context
 import com.lxj.androidktx.core.mmkv
 import com.tencent.mmkv.MMKV
 import kotlin.properties.ReadWriteProperty

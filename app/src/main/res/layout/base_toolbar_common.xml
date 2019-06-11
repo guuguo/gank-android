@@ -39,7 +39,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                         android:id="@+id/search_card"
                         android:layout_width="match_parent"
                         android:layout_height="46dp"
@@ -95,7 +95,7 @@
                                 app:srcCompat="@drawable/ic_search" android:id="@+id/imageView3"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
 
                 <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tab"

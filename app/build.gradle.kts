@@ -35,14 +35,8 @@ android {
         }
     }
     packagingOptions {
-        exclude("META-INF/DEPENDENCIES")
-        exclude("META-INF/LICENSE")
-        exclude("META-INF/LICENSE.txt")
-        exclude("META-INF/license.txt")
-        exclude("META-INF/NOTICE")
-        exclude("META-INF/NOTICE.txt")
-        exclude("META-INF/notice.txt")
-        exclude("META-INF/ASL2.0")
+        exclude("META-INF/library_release.kotlin_module")
+        exclude("META-INF/*_release.kotlin_module")
     }
     buildTypes {
 
@@ -112,11 +106,11 @@ dependencies {
     implementation(Deps.navigation.fragment_ktx)
 
     implementation(Deps.room.runtime)
-    kapt(Deps.room.compiler)
     implementation(Deps.room.rxjava2)
+    kapt(Deps.room.compiler)
     // testimplementation(Deps.room.testing)
 
-    implementation(Deps.support.cardview)
+//    implementation(Deps.support.cardview)
     implementation(Deps.support.app_compat)
     implementation(Deps.support.design)
     implementation(Deps.support.recyclerview)
@@ -157,6 +151,9 @@ dependencies {
     implementation("com.github.castorflex.smoothprogressbar:library:1.1.0")
     implementation("com.github.iielse:ImageWatcher:1.1.2")
     implementation("com.tapadoo.android:alerter:3.0.1")
-    implementation("com.mikepenz:materialdrawer:7.0.0-rc01")
+    implementation("com.mikepenz:materialdrawer:6.1.2")
+    {
+        exclude("com.google.android.material")
+    }
 }
 
