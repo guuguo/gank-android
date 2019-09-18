@@ -1,5 +1,3 @@
-import org.gradle.internal.impldep.aQute.bnd.osgi.Constants.options
-
 buildscript {
 
     repositories {
