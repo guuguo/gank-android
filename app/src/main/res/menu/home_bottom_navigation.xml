@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@android:drawable/ic_delete"
+        android:id="@+id/menu_fuliba"
+        app:showAsAction="ifRoom"
+        android:title="@string/check_upgrade"
+        />
+    <item
+        android:id="@+id/menu_gank"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_delete"
+        android:title="@string/about"
+        />
+
+</menu>
