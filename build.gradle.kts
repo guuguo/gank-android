@@ -1,8 +1,5 @@
 buildscript {
-
     repositories {
-        google()
-        jcenter()
         addRepos(repositories)
     }
 
@@ -19,11 +16,12 @@ allprojects {
         flatDir {
             dirs("libs")
         }
-
         maven { setUrl("http://www.guuguo.top/") }
-        maven { setUrl("http://dl.bintray.com/kotlin/kotlin-eap") }
     }
 }
 tasks.register("clean").configure {
     delete("build")
 }
+
+
+

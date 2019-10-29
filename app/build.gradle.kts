@@ -1,14 +1,12 @@
-import Deps.dagger.android
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id(BuildPlugins.androidApplication)
-    id(BuildPlugins.kotlinAndroid)
+    kotlin("android")
+//    id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
 }
-fun gitVersionCode() = currentTime()//Date().format("yyMMdd", java.util.TimeZone.getTimeZone("UTC")).toInteger()
+fun gitVersionCode() =
+    currentTime()//Date().format("yyMMdd", java.util.TimeZone.getTimeZone("UTC")).toInteger()
 
 android {
     compileSdkVersion(AndroidSdk.compile)
@@ -25,7 +23,6 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
     }
-
     signingConfigs {
         create("config") {
             keyAlias = "mimi"
@@ -80,8 +77,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildFeatures {
+        compose = true
+    }
 }
-
 
 dependencies {
     implementation(fileTree(hashMapOf("dir" to "libs", "include" to arrayOf("*.jar"))))
@@ -95,10 +97,10 @@ dependencies {
     androidTestImplementation(Deps.espresso.core)
     androidTestImplementation("org.hamcrest:hamcrest-library:2.1")
 
-//    implementation(Deps.androidlib.dividerview
-//    implementation(Deps.androidlib.flowlayoutMaterialAbout
-//    implementation(Deps.androidlib.lib
-//    implementation(Deps.androidlib.iconfont
+    implementation("androidx.ui:ui-tooling:0.1.0-dev02")
+    implementation("androidx.ui:ui-layout:0.1.0-dev02")
+    implementation("androidx.ui:ui-material:0.1.0-dev02")
+
     implementation(Deps.androidlib.libdatabindingex)
 
     implementation(Deps.navigation.runtime_ktx)
@@ -140,13 +142,11 @@ dependencies {
 
     implementation("com.github.florent37:viewanimator:1.1.1")
 
-//    implementation(project(":flutter_boost"))
-//    implementation(project(":xservice_kit"))
 
     implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44")
     implementation("com.github.bumptech.glide:glide:4.9.0")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.9.0@aar")
-    implementation("com.github.Lauzy:LBehavior:1.0.2")
+    implementation("com.github.Lauzy:LBehavior:1.0.3")
     implementation("com.github.jrvansuita:MaterialAbout:0.1.9")
     implementation("com.github.castorflex.smoothprogressbar:library:1.1.0")
     implementation("com.github.iielse:ImageWatcher:1.1.2")
