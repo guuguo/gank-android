@@ -2,6 +2,8 @@ plugins {
     id("com.android.library")
 }
 
+
+
 android {
     compileSdkVersion(AndroidSdk.compile)
 
@@ -17,7 +19,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            minifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
@@ -28,5 +30,5 @@ dependencies {
     //stetho
     debugApi(Deps.stetho.runtime)
     debugApi(Deps.stetho.okhttp3)
-    api("com.squareup.okhttp3:okhttp:3.14.1")
+    api("com.squareup.okhttp3:okhttp:4.0.0")
 }

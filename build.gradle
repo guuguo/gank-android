@@ -1,9 +1,12 @@
+
 buildscript {
+    apply from: 'versions.gradle'
     repositories {
         addRepos(repositories)
     }
 
     dependencies {
+
         classpath(BuildPlugins.androidGradlePlugin)
         classpath(BuildPlugins.kotlinGradlePlugin)
         classpath("com.novoda:bintray-release:0.9")

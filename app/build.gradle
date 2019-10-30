@@ -1,12 +1,11 @@
-plugins {
-    id(BuildPlugins.androidApplication)
-//    kotlin("android")
-    id(BuildPlugins.kotlinAndroid)
-    id(BuildPlugins.kotlinAndroidExtensions)
-    id(BuildPlugins.kotlinKapt)
-}
-fun gitVersionCode() =
-    currentTime()//Date().format("yyMMdd", java.util.TimeZone.getTimeZone("UTC")).toInteger()
+import java.text.SimpleDateFormat
+
+apply plugin: BuildPlugins.androidApplication
+apply plugin: BuildPlugins.kotlinAndroid
+apply plugin: BuildPlugins.kotlinAndroidExtensions
+apply plugin: BuildPlugins.kotlinKapt
+
+def gitVersionCode() { return Integer.parseInt(new SimpleDateFormat("yyMMdd").format(new Date())) }
 
 android {
     compileSdkVersion(AndroidSdk.compile)
@@ -39,17 +38,17 @@ android {
 
         getByName("debug") {
             versionNameSuffix = "d"
-            isMinifyEnabled = true
-            isShrinkResources = false
-            isZipAlignEnabled = true
+            minifyEnabled = true
+            shrinkResources = false
+            zipAlignEnabled = true
             signingConfig = signingConfigs.getByName("config")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
 
         getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = false
-            isZipAlignEnabled = true
+            minifyEnabled = true
+            shrinkResources = false
+            zipAlignEnabled = true
             signingConfig = signingConfigs.getByName("config")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
@@ -57,7 +56,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            val fileName = output.outputFile.name
+            def fileName = output.outputFile.name
             fileName.replace("app", "gank-${variant.versionName}-${variant.versionCode}")
 
             true
@@ -68,10 +67,10 @@ android {
         getByName("main").java.srcDirs("src/main/kotlin")
     }
     dataBinding {
-        isEnabled = true
+        enabled = true
     }
     lintOptions {
-        isAbortOnError = false
+        abortOnError = false
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -86,7 +85,7 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(hashMapOf("dir" to "libs", "include" to arrayOf("*.jar"))))
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     testImplementation(Deps.mockito.core)
     testImplementation(Deps.mockito.all)
@@ -157,9 +156,9 @@ dependencies {
     implementation("com.github.castorflex.smoothprogressbar:library:1.1.0")
     implementation("com.github.iielse:ImageWatcher:1.1.5")
     implementation("com.tapadoo.android:alerter:3.0.1")
-    implementation("com.mikepenz:materialdrawer:6.1.2")
+    implementation("com.mikepenz:materialdrawer:6.1.2",
     {
-        exclude("com.google.android.material")
-    }
+        exclude group:"com.google.android.material"
+    })
 }
 
