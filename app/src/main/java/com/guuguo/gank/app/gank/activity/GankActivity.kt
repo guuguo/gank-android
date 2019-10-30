@@ -43,14 +43,12 @@ import com.guuguo.gank.constant.OmeiziDrawable
 import com.guuguo.gank.constant.OmeiziDrawableStr
 import com.guuguo.gank.databinding.ActivityGankBinding
 import com.guuguo.gank.model.entity.GankModel
-import io.reactivex.Completable
-import io.reactivex.Flowable
+import com.guuguo.gank.net.netError
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_gank.*
 import kotlinx.android.synthetic.main.toolbar_gank_detail.*
-import netError
 import java.util.concurrent.TimeUnit
 
 

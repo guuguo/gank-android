@@ -1,3 +1,5 @@
+package com.guuguo.gank.net;
+
 import android.accounts.NetworkErrorException
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.R
@@ -8,53 +10,6 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-//package com.guuguo.gank.net
-//
-//import android.accounts.NetworkErrorException
-//import com.bianla.lite.R
-//import com.bianla.lite.app.App
-//import com.bianla.lite.app.base.net.BaseEntity
-//import com.guuguo.android.lib.extension.safe
-//import com.guuguo.gank.R
-//import com.guuguo.gank.app.App
-//import com.guuguo.gank.model.Ganks
-//import io.reactivex.Observable
-//import io.reactivex.ObservableTransformer
-//import retrofit2.HttpException
-//import java.io.IOException
-//import java.net.ConnectException
-//import java.net.SocketTimeoutException
-//import java.net.UnknownHostException
-//
-//class NetTransform<T> : ObservableTransformer<Ganks<T>, Ganks<T>> {
-//
-//    override fun apply(upstream: Observable<Ganks<T>>): Observable<Ganks<T>> {
-//        return upstream.flatMap { data ->
-//            return@flatMap Observable.create<Ganks<T>> { e ->
-//                val str = checkError(data)
-//                if (str != null) {
-//                    try {
-//                        e.onError(IOException(str))
-//                    } catch (e: Exception) {
-//                        e.printStackTrace()
-//                    }
-//                } else {
-//                    e.onNext(data)
-//                    e.onComplete()
-//                }
-//            }
-//        }
-//    }
-//
-//    private fun checkError(t: Ganks<T>): String? {
-//        return if (t.code != 1) {
-//            t.alertMsg
-//        } else {
-//            null
-//        }
-//    }
-//}
-//
 fun Throwable.netError(onApiLoadError: (msg: String, isNetError: Boolean) -> Unit = { _, _ -> }): String {
     var message = ""
     val errorMessage: (msg: String, isNetError: Boolean) -> Unit = { msg, b ->
@@ -85,8 +40,6 @@ fun Throwable.netError(onApiLoadError: (msg: String, isNetError: Boolean) -> Uni
             }, true)
         }
         is IOException -> {
-//            val res=ResourceUtils.getResId(this.message.safe(),String::class.java)
-//           val msg= if(res !=-1) App.getInstance().getString(res) else this.message.safe()
             val msg = this.message.safe()
             errorMessage(msg, false)
         }
