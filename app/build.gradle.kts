@@ -97,10 +97,6 @@ dependencies {
     androidTestImplementation(Deps.espresso.core)
     androidTestImplementation("org.hamcrest:hamcrest-library:2.1")
 
-    implementation("androidx.ui:ui-tooling:0.1.0-dev02")
-    implementation("androidx.ui:ui-layout:0.1.0-dev02")
-    implementation("androidx.ui:ui-material:0.1.0-dev02")
-
     implementation(Deps.androidlib.libdatabindingex)
 
     implementation(Deps.navigation.runtime_ktx)
@@ -118,6 +114,16 @@ dependencies {
     implementation(Deps.support.recyclerview)
     implementation(Deps.androidx.vectordrawable)
     implementation(Deps.androidx.ktx)
+
+    kapt(Deps.compose.compiler)
+    implementation(Deps.compose.foundation)
+    implementation(Deps.compose.runtime)
+    implementation(Deps.compose.android_text)
+    implementation(Deps.compose.text)
+    implementation(Deps.compose.layout)
+    implementation(Deps.compose.material)
+    implementation(Deps.compose.tooling)
+
     implementation(Deps.support.v4)
     implementation(Deps.constraint_layout)
     kapt(Deps.lifecycle.compiler)
@@ -149,7 +155,7 @@ dependencies {
     implementation("com.github.Lauzy:LBehavior:1.0.3")
     implementation("com.github.jrvansuita:MaterialAbout:0.1.9")
     implementation("com.github.castorflex.smoothprogressbar:library:1.1.0")
-    implementation("com.github.iielse:ImageWatcher:1.1.2")
+    implementation("com.github.iielse:ImageWatcher:1.1.5")
     implementation("com.tapadoo.android:alerter:3.0.1")
     implementation("com.mikepenz:materialdrawer:6.1.2")
     {

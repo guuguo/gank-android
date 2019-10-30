@@ -23,22 +23,22 @@ import java.util.*
 class GankModel() : Parcelable, Serializable {
     @NonNull
     @PrimaryKey
-    var _id: String = ""
+    var _id: String? = ""
     var createdAt: Date? = null
-    var desc: String = ""
+    var desc: String? = ""
     var publishedAt: Date? = null
     var source: String? = null
-    var type: String = ""
-    var url: String = ""
+    var type: String? = ""
+    var url: String? = ""
     var used: String? = null
     var who: String? = null
-    @TypeConverters(RoomDataConverter::class)
-    var images: List<String> = listOf()
+//    @TypeConverters(RoomDataConverter::class)
+    var images: List<String>? = listOf()
     var width: Int = 0
     var height: Int = 0
 
-    var ganhuo_id = ""
-    var readability = ""
+    var ganhuo_id: String? = ""
+    var readability: String? = ""
 
     constructor(parcel: Parcel) : this() {
         _id = parcel.readString()
@@ -96,7 +96,9 @@ class GankModel() : Parcelable, Serializable {
         parcel.writeString(ganhuo_id)
         parcel.writeString(readability)
         parcel.writeString(createdAt?.let { SimpleDateFormat(datePattern).format(it) }.safe())
-        parcel.writeString(publishedAt?.let { SimpleDateFormat(datePattern).format(publishedAt).safe() })
+        parcel.writeString(publishedAt?.let {
+            SimpleDateFormat(datePattern).format(publishedAt).safe()
+        })
     }
 
     override fun describeContents(): Int {
