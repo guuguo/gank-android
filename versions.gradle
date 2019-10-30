@@ -8,7 +8,7 @@ versions.roomCompiler = "1.1.0"
 versions.lifecycle = "2.0.0"
 versions.annotation = "1.1.0"
 versions.support = "1.0.0"
-versions.compat = "1.0.2"
+versions.compat = "1.1.0"
 versions.recycler = "1.0.0"
 versions.constraint_layout = "2.0.0-beta3"
 versions.ktx = "1.0.2"
@@ -91,7 +91,7 @@ Deps.support.cardview = "androidx.cardview:cardview:${versions.design}"
 
 Deps.androidx = [:]
 Deps.androidx.ktx = "androidx.core:core-ktx:${versions.ktx}"
-Deps.androidx.vectordrawable = "androidx.vectordrawable:vectordrawable:${versions.design}"
+Deps.androidx.vectordrawable = "androidx.vectordrawable:vectordrawable:${versions.compat}"
 
 
 Deps.compose = [:]
