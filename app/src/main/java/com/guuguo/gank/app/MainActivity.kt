@@ -1,23 +1,13 @@
-package com.guuguo.gank.app.gank.activity
+package com.guuguo.gank.app
 
-import android.graphics.Color
+import android.os.Build.VERSION
+import android.view.View
+import android.view.ViewGroup
 import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.systembar.SystemBarHelper
 import com.guuguo.gank.R
-import com.guuguo.gank.base.BaseActivity
-import android.view.ViewGroup
-import android.os.Build.VERSION
-import android.os.Bundle
-import android.view.View
 import com.guuguo.gank.base.MBaseActivity
 import com.guuguo.gank.databinding.ActivityMainBinding
-import com.guuguo.gank.util.ThemeUtils
-import com.mikepenz.materialdrawer.Drawer
-import com.mikepenz.materialdrawer.DrawerBuilder
-import com.mikepenz.materialdrawer.model.DividerDrawerItem
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
-import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class MainActivity : MBaseActivity<ActivityMainBinding>() {
@@ -29,13 +19,29 @@ class MainActivity : MBaseActivity<ActivityMainBinding>() {
             if (translucentView == null) {
                 translucentView = View(decorView.context)
                 translucentView.id = R.id.systembar_foreground_view
-                val lp = ViewGroup.LayoutParams(-1, SystemBarHelper.getStatusBarHeight(decorView.context))
+                val lp = ViewGroup.LayoutParams(
+                    -1,
+                    SystemBarHelper.getStatusBarHeight(decorView.context)
+                )
                 decorView.addView(translucentView, lp)
             }
 
             translucentView.setBackgroundColor(getColorCompat(R.color.colorPrimary))
         }
         SystemBarHelper.tintStatusBar(activity, getColorCompat(R.color.colorPrimary), 0.2f)
+    }
+
+    override fun initView() {
+        super.initView()
+        binding.navigation.setOnClickListener {
+            when (it.id) {
+                R.id.menu_fuliba -> {
+                }
+                R.id.menu_gank -> {
+
+                }
+            }
+        }
     }
 
 }
