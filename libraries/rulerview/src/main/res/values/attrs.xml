@@ -1,0 +1,51 @@
+<resources>
+    <declare-styleable name="RulerView">
+
+        <attr name="maxLineHeight" format="dimension" />
+        <attr name="middleLineHeight" format="dimension" />
+        <attr name="minLineHeight" format="dimension" />
+        <attr name="selectedLineHeight" format="dimension" />
+
+        <attr name="maxLineColor" format="reference|color" />
+        <attr name="middleLineColor" format="reference|color" />
+        <attr name="minLineColor" format="reference|color" />
+        <attr name="selectedLineColor" format="reference|color" />
+
+        <attr name="maxLineWidth" format="dimension" />
+        <attr name="middleLineWidth" format="dimension" />
+        <attr name="minLineWidth" format="dimension" />
+        <attr name="selectedLineWidth" format="dimension" />
+
+        <attr name="maxTextSize" format="dimension" />
+
+        <attr name="maxTextColor" format="reference|color" />
+        <attr name="selectedTextColor" format="reference|color" />
+
+        <attr name="textMargin" format="dimension" />
+
+        <attr name="model" format="enum">
+            <enum name="horizontal_top" value="0" />
+            <enum name="horizontal_bottom" value="1" />
+            <enum name="horizontal_circular_top" value="2" />
+            <enum name="horizontal_circular_bottom" value="3" />
+
+            <enum name="vertical_left" value="4" />
+            <enum name="vertical_right" value="5" />
+            <enum name="vertical_circular_left" value="6" />
+            <enum name="vertical_circular_right" value="7" />
+        </attr>
+
+        <attr name="unit" format="float" />
+        <attr name="maxValue" format="float" />
+        <attr name="minValue" format="float" />
+        <attr name="defaultValue" format="float" />
+        <attr name="lineSpaceWidth" format="dimension" />
+
+        <attr name="circularRadius" format="dimension" />
+
+        <attr name="baseLineWidth" format="dimension" />
+        <attr name="baseLineMargin" format="dimension" />
+        <attr name="baseLineColor" format="color"/>
+
+    </declare-styleable>
+</resources>

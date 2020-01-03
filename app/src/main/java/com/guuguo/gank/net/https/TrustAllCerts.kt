@@ -30,16 +30,13 @@ class TrustAllCerts : X509TrustManager {
 
     companion object {
 
-        fun createSSLSocketFactory(): SSLSocketFactory? {
-            var ssfFactory: SSLSocketFactory? = null
+        fun createSSLSocketFactory(): SSLSocketFactory {
+            var ssfFactory: SSLSocketFactory
 
-            try {
-                val sc = SSLContext.getInstance("TLS")
-                sc.init(null, arrayOf<TrustManager>(TrustAllCerts()), SecureRandom())
+            val sc = SSLContext.getInstance("TLS")
+            sc.init(null, arrayOf<TrustManager>(TrustAllCerts()), SecureRandom())
 
-                ssfFactory = sc.socketFactory
-            } catch (e: Exception) {
-            }
+            ssfFactory = sc.socketFactory
 
             return ssfFactory
         }

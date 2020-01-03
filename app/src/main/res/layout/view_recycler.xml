@@ -9,4 +9,4 @@
     android:paddingBottom="20dp"
     tools:listitem="@layout/item_meizi"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".app.gank.fragment.GankDailyFragment" />
+    tools:context=".ui.gank.fragment.GankDailyFragment" />

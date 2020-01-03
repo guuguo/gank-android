@@ -1,7 +1,7 @@
 def versions = [:]
-versions.buildToolsVersion = "4.0.0-alpha01"
 versions.navigationSafeArgsVersion = "1.0.0"
-versions.kotlin = "1.3.60-eap-25"
+versions.buildToolsVersion = "3.4.2"
+versions.kotlin = "1.3.50"
 versions.arch_core = "1.1.1"
 versions.room = "2.2.1"
 versions.roomCompiler = "1.1.0"

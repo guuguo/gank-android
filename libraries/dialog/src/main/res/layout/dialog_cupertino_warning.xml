@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rect_light"
+    android:gravity="center_horizontal"
+    android:paddingTop="30dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:paddingStart="27dp"
+        android:paddingEnd="27dp"
+        android:text="提示"
+        android:textColor="#333"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:paddingStart="27dp"
+        android:paddingEnd="27dp"
+        android:textColor="#333"
+        android:textSize="16sp"
+        tools:text="哈哈哈哈哈哈" />
+
+    <FrameLayout
+        android:layout_marginTop="15dp"
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+    <View
+        android:id="@+id/v_divider"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/ios_dialog_split_light" />
+
+    <LinearLayout
+        android:id="@+id/ll_functions"
+        android:layout_width="@dimen/cupertino_dialog_width"
+        android:layout_height="45dp"
+        android:divider="@color/ios_dialog_split_light"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/btn_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/ios_dlg_text"
+            android:textSize="16sp"
+            tools:text="取消" />
+
+        <TextView
+            android:id="@+id/btn_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/ios_dlg_text"
+            android:textSize="16sp"
+            tools:text="确认" />
+    </LinearLayout>
+</LinearLayout>

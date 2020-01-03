@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="statusbar_view" type="id"/>
+    <item name="translucent_view" type="id"/>
+
+    <item name="function_tv" type="id"/>
+    <item name="function_img" type="id"/>
+
+</resources>

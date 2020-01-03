@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.guuguo.gank.app.gank.viewmodel.GankDailyViewModel" />
+            type="com.guuguo.gank.ui.gank.viewmodel.GankDailyViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

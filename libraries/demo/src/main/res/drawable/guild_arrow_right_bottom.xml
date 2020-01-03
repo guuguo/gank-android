@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--负数的角度，代表的是逆时针旋转，大神们牛逼,经常能看见负数的使用-->
+    <rotate xmlns:android="http://schemas.android.com/apk/res/android"
+        android:drawable="@drawable/guild_arrow_left_top"
+        android:fromDegrees="180"
+        android:toDegrees="-180"
+        android:pivotX="50%"
+        android:pivotY="50%"/>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="cupertino_dialog_width">280dp</dimen>
+    <dimen name="dialog_recycler_item_height">65sp</dimen>
+</resources>

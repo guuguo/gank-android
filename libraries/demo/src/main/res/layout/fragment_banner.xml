@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ededed"
+    android:orientation="vertical"
+    tools:context="top.guuguo.myapplication.ui.activity.MainActivity">
+
+    <top.guuguo.myapplication.SimpleImageBanner
+        android:id="@+id/convenientBanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/day_main_base_bg"
+        app:bb_barPaddingBottom="85dp"
+        app:bb_indicatorCornerRadius="2dp"
+        app:bb_indicatorGap="8dp"
+        app:bb_indicatorGravity="LEFT"
+        app:bb_indicatorHeight="4dp"
+        app:bb_indicatorSelectColor="#ffffff"
+        app:bb_indicatorStyle="CORNER_RECTANGLE"
+        app:bb_indicatorUnselectColor="#88ffffff"
+        app:bb_indicatorWidth="8dp"
+        app:bb_isAutoScrollEnable="true"
+        app:bb_isIndicatorShow="true"
+        app:bb_isLoopEnable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</LinearLayout>

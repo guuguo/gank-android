@@ -1,6 +1,6 @@
 package com.guuguo.gank.source
 
-import com.guuguo.gank.app.App
+import com.guuguo.gank.ui.App
 import com.guuguo.gank.db.GankAppDatabase
 import com.guuguo.gank.model.entity.GankModel
 import io.reactivex.Completable

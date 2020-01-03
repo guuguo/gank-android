@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="10dp"
+  android:orientation="vertical"
+  app:columnNumbers="3"
+  tools:context="top.guuguo.myapplication.ui.activity.MainActivity">
+
+  <top.guuguo.flowlayout.FlowLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50dp"
+    android:background="?containerBackgroundLayer2"
+    app:columnNumbers="3">
+
+    <Button
+      android:id="@+id/btn_theme"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="切换主题"/>
+    <Button
+      android:id="@+id/btn_warning_type"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="切换warning"/>
+
+    <Button
+      android:id="@+id/btn_loading"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="加载"/>
+
+
+    <Button
+      android:id="@+id/btn_warning"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="警告"/>
+
+    <Button
+      android:id="@+id/btn_error"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="错误"/>
+
+    <Button
+      android:id="@+id/btn_success"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="正确"/>
+    <Button
+      android:id="@+id/btn_message"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="信息"/>
+
+
+    <Button
+      android:id="@+id/btn_alert_edit"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="填写"/>
+
+    <Button
+      android:id="@+id/btn_alert_custom"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="自定义"/>
+
+    <Button
+      android:id="@+id/btn_alert_custom2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="custom"/>
+    <Button
+      android:id="@+id/btn_alert_custom3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="customFull"/>
+    <com.guuguo.android.lib.widget.FunctionTextView
+      android:textStyle="bold"
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:drawablePadding="6dp"
+      android:text="正确"
+      android:textSize="12sp"
+      app:ftv_drawableAlign="top"
+      app:ftv_drawableHeight="25dp"
+      app:ftv_drawableSrc="@drawable/widget_state_success"
+      app:ftv_drawableTintDefaultTextColor="true"
+      app:ftv_drawableWidth="25dp"/>
+
+    <com.guuguo.android.lib.widget.FunctionTextView
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:drawablePadding="6dp"
+      android:text="正确"
+      android:textSize="12sp"
+      app:ftv_drawableAlign="left"
+      app:ftv_drawableHeight="14dp"
+      app:ftv_drawableSrc="@drawable/widget_state_warning"
+      app:ftv_drawableWidth="14dp"/>
+
+    <com.guuguo.android.lib.widget.FunctionTextView
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:drawablePadding="6dp"
+      android:text="正确"
+      android:textColor="@color/red"
+      android:textSize="12sp"
+      app:ftv_drawableAlign="right"
+      app:ftv_drawableHeight="14dp"
+      app:ftv_drawableSrc="@drawable/widget_state_error"
+      app:ftv_drawableTint="@color/red"
+      app:ftv_drawableWidth="14dp"/>
+
+    <com.guuguo.android.lib.widget.FunctionTextView
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:drawablePadding="6dp"
+      android:text="正确"
+      android:textSize="12sp"
+      app:ftv_drawableAlign="bottom"
+      app:ftv_drawableHeight="25dp"
+      app:ftv_drawableSrc="@drawable/widget_state_warning"
+      app:ftv_drawableTintDefaultTextColor="true"
+      app:ftv_drawableWidth="25dp"/>
+    <com.guuguo.android.lib.widget.FunctionTextView
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:drawablePadding="6dp"
+      android:textSize="12sp"
+      app:ftv_drawableAlign="bottom"
+      app:ftv_drawableHeight="25dp"
+      app:ftv_drawableSrc="@drawable/widget_state_warning"
+      app:ftv_drawableTintDefaultTextColor="true"
+      app:ftv_drawableWidth="25dp"/>
+    <com.guuguo.android.lib.widget.FunctionTextView
+      android:layout_width="match_parent"
+      android:text="正确"
+      android:layout_height="100dp"
+      android:drawablePadding="6dp"
+      android:textSize="12sp"
+      />
+  </top.guuguo.flowlayout.FlowLayout>
+</FrameLayout>

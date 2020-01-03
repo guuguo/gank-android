@@ -79,14 +79,16 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    buildFeatures {
-        compose = true
-    }
+//    buildFeatures {
+//        compose = true
+//    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
+    print("Deps")
+    print(Deps)
     testImplementation(Deps.mockito.core)
     testImplementation(Deps.mockito.all)
     testImplementation(Deps.junit)
@@ -114,14 +116,14 @@ dependencies {
     implementation(Deps.androidx.vectordrawable)
     implementation(Deps.androidx.ktx)
 
-    kapt(Deps.compose.compiler)
-    implementation(Deps.compose.foundation)
-    implementation(Deps.compose.runtime)
-    implementation(Deps.compose.android_text)
-    implementation(Deps.compose.text)
-    implementation(Deps.compose.layout)
-    implementation(Deps.compose.material)
-    implementation(Deps.compose.tooling)
+//    kapt(Deps.compose.compiler)
+//    implementation(Deps.compose.foundation)
+//    implementation(Deps.compose.runtime)
+//    implementation(Deps.compose.android_text)
+//    implementation(Deps.compose.text)
+//    implementation(Deps.compose.layout)
+//    implementation(Deps.compose.material)
+//    implementation(Deps.compose.tooling)
 
     implementation(Deps.support.v4)
     implementation(Deps.constraint_layout)

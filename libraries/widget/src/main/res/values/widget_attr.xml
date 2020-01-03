@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <declare-styleable name="GuideHighLightBgView" tools:ignore="ResourceName">
+    <attr format="color" name="ghv_backgroundColor"/>
+    <attr format="integer" name="ghv_backgroundAlpha"/>
+  </declare-styleable>
+  <declare-styleable name="SuperLayout"  tools:ignore="ResourceName">
+    <attr name="widget_sl_leftImageSrc" format="reference"/>
+    <attr name="widget_sl_leftImageSize" format="dimension"/>
+
+    <attr name="widget_sl_leftText" format="string"/>
+    <attr name="widget_sl_leftTextColor" format="color"/>
+    <attr name="widget_sl_leftTextSize" format="dimension"/>
+    <attr name="widget_sl_leftTextMarginLeft" format="dimension"/>
+    <attr name="widget_sl_leftTextMarginTop" format="dimension"/>
+    <attr name="widget_sl_leftTextMarginRight" format="dimension"/>
+    <attr name="widget_sl_leftTextMarginBottom" format="dimension"/>
+
+    <attr name="widget_sl_leftSubText" format="string"/>
+    <attr name="widget_sl_leftSubTextColor" format="color"/>
+    <attr name="widget_sl_leftSubTextSize" format="dimension"/>
+
+    <attr name="widget_sl_centerText" format="string"/>
+    <attr name="widget_sl_centerTextColor" format="color"/>
+    <attr name="widget_sl_centerTextBg" format="reference"/>
+    <attr name="widget_sl_centerTextSize" format="dimension"/>
+
+    <attr name="widget_sl_rightText" format="string"/>
+    <attr name="widget_sl_rightTextColor" format="color"/>
+    <attr name="widget_sl_rightTextSize" format="dimension"/>
+    <attr name="widget_sl_rightTextBg" format="reference"/>
+    <attr name="widget_sl_rightTextBgColor" format="color"/>
+    <attr name="widget_sl_rightTextWidth" format="dimension"/>
+    <attr name="widget_sl_rightTextHeight" format="dimension"/>
+
+    <attr name="widget_sl_rightImageSrc" format="reference"/>
+    <attr name="widget_sl_rightImageMarginLeft" format="dimension"/>
+    <attr name="widget_sl_rightImageSize" format="dimension"/>
+
+    <attr name="widget_sl_rightImage2Src" format="reference"/>
+    <attr name="widget_sl_rightImage2MarginLeft" format="dimension"/>
+    <attr name="widget_sl_rightImage2Size" format="dimension"/>
+
+    <attr name="widget_sl_solid" format="color"/>
+    <attr name="widget_sl_corner" format="dimension"/>
+    <attr name="widget_sl_stroke" format="color"/>
+    <attr name="widget_sl_strokeWidth" format="dimension"/>
+
+    <attr name="widget_sl_topLineColor" format="color"/>
+    <attr name="widget_sl_bottomLineColor" format="color"/>
+    <attr name="widget_sl_lineSize" format="dimension"/>
+
+    <attr name="widget_sl_enableRipple" format="boolean"/>
+    <attr name="widget_sl_rippleColor" format="color"/>
+  </declare-styleable>
+
+</resources>

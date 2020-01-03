@@ -16,7 +16,7 @@
             android:id="@+id/container_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".app.gank.activity.GankActivity">
+            tools:context=".ui.gank.activity.GankActivity">
 
 
             <include layout="@layout/toolbar_gank_detail" />

@@ -1,0 +1,101 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.guuguo.android.lib.widget.GuideHighLightBgView
+        android:id="@+id/guild_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:ghv_backgroundAlpha="229"
+        app:ghv_backgroundColor="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_target_circle"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="left"
+            tools:src="@drawable/guide_circle" />
+
+        <com.guuguo.android.lib.widget.ShadowFrameLayout
+            android:id="@+id/sfl_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:blurShadowRadius="5dp"
+            app:cardShadowAlpha="115"
+            app:cardShadowColor="#74CEAC"
+            app:cardShadowRadius="4dp"
+            app:sfl_cardBackgroundColor="#64D2A8"
+            app:sfl_cardBackgroundColorEnd="@color/colorPrimary"
+            app:sfl_cardTriangleAlign="top"
+            app:sfl_cardTriangleCubicRadius="4dp"
+            app:sfl_cardTriangleHeight="11dp"
+            app:sfl_cardTriangleStartExtent="800dp"
+            app:sfl_cardTriangleWidth="20dp"
+            app:shadowTranslationY="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="23dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="right"
+                    android:lineHeight="21dp"
+                    android:src="@drawable/home_guid_weight"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/v_divider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="消息通知迁到这里了呦~\n可以查看系统消息，管理师聊天等消息了~" />
+
+                <View
+                    android:id="@+id/v_divider"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/white30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_i_know"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/iv_i_know"
+                    android:layout_width="47.5dp"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/home_guild_know_btn"
+                    android:text="@string/ok"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.guuguo.android.lib.widget.ShadowFrameLayout>
+    </com.guuguo.android.lib.widget.GuideHighLightBgView>
+</FrameLayout>

@@ -34,7 +34,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/ic_bar"
                     android:clipToPadding="false"
-                    tools:context=".app.gank.fragment.GankDailyFragment"
+                    tools:context=".ui.gank.fragment.GankDailyFragment"
                     tools:listitem="@layout/item_gank" />
             </com.guuguo.android.lib.widget.simpleview.StateLayout>
         </androidx.cardview.widget.CardView>

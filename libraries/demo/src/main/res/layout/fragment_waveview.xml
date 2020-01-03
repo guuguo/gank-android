@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryBlue"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="top.guuguo.myapplication.ui.activity.MainActivity">
+
+    <com.guuguo.android.lib.widget.CustomMultiWaveView
+        android:id="@+id/wave_view"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        app:columnNumbers="2"
+        app:rv_backgroundColor="@color/white"
+        app:rv_cornerRadius="3dp"
+        app:rv_strokeColor="@color/blue"
+        app:rv_strokeWidth="1dp">
+
+    </com.guuguo.android.lib.widget.CustomMultiWaveView>
+
+
+</LinearLayout>

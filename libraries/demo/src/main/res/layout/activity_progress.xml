@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="top.guuguo.myapplication.ui.activity.MainActivity">
+
+    <include layout="@layout/base_include_toolbar_common" />
+
+    <com.guuguo.android.lib.widget.progress.ProgressRing
+        android:id="@+id/pr_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cr_background_bar_end_color="@color/black20"
+        app:cr_background_bar_mid_color="@color/black60"
+        app:cr_background_bar_start_color="@color/black20"
+        app:cr_progress="70"
+        app:cr_progressbar_end_color="@color/colorAccent"
+        app:cr_progressbar_start_color="#33FF4081"
+        app:cr_progressbar_width="8dp" />
+
+    <com.guuguo.android.lib.widget.simpleview.StateLayout
+        android:id="@+id/state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.guuguo.android.lib.widget.simpleview.StateLayout>
+</LinearLayout>

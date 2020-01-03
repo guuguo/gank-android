@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
+
+<!--
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+-->
+
+    <!--<ViewStub-->
+        <!--android:id="@+id/stub_import"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:inflatedId="@+id/video_view"-->
+        <!--android:layout="@layout/part_videoview" />-->
+    <top.guuguo.myapplication.ui.SimpleVideoView
+        android:layout_width="match_parent"
+        android:id="@+id/image_view"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android" />
+    <!--<com.google.android.exoplayer2.ui.SimpleExoPlayerView-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/video_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:keepScreenOnid/="true"/>-->
+<!--<ImageView-->
+    <!--android:id="@+id/iv"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+</FrameLayout>

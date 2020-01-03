@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="icon_large">37sp</dimen>
+    <dimen name="title_item">15sp</dimen>
+    <dimen name="title1">35sp</dimen>
+    <dimen name="title2">25sp</dimen>
+    <dimen name="list_interval">10dp</dimen>
+    <dimen name="hint">11sp</dimen>
+    <dimen name="actionbar_size">56dp</dimen>
+    <dimen name="text_size">14sp</dimen>
+    <dimen name="appbar_elevation">0dp</dimen>
+
+</resources>

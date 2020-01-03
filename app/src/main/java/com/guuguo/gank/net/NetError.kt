@@ -3,7 +3,7 @@ package com.guuguo.gank.net;
 import android.accounts.NetworkErrorException
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.R
-import com.guuguo.gank.app.App
+import com.guuguo.gank.ui.App
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.ConnectException

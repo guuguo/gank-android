@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="BianlaTitleLayout">
+    <attr format="reference" name="widget_btl_leftImageSrc"/>
+    <attr format="dimension" name="widget_btl_leftImageSize"/>
+
+    <attr format="string" name="widget_btl_leftText"/>
+    <attr format="color" name="widget_btl_leftTextColor"/>
+    <attr format="dimension" name="widget_btl_leftTextSize"/>
+    <attr format="dimension" name="widget_btl_leftTextMarginLeft"/>
+    <attr format="dimension" name="widget_btl_leftTextMarginTop"/>
+    <attr format="dimension" name="widget_btl_leftTextMarginRight"/>
+    <attr format="dimension" name="widget_btl_leftTextMarginBottom"/>
+
+    <attr format="string" name="widget_btl_leftSubText"/>
+    <attr format="color" name="widget_btl_leftSubTextColor"/>
+    <attr format="dimension" name="widget_btl_leftSubTextSize"/>
+
+    <attr format="string" name="widget_btl_centerText"/>
+    <attr format="color" name="widget_btl_centerTextColor"/>
+    <attr format="reference" name="widget_btl_centerTextBg"/>
+    <attr format="dimension" name="widget_btl_centerTextSize"/>
+    <attr name="widget_btl_centerTextStyle"/>
+    <attr name="widget_btl_centerTextAlign" />
+
+    <attr format="string" name="widget_btl_rightText"/>
+    <attr format="color" name="widget_btl_rightTextColor"/>
+    <attr format="dimension" name="widget_btl_rightTextSize"/>
+    <attr format="reference" name="widget_btl_rightTextBg"/>
+    <attr format="color" name="widget_btl_rightTextBgColor"/>
+    <attr format="dimension" name="widget_btl_rightTextWidth"/>
+    <attr format="dimension" name="widget_btl_rightTextHeight"/>
+
+    <attr format="reference" name="widget_btl_rightImageSrc"/>
+    <attr format="dimension" name="widget_btl_rightImageMarginLeft"/>
+    <attr format="dimension" name="widget_btl_rightImageSize"/>
+
+    <attr format="reference" name="widget_btl_rightImage2Src"/>
+    <attr format="dimension" name="widget_btl_rightImage2MarginLeft"/>
+    <attr format="dimension" name="widget_btl_rightImage2Size"/>
+
+    <attr format="color" name="widget_btl_solid"/>
+    <attr format="dimension" name="widget_btl_corner"/>
+    <attr format="color" name="widget_btl_stroke"/>
+    <attr format="dimension" name="widget_btl_strokeWidth"/>
+
+    <attr format="color" name="widget_btl_topLineColor"/>
+    <attr format="color" name="widget_btl_bottomLineColor"/>
+    <attr format="dimension" name="widget_btl_bottomLinePaddingStart"/>
+    <attr format="dimension" name="widget_btl_lineSize"/>
+
+    <attr format="boolean" name="widget_btl_enableRipple"/>
+    <attr format="color" name="widget_btl_rippleColor"/>
+  </declare-styleable>
+  <attr format="enum" name="widget_btl_centerTextAlign">
+    <enum name="top" value="0x30"/>
+    <enum name="bottom" value="0x50"/>
+    <enum name="left" value="0x03"/>
+    <enum name="right" value="0x05"/>
+    <enum name="center_vertical" value="0x10"/>
+    <enum name="fill_vertical" value="0x70"/>
+    <enum name="center_horizontal" value="0x01"/>
+    <enum name="fill_horizontal" value="0x07"/>
+    <enum name="center" value="0x11"/>
+    <enum name="fill" value="0x77"/>
+    <enum name="clip_vertical" value="0x80"/>
+    <enum name="clip_horizontal" value="0x08"/>
+    <enum name="start" value="0x00800003"/>
+    <enum name="end" value="0x00800005"/>
+  </attr>
+  <attr format="enum" name="widget_btl_centerTextStyle">
+    <enum name="normal" value="0"/>
+    <enum name="bold" value="1"/>
+    <enum name="italic" value="2"/>
+  </attr>
+</resources>

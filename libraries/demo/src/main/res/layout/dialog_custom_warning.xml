@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="warningDialog"
+            type="top.guuguo.myapplication.WarningDialog" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <com.guuguo.android.lib.widget.roundview.RoundConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="24dp"
+        app:rv_backgroundColor="@color/white"
+        app:rv_cornerRadius="2dp">
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="26dp"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="5dp"
+            android:text="@{warningDialog.title}"
+            android:textColor="#333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility='@{warningDialog.title==""?View.GONE:View.VISIBLE}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="提示" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="280dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            android:paddingHorizontal="27dp"
+            android:text="@{warningDialog.message}"
+            android:textColor="#333"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="哈哈哈" />
+
+
+        <com.guuguo.android.lib.widget.roundview.RoundTextView
+            android:id="@+id/btn_1"
+            android:layout_width="87dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@{warningDialog.btnText1}"
+            android:textColor="@{warningDialog.btnPosition==1?@color/white:@color/dialogColorPrimary}"
+            android:textSize="16sp"
+            android:visibility="@{warningDialog.btnNum>=1?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toStartOf="@+id/btn_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_message"
+            app:rv_backgroundColor="@{warningDialog.btnPosition==1?@color/dialogColorPrimary:@color/white}"
+            app:rv_backgroundPressColor="@color/dialogColorPrimary"
+            app:rv_cornerRadius="4dp"
+            app:rv_isRippleEnable="true"
+            app:rv_strokeColor="@color/dialogColorPrimary"
+            app:rv_strokeWidth="1dp"
+            tools:text="取消"
+            tools:textColor="@color/dialogColorPrimary" />
+
+        <com.guuguo.android.lib.widget.roundview.RoundTextView
+            android:id="@+id/btn_2"
+            android:layout_width="87dp"
+            android:layout_height="28dp"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:text="@{warningDialog.btnText2}"
+            android:textColor="@{warningDialog.btnPosition==2?@color/white:@color/dialogColorPrimary}"
+            android:textSize="16sp"
+            android:visibility="@{warningDialog.btnNum>=2?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_1"
+            app:layout_constraintTop_toTopOf="@id/btn_1"
+            app:rv_backgroundColor="@{warningDialog.btnPosition==2?@color/dialogColorPrimary:@color/white}"
+            app:rv_backgroundPressColor="@color/colorPrimary"
+            app:rv_cornerRadius="4dp"
+            app:rv_isRippleEnable="true"
+            app:rv_strokeColor="@color/dialogColorPrimary"
+            app:rv_strokeWidth="1dp"
+            tools:rv_backgroundColor="@color/dialogColorPrimary"
+            tools:text="确认"
+            tools:textColor="#fff" />
+    </com.guuguo.android.lib.widget.roundview.RoundConstraintLayout>
+
+</layout>

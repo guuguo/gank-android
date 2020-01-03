@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.guuguo.gank.app.gank.viewmodel.WebViewModel" />
+            type="com.guuguo.gank.ui.gank.viewmodel.WebViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".app.gank.activity.WebViewActivity">
+        tools:context=".ui.gank.activity.WebViewActivity">
 
         <!--<android.support.v4.widget.SwipeRefreshLayout-->
             <!--android:id="@+id/refresh"-->

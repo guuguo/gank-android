@@ -8,18 +8,18 @@
 
     <fragment
         android:id="@+id/dailyFragment"
-        android:name="com.guuguo.gank.app.gank.fragment.GankDailyFragment"
+        android:name="com.guuguo.gank.ui.gank.fragment.GankDailyFragment"
         android:label="DailyFragment"
         tools:layout="@layout/view_recycler" />
 
     <fragment
         android:id="@+id/gankCategoryFragment"
-        android:name="com.guuguo.gank.app.gank.fragment.GankCategoryFragment"
+        android:name="com.guuguo.gank.ui.gank.fragment.GankCategoryFragment"
         android:label="GankCategoryFragment"
         tools:layout="@layout/fragment_category_gank" />
     <fragment
         android:id="@+id/gankCategoryContentFragment"
-        android:name="com.guuguo.gank.app.gank.fragment.GankCategoryContentFragment"
+        android:name="com.guuguo.gank.ui.gank.fragment.GankCategoryContentFragment"
         android:label="GankCategoryContentFragment"
         tools:layout="@layout/fragment_gank_category_content">
         <argument

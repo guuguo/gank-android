@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="20dp"
-            tools:context=".app.gank.fragment.GankDailyFragment"
+            tools:context=".ui.gank.fragment.GankDailyFragment"
             tools:listitem="@layout/item_gank" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

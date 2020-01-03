@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="dialog_colorAccent" format="reference|color" />
+
+    <!--************ dialog ***********-->
+    <declare-styleable name="RealtimeBlurView">
+        <attr name="realtimeBlurRadius" format="dimension"/>
+        <attr name="realtimeDownsampleFactor" format="float"/>
+        <attr name="realtimeOverlayColor" format="reference|color"/>
+        <attr name="xRadius" format="dimension"/>
+        <attr name="yRadius" format="dimension"/>
+    </declare-styleable>
+
+</resources>

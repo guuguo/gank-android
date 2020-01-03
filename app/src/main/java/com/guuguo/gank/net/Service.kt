@@ -9,6 +9,7 @@ import com.guuguo.gank.model.Ganks
 import com.guuguo.gank.model.entity.GankModel
 import io.reactivex.Flowable
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -33,11 +34,11 @@ interface Service {
 
     companion object {
         private const val GANHUO_API = "https://gank.io/api/"
-        fun create(): Service = create(HttpUrl.parse(GANHUO_API)!!)
+        fun create(): Service = create(GANHUO_API.toHttpUrlOrNull()!!)
         fun create(httpUrl: HttpUrl): Service {
 
             val commonHttpBuilder = OkHttpClient.Builder()
-                    .sslSocketFactory(TrustAllCerts.createSSLSocketFactory())
+                    .sslSocketFactory(TrustAllCerts.createSSLSocketFactory(),TrustAllCerts())
                     .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
                     .connectTimeout(7, TimeUnit.SECONDS)
                     .readTimeout(7, TimeUnit.SECONDS)

@@ -1,9 +1,6 @@
 package com.guuguo.gank.constant
 
-import com.guuguo.android.lib.utils.Preference
-import com.guuguo.gank.app.App
 import com.guuguo.gank.util.KV
-import com.tencent.mmkv.MMKV
 
 
 /**

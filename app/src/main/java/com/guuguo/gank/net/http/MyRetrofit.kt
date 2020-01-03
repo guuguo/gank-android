@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
  */
 object MyRetrofit {
     val commonHttpBuilder = OkHttpClient.Builder()
-            .sslSocketFactory(TrustAllCerts.createSSLSocketFactory())
+            .sslSocketFactory(TrustAllCerts.createSSLSocketFactory(),TrustAllCerts())
             .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)

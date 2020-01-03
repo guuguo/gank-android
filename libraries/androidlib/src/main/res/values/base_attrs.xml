@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+  <attr format="reference|color" name="containerBackgroundLayer1"/>
+  <attr format="reference|color" name="containerBackgroundLayer2"/>
+  <attr format="reference|color" name="buttonBackground"/>
+  <attr format="color" name="myTitleTextColor"/>
+  <attr format="color" name="mySubTitleTextColor"/>
+  <declare-styleable name="IconTextView">
+    <attr format="enum" name="typeface">
+      <enum name="material_icon" value="0"/>
+      <enum name="font_awesome" value="1"/>
+    </attr>
+  </declare-styleable>
+  <declare-styleable name="RatioImageView">
+    <attr format="dimension" name="riv_origin_width"/>
+    <attr format="dimension" name="riv_origin_height"/>
+  </declare-styleable>
+
+  <declare-styleable name="MySearchView">
+    <attr format="string" name="msv_hint"/>
+  </declare-styleable>
+
+  <declare-styleable name="CircleProgressBar">
+    <attr format="integer" name="cpb_progress"/>
+    <attr format="integer" name="cpb_max"/>
+    <attr format="dimension" name="cpb_progressbar_width"/>
+    <attr format="dimension" name="cpb_background_bar_width"/>
+    <attr format="color" name="cpb_progressbar_color"/>
+    <attr format="color" name="cpb_background_bar_color"/>
+  </declare-styleable>
+  <declare-styleable name="ProgressRing">
+    <attr format="integer" name="cr_progress"/>
+    <attr format="dimension" name="cr_progressbar_width"/>
+    <attr format="color" name="cr_progressbar_start_color"/>
+    <attr format="color" name="cr_progressbar_end_color"/>
+    <attr format="color" name="cr_background_bar_start_color"/>
+    <attr format="color" name="cr_background_bar_mid_color"/>
+    <attr format="color" name="cr_background_bar_end_color"/>
+    <attr format="integer" name="cr_start_angle"/>
+    <attr format="integer" name="cr_sweep_angle"/>
+    <attr format="boolean" name="cr_anim_show"/>
+  </declare-styleable>
+
+  <!--************ QMUILoading ***********-->
+  <declare-styleable name="MLoadingView">
+    <attr format="dimension" name="qmui_loading_view_size"/>
+    <attr name="android:color"/>
+  </declare-styleable>
+
+  <!--************ FunctionTextView ***********-->
+  <!-- drawable 资源的宽-->
+  <attr format="dimension" name="ftv_drawableWidth"/>
+  <!-- drawable 资源的高-->
+  <attr format="dimension" name="ftv_drawableHeight"/>
+  <!-- text 最小宽度-->
+  <attr format="dimension" name="ftv_textMinWidth"/>
+  <!-- text 最大宽度-->
+  <attr format="dimension" name="ftv_textMaxWidth"/>
+  <!-- text 居中状态-->
+  <attr format="enum" name="ftv_textGravity">
+    <enum name="bottom" value="80"/>
+    <enum name="center" value="17"/>
+    <enum name="center_horizontal" value="1"/>
+    <enum name="center_vertical" value="16"/>
+    <enum name="clip_horizontal" value="8"/>
+    <enum name="clip_vertical" value="128"/>
+    <enum name="end" value="8388613"/>
+    <enum name="fill" value="119"/>
+    <enum name="fill_horizontal" value="7"/>
+    <enum name="fill_vertical" value="112"/>
+    <enum name="left" value="3"/>
+    <enum name="right" value="5"/>
+    <enum name="start" value="8388611"/>
+    <enum name="top" value="48"/>
+  </attr>
+  <!-- drawable 图片资源-->
+  <attr format="reference" name="ftv_drawableSrc"/>
+  <!-- drawable 图片着色颜色-->
+  <attr format="reference|color" name="ftv_drawableTint"/>
+  <!-- drawable 默认icon颜色是否和textView一致-->
+  <attr format="boolean" name="ftv_drawableTintDefaultTextColor"/>
+  <!-- drawable 资源偏向文字的位置-->
+  <attr format="enum" name="ftv_drawableAlign">
+    <enum name="left" value="0"/>
+    <enum name="top" value="1"/>
+    <enum name="right" value="2"/>
+    <enum name="bottom" value="3"/>
+  </attr>
+
+  <declare-styleable name="FunctionTextView">
+    <attr name="android:text"/>
+    <attr name="android:textStyle"/>
+    <attr name="android:textColor"/>
+    <attr name="android:textSize"/>
+    <attr name="android:drawablePadding"/>
+    <attr name="android:gravity"/>
+    <attr name="ftv_textMinWidth"/>
+    <attr name="ftv_textMaxWidth"/>
+    <attr name="ftv_textGravity"/>
+    <attr name="ftv_drawableTintDefaultTextColor"/>
+    <attr name="ftv_drawableTint"/>
+    <attr name="ftv_drawableSrc"/>
+    <attr name="ftv_drawableAlign"/>
+    <attr name="ftv_drawableWidth"/>
+    <attr name="ftv_drawableHeight"/>
+
+  </declare-styleable>
+
+
+
+
+</resources>
