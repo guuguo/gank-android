@@ -87,7 +87,6 @@ abstract class BaseDialog<T : BaseDialog<T>> : Dialog {
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))// android:windowBackground
     }
 
-
     /**
      * inflate layout for dialog ui and return (填充对话框所需要的布局并返回)
      * <pre>
@@ -104,17 +103,16 @@ abstract class BaseDialog<T : BaseDialog<T>> : Dialog {
     /** set Ui data or logic opreation before attatched window(在对话框显示之前,设置界面数据或者逻辑)  */
     abstract fun setUiBeforShow()
 
-    fun getScreenHeight() = DisplayUtil.getScreenRealHeight(mContext)
-    /**获取显示高度，真实屏幕高度减去底部导航栏的高度*/
-    fun getScreenDisplayHeight() = DisplayUtil.getScreenRealHeight(mContext) - DisplayUtil.getNavigationBarHeight(mContext)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(mTag, "onCreate")
         mDisplayMetrics = mContext.resources.displayMetrics
-        mMaxHeight = if (mFullScreen)
-            (DisplayUtil.getScreenRealHeight(mContext) - DisplayUtil.getNavigationBarHeight(mContext)).toFloat()
-        else (DisplayUtil.getScreenRealHeight(mContext) - StatusBarUtils.getHeight(mContext) - DisplayUtil.getNavigationBarHeight(mContext)).toFloat()
-
+        mMaxHeight = if (isLandscape()) {
+            mDisplayMetrics.heightPixels.toFloat()
+        } else {
+            if (mFullScreen)
+                (DisplayUtil.getScreenRealHeight(mContext) - DisplayUtil.getNavigationBarHeight(mContext)).toFloat() //真实屏幕高度减去底部导航栏的高度
+            else (DisplayUtil.getScreenRealHeight(mContext) - StatusBarUtils.getHeight(mContext) - DisplayUtil.getNavigationBarHeight(mContext)).toFloat()
+        }
         mContentTop = LinearLayout(mContext)
         mContentTop.gravity = Gravity.CENTER
 
@@ -128,7 +126,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : Dialog {
 
         if (mIsPopupStyle) {
             setContentView(mContentTop, ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT))
+                ViewGroup.LayoutParams.WRAP_CONTENT))
         } else {
             setContentView(mContentTop, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         }
@@ -224,10 +222,11 @@ abstract class BaseDialog<T : BaseDialog<T>> : Dialog {
         immersiveStatusBar()
     }
 
+    fun isLandscape() = mContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     open protected fun immersiveStatusBar() {
         val layoutParams = window!!.attributes
         layoutParams.width = mContext.resources.displayMetrics.widthPixels
-        layoutParams.height = if(mContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) mContext.resources.displayMetrics.heightPixels else DisplayUtil.getScreenRealHeight(mContext)
+        layoutParams.height = if (isLandscape()) mContext.resources.displayMetrics.heightPixels else DisplayUtil.getScreenRealHeight(mContext)
         window!!.attributes = layoutParams
         SystemBarHelper.immersiveStatusBar(window, 0f)
     }
@@ -362,15 +361,15 @@ abstract class BaseDialog<T : BaseDialog<T>> : Dialog {
     private inline fun View.doOnNextLayout(crossinline action: (view: View) -> Unit) {
         addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
             override fun onLayoutChange(
-                    view: View,
-                    left: Int,
-                    top: Int,
-                    right: Int,
-                    bottom: Int,
-                    oldLeft: Int,
-                    oldTop: Int,
-                    oldRight: Int,
-                    oldBottom: Int
+                view: View,
+                left: Int,
+                top: Int,
+                right: Int,
+                bottom: Int,
+                oldLeft: Int,
+                oldTop: Int,
+                oldRight: Int,
+                oldBottom: Int
             ) {
                 view.removeOnLayoutChangeListener(this)
                 action(view)
