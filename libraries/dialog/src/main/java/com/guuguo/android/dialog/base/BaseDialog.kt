@@ -2,6 +2,7 @@ package com.guuguo.android.dialog.base
 
 import android.app.Dialog
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -226,7 +227,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : Dialog {
     open protected fun immersiveStatusBar() {
         val layoutParams = window!!.attributes
         layoutParams.width = mContext.resources.displayMetrics.widthPixels
-        layoutParams.height = DisplayUtil.getScreenRealHeight(mContext)//mContext.resources.displayMetrics.heightPixels
+        layoutParams.height = if(mContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) mContext.resources.displayMetrics.heightPixels else DisplayUtil.getScreenRealHeight(mContext)
         window!!.attributes = layoutParams
         SystemBarHelper.immersiveStatusBar(window, 0f)
     }

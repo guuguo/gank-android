@@ -36,4 +36,5 @@ dependencies {
 
     api project(":libraries:libdatabindingex")
 
+    api("com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44")
 }

@@ -100,6 +100,7 @@ dependencies {
 
     implementation(Deps.navigation.runtime_ktx)
     implementation(Deps.navigation.fragment_ktx)
+    implementation(Deps.navigation.ui)
 
     implementation(Deps.room.runtime)
     implementation(Deps.room.rxjava2)
@@ -148,7 +149,6 @@ dependencies {
     implementation("com.github.florent37:viewanimator:1.1.1")
 
 
-    implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44")
     implementation("com.github.bumptech.glide:glide:4.9.0")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.9.0@aar")
     implementation("com.github.Lauzy:LBehavior:1.0.3")

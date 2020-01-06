@@ -56,8 +56,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         when (item!!.itemId) {
             R.id.menu_check_up -> Beta.checkUpgrade()
             R.id.menu_search -> {
-//                val nav = NavOptions.Builder().setPopUpTo(R.id.searchFragment, true).build()
-//                findNavController().navigate(R.id.action_to_search, null, nav)
                 SearchActivity.intentTo(activity, binding.toolbar.searchCard)
             }
             R.id.menu_about -> AboutActivity.intentTo(activity)
@@ -119,10 +117,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
             override fun onTabSelected(t: TabLayout.Tab?) {
                 revealColor(t)
                 val id = when (t?.position) {
-                    0 -> R.id.dailyFragment
-                    1 -> R.id.gankCategoryFragment
-                    2 -> R.id.gankCategoryContentFragment
-                    else -> R.id.dailyFragment
+//                    0 -> R.id.dailyFragment
+                    0 -> R.id.gankCategoryFragment
+                    1 -> R.id.gankCategoryContentFragment
+                    else -> R.id.gankCategoryFragment
                 }
                 onNavDestinationSelected(id, mNavHostFragment.navController, true)
             }

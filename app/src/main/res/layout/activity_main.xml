@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <fragment
-            android:id="@+id/container_view"
+            android:id="@+id/container_nav"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -23,7 +23,7 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
            android:id="@+id/navigation"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             app:menu="@menu/home_bottom_navigation"
             android:layout_height="50dp" />
 

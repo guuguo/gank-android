@@ -42,7 +42,7 @@ dependencies {
     api 'com.google.android.material:material:1.0.0'
     api 'androidx.recyclerview:recyclerview:1.1.0'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api "androidx.constraintlayout:constraintlayout:2.0.0-beta3"
+    api 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
     api 'androidx.annotation:annotation:1.1.0'
     api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     api 'com.google.code.gson:gson:2.8.5'

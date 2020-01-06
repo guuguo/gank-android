@@ -39,10 +39,6 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
-    aaptOptions {
-        cruncherEnabled = false
-        useNewCruncher = false
-    }
     buildTypes {
         release {
             minifyEnabled false

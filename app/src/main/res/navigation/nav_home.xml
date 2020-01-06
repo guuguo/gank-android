@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/fulibaFragment">
     <fragment
         android:id="@+id/fulibaFragment"
-        android:name="com.guuguo.gank.ui.gank.fragment.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home">
+        android:name="com.guuguo.gank.ui.fuliba.main.FulibaFragment"
+        android:label="FulibaFragment"
+        tools:layout="@layout/fragment_fuliba">
 
     </fragment>
     <fragment

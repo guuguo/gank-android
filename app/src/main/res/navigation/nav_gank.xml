@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/dailyFragment">
+    app:startDestination="@id/gankCategoryFragment">
 
 
-    <fragment
-        android:id="@+id/dailyFragment"
-        android:name="com.guuguo.gank.ui.gank.fragment.GankDailyFragment"
-        android:label="DailyFragment"
-        tools:layout="@layout/view_recycler" />
+<!--    <fragment-->
+<!--        android:id="@+id/dailyFragment"-->
+<!--        android:name="com.guuguo.gank.ui.gank.fragment.GankDailyFragment"-->
+<!--        android:label="DailyFragment"-->
+<!--        tools:layout="@layout/view_recycler" />-->
 
     <fragment
         android:id="@+id/gankCategoryFragment"

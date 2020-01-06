@@ -104,10 +104,10 @@
                         app:tabIndicatorColor="@color/white"
                         app:tabRippleColor="@color/transparent">
 
-                    <com.google.android.material.tabs.TabItem
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="@string/daily"/>
+<!--                    <com.google.android.material.tabs.TabItem-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:text="@string/daily"/>-->
 
                     <com.google.android.material.tabs.TabItem
                             android:layout_width="match_parent"

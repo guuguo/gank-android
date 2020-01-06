@@ -3,7 +3,11 @@ package com.guuguo.gank.ui
 import android.os.Build.VERSION
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.guuguo.android.lib.extension.getColorCompat
+import com.guuguo.android.lib.ktx.fragmentManager
 import com.guuguo.android.lib.systembar.SystemBarHelper
 import com.guuguo.gank.R
 import com.guuguo.gank.base.MBaseActivity
@@ -11,6 +15,8 @@ import com.guuguo.gank.databinding.ActivityMainBinding
 
 
 class MainActivity : MBaseActivity<ActivityMainBinding>() {
+    private lateinit var mNavHostFragment: NavHostFragment
+
     override fun getLayoutResId() = R.layout.activity_main
     override fun initStatusBar() {
         val decorView = window.decorView as ViewGroup
@@ -33,15 +39,19 @@ class MainActivity : MBaseActivity<ActivityMainBinding>() {
 
     override fun initView() {
         super.initView()
-        binding.navigation.setOnClickListener {
-            when (it.id) {
-                R.id.menu_fuliba -> {
-                }
-                R.id.menu_gank -> {
+        mNavHostFragment =
+            supportFragmentManager.findFragmentById(R.id.container_nav) as NavHostFragment
+        NavigationUI.setupWithNavController(binding.navigation, mNavHostFragment.navController)
+//        binding.navigation.setOnClickListener {
+//            when (it.id) {
+//                R.id.menu_fuliba -> {
+//                }
+//                R.id.menu_gank -> {
+//
+//                }
+//            }
+//        }
 
-                }
-            }
-        }
     }
 
 }
