@@ -87,8 +87,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    print("Deps")
-    print(Deps)
+    implementation project(":baselib")
+
     testImplementation(Deps.mockito.core)
     testImplementation(Deps.mockito.all)
     testImplementation(Deps.junit)
@@ -97,8 +97,6 @@ dependencies {
     androidTestImplementation(Deps.atsl.rules)
     androidTestImplementation(Deps.espresso.core)
     androidTestImplementation("org.hamcrest:hamcrest-library:2.1")
-
-    implementation(Deps.androidlib.libdatabindingex)
 
     implementation(Deps.navigation.runtime_ktx)
     implementation(Deps.navigation.fragment_ktx)

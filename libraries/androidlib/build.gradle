@@ -30,18 +30,19 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    api project(':librarys:dialog')
-    api project(':librarys:drawable')
-    api project(':librarys:roundview')
-    api project(':librarys:utils')
-    api project(':librarys:widget')
+    api project(':libraries:dialog')
+    api project(':libraries:drawable')
+    api project(':libraries:roundview')
+    api project(':libraries:utils')
+    api project(':libraries:widget')
+    api project(':libraries:shadowview')
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
     api 'androidx.appcompat:appcompat:1.1.0'
     api 'com.google.android.material:material:1.0.0'
     api 'androidx.recyclerview:recyclerview:1.1.0'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api "androidx.constraintlayout:constraintlayout:${CONSTRAINT_LAYOUT_VERSION}"
+    api "androidx.constraintlayout:constraintlayout:2.0.0-beta3"
     api 'androidx.annotation:annotation:1.1.0'
     api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     api 'com.google.code.gson:gson:2.8.5'

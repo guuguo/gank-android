@@ -3,11 +3,8 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
-
-
-
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION
+        minSdkVersion 15
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
 
@@ -30,14 +27,7 @@ android {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
-    api 'androidx.appcompat:appcompat:1.1.0'
-    api 'com.google.android.material:material:1.0.0'
-    api "androidx.recyclerview:recyclerview:1.1.0"
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api "androidx.constraintlayout:constraintlayout:2.0.0-beta4"
-
 }
 repositories {
     mavenCentral()

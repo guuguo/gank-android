@@ -62,7 +62,7 @@ dependencies {
     implementation 'com.github.guuguo:dividerView:1.0.2'
     implementation 'com.github.guuguo:flowlayout:1.14.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation project(':librarys:libdatabindingex')
+    implementation project(':libraries:libdatabindingex')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

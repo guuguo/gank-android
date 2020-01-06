@@ -25,10 +25,10 @@
             android:id="@+id/sfl_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:blurShadowRadius="5dp"
-            app:cardShadowAlpha="115"
-            app:cardShadowColor="#74CEAC"
-            app:cardShadowRadius="4dp"
+            app:sfl_blurShadowRadius="5dp"
+            app:sfl_cardShadowAlpha="115"
+            app:sfl_cardShadowColor="#74CEAC"
+            app:sfl_cardShadowRadius="4dp"
             app:sfl_cardBackgroundColor="#64D2A8"
             app:sfl_cardBackgroundColorEnd="@color/colorPrimary"
             app:sfl_cardTriangleAlign="top"
@@ -36,7 +36,7 @@
             app:sfl_cardTriangleHeight="11dp"
             app:sfl_cardTriangleStartExtent="800dp"
             app:sfl_cardTriangleWidth="20dp"
-            app:shadowTranslationY="5dp">
+            app:sfl_shadowTranslationY="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"

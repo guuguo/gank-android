@@ -2,7 +2,11 @@
 buildscript {
     apply from: 'versions.gradle'
     ext {
-        kotlin_version = '1.3.60-eap-25'
+        kotlin_version = '1.3.61'
+        KOTLIN_VERSION = '1.3.61'
+        MIN_SDK_VERSION = 19
+        COMPILE_SDK_VERSION = 28
+        TARGET_SDK_VERSION = 26
     }
     repositories {
         addRepos(repositories)
@@ -21,7 +25,7 @@ allprojects {
         flatDir {
             dirs("libs")
         }
-        maven { setUrl("http://www.guuguo.top/") }
+//        maven { setUrl("http://www.guuguo.top/") }
     }
 }
 tasks.register("clean").configure {
