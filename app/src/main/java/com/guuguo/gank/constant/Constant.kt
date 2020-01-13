@@ -18,6 +18,6 @@ val MY_DEBUG = true
 val datePattern = "yyyy-MM-dd'T'HH:mm:ss"
 
 val myGson by lazy {
-    GsonBuilder().setDateFormat(datePattern).create()
+    GsonBuilder().setDateFormat(datePattern).setLenient().create()
 }
 

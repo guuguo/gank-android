@@ -15,12 +15,15 @@ import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.gank.R
 import com.guuguo.gank.net.netError
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
 /**
  * Created by guodeqing on 7/23/16.
  */
 
-abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment() {
+abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment(), CoroutineScope by MainScope() {
     protected open lateinit var binding: VB
     private var viewModel: BaseViewModel? = null
     private lateinit var runCallBack: RunCallBack
@@ -28,7 +31,10 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment() {
         activity as LBaseActivity
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        cancel()
+    }
     open fun getViewModel(): BaseViewModel? = null
     @CallSuper
     override fun initView() {

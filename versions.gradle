@@ -18,7 +18,8 @@ versions.gson = "2.8.2"
 versions.dagger = "2.15"
 versions.junit = "4.12"
 versions.espresso = "3.1.0-beta02"
-versions.retrofit = "2.4.0"
+versions.retrofit = "2.7.1"
+versions.okhttp3 = "4.3.1"
 versions.okhttp_logging_interceptor = "3.12.1"
 versions.mockwebserver = "3.8.1"
 versions.apache_commons = "2.5"
@@ -107,6 +108,8 @@ Deps.compose.text = "androidx.ui:ui-text:${versions.compose}"
 Deps.stetho = [:]
 Deps.stetho.runtime = "com.facebook.stetho:stetho:${versions.stetho}"
 Deps.stetho.okhttp3 = "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
+
+Deps.okhttp3 = "com.squareup.okhttp3:okhttp:${versions.okhttp3}"
 
 Deps.room = [:]
 Deps.room.runtime = "androidx.room:room-runtime:${versions.room}"

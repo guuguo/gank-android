@@ -30,5 +30,6 @@ dependencies {
     //stetho
     debugApi(Deps.stetho.runtime)
     debugApi(Deps.stetho.okhttp3)
-    api("com.squareup.okhttp3:okhttp:4.0.0")
+    api(Deps.okhttp3)
+
 }
