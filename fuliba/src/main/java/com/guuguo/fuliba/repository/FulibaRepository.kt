@@ -9,12 +9,12 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
 object FulibaRepository {
-   suspend fun getHomeList(): MutableList<FulibaItemBean>? {
+   suspend fun getHomeList(page:Int): MutableList<FulibaItemBean>? {
 //        val livedata = MutableLiveData<MutableList<FulibaItemBean>>()
 
 //           GlobalScope.launch {
         return kotlin.runCatching {
-            val html = FulibaService.server().getFulibaList().string()
+            val html = FulibaService.server().getFulibaList(page).string()
             val doc: Document = Jsoup.parse(html)
             val articals = doc.select("article")
             articals.map {

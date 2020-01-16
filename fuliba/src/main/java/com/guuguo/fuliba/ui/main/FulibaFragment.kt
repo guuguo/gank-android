@@ -29,13 +29,23 @@ class FulibaFragment : BaseFragment<FragmentFulibaBinding>() {
             val bean = adapter.getItem(position)
             FullscreenWebViewActivity.intentTo(activity, bean?.url.safe())
         }
+        adapter.setOnLoadMoreListener({
+            page++
+            request()
+        }, binding.recycler)
     }
 
+    private fun request() {
+        launch {
+            val list = FulibaRepository.getHomeList(page)
+            list?.let { adapter.addData(list) }
+            adapter.loadMoreComplete()
+        }
+    }
+
+    var page = 1
     override fun loadData(isFromNet: Boolean) {
         super.loadData(isFromNet)
-        launch {
-            val list = FulibaRepository.getHomeList()
-            adapter.setNewData(list)
-        }
+        request()
     }
 }
