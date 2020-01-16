@@ -88,6 +88,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation project(":baselib")
+    implementation project(":fuliba")
 
     testImplementation(Deps.mockito.core)
     testImplementation(Deps.mockito.all)
@@ -105,55 +106,26 @@ dependencies {
     implementation(Deps.room.runtime)
     implementation(Deps.room.rxjava2)
     kapt(Deps.room.compiler)
-    // testimplementation(Deps.room.testing)
 
-//    implementation(Deps.support.cardview)
-    implementation(Deps.support.annotations)
-    implementation(Deps.support.app_compat)
-    implementation(Deps.support.design)
-    implementation(Deps.support.recyclerview)
-    implementation(Deps.androidx.vectordrawable)
-    implementation(Deps.androidx.ktx)
 
-//    kapt(Deps.compose.compiler)
-//    implementation(Deps.compose.foundation)
-//    implementation(Deps.compose.runtime)
-//    implementation(Deps.compose.android_text)
-//    implementation(Deps.compose.text)
-//    implementation(Deps.compose.layout)
-//    implementation(Deps.compose.material)
-//    implementation(Deps.compose.tooling)
-
-    implementation(Deps.support.v4)
-    implementation(Deps.constraint_layout)
     kapt(Deps.lifecycle.compiler)
     implementation(Deps.paging)
     implementation(Deps.multidex)
-    implementation(project(":stethomodule"))
 
     implementation(Deps.dagger.runtime)
     implementation(Deps.dagger.android_support)
     kapt(Deps.dagger.compiler)
 
-    implementation(Deps.agentweb.basic)
-    implementation(Deps.bugly.upgrade)
-
-    implementation(Deps.kotlin.stdlib)
-    implementation(Deps.wildAndroidKtx)
-
     implementation("com.github.florent37:viewanimator:1.1.1")
 
-
-    implementation("com.github.bumptech.glide:glide:4.10.0")
-    implementation("com.github.bumptech.glide:okhttp3-integration:4.9.0@aar")
     implementation("com.github.Lauzy:LBehavior:1.0.3")
     implementation("com.github.jrvansuita:MaterialAbout:0.1.9")
     implementation("com.github.castorflex.smoothprogressbar:library:1.1.0")
     implementation("com.github.iielse:ImageWatcher:1.1.5")
     implementation("com.tapadoo.android:alerter:3.0.1")
     implementation("com.mikepenz:materialdrawer:6.1.2",
-    {
-        exclude group:"com.google.android.material"
-    })
+            {
+                exclude group: "com.google.android.material"
+            })
 }
 

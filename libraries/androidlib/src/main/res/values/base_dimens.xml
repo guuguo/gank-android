@@ -9,4 +9,8 @@
     <dimen name="text_size">14sp</dimen>
     <dimen name="appbar_elevation">0dp</dimen>
 
+    <dimen name="textsize_title">15sp</dimen>
+    <dimen name="textsize_body1">14sp</dimen>
+    <dimen name="textsize_caption">11sp</dimen>
+
 </resources>

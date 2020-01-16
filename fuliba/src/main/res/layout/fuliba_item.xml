@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="bean"
+                type="com.guuguo.fuliba.model.FulibaItemBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false">
+
+
+        <com.guuguo.android.lib.widget.ShadowFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:id="@+id/sfl_card"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sfl_cardBackgroundColor="@color/white"
+                app:sfl_cardShadowAlpha="20"
+                app:sfl_cardShadowColor="@color/black"
+                app:sfl_cardShadowRadius="10dp">
+
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+            </FrameLayout>
+        </com.guuguo.android.lib.widget.ShadowFrameLayout>
+
+        <com.guuguo.android.lib.widget.ShadowFrameLayout
+                android:id="@+id/sfl_iv"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="220:150"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sfl_cardShadowAlpha="30"
+                app:sfl_blurShadowRadius="6dp"
+                app:sfl_cardShadowRadius="10dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="福利吧图片"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="10dp"
+                    app:url="@{bean.img}"
+                    tools:background="@color/black20" />
+        </com.guuguo.android.lib.widget.ShadowFrameLayout>
+
+        <TextView
+                android:id="@+id/tv_text"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{bean.title}"
+                app:layout_constraintEnd_toEndOf="@id/sfl_card"
+                app:layout_constraintStart_toEndOf="@+id/sfl_iv"
+                app:layout_constraintTop_toTopOf="@id/sfl_card"
+                tools:text="2020福利汇总第8期：遥远的Paradise" />
+
+        <TextView
+                android:id="@+id/tv_content"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:ellipsize="end"
+                android:text="@{bean.title}"
+                app:layout_constraintBottom_toBottomOf="@id/sfl_card"
+                app:layout_constraintEnd_toEndOf="@+id/tv_text"
+                app:layout_constraintStart_toStartOf="@+id/tv_text"
+                app:layout_constraintTop_toBottomOf="@+id/tv_text"
+                tools:text="BGM：《遥远的Paradise》：点击播放 热门视频： 这不就是放假在家的我妈的样子吗 日本网友池田泰延在东京羽田机场的延时摄影 一个普通的八卦恋情新闻，被湾媒播的汉语中类似的恶汉语中类似的好笑 区块链到底是什么？ 自然风光纪录片《地球的..." />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

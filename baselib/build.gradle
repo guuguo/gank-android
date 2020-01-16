@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: BuildPlugins.kotlinKapt
 
 android {
     compileSdkVersion 29
@@ -22,7 +23,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -38,10 +41,31 @@ dependencies {
 
     api("com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44")
 
+    api(Deps.wildAndroidKtx)
+    api(project(":stethomodule"))
+    api(Deps.agentweb.basic)
+    api(Deps.bugly.upgrade)
+    api(Deps.kotlin.stdlib)
+    api(Deps.wildAndroidKtx)
+    api(Deps.rounded_imageview)
+
     api(Deps.retrofit.runtime)
     api(Deps.retrofit.gson)
     api(Deps.retrofit.rxjava2)
     api(Deps.retrofit.mock)
     api(Deps.okhttp3)
+
+
+    api(Deps.support.annotations)
+    api(Deps.support.app_compat)
+    api(Deps.support.design)
+    api(Deps.support.recyclerview)
+    api(Deps.androidx.vectordrawable)
+    api(Deps.androidx.ktx)
+    api(Deps.support.v4)
+    api(Deps.constraint_layout)
+
+    api(Deps.glide.runtime)
+    api(Deps.glide.okhttp)
 
 }

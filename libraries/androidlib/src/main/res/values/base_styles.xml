@@ -104,7 +104,7 @@
 
   <style name="text_item_title">
     <item name="android:textColor">?myTitleTextColor</item>
-    <item name="android:textSize">@dimen/title_item</item>
+    <item name="android:textSize">@dimen/textsize_title</item>
   </style>
 
   <style name="text_level1_title">

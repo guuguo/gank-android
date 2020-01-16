@@ -6,7 +6,7 @@
     app:startDestination="@id/fulibaFragment">
     <fragment
         android:id="@+id/fulibaFragment"
-        android:name="com.guuguo.gank.ui.fuliba.main.FulibaFragment"
+        android:name="com.guuguo.fuliba.ui.main.FulibaFragment"
         android:label="FulibaFragment"
         tools:layout="@layout/fragment_fuliba">
 

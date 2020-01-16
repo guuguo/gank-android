@@ -9,6 +9,7 @@ include(":app", ":stethomodule")
 //
 include ':baselib'
 include ':service'
+include ':fuliba'
 
 
 include ':libraries:crash'

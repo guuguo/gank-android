@@ -26,7 +26,7 @@ versions.apache_commons = "2.5"
 versions.mockito = "2.7.19"
 versions.mockito_all = "1.10.19"
 versions.dexmaker = "2.2.0"
-versions.glide = "4.8.0"
+versions.glide = "4.11.0"
 versions.timber = "4.5.1"
 versions.android_gradle_plugin = "3.3.1"
 versions.rxjava2 = "2.1.3"
@@ -57,10 +57,12 @@ versions.flowlayout = "1.14.0"
 versions.exoplayer = "2.8.0"
 versions.stetho = "1.5.1"
 versions.bugly = "1.4.0"
-
+versions.jsoup="1.12.1"
+versions.rounded_imageview="2.3.0"
 
 def BuildPlugins = [:]
 
+BuildPlugins.androidLib = "com.android.library"
 BuildPlugins.androidApplication = "com.android.application"
 BuildPlugins.kotlinAndroid = "kotlin-android"
 BuildPlugins.kotlinAndroidExtensions = "kotlin-android-extensions"
@@ -233,8 +235,9 @@ Deps.paging = "android.arch.paging:runtime:${versions.paging}"
 
 Deps.hamcrest = "org.hamcrest:hamcrest-all:${versions.hamcrest}"
 
-Deps.android_gradle_plugin =
-        "com.android.tools.build:gradle:${versions.android_gradle_plugin}"
+Deps.android_gradle_plugin ="com.android.tools.build:gradle:${versions.android_gradle_plugin}"
+
+Deps.rounded_imageview= "com.makeramen:roundedimageview:${versions.rounded_imageview}"
 
 Deps.qmui = "com.qmuiteam:qmui:${versions.qmui}"
 
@@ -242,16 +245,15 @@ Deps.matisse = "com.zhihu.android:matisse:${versions.matisse}"
 
 Deps.multidex = "androidx.multidex:multidex:${versions.multidex}"
 
-Deps.rx_permissions =
-        "com.tbruyelle.rxpermissions2:rxpermissions:${versions.rx_permissions}"
+Deps.rx_permissions = "com.tbruyelle.rxpermissions2:rxpermissions:${versions.rx_permissions}"
 
-Deps.persistent_cookie_jar =
-        "com.github.franmontiel:PersistentCookieJar:${versions.persistent_cookie_jar}"
+Deps.persistent_cookie_jar =  "com.github.franmontiel:PersistentCookieJar:${versions.persistent_cookie_jar}"
+
+Deps.jsoup = "org.jsoup:jsoup:${versions.jsoup}"
 
 Deps.convenient_banner = "com.bigkoo:ConvenientBanner:${versions.convenient_banner}"
 
-Deps.smart_refresh_layout =
-        "com.scwang.smartrefresh:SmartRefreshLayout:${versions.smart_refresh_layout}"
+Deps.smart_refresh_layout = "com.scwang.smartrefresh:SmartRefreshLayout:${versions.smart_refresh_layout}"
 
 Deps.statusbar = "com.jaeger.statusbarutil:library:${versions.statusbar}"
 
