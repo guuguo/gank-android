@@ -3,7 +3,9 @@ package com.guuguo.fuliba.ui.main
 import com.bianla.commonlibrary.extension.BindingViewHolder
 import com.bianla.commonlibrary.extension.generate
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.guuguo.baselib.extension.safe
 import com.guuguo.baselib.mvvm.BaseFragment
+import com.guuguo.baselib.mvvm.FullscreenWebViewActivity
 import com.guuguo.fuliba.R
 import com.guuguo.fuliba.databinding.FragmentFulibaBinding
 import com.guuguo.fuliba.databinding.FulibaItemBinding
@@ -22,6 +24,10 @@ class FulibaFragment : BaseFragment<FragmentFulibaBinding>() {
         binding.refresh.setOnRefreshListener {
             loadData(true)
             binding.refresh.isRefreshing = false
+        }
+        adapter.setOnItemClickListener { _, view, position ->
+            val bean = adapter.getItem(position)
+            FullscreenWebViewActivity.intentTo(activity, bean?.url.safe())
         }
     }
 

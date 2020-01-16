@@ -6,4 +6,5 @@ class FulibaItemBean {
     var date: String = ""
     var content: String = ""
     var tag:String=""
+    var url:String=""
 }
