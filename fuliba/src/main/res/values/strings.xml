@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">gank</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+
+    <string name="url_gank_history_some">http://gank.io/api/history/content/%1$d/%2$d</string>
+    <string name="url_gank_history_day">http://gank.io/api/history/content/day/%1$s</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="girl">girl</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="category">分类</string>
+    <string name="daily">每日</string>
+    <string name="star">收藏</string>
+    <string name="about">关于</string>
+    <string name="check_upgrade">检查更新</string>
+    <string name="search">搜索</string>
+
+
+    <string name="wait">请稍等</string>
+    <string name="fuliba">福利吧</string>
+    <string name="gank">gank</string>
+
+</resources>
