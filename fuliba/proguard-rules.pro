@@ -158,9 +158,9 @@
 #------------------------------------------------------------------------------项目内混淆规则START--------------------------------------------------------------------------------#
 
 #Module
--keep public class com.guuguo.fuliba.model.entity.** {*;}
--keep public class com.guuguo.fuliba.model.other.** {*;}
--keep public class com.guuguo.fuliba.model.** {*;}
+-keep public class com.guuguo.fuliba.data.bean.entity.** {*;}
+-keep public class com.guuguo.fuliba.data.bean.other.** {*;}
+-keep public class com.guuguo.fuliba.data.bean.** {*;}
 -keep public class com.guuguo.fuliba.constant.** {*;}
 
 # 保留JS方法不被混淆

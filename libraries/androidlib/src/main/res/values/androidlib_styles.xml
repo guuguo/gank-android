@@ -39,6 +39,9 @@
     <!--&lt;!&ndash; Used by MediaRouter &ndash;&gt;-->
     <!--<item name="isLightTheme">true</item>-->
   </style>
+  <style name="TextAppearance.AppCompat.Body1.ColorPrimary">
+    <item name="android:textColor">?colorPrimary</item>
+  </style>
 
   <!-- 夜间模式 -->
   <style name="MyTheme.Dark" parent="Base.Theme.AppCompat">

@@ -1,18 +1,13 @@
-package com.guuguo.fuliba.ui.fuliba.repository
+package com.guuguo.fuliba.data.source
 
-import androidx.lifecycle.MutableLiveData
-import com.guuguo.fuliba.model.FulibaItemBean
-import com.guuguo.fuliba.repository.net.FulibaService
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.guuguo.fuliba.data.bean.FulibaItemBean
+import androidx.lifecycle.liveData
+import com.guuguo.fuliba.data.source.remote.FulibaService
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-object FulibaRepository {
-   suspend fun getHomeList(page:Int): MutableList<FulibaItemBean>? {
-//        val livedata = MutableLiveData<MutableList<FulibaItemBean>>()
-
-//           GlobalScope.launch {
+object FulibaRepository : FulibaDataSource {
+    override suspend fun getFuliItemList(page: Int): MutableList<FulibaItemBean>? {
         return kotlin.runCatching {
             val html = FulibaService.server().getFulibaList(page).string()
             val doc: Document = Jsoup.parse(html)
@@ -27,8 +22,5 @@ object FulibaRepository {
                 bean
             }.toMutableList()
         }.getOrNull()
-//            livedata.postValue(res)
-//        }
-//        return livedata
     }
 }

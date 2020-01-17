@@ -1,7 +1,7 @@
-package com.guuguo.fuliba.repository.net
+package com.guuguo.fuliba.data.source.remote
 
 import com.google.gson.GsonBuilder
-import com.guuguo.fuliba.repository.net.MyRetrofit.httpClient
+import com.guuguo.fuliba.data.source.remote.MyRetrofit.httpClient
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.ResponseBody
@@ -22,6 +22,7 @@ interface FulibaService {
     /**福利吧*/
     @GET("{path}")
     suspend fun getPath(@Path("path") path: String): ResponseBody
+
 
     companion object {
         private const val API = "https://fulibus.net"

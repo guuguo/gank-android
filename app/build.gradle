@@ -79,9 +79,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-//    buildFeatures {
-//        compose = true
-//    }
 }
 
 dependencies {
@@ -108,8 +105,6 @@ dependencies {
     kapt(Deps.room.compiler)
 
 
-    kapt(Deps.lifecycle.compiler)
-    implementation(Deps.paging)
     implementation(Deps.multidex)
 
     implementation(Deps.dagger.runtime)

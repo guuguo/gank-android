@@ -30,7 +30,8 @@ import top.guuguo.myapplication.ui.guide.IGuideType
  * Created by admin on 2016/11/29.
  */
 
-class HomeGuideDialog(var activity: Activity, var targetView: View, var guildType: IGuideType) : BaseDialog<HomeGuideDialog>(activity) {
+class HomeGuideDialog(var activity: Activity, var targetView: View, var guildType: IGuideType) :
+    BaseDialog<HomeGuideDialog>(activity) {
 
     fun getLayoutResId() = R.layout.home_layout_guild_home_without_scale
     var setUpCustomView: ((Rect, ViewGroup) -> Unit)? = null
@@ -86,7 +87,8 @@ class HomeGuideDialog(var activity: Activity, var targetView: View, var guildTyp
                 when (targetShape) {
                     1 -> {
                         guideContent.isCircle = true
-                        guideContent.targetRadius = Math.sqrt(circleWidth * circleWidth + circleHeight * circleHeight.toDouble()).toFloat() / 2
+                        guideContent.targetRadius =
+                            Math.sqrt(circleWidth * circleWidth + circleHeight * circleHeight.toDouble()).toFloat() / 2
                     }
                     2 -> {
                         guideContent.isCircle = false
@@ -113,7 +115,7 @@ class HomeGuideDialog(var activity: Activity, var targetView: View, var guildTyp
                 }
 
                 ///圈圈在下面的时候
-                if (lCY > getScreenDisplayHeight() / 2) {
+                if (lCY > DisplayUtil.getScreenRealHeight(mContext) / 2) {
                     guideContent.removeAllViews()
                     guideContent.addView(sflMsg)
                     guideContent.addView(circleView)
@@ -155,12 +157,21 @@ class HomeGuideDialog(var activity: Activity, var targetView: View, var guildTyp
                         sflMsg.updateLayoutParams<LinearLayout.LayoutParams> {
                             gravity = Gravity.END
                         }
-                        sflMsg.triangleStartExtent = lCx.toFloat() - guideContent.measuredWidth + sflMsg.measuredWidth + anchorOffset
+                        sflMsg.triangleStartExtent =
+                            lCx.toFloat() - guideContent.measuredWidth + sflMsg.measuredWidth + anchorOffset
                     }
                 }
                 ///tvHint 最大宽度减掉各种margin
-                tvHint.maxWidth = guideContent.measuredWidth - 30.dpToPx() - 27.dpToPx() - 47.5f.dpToPx().toInt()
-                setUpCustomView?.invoke(Rect(location[0], location[1], location[0] + targetWidth, location[1] + targetHeight), container)
+                tvHint.maxWidth =
+                    guideContent.measuredWidth - 30.dpToPx() - 27.dpToPx() - 47.5f.dpToPx().toInt()
+                setUpCustomView?.invoke(
+                    Rect(
+                        location[0],
+                        location[1],
+                        location[0] + targetWidth,
+                        location[1] + targetHeight
+                    ), container
+                )
                 circleView.updateLayoutParams<LinearLayout.LayoutParams> {
                     leftMargin = mLeft
                     topMargin = mTop

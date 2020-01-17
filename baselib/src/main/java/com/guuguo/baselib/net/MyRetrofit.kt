@@ -1,4 +1,4 @@
-package com.guuguo.fuliba.repository.net
+package com.guuguo.fuliba.data.source.remote
 
 import com.google.gson.Gson
 import com.guuguo.android.lib.extension.log

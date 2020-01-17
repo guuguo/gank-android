@@ -39,7 +39,7 @@ dependencies {
 
     api project(":libraries:libdatabindingex")
 
-    api("com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44")
+    api("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11")
 
     api(Deps.wildAndroidKtx)
     api(project(":stethomodule"))
@@ -48,6 +48,7 @@ dependencies {
     api(Deps.kotlin.stdlib)
     api(Deps.wildAndroidKtx)
     api(Deps.rounded_imageview)
+    api(Deps.paging)
 
     api(Deps.retrofit.runtime)
     api(Deps.retrofit.gson)
@@ -55,6 +56,9 @@ dependencies {
     api(Deps.retrofit.mock)
     api(Deps.okhttp3)
 
+    api(Deps.lifecycle.runtime)
+    api(Deps.lifecycle.extensions)
+    api(Deps.lifecycle.ktx)
 
     api(Deps.support.annotations)
     api(Deps.support.app_compat)

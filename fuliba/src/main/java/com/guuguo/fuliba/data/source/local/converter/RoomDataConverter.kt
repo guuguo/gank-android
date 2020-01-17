@@ -1,4 +1,4 @@
-package com.guuguo.fuliba.repository.db.converter
+package com.guuguo.fuliba.data.source.local.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

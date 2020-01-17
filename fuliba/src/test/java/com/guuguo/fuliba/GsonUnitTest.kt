@@ -1,8 +1,7 @@
 package com.guuguo.fuliba
 
-import com.guuguo.android.lib.extension.date
 import com.guuguo.fuliba.constant.myGson
-import com.guuguo.fuliba.model.entity.GankModel
+import com.guuguo.fuliba.data.bean.entity.GankModel
 import org.junit.Test
 
 import org.junit.Assert.assertEquals

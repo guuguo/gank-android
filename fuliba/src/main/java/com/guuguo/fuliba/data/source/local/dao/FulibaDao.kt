@@ -1,4 +1,4 @@
-package com.guuguo.fuliba.repository.db.dao
+package com.guuguo.fuliba.data.source.local.dao
 
 import androidx.room.Dao
 

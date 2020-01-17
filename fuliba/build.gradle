@@ -48,8 +48,22 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-//    buildFeatures {
-//        compose = true
+//    // If you need to add more flavors, consider using flavor dimensions.
+//    productFlavors {
+//        mock {
+//            applicationIdSuffix = ".mock"
+//            dimension "default"
+//        }
+//        prod {
+//            dimension "default"
+//        }
+//    }
+//    // Remove mockRelease as it's not needed.
+//    android.variantFilter { variant ->
+//        if (variant.buildType.name == 'release'
+//                && variant.flavors[0].name == 'mock') {
+//            variant.ignore = true
+//        }
 //    }
 }
 
@@ -76,9 +90,6 @@ dependencies {
     kapt(Deps.room.compiler)
 
     implementation(Deps.jsoup)
-
-    kapt(Deps.lifecycle.compiler)
-    implementation(Deps.paging)
     implementation(Deps.multidex)
 
     implementation(Deps.dagger.runtime)
