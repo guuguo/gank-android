@@ -3,7 +3,6 @@ plugins {
 }
 
 
-
 android {
     compileSdkVersion(AndroidSdk.compile)
 
@@ -19,7 +18,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            minifyEnabled = false
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
@@ -31,5 +30,4 @@ dependencies {
     debugApi(Deps.stetho.runtime)
     debugApi(Deps.stetho.okhttp3)
     api(Deps.okhttp3)
-
 }

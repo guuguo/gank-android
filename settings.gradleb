@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+}
+include(":app", ":stethomodule")
+//
+include(":baselib'
+include(":service'
+include(":fuliba'
+
+
+include(":libraries:crash'
+include(":libraries:rulerview'
+include(":libraries:messagebar'
+include(":libraries:shadowview'
+include(":libraries:androidlib'
+include(":libraries:dialog'
+include(":libraries:drawable'
+include(":libraries:systembar'
+include(":libraries:roundview'
+include(":libraries:shadowview'
+include(":libraries:utils'
+include(":libraries:widget'
+include(":libraries:libdatabindingex'
+include(":libraries:demo'
