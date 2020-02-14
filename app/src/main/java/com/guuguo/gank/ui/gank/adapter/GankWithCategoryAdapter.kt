@@ -2,12 +2,12 @@ package com.guuguo.gank.ui.gank.adapter
 
 import android.view.View
 import android.widget.ImageView
-import com.chad.library.adapter.base.BaseViewHolder
 import com.guuguo.gank.R
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseSectionQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.guuguo.android.lib.extension.getTimeSpan
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.gank.model.GankSection
@@ -15,22 +15,27 @@ import com.guuguo.gank.model.GankSection
 
 class GankWithCategoryAdapter : BaseSectionQuickAdapter<GankSection, BaseViewHolder> {
 
-    override fun convertHead(helper: BaseViewHolder?, item: GankSection?) {
+    override fun convertHeader(helper: BaseViewHolder, item: GankSection?) {
         helper?.setText(R.id.tv_category, item?.header)
     }
 
     constructor() : super(R.layout.item_gank, R.layout.item_gank_category, null)
 
-    constructor(data: List<GankSection>?) : super(R.layout.item_gank, R.layout.item_gank_category, data)
+    constructor(data: MutableList<GankSection>?) : super(
+        R.layout.item_gank,
+        R.layout.item_gank_category,
+        data
+    )
 
-    override fun convert(holder: BaseViewHolder, gankBean: GankSection) {
-
-        holder.setText(R.id.tv_content, gankBean.t.desc)
-                .setText(R.id.tv_hint, gankBean.t.who + " · " + gankBean.t.publishedAt?.getTimeSpan())
+    override fun convert(holder: BaseViewHolder, gankBean: GankSection?) {
+        if (gankBean?.t == null) return
+        holder.setText(R.id.tv_content, gankBean.t!!.desc)
+            .setText(R.id.tv_hint, gankBean.t!!.who + " · " + gankBean.t!!.publishedAt?.getTimeSpan())
         val image = holder.getView<ImageView>(R.id.iv_image)
-        if (gankBean.t.images.safe().isNotEmpty()) {
+        if (gankBean.t!!.images.safe().isNotEmpty()) {
             image.visibility = View.VISIBLE
-            Glide.with(mContext).asBitmap().load(gankBean.t.images.safe()[0]).apply(RequestOptions().centerCrop()).into(image)
+            Glide.with(context).asBitmap().load(gankBean.t!!.images.safe()[0])
+                .apply(RequestOptions().centerCrop()).into(image)
         } else {
             image.visibility = View.GONE
         }

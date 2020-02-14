@@ -16,6 +16,6 @@ class GankNetResult {
 
     var count: Int = 0
     var error: Boolean = false
-    var results: List<GankModel>? = null
+    var results: MutableList<GankModel>? = null
 
 }

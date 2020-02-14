@@ -9,10 +9,10 @@ import io.reactivex.Maybe
 interface GankDao {
 
     @Query("SELECT * FROM gank ORDER BY _id DESC")
-    fun getGanks(): Maybe<List<GankModel>>
+    fun getGanks(): Maybe<MutableList<GankModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertGanks(newsList: List<GankModel>)
+    fun insertGanks(newsList: MutableList<GankModel>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGank(gank: GankModel)

@@ -54,9 +54,9 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
                     mSearchResultAdapter.addData(it.list?.toMutableList().safe())
                 }
                 if (it.isEnd) {
-                    mSearchResultAdapter.loadMoreEnd()
+                    mSearchResultAdapter.loadMoreModule?.loadMoreEnd()
                 } else {
-                    mSearchResultAdapter.setEnableLoadMore(true)
+                    mSearchResultAdapter.loadMoreModule?.isEnableLoadMore=(true)
                 }
             }
         })
@@ -80,9 +80,9 @@ class SearchActivity : BaseListActivity<FragmentSearchBinding>() {
 
     override fun initView() {
         super.initView()
-        mSearchResultAdapter.setOnLoadMoreListener({
+        mSearchResultAdapter.loadMoreModule?.setOnLoadMoreListener{
             viewModel.fetchData(false)
-        }, binding.recycler)
+        }
         mSearchResultAdapter.setOnItemClickListener { _, _, position ->
             val bean = mSearchResultAdapter.getItem(position)!!
             WebViewActivity.intentTo(bean, activity)

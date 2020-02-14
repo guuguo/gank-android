@@ -2,6 +2,7 @@ package com.guuguo.gank.ui.gank.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.guuguo.android.lib.extension.safe
+import com.guuguo.android.lib.extension.safeMl
 import com.guuguo.baselib.mvvm.BaseListViewModel
 import com.guuguo.gank.constant.MEIZI_COUNT
 import com.guuguo.gank.model.entity.GankModel
@@ -34,7 +35,7 @@ class SearchViewModel : BaseListViewModel() {
                         isEmpty.value = true
                     } else {
                         isEmpty.value = false
-                        refreshListModel.setRefresh(searchResult.results.safe())
+                        refreshListModel.setRefresh(searchResult.results.safeMl())
                     }
                 } else {
                     isEmpty.value = false

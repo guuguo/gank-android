@@ -23,12 +23,12 @@ import java.util.*
 class GankDailyViewModel : BaseListViewModel() {
     override fun refreshData(refresh: Boolean) {
         Flowable.zip(ApiServer.getGankData(ApiServer.TYPE_FULI, MEIZI_COUNT, page), ApiServer.getGankData(ApiServer.TYPE_REST, MEIZI_COUNT, page),
-                BiFunction<Ganks<ArrayList<GankModel>>, Ganks<ArrayList<GankModel>>, List<GankModel>> { t1, t2 ->
+                BiFunction<Ganks<MutableList<GankModel>>, Ganks<MutableList<GankModel>>, MutableList<GankModel>> { t1, t2 ->
                     t1.results?.zip(t2.results!!) { a: GankModel, b: GankModel ->
                         a.desc = b.desc
                         a.who = b.who
                         a
-                    }.safe()
+                    }.safe().toMutableList()
                 })
                 .subscribe({
                     it.let {
@@ -51,7 +51,7 @@ class GankDailyViewModel : BaseListViewModel() {
             setUpMeiziList(myGson.fromJson(tempStr, object : TypeToken<ArrayList<GankModel>>() {}.type))
     }
 
-    fun setUpMeiziList(lMeiziList: List<GankModel>) {
+    fun setUpMeiziList(lMeiziList: MutableList<GankModel>) {
         isLoading.value = false
         if (lMeiziList.size < MEIZI_COUNT) {
             refreshListModel.isEnd = true

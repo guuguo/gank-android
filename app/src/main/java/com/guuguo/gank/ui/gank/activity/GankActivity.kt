@@ -183,10 +183,10 @@ class GankActivity : MBaseActivity<ActivityGankBinding>() {
     private fun initRecycler() {
         rv_gank.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         rv_gank.adapter = mGankAdapter
-        mGankAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        mGankAdapter.setOnItemClickListener {  adapter, view, position ->
             val bean = mGankAdapter.getItem(position)!!
             if (!bean.isHeader)
-                WebViewActivity.intentTo(bean.t, activity)
+                WebViewActivity.intentTo(bean.t!!, activity)
         }
     }
 

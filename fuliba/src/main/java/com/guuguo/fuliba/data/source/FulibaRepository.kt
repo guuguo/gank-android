@@ -1,7 +1,6 @@
 package com.guuguo.fuliba.data.source
 
 import com.guuguo.fuliba.data.bean.FulibaItemBean
-import androidx.lifecycle.liveData
 import com.guuguo.fuliba.data.source.remote.FulibaService
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -23,4 +22,5 @@ object FulibaRepository : FulibaDataSource {
             }.toMutableList()
         }.getOrNull()
     }
+
 }

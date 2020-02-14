@@ -53,15 +53,15 @@ class GankDailyFragment : BaseListFragment<FragmentGankDailyBinding>() {
         super.loadingStatusChange(it)
         if (it) {
         } else {
-            meiziAdapter.loadMoreComplete()
+            meiziAdapter.loadMoreModule?.loadMoreComplete()
         }
     }
 
     override fun initRecycler() {
         super.initRecycler()
-        meiziAdapter.setOnLoadMoreListener({
+        meiziAdapter.loadMoreModule?.setOnLoadMoreListener {
             viewModel.fetchData(false)
-        }, recycler)
+        }
 
         recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         recycler.adapter = meiziAdapter

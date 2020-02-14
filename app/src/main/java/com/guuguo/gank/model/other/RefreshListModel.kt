@@ -4,7 +4,7 @@ import androidx.annotation.IntDef
 
 
 class RefreshListModel<T> {
-    var list: List<T>? = null
+    var list: MutableList<T>? = null
 
     @RefreshType
     var refreshType: Int = REFRESH
@@ -25,12 +25,12 @@ class RefreshListModel<T> {
         refreshType = UPDATE
     }
 
-    fun setRefresh(list: List<T>) {
+    fun setRefresh(list: MutableList<T>) {
         setRefresh()
         this.list = list
     }
 
-    fun setUpdate(list: List<T>) {
+    fun setUpdate(list: MutableList<T>) {
         setUpdate()
         this.list = list
     }

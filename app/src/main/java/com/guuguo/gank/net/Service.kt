@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit
  */
 interface Service {
     @GET("data/{type}/{count}/{page}")
-    fun getGanHuo(@Path("type") type: String, @Path("count") count: Int, @Path("page") page: Int): Flowable<Ganks<ArrayList<GankModel>>>
+    fun getGanHuo(@Path("type") type: String, @Path("count") count: Int, @Path("page") page: Int): Flowable<Ganks<MutableList<GankModel>>>
 
     @GET("day/{date}")
     fun getGankOneDay(@Path("date") date: String): Flowable<GankDays>

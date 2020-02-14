@@ -8,10 +8,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.LinearLayout
+import androidx.appcompat.widget.Toolbar
 import com.guuguo.android.lib.extension.safe
+import com.guuguo.android.lib.extension.toast
+import com.guuguo.android.lib.ktx.snackShow
 import com.guuguo.baselib.R
 import com.guuguo.baselib.databinding.BaseActivityWebviewBinding
 import com.guuguo.baselib.widget.WebLoadingIndicator
@@ -29,13 +33,16 @@ open class FullscreenWebViewActivity : MBaseActivity<BaseActivityWebviewBinding>
 
     override fun getLayoutResId() = R.layout.base_activity_webview
     override fun isNavigationBack() = true
+    override fun getToolBar(): Toolbar? = binding.bottombar
+    override fun getHeaderTitle(): String = title.safe()
+    override fun getMenuResId() = R.menu.web_menu
 
     lateinit var mAgentWeb: AgentWeb
 
     companion object {
         val ARG_URL = "url"
         val ACTIVITY_WEBVIEW = 0x102
-        fun intentTo(activity: Activity,url: String) {
+        fun intentTo(activity: Activity, url: String) {
             val intent = Intent(activity, FullscreenWebViewActivity::class.java)
             intent.putExtra(ARG_URL, url)
             activity.startActivityForResult(intent, ACTIVITY_WEBVIEW)
@@ -45,16 +52,22 @@ open class FullscreenWebViewActivity : MBaseActivity<BaseActivityWebviewBinding>
     override fun initView() {
         super.initView()
         mAgentWeb = AgentWeb.with(this)
-                .setAgentWebParent(getWebContentParentView()!!, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
-                .run {
-                    getCustomIndicator()?.run {
-                        setCustomIndicator(this)
-                    } ?: useDefaultIndicator()
-                }
-                .setWebView(NestedScrollAgentWebView(activity))
-                .createAgentWeb()
-                .ready()
-                .go(getUrl())
+            .setAgentWebParent(
+                getWebContentParentView()!!,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+            )
+            .run {
+                getCustomIndicator()?.run {
+                    setCustomIndicator(this)
+                } ?: useDefaultIndicator()
+            }
+            .setWebView(NestedScrollAgentWebView(activity))
+            .createAgentWeb()
+            .ready()
+            .go(getUrl())
         if (BuildConfig.DEBUG) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 WebView.setWebContentsDebuggingEnabled(true)
@@ -75,10 +88,19 @@ open class FullscreenWebViewActivity : MBaseActivity<BaseActivityWebviewBinding>
         mUrl = intent.getStringExtra(ARG_URL)
     }
 
-    override fun getHeaderTitle(): String {
-        return title.safe()
-    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val url = mAgentWeb.webCreator.webView.url
+        when (item.itemId) {
+            R.id.menu_browser -> openInBrowser(url)
+            R.id.menu_copy -> copyUrl(url)
+            R.id.menu_share -> {
+                shareUrl(url)
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 
     fun openInBrowser(url: String) {
         val intent = Intent()
@@ -91,14 +113,14 @@ open class FullscreenWebViewActivity : MBaseActivity<BaseActivityWebviewBinding>
     fun copyUrl(url: String) {
         val myClipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val myClip: ClipData = ClipData.newPlainText("text", url)
-        myClipboard.setPrimaryClip(myClip) 
-//        showTip("已成功复制")
+        myClipboard.setPrimaryClip(myClip)
+        snackShow("已成功复制")
     }
 
-    private fun shareUrl() {
+    private fun shareUrl(url: String) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, mUrl)
+        intent.putExtra(Intent.EXTRA_TEXT, url)
         startActivity(Intent.createChooser(intent, "分享链接到"))
     }
 

@@ -36,7 +36,7 @@ class GankCategoryContentViewModel : BaseListViewModel() {
             }
             else -> {
                 ApiServer.getGankData(gank_type, MEIZI_COUNT, page)
-                        .compose(ACacheTransformF<Ganks<ArrayList<GankModel>>>("getGankData$gank_type$page").fromCacheIfValide())
+                        .compose(ACacheTransformF<Ganks<MutableList<GankModel>>>("getGankData$gank_type$page").fromCacheIfValide())
                         .doOnSubscribe { isLoading.value = true }
                         .doOnTerminate { isLoading.value = false }
                         .doOnError { isLoading.value = false;isError.value = it }
@@ -50,7 +50,7 @@ class GankCategoryContentViewModel : BaseListViewModel() {
         }
     }
 
-    fun showMeiziList(lMeiziList: List<GankModel>) {
+    fun showMeiziList(lMeiziList: MutableList<GankModel>) {
         if (lMeiziList.size < MEIZI_COUNT) {
             refreshListModel.isEnd = true
         }

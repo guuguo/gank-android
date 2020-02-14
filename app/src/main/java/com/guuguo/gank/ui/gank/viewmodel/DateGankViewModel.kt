@@ -22,12 +22,12 @@ class DateGankViewModel : BaseViewModel() {
 
     fun fetchDate(date: Date) {
         ApiServer.getGankOneDayData(date)
-                .compose(ACacheTransformF<GankDays>("getGankOneDayData${date.time}").fromCacheIfValide())
-                .doOnSubscribe { isLoading.value = true }
-                .doOnTerminate { isLoading.value = false }
-                .doOnError { isError.value = it;it.printStackTrace() }
-                .doOnNext { gankDayLiveData.value = getMergeAllGanks(it.first) }
-                .subscribe(EmptyConsumer(), ErrorConsumer()).isDisposed
+            .compose(ACacheTransformF<GankDays>("getGankOneDayData${date.time}").fromCacheIfValide())
+            .doOnSubscribe { isLoading.value = true }
+            .doOnTerminate { isLoading.value = false }
+            .doOnError { isError.value = it;it.printStackTrace() }
+            .doOnNext { gankDayLiveData.value = getMergeAllGanks(it.first) }
+            .subscribe(EmptyConsumer(), ErrorConsumer()).isDisposed
     }
 
     fun getMergeAllGanks(gankDays: GankDays): ArrayList<GankSection> {
@@ -45,8 +45,8 @@ class DateGankViewModel : BaseViewModel() {
     fun ArrayList<GankModel>?.addSection(list: ArrayList<GankSection>) {
         this?.let {
             if (it.isNotEmpty()) {
-                list.add(GankSection(it[0].type.safe()))
-                list.addAll(it.map { GankSection(it) }.safe())
+                list.add(GankSection(true, it[0].type.safe()))
+                list.addAll(it.map { GankSection(false, t = it) }.safe())
             }
         }
     }

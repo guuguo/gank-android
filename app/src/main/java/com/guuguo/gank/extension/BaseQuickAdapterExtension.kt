@@ -1,7 +1,7 @@
 package com.guuguo.gank.extension
 
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
  * Created by 大哥哥 on 2016/10/25 0025.
