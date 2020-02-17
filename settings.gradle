@@ -1,4 +1,4 @@
-rootProject.buildFileName = "build.gradle"
+rootProject.buildFileName = "build.gradle.kts"
 include(":app", ":stethomodule")
 //
 include(":baselib")

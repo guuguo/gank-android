@@ -1,6 +1,5 @@
 plugins {
-    id(BuildPlugins.androidApplication)
-//    kotlin("android")
+    id(BuildPlugins.androidLibrary)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
@@ -82,10 +81,6 @@ dependencies {
     androidTestImplementation(Deps.atsl.rules)
     androidTestImplementation(Deps.espresso.core)
     androidTestImplementation("org.hamcrest:hamcrest-library:2.1")
-
-    implementation(Deps.navigation.runtime_ktx)
-    implementation(Deps.navigation.fragment_ktx)
-    implementation(Deps.navigation.ui)
 
     implementation(Deps.room.runtime)
     implementation(Deps.room.rxjava2)

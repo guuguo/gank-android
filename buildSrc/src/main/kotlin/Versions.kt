@@ -38,7 +38,7 @@ private object versions {
     const val hamcrest = "1.3"
     const val kotlin = "1.3.11"
     const val paging = "1.0.1"
-    const val navigation = "1.0.0-alpha04"
+    const val navigation = "2.3.0-alpha01"
     const val work = "1.0.0-alpha08"
     const val arouter_api = "1.4.1"
     const val arouter_compiler = "1.2.2"

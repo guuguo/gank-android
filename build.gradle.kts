@@ -2,10 +2,15 @@
 import java.net.URI
 
 buildscript {
+    // Define versions in a single place
+    extra.apply{
+        set("KOTLIN_VERSION", "1.3.61")
+        set("MIN_SDK_VERSION", 19)
+        set("COMPILE_SDK_VERSION", 28)
+        set("TARGET_SDK_VERSION", 26)
+    }
     repositories {
-        google()
-        jcenter()
-//        addRepos(repositories)
+        addRepos(repositories)
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.5.3")
@@ -19,10 +24,7 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-
-//        addRepos(repositories)
+        addRepos(repositories)
         flatDir {
             dirs("libs")
         }

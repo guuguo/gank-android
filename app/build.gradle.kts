@@ -88,8 +88,8 @@ android {
 dependencies {
     implementation(fileTree(hashMapOf("dir" to "libs", "include" to arrayOf("*.jar"))))
 
-    implementation(project(":baselib"))
     implementation(project(":fuliba"))
+    implementation(project(":baselib"))
 
     testImplementation(Deps.mockito.core)
     testImplementation(Deps.mockito.all)
@@ -99,10 +99,6 @@ dependencies {
     androidTestImplementation(Deps.atsl.rules)
     androidTestImplementation(Deps.espresso.core)
     androidTestImplementation("org.hamcrest:hamcrest-library:2.1")
-
-    implementation(Deps.navigation.runtime_ktx)
-    implementation(Deps.navigation.fragment_ktx)
-    implementation(Deps.navigation.ui)
 
     implementation(Deps.room.runtime)
     implementation(Deps.room.rxjava2)

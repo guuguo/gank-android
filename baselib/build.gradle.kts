@@ -1,5 +1,5 @@
 plugins {
-    id(BuildPlugins.androidApplication)
+    id(BuildPlugins.androidLibrary)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
@@ -48,6 +48,10 @@ dependencies {
     api(Deps.wildAndroidKtx)
     api(Deps.rounded_imageview)
     api(Deps.paging)
+
+    api(Deps.navigation.runtime_ktx)
+    api(Deps.navigation.fragment_ktx)
+    api(Deps.navigation.ui)
 
     api(Deps.retrofit.runtime)
     api(Deps.retrofit.gson)
