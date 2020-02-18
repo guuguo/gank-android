@@ -8,6 +8,7 @@ pluginManagement {
 include(":app", ":stethomodule")
 //
 include ':baselib'
+include ':theme'
 include ':service'
 include ':fuliba'
 

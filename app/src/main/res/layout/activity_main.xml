@@ -28,10 +28,10 @@
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@color/white"
             app:itemBackground="?selectableItemBackgroundBorderless"
+            android:background="?containerBackgroundLayer2"
             app:itemTextAppearanceActive="@style/TextAppearance.AppCompat.Body1.ColorPrimary"
-            app:itemTextAppearanceInactive="@style/TextAppearance.AppCompat.Body1"
+            app:itemTextAppearanceInactive="?textAppearanceBody1"
             app:menu="@menu/home_bottom_navigation" />
 
 

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: BuildPlugins.kotlinKapt
 
 android {
     compileSdkVersion 29
@@ -15,6 +15,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
+    resourcePrefix "theme_"
 
     buildTypes {
         release {
