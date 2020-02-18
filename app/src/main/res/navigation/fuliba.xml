@@ -2,14 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/fuliba"
     app:startDestination="@id/fulibaFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.guuguo.gank.ui.gank.fragment.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/fulibaFragment"
+        android:name="com.guuguo.fuliba.ui.main.FulibaFragment"
+        android:label="FulibaFragment"
+        tools:layout="@layout/fragment_fuliba">
 
     </fragment>
 

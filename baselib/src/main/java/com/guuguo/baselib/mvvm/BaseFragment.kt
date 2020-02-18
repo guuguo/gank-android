@@ -30,8 +30,8 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment(), CoroutineSc
         activity as LBaseActivity
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         cancel()
     }
     open fun getViewModel(): BaseViewModel? = null

@@ -89,7 +89,7 @@ abstract class LBaseFragment : RxFragment() {
         initView()
         loadData()
         loadDataObs(false)?.subscribe({}, {})?.isDisposed
-        loadData(false)
+        loadData()
 
         //如果准备好 懒加载
         isPrepare = true
@@ -156,7 +156,7 @@ abstract class LBaseFragment : RxFragment() {
 
 
     /*init*/
-    @Deprecated("用带参数的方法吧", replaceWith = ReplaceWith("loadData(false)"), level = DeprecationLevel.WARNING)
+//    @Deprecated("用带参数的方法吧", replaceWith = ReplaceWith("loadData(false)"), level = DeprecationLevel.WARNING)
     open fun loadData() {
     }
 
@@ -164,6 +164,7 @@ abstract class LBaseFragment : RxFragment() {
     open fun loadDataObs(isRefresh: Boolean): Observable<*>? = null
 
     /**[isFromNet] 是否单纯从网络获取*/
+    @Deprecated("用不带参数的方法吧", replaceWith = ReplaceWith("loadData()"), level = DeprecationLevel.WARNING)
     open fun loadData(isFromNet: Boolean) {}
 
     protected open fun initVariable(savedInstanceState: Bundle?) {}

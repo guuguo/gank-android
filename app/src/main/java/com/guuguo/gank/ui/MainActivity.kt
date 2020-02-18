@@ -3,6 +3,7 @@ package com.guuguo.gank.ui
 import android.os.Build.VERSION
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -22,6 +23,8 @@ class MainActivity : MBaseActivity<ActivityMainBinding>() {
 
     private var currentNavController: LiveData<NavController>? = null
     override fun getLayoutResId() = R.layout.activity_main
+//    override fun getToolBar(): Toolbar? = binding.toolbar
+    override fun isNavigationBack(): Boolean = false
     override fun initStatusBar() {
         val decorView = window.decorView as ViewGroup
         var translucentView = decorView.findViewById<View>(R.id.systembar_foreground_view)
@@ -38,6 +41,7 @@ class MainActivity : MBaseActivity<ActivityMainBinding>() {
         translucentView.setBackgroundColor(getColorCompat(R.color.colorPrimary))
         SystemBarHelper.tintStatusBar(activity, getColorCompat(R.color.colorPrimary), 0.2f)
     }
+
     /**
      * Called on first creation and when restoring state.
      */
@@ -53,16 +57,17 @@ class MainActivity : MBaseActivity<ActivityMainBinding>() {
             intent = intent
         )
 
-        // Whenever the selected controller changes, setup the action bar.
-        controller.observe(this, Observer { navController ->
-            setupActionBarWithNavController(navController)
-        })
+//        // Whenever the selected controller changes, setup the action bar.
+//        controller.observe(this, Observer { navController ->
+//            setupActionBarWithNavController(navController)
+//        })
         currentNavController = controller
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
     }
+
     override fun initView() {
         super.initView()
         setupBottomNavigationBar()

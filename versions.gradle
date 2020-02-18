@@ -278,9 +278,8 @@ static def addRepos(RepositoryHandler handler) {
     handler.maven { url = "http://maven.aliyun.com/nexus/content/groups/public" }
     handler.maven { url = "http://maven.aliyun.com/nexus/content/repositories/releases" }
     handler.maven { url = "https://dl.bintray.com/guuguo/maven" }
-    handler.jcenter { url = "http://jcenter.bintray.com/" }
     handler.google()
-//    handler.jcenter()
+    handler.jcenter()
     handler.mavenCentral()
     handler.maven { url = "https://jitpack.io" }
 }

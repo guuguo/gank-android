@@ -1,5 +1,6 @@
 package com.guuguo.gank.net
 
+import android.util.Log
 import com.google.gson.Gson
 import com.guuguo.android.lib.extension.log
 import com.guuguo.android.pikacomic.net.https.TrustAllCerts
@@ -22,7 +23,7 @@ object MyRetrofit {
         .readTimeout(10, TimeUnit.SECONDS)
         .also { StethoUtils.configureInterceptor(it) }
     val httpClient = commonHttpBuilder
-        .addInterceptor(MyHttpLoggingInterceptor(MyHttpLoggingInterceptor.Logger { it.log() }).setLevel(MyHttpLoggingInterceptor.Level.BODY))
+        .addInterceptor(MyHttpLoggingInterceptor(MyHttpLoggingInterceptor.Logger {  Log.i("网络",it) }).setLevel(MyHttpLoggingInterceptor.Level.BODY))
         .retryOnConnectionFailure(false)
         .build()
 

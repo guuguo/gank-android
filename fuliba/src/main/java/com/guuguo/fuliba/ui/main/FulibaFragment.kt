@@ -1,5 +1,6 @@
 package com.guuguo.fuliba.ui.main
 
+import androidx.core.view.get
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.guuguo.baselib.extension.*
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class FulibaFragment : BaseFragment<FragmentFulibaBinding>() {
     override fun getLayoutResId() = R.layout.fragment_fuliba
-    lateinit var adapter: BaseQuickAdapter<FulibaItemBean,BaseViewHolder>
+    lateinit var adapter: BaseQuickAdapter<FulibaItemBean, BaseViewHolder>
     override fun initView() {
         super.initView()
         adapter = binding.recycler.generate(R.layout.fuliba_item) { h, t ->
@@ -25,21 +26,32 @@ class FulibaFragment : BaseFragment<FragmentFulibaBinding>() {
             }
         }
         binding.refresh.setOnRefreshListener {
-            loadData(true)
+            loadData()
             binding.refresh.isRefreshing = false
         }
     }
 
     private fun request() {
         launch {
+            runCatching {
             val list = FulibaRepository.getFuliItemList(page)
-            list?.let { adapter.addData(list) }
+            list?.let {
+                adapter.addData(list)
+                adapter.setEmptyView(R.layout.widget_include_simple_empty_view)
+            }
+            }.onFailure {
+                adapter.setEmptyView(R.layout.agentweb_error_page)
+                adapter.emptyLayout?.get(0)?.setOnClickListener {
+                    loadData()
+                }
+            }
         }
+
     }
 
     var page = 1
-    override fun loadData(isFromNet: Boolean) {
-        super.loadData(isFromNet)
+    override fun loadData() {
+        super.loadData()
         request()
     }
 }
