@@ -81,10 +81,6 @@ dependencies {
     androidTestImplementation(Deps.espresso.core)
     androidTestImplementation("org.hamcrest:hamcrest-library:2.1")
 
-    implementation(Deps.navigation.runtime_ktx)
-    implementation(Deps.navigation.fragment_ktx)
-    implementation(Deps.navigation.ui)
-
     implementation(Deps.room.runtime)
     implementation(Deps.room.rxjava2)
     kapt(Deps.room.compiler)

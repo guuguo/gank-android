@@ -12,17 +12,23 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <fragment
-                android:id="@+id/container_nav"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/nav_home" />
+<!--        <fragment-->
+<!--                android:id="@+id/container_nav"-->
+<!--                android:name="androidx.navigation.fragment.NavHostFragment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:defaultNavHost="true"-->
+<!--                app:navGraph="@navigation/nav_home" />-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/navigation"
+                android:id="@+id/bottomNavigation"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:background="@color/white"
