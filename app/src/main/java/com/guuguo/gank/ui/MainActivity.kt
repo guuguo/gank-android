@@ -23,7 +23,6 @@ class MainActivity : MBaseActivity<ActivityMainBinding>() {
 
     private var currentNavController: LiveData<NavController>? = null
     override fun getLayoutResId() = R.layout.activity_main
-//    override fun getToolBar(): Toolbar? = binding.toolbar
     override fun isNavigationBack(): Boolean = false
     override fun initStatusBar() {
         val decorView = window.decorView as ViewGroup
@@ -49,18 +48,12 @@ class MainActivity : MBaseActivity<ActivityMainBinding>() {
 
         val navGraphIds = listOf(R.navigation.fuliba, R.navigation.gank)
 
-        // Setup the bottom navigation view with a list of navigation graphs
         val controller = binding.bottomNavigation.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
             intent = intent
         )
-
-//        // Whenever the selected controller changes, setup the action bar.
-//        controller.observe(this, Observer { navController ->
-//            setupActionBarWithNavController(navController)
-//        })
         currentNavController = controller
     }
 

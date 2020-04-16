@@ -14,6 +14,8 @@ import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.beta.upgrade.UpgradeListener
 import com.tencent.bugly.crashreport.CrashReport
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import top.guuguo.stethomodule.StethoUtils
 
 /**
@@ -21,6 +23,13 @@ import top.guuguo.stethomodule.StethoUtils
  */
 class App : BaseApplication() {
     override fun init() {
+        // start Koin!
+        startKoin {
+            // Android context
+            androidContext(this@App)
+            // modules
+//            modules(myModule)
+        }
         Utils.init(this)
         LogUtil.init(MY_DEBUG)
         initBugly()

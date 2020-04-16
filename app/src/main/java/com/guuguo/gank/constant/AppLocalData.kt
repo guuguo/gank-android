@@ -10,6 +10,6 @@ import com.guuguo.baselib.utils.KV
 object AppLocalData {
     var userName by KV("")
     var gankDaily by KV("")
-    var isDark by KV(false)
+//    var isDark by KV(false)
 
 }

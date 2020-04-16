@@ -21,6 +21,8 @@ import android.util.SparseArray
 import androidx.core.util.forEach
 import androidx.core.util.set
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commitNow
+import androidx.fragment.app.transaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
@@ -52,6 +54,7 @@ fun BottomNavigationView.setupWithNavController(
         val fragmentTag = getFragmentTag(index)
 
         // Find or create the Navigation host fragment
+        //找到或者创建fragment,并添加到布局中
         val navHostFragment = obtainNavHostFragment(
             fragmentManager,
             fragmentTag,
@@ -92,16 +95,9 @@ fun BottomNavigationView.setupWithNavController(
         } else {
             val newlySelectedItemTag = graphIdToTagMap[item.itemId]
             if (selectedItemTag != newlySelectedItemTag) {
-                // Pop everything above the first fragment (the "fixed start destination")
-//                fragmentManager.popBackStack(firstFragmentTag,
-//                    FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
                         as NavHostFragment
 
-                // Exclude the first fragment tag because it's always in the back stack.
-//                if (firstFragmentTag != newlySelectedItemTag) {
-                // Commit a transaction that cleans the back stack and adds the first fragment
-                // to it, creating the fixed started destination.
                 fragmentManager.beginTransaction()
                     .setCustomAnimations(
                         R.anim.nav_default_enter_anim,
@@ -211,15 +207,12 @@ private fun attachNavHostFragment(
     navHostFragment: NavHostFragment,
     isPrimaryNavFragment: Boolean
 ) {
-    fragmentManager.beginTransaction()
-        .show(navHostFragment)
-        .apply {
-            if (isPrimaryNavFragment) {
-                setPrimaryNavigationFragment(navHostFragment)
-            }
+    fragmentManager.commitNow {
+        show(navHostFragment)
+        if (isPrimaryNavFragment) {
+            setPrimaryNavigationFragment(navHostFragment)
         }
-        .commitNow()
-
+    }
 }
 
 private fun obtainNavHostFragment(
@@ -234,9 +227,10 @@ private fun obtainNavHostFragment(
 
     // Otherwise, create it and return it.
     val navHostFragment = NavHostFragment.create(navGraphId)
-    fragmentManager.beginTransaction()
-        .add(containerId, navHostFragment, fragmentTag)
-        .commitNow()
+    if (!navHostFragment.isAdded)
+        fragmentManager.commitNow {
+            add(containerId, navHostFragment, fragmentTag)
+        }
     return navHostFragment
 }
 

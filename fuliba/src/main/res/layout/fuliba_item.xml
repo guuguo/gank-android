@@ -27,7 +27,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:sfl_cardBackgroundColor="?containerBackgroundLayer2"
+                app:sfl_cardBackgroundColor="?cardBackgroundColor"
                 app:sfl_cardShadowAlpha="20"
                 app:sfl_cardShadowColor="@color/black"
                 app:sfl_cardShadowRadius="10dp">

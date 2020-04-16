@@ -22,7 +22,7 @@ import com.guuguo.gank.ui.gank.activity.AboutActivity
 import com.guuguo.baselib.mvvm.BaseFragment
 import com.guuguo.gank.constant.AppLocalData
 import com.guuguo.gank.databinding.FragmentHomeBinding
-import com.guuguo.baselib.utils.ThemeUtils
+import com.guuguo.theme.ThemeUtils
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
@@ -65,13 +65,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
     }
 
     lateinit var drawer: Drawer
+
     override fun initView() {
         super.initView()
         val slideTextColor: Int = activity.getThemeRes(android.R.attr.textColorPrimary)!!
+        val darkModeSetting = SwitchDrawerItem().withName("暗黑模式").withIdentifier(1).withTextColor(slideTextColor)
+            .withChecked(ThemeUtils.isDark)
+            .withSwitchEnabled(!ThemeUtils.darkFollowSystem)
+            .withOnCheckedChangeListener { drawerItem, buttonView, isChecked ->
+                ThemeUtils.changeToTheme(isChecked)
+                (drawerItem as SwitchDrawerItem).withChecked(isChecked)
+            }.withSelectable(false)
+
+        val darkModeFollowSystemSetting =
+            SwitchDrawerItem().withName("暗黑模式跟随系统").withIdentifier(1).withTextColor(slideTextColor)
+                .withChecked(ThemeUtils.darkFollowSystem)
+                .withOnCheckedChangeListener { _, _, isChecked ->
+                    ThemeUtils.enableFollowSystem(isChecked)
+                    darkModeSetting
+                        .withChecked(ThemeUtils.isDark)
+                        .withSwitchEnabled(!isChecked)
+                    drawer.adapter.notifyAdapterDataSetChanged()
+                }
+                .withSelectable(false)
 
         drawer = DrawerBuilder()
             .withActivity(activity)
-            .withSliderBackgroundColor(activity.getThemeRes(R.attr.containerBackgroundLayer2)!!)
+            .withSliderBackgroundColor(activity.getThemeRes(R.attr.cardBackgroundColor)!!)
             .withAccountHeader(
                 AccountHeaderBuilder()
                     .withActivity(activity)
@@ -84,22 +104,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
             )
             .withHeaderPadding(true)
             .addDrawerItems(
-                SwitchDrawerItem().withName("夜间模式").withIdentifier(1).withTextColor(slideTextColor).withChecked(
-                    AppLocalData.isDark
-                ).withOnCheckedChangeListener { drawerItem, buttonView, isChecked ->
-                    ThemeUtils.changeToTheme(activity)
-                }.withSelectable(false),
+                darkModeFollowSystemSetting,
+                darkModeSetting,
                 SecondaryDrawerItem().withName("关于").withIdentifier(2).withSelectable(false).withTextColor(
                     slideTextColor
-                )
-            )
-            .withOnDrawerItemClickListener { view, position, drawerItem ->
-                // do something with the clicked item :D
-                when (drawerItem.identifier) {
-                    2L -> AboutActivity.intentTo(activity)
+                ).withOnDrawerItemClickListener { view, position, drawerItem ->
+                    AboutActivity.intentTo(activity)
+                    false
                 }
-                false
-            }
+            )
             .build()
         binding.toolbar.imageView2.setOnClickListener {
             drawer.openDrawer()
@@ -117,7 +130,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
             override fun onTabSelected(t: TabLayout.Tab?) {
                 revealColor(t)
                 val id = when (t?.position) {
-//                    0 -> R.id.dailyFragment
+                    2 -> R.id.dailyFragment
                     0 -> R.id.gankCategoryFragment
                     1 -> R.id.gankCategoryContentFragment
                     else -> R.id.gankCategoryFragment
@@ -202,7 +215,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
     }
 
     private fun getBgColor(t: Int): Int {
-        val color: Int = if (!AppLocalData.isDark) when (t) {
+        val color: Int = if (!ThemeUtils.isDark) when (t) {
             0 -> activity.getColorCompat(R.color.colorPrimary)
             1 -> activity.getColorCompat(R.color.color_red_ccfa3c55)
             2 -> activity.getColorCompat(R.color.colorPrimaryBlue)
@@ -213,7 +226,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), Toolbar.OnMenuItemClic
         return color
     }
 
-    internal fun onNavDestinationSelected(id: Int, navController: NavController, popUp: Boolean): Boolean {
+    internal fun onNavDestinationSelected(
+        id: Int,
+        navController: NavController,
+        popUp: Boolean
+    ): Boolean {
         try {
             navController.popBackStack()
             navController.navigate(id)

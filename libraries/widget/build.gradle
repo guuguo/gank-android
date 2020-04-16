@@ -35,7 +35,7 @@ dependencies {
     api project(':libraries:drawable')
     api project(':libraries:roundview')
     api project(':libraries:utils')
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api "androidx.constraintlayout:constraintlayout:2.0.0-beta4"
 
 }

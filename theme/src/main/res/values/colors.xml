@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#11A884</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="cardBackgroundColor">#FFFFFF</color>
+    <color name="textColorPrimary">#333333</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="day_main_base_bg">#F2F2F2</color>
+    <color name="day_main_front_bg">#ffffff</color>
+    <color name="day_title_text">#404040</color>
+    <color name="day_sub_title_text">#5a5a5a</color>
+    <color name="day_text">#0e0e0e</color>
+    <color name="day_hint">#919191</color>
+    <color name="colorWhiteRipple">#919191</color>
+    <color name="light_button_background">#d6d7d7</color>
+</resources>

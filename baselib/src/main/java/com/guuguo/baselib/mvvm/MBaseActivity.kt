@@ -11,7 +11,6 @@ import com.guuguo.android.lib.app.LBaseActivity
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.baselib.R
-import com.guuguo.baselib.utils.ThemeUtils
 
 /**
  * Created by guodeqing on 7/23/16.
@@ -28,10 +27,7 @@ abstract class MBaseActivity<VB : ViewDataBinding> : LBaseActivity() {
         super.initView()
         initViewModelCallBack()
     }
-    override fun initVariable(savedInstanceState: Bundle?) {
-        super.initVariable(savedInstanceState)
-        ThemeUtils.onActivityCreateSetTheme(activity)
-    }
+
     protected open fun initViewModelCallBack() {
         setupBaseViewModel(getViewModel())
     }

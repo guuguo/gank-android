@@ -15,7 +15,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
-    resourcePrefix "theme_"
 
     buildTypes {
         release {
@@ -38,50 +37,27 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'androidx.appcompat:appcompat:1.1.0'
-    api 'androidx.core:core-ktx:1.2.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    api project(":libraries:libdatabindingex")
-
-    api("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11")
-
-    api(Deps.wildAndroidKtx)
-    api(project(":stethomodule"))
-    api(Deps.agentweb.basic)
-    api(Deps.bugly.upgrade)
     api(Deps.kotlin.stdlib)
-    api(Deps.wildAndroidKtx)
-    api(Deps.rounded_imageview)
-    api(Deps.paging)
-
-    // Navigation
-    api(Deps.navigation.runtime_ktx)
-    api(Deps.navigation.fragment_ktx)
-    api(Deps.navigation.ui_ktx)
-
-    api(Deps.retrofit.runtime)
-    api(Deps.retrofit.gson)
-    api(Deps.retrofit.rxjava2)
-    api(Deps.retrofit.mock)
-    api(Deps.okhttp3)
-
-    api(Deps.lifecycle.runtime)
-    api(Deps.lifecycle.extensions)
-    api(Deps.lifecycle.ktx)
 
     api(Deps.support.annotations)
     api(Deps.support.app_compat)
     api(Deps.support.design)
     api(Deps.support.recyclerview)
-    api(Deps.androidx.vectordrawable)
     api(Deps.androidx.ktx)
+
+    api(Deps.koin.core)
+    api(Deps.koin.core_ext)
+    testApi(Deps.koin.test)
+    api(Deps.koin.androidx.scope)
+    api(Deps.koin.androidx.viewmodel)
+    api(Deps.koin.androidx.fragment)
+    api(Deps.koin.androidx.ext)
+
     api(Deps.support.v4)
     api(Deps.constraint_layout)
-
-    api(Deps.glide.runtime)
-    api(Deps.glide.okhttp)
 
 }

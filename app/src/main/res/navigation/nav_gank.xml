@@ -26,6 +26,12 @@
             android:name="ARG_GANK_TYPE"
             android:defaultValue="GANK_TYPE_STAR" />
     </fragment>
+    <fragment
+        android:id="@+id/dailyFragment"
+        android:name="com.guuguo.gank.ui.gank.fragment.GankDailyFragment"
+        android:label="GankCategoryContentFragment"
+        tools:layout="@layout/fragment_gank_daily">
+    </fragment>
 
 
 </navigation>
