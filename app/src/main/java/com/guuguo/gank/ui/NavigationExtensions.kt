@@ -41,7 +41,6 @@ fun BottomNavigationView.setupWithNavController(
     containerId: Int,
     intent: Intent
 ): LiveData<NavController> {
-
     // Map of tags
     val graphIdToTagMap = SparseArray<String>()
     // Result. Mutable live data with the selected controlled
@@ -132,50 +131,50 @@ fun BottomNavigationView.setupWithNavController(
     // Optional: on item reselected, pop back stack to the destination of the graph
     setupItemReselected(graphIdToTagMap, fragmentManager)
 
-    // Handle deep link
-    setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
+//    // Handle deep link
+//    setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
 
-    // Finally, ensure that we update our BottomNavigationView when the back stack changes
-    fragmentManager.addOnBackStackChangedListener {
-        if (!isOnFirstFragment && !fragmentManager.isOnBackStack(firstFragmentTag)) {
-            this.selectedItemId = firstFragmentGraphId
-        }
-
-        // Reset the graph if the currentDestination is not valid (happens when the back
-        // stack is popped after using the back button).
-        selectedNavController.value?.let { controller ->
-            if (controller.currentDestination == null) {
-                controller.navigate(controller.graph.id)
-            }
-        }
-    }
+//    // Finally, ensure that we update our BottomNavigationView when the back stack changes
+//    fragmentManager.addOnBackStackChangedListener {
+//        if (!isOnFirstFragment && !fragmentManager.isOnBackStack(firstFragmentTag)) {
+//            this.selectedItemId = firstFragmentGraphId
+//        }
+//
+//        // Reset the graph if the currentDestination is not valid (happens when the back
+//        // stack is popped after using the back button).
+//        selectedNavController.value?.let { controller ->
+//            if (controller.currentDestination == null) {
+//                controller.navigate(controller.graph.id)
+//            }
+//        }
+//    }
     return selectedNavController
 }
 
-private fun BottomNavigationView.setupDeepLinks(
-    navGraphIds: List<Int>,
-    fragmentManager: FragmentManager,
-    containerId: Int,
-    intent: Intent
-) {
-    navGraphIds.forEachIndexed { index, navGraphId ->
-        val fragmentTag = getFragmentTag(index)
-
-        // Find or create the Navigation host fragment
-        val navHostFragment = obtainNavHostFragment(
-            fragmentManager,
-            fragmentTag,
-            navGraphId,
-            containerId
-        )
-        // Handle Intent
-        if (navHostFragment.navController.handleDeepLink(intent)
-            && selectedItemId != navHostFragment.navController.graph.id
-        ) {
-            this.selectedItemId = navHostFragment.navController.graph.id
-        }
-    }
-}
+//private fun BottomNavigationView.setupDeepLinks(
+//    navGraphIds: List<Int>,
+//    fragmentManager: FragmentManager,
+//    containerId: Int,
+//    intent: Intent
+//) {
+//    navGraphIds.forEachIndexed { index, navGraphId ->
+//        val fragmentTag = getFragmentTag(index)
+//
+//        // Find or create the Navigation host fragment
+//        val navHostFragment = obtainNavHostFragment(
+//            fragmentManager,
+//            fragmentTag,
+//            navGraphId,
+//            containerId
+//        )
+//        // Handle Intent
+//        if (navHostFragment.navController.handleDeepLink(intent)
+//            && selectedItemId != navHostFragment.navController.graph.id
+//        ) {
+//            this.selectedItemId = navHostFragment.navController.graph.id
+//        }
+//    }
+//}
 
 private fun BottomNavigationView.setupItemReselected(
     graphIdToTagMap: SparseArray<String>,
