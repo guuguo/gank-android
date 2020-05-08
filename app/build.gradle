@@ -5,15 +5,12 @@ apply plugin: BuildPlugins.kotlinAndroid
 apply plugin: BuildPlugins.kotlinAndroidExtensions
 apply plugin: BuildPlugins.kotlinKapt
 
-def gitVersionCode() { return Integer.parseInt(new SimpleDateFormat("yyMMdd").format(new Date())) }
-
 android {
-    compileSdkVersion(AndroidSdk.compile)
+    defaultConfig android
+
+//    compileSdkVersion(AndroidSdk.compile)
     defaultConfig {
         applicationId = "com.guuguo.gank"
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
-        versionCode = gitVersionCode()
         versionName = "1.7"
         ndk {
             //设置支持的SO库架构

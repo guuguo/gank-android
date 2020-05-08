@@ -61,6 +61,30 @@ versions.bugly = "1.4.0"
 versions.jsoup = "1.12.1"
 versions.rounded_imageview = "2.3.0"
 
+import java.text.SimpleDateFormat
+
+def gitVersionCode() { return Integer.parseInt(new SimpleDateFormat("yyMMdd").format(new Date())) }
+
+/************************************************************/
+def cfgs = [:]
+cfgs.min = 21
+cfgs.compile = 29
+cfgs.target = 29
+cfgs.versionCode = gitVersionCode()
+cfgs.versionName = "17"
+ext.cfgs = cfgs
+
+
+def AndroidSdk = [:]
+
+AndroidSdk.min = 21
+AndroidSdk.compile = 29
+AndroidSdk.target = 29
+ext.AndroidSdk = AndroidSdk
+
+/************************************************************/
+
+
 def BuildPlugins = [:]
 
 BuildPlugins.androidLib = "com.android.library"
@@ -72,12 +96,6 @@ BuildPlugins.androidGradlePlugin = "com.android.tools.build:gradle:${versions.bu
 BuildPlugins.kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
 ext.BuildPlugins = BuildPlugins
 
-def AndroidSdk = [:]
-
-AndroidSdk.min = 21
-AndroidSdk.compile = 29
-AndroidSdk.target = 29
-ext.AndroidSdk = AndroidSdk
 
 
 def Deps = [:]
@@ -228,9 +246,9 @@ Deps.koin.core_ext = "org.koin:koin-core-ext:${versions.koin}"
 Deps.koin.test = "org.koin:koin-test:${versions.koin}"
 Deps.koin.androidx = [:]
 Deps.koin.androidx.scope = "org.koin:koin-androidx-scope:${versions.koin}"
-Deps.koin.androidx.viewmodel  = "org.koin:koin-androidx-viewmodel:${versions.koin}"
-Deps.koin.androidx.fragment  = "org.koin:koin-androidx-fragment:${versions.koin}"
-Deps.koin.androidx.ext  = "org.koin:koin-androidx-ext:${versions.koin}"
+Deps.koin.androidx.viewmodel = "org.koin:koin-androidx-viewmodel:${versions.koin}"
+Deps.koin.androidx.fragment = "org.koin:koin-androidx-fragment:${versions.koin}"
+Deps.koin.androidx.ext = "org.koin:koin-androidx-ext:${versions.koin}"
 
 Deps.wildAndroidKtx = "com.lxj:androidktx:${versions.xiaojunKtx}-x"
 Deps.dexmaker = "com.linkedin.dexmaker:dexmaker-mockito:${versions.dexmaker}"

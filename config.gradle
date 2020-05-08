@@ -1,0 +1,54 @@
+apply from: 'versions.gradle'
+tasks.register("aaprint123123").configure {
+    println "android"
+}
+ext {
+    //是否单个模组
+    isBuildModule = false
+    if (isBuildModule) {//分模块
+        apply = 'com.android.application'
+    } else {
+        apply = 'com.android.library'
+    }
+
+    //通用配置
+    defaultConfig = { extensions ->
+
+        extensions.compileSdkVersion cfgs.compile
+        extensions.defaultConfig {
+            minSdkVersion cfgs.min //兼容版本
+            targetSdkVersion cfgs.target//最高版本
+            versionCode cfgs.versionCode//内部版本号
+            versionName cfgs.versionName//外部版本号
+        }
+        extensions.compileOptions {// java版本
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+        extensions.sourceSets.main {
+            manifest.srcFile "AndroidManifest.xml"
+            java.srcDirs = ["src/main"]
+            resources.srcDirs = ["src/main"]
+            res.srcDirs = ["res"]
+            assets.srcDirs = ["assets"]
+            jniLibs.srcDirs = ["libs"]
+        }
+        extensions.packagingOptions {
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE.txt'
+        }
+        extensions.lintOptions {// 移除lint检查的error
+            checkReleaseBuilds false
+            abortOnError false //关闭lint检查，防止打包被终止
+        }
+        extensions.dexOptions {
+            preDexLibraries false
+            jumboMode true
+            javaMaxHeapSize "8g"
+        }
+        extensions.aaptOptions {
+            cruncherEnabled = false
+            useNewCruncher = false
+        }
+    }
+}
