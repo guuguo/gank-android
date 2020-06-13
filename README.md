@@ -19,8 +19,12 @@
 -----------
 * MVVM的项目应用
 * Room LiveData 等的使用
-* retrofit+rxjava配合使用
-* 共享元素动画
+* paging3
+* motionlayout
+* dagger2 hilt
+* app startup
+* compose
+* retrofit+courotine配合使用
 * kotlin的使用
 
 
