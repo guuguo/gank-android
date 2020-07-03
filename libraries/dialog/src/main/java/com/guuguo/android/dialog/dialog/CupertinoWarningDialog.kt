@@ -31,7 +31,7 @@ class CupertinoWarningDialog : IWarningDialog {
         heightRatio(0f)
         dimEnabled(true)
 
-        val lp = window.attributes
+        val lp = window!!.attributes
         lp.dimAmount = 0.5f
         window!!.attributes = lp
 
@@ -146,7 +146,7 @@ class CupertinoWarningDialog : IWarningDialog {
         }
     }
 
-    fun getDrawable(id: Int): Drawable {
+    fun getDrawable(id: Int): Drawable? {
         return if (Build.VERSION.SDK_INT >= 23) {
             mContext.getDrawable(id)
         } else {

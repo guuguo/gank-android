@@ -153,7 +153,7 @@ class ShadowFrameLayout : FrameLayout {
             return
         }
         ///画阴影
-        canvas.drawBitmap(shadow, -blurShadowRadius, -blurShadowRadius, bitmapPaint)
+        canvas.drawBitmap(shadow!!, -blurShadowRadius, -blurShadowRadius, bitmapPaint)
 
         ///画边框
         if (strokeWidth > 0) {
@@ -167,7 +167,7 @@ class ShadowFrameLayout : FrameLayout {
         }
 
         ///画背景色
-        canvas.drawBitmap(bgBitmap, 0f, 0f, bitmapPaint)
+        canvas.drawBitmap(bgBitmap!!, 0f, 0f, bitmapPaint)
     }
 
     lateinit var trianglePath: Path

@@ -85,27 +85,39 @@ class CircularDrawable : Drawable(), Animatable, IDrawableTheme {
             val radius = Math.min(canvas.width, canvas.height) / 2
 
             mPaint.color = mRoundColor
-            mBufferCircleBgBitmap = Bitmap.createBitmap(canvas.width, canvas.height, Bitmap.Config.ARGB_8888);
+            mBufferCircleBgBitmap =
+                Bitmap.createBitmap(canvas.width, canvas.height, Bitmap.Config.ARGB_8888);
             val mBufferCircleBgCanvas = Canvas(mBufferCircleBgBitmap!!)
-            mBufferCircleBgCanvas.drawCircle(canvas.width * 0.5f, canvas.height * 0.5f, radius - mPadding, mPaint)
+            mBufferCircleBgCanvas.drawCircle(
+                canvas.width * 0.5f,
+                canvas.height * 0.5f,
+                radius - mPadding,
+                mPaint
+            )
 
 
             val hExtend = (canvas.width - radius * 2) / 2
             val vExtend = (canvas.height - radius * 2) / 2
             mPaint.color = mIndicatorColor
-            val rectF = RectF(mPadding + hExtend, mPadding + vExtend, canvas.width - mPadding - hExtend, canvas.height - mPadding - vExtend)
-            mBufferCircleFgBitmap = Bitmap.createBitmap(canvas.width, canvas.height, Bitmap.Config.ARGB_8888)
+            val rectF = RectF(
+                mPadding + hExtend,
+                mPadding + vExtend,
+                canvas.width - mPadding - hExtend,
+                canvas.height - mPadding - vExtend
+            )
+            mBufferCircleFgBitmap =
+                Bitmap.createBitmap(canvas.width, canvas.height, Bitmap.Config.ARGB_8888)
             val mBufferCircleFgCanvas = Canvas(mBufferCircleFgBitmap!!)
             mBufferCircleFgCanvas.drawArc(rectF, 0f, 60f, false, mPaint)//第四个参数是否显示半径
         }
-        canvas.drawBitmap(mBufferCircleBgBitmap, 0f, 0f, mPaint)
+        mBufferCircleFgBitmap?.let { canvas.drawBitmap(it, 0f, 0f, mPaint) }
 
         canvas.save()
         canvas.translate(canvas.width / 2f, canvas.height / 2f)
         canvas.rotate(mAnimateAngle)
         canvas.translate(-canvas.width / 2f, -canvas.height / 2f)
 
-        canvas.drawBitmap(mBufferCircleFgBitmap, 0f, 0f, mPaint)
+        mBufferCircleFgBitmap?.let { canvas.drawBitmap(it, 0f, 0f, mPaint) }
         canvas.restore()
     }
 

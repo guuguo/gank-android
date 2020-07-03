@@ -177,7 +177,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : Dialog {
 
         mContentTop.doOnNextLayout {
             val bgLocation = IntArray(2)
-            window.decorView.findViewById<FrameLayout>(Window.ID_ANDROID_CONTENT).getLocationOnScreen(bgLocation)
+            window!!.decorView.findViewById<FrameLayout>(Window.ID_ANDROID_CONTENT).getLocationOnScreen(bgLocation)
             /** 是否是沉浸式 有些vivo 三星手机无法沉浸式*/
             val isNotRealImmerse = bgLocation[1] == SystemBarHelper.getStatusBarHeight(mContext)
 
@@ -195,7 +195,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : Dialog {
                 }
             }
             if (isNotRealImmerse) {
-                window.decorView.findViewById<FrameLayout>(Window.ID_ANDROID_CONTENT).getChildAt(0).apply {
+                window!!.decorView.findViewById<FrameLayout>(Window.ID_ANDROID_CONTENT).getChildAt(0).apply {
                     top = 0
                     updateLayoutParams<FrameLayout.LayoutParams> {
                         topMargin = 0 //把沉浸式改的topMargin改回来

@@ -86,11 +86,11 @@ class GuideHighLightBgView : LinearLayout {
         drawCircle()
 
         ///把 dst bitmap 绘制到画布  洞洞
-        canvas.drawBitmap(dstBm, 0f, 0f, mPaint)
+        canvas.drawBitmap(dstBm!!, 0f, 0f, mPaint)
         mPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OUT)
         mPaint.alpha = bgAlpha
         ///混合模式绘制背景，dst 挖空
-        canvas.drawBitmap(srcBm, 0f, 0f, mPaint)
+        canvas.drawBitmap(srcBm!!, 0f, 0f, mPaint)
     }
 
 }

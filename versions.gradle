@@ -1,6 +1,6 @@
 def versions = [:]
 versions.navigationSafeArgsVersion = "1.0.0"
-versions.buildToolsVersion = "3.4.2"
+versions.buildToolsVersion = "4.2.0-alpha03"
 versions.kotlin = "1.3.61"
 versions.arch_core = "1.1.1"
 versions.room = "2.2.1"

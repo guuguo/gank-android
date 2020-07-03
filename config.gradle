@@ -10,6 +10,7 @@ ext {
     } else {
         apply = 'com.android.library'
     }
+    compose_version = '0.1.0-dev13'
 
     //通用配置
     defaultConfig = { extensions ->

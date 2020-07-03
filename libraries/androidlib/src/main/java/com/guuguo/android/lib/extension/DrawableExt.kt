@@ -22,7 +22,7 @@ fun Drawable.changeProgressColor(@ColorInt color: Int): Drawable {
 fun Drawable.changeColor(@ColorInt color: Int, mutate: Boolean = true): Drawable {
     var drawable = if (mutate) this.mutate() else this
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && drawable is DrawableWrapper)
-        drawable = drawable.drawable
+        drawable = drawable.drawable!!
     when {
         drawable is ShapeDrawable -> {
             drawable.paint.color = color

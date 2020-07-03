@@ -89,14 +89,20 @@ class CircleRunDrawable : Drawable(), Animatable, IDrawableTheme {
             val radius = Math.min(bounds.width(), bounds.height()) / 2 - 18
 
             mPaint.color = mIndicatorColor
-            mBufferCircleFgBitmap = Bitmap.createBitmap(bounds.width(), bounds.height(), Bitmap.Config.ARGB_8888)
+            mBufferCircleFgBitmap =
+                Bitmap.createBitmap(bounds.width(), bounds.height(), Bitmap.Config.ARGB_8888)
             val mBufferCircleFgCanvas = Canvas(mBufferCircleFgBitmap!!)
 
             (0 until size).forEach {
                 val lcy = cy - Math.sin(2 * Math.PI / size * it) * radius
                 val lcx = cx + Math.cos(2 * Math.PI / size * it) * radius
                 val lRadius = 17 - 1.2 * it
-                mBufferCircleFgCanvas.drawCircle(lcx.toFloat(), lcy.toFloat(), lRadius.toFloat(), mPaint)//第四个参数是否显示半径
+                mBufferCircleFgCanvas.drawCircle(
+                    lcx.toFloat(),
+                    lcy.toFloat(),
+                    lRadius.toFloat(),
+                    mPaint
+                )//第四个参数是否显示半径
             }
         }
 
@@ -105,7 +111,7 @@ class CircleRunDrawable : Drawable(), Animatable, IDrawableTheme {
         canvas.rotate(mAnimateAngle)
         canvas.translate(-bounds.width() / 2f, -bounds.height() / 2f)
 
-        canvas.drawBitmap(mBufferCircleFgBitmap, 0f, 0f, mPaint)
+        mBufferCircleFgBitmap?.let { canvas.drawBitmap(it, 0f, 0f, mPaint) }
         canvas.restore()
     }
 
