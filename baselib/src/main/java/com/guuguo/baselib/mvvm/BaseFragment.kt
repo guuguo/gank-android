@@ -26,9 +26,8 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment(), CoroutineSc
     protected open lateinit var binding: VB
     private var viewModel: BaseViewModel? = null
     private lateinit var runCallBack: RunCallBack
-    val mActivity by lazy {
-        activity as LBaseActivity
-    }
+
+    override val mActivity:LBaseActivity get() = requireActivity() as LBaseActivity
 
     override fun onDestroy() {
         super.onDestroy()
@@ -68,9 +67,9 @@ abstract class BaseFragment<VB : ViewDataBinding> : LBaseFragment(), CoroutineSc
 
     protected open fun loadingStatusChange(isRunning: Boolean) {
         if (isRunning) {
-            activity.dialogLoadingShow(getString(R.string.wait))
+            mActivity.dialogLoadingShow(getString(R.string.wait))
         } else {
-            activity.dialogDismiss()
+            mActivity.dialogDismiss()
         }
     }
 

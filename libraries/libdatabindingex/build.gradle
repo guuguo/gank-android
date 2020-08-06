@@ -27,13 +27,20 @@ android {
             }
         }
     }
-    dataBinding {
-        enabled = true
+    buildFeatures{
+        dataBinding  = true
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api(Deps.kotlin.stdlib)
     api project(':libraries:androidlib')
 }
 

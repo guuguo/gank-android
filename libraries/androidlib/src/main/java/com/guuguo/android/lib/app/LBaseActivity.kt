@@ -9,16 +9,16 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.annotation.CallSuper
-import androidx.annotation.ColorInt
-import androidx.fragment.app.Fragment
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.annotation.CallSuper
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.graphics.drawable.DrawableCompat
 import com.guuguo.android.R
 import com.guuguo.android.dialog.dialog.NormalListDialog
 import com.guuguo.android.dialog.dialog.TipDialog
@@ -29,13 +29,11 @@ import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.extension.initNav
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.extension.toast
-
 import com.guuguo.android.lib.lifecycle.AppHelper
 import com.guuguo.android.lib.systembar.SystemBarHelper
 import com.guuguo.android.lib.utils.FileUtil
 import com.guuguo.android.lib.utils.MemoryLeakUtil
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.io.Serializable
@@ -45,10 +43,11 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by guodeqing on 16/5/31.
  */
-abstract class LBaseActivity : RxAppCompatActivity() {
+abstract class LBaseActivity : AppCompatActivity() {
 
     open fun getApp() = AppHelper.app
     private var mLoadingDialog: TipDialog? = null
+
     /*fragment*/
     var mFragment: androidx.fragment.app.Fragment? = null
 
@@ -65,16 +64,17 @@ abstract class LBaseActivity : RxAppCompatActivity() {
     private var TOUCH_TIME: Long = 0
 
     private fun fullScreen(): Boolean =
-            isFullScreen || mFragment != null && (mFragment as? LBaseFragment)?.isFullScreen.safe()
+        isFullScreen || mFragment != null && (mFragment as? LBaseFragment)?.isFullScreen.safe()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity = this
         initFromIntent(intent)
         if (!isTaskRoot
-                && intent.hasCategory(Intent.CATEGORY_LAUNCHER)
-                && intent.action != null
-                && intent.action == Intent.ACTION_MAIN) {
+            && intent.hasCategory(Intent.CATEGORY_LAUNCHER)
+            && intent.action != null
+            && intent.action == Intent.ACTION_MAIN
+        ) {
             finish()
             return
         }
@@ -94,9 +94,13 @@ abstract class LBaseActivity : RxAppCompatActivity() {
     /*toolbar*/
     open fun getToolBar(): Toolbar? = null
 
-    open fun getBackIconRes(): Int = (mFragment as? LBaseFragment)?.getBackIconRes().safe(R.drawable.ic_arrow_back_white_24dp)
+    open fun getBackIconRes(): Int =
+        (mFragment as? LBaseFragment)?.getBackIconRes().safe(R.drawable.ic_arrow_back_white_24dp)
+
     open fun getAppBar(): ViewGroup? = null
-    protected open fun isNavigationBack() = (mFragment as? LBaseFragment)?.isNavigationBack().safe(true)
+    protected open fun isNavigationBack() =
+        (mFragment as? LBaseFragment)?.isNavigationBack().safe(true)
+
     protected open fun isStatusBarTextDark() = false
     protected open fun initToolBar() {
         val toolBar = getToolBar()
@@ -134,8 +138,12 @@ abstract class LBaseActivity : RxAppCompatActivity() {
 
     protected open fun initStatusBar() {
         if (!fullScreen()) {
-            val ta = theme.obtainStyledAttributes(null, R.styleable.ActionBar, R.attr.actionBarStyle, 0)
-            val color = ta.getColor(R.styleable.AppBarLayout_android_background, getColorCompat(R.color.colorPrimary))
+            val ta =
+                theme.obtainStyledAttributes(null, R.styleable.ActionBar, R.attr.actionBarStyle, 0)
+            val color = ta.getColor(
+                R.styleable.AppBarLayout_android_background,
+                getColorCompat(R.color.colorPrimary)
+            )
 
             SystemBarHelper.tintStatusBar(activity, color, 0f)
             if (isStatusBarTextDark()) {
@@ -249,7 +257,10 @@ abstract class LBaseActivity : RxAppCompatActivity() {
                 val fragment = supportFragmentManager.findFragmentByTag(clz.name)
                 if (fragment != null)
                     return fragment as LBaseFragment
-                return androidx.fragment.app.Fragment.instantiate(this, clz.name) as LBaseFragment//clz.getConstructor().newInstance() as LBaseFragment
+                return androidx.fragment.app.Fragment.instantiate(
+                    this,
+                    clz.name
+                ) as LBaseFragment//clz.getConstructor().newInstance() as LBaseFragment
             } catch (e: Exception) {
                 e.printStackTrace()
                 throw IllegalArgumentException("generate fragment error. by value:$clz")
@@ -319,32 +330,39 @@ abstract class LBaseActivity : RxAppCompatActivity() {
         home.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         home.addCategory(Intent.CATEGORY_HOME)
         startActivity(home)
-        Completable.complete().delay(200, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
-            AppHelper.mActivityLifecycle.clear()
-        }.isDisposed
+        Completable.complete().delay(200, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                AppHelper.mActivityLifecycle.clear()
+            }.isDisposed
     }
 
-    open fun dialogTakePhotoShow(takePhotoListener: DialogInterface.OnClickListener, pickPhotoListener: DialogInterface.OnClickListener) {
+    open fun dialogTakePhotoShow(
+        takePhotoListener: DialogInterface.OnClickListener,
+        pickPhotoListener: DialogInterface.OnClickListener
+    ) {
         if (FileUtil.isExternalStorageMounted()) {
             val rxPermissions = RxPermissions(this)
-            rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe { granted ->
-                        if (granted) { // Always true pre-M
-                            val strings = arrayOf("拍照", "从相册中选取")
-                            val listDialog = NormalListDialog(activity, strings).title("请选择")
-                            listDialog.layoutAnimation(null)
-                            listDialog.setOnOperItemClickL { _, _, position, _ ->
-                                if (position == 0)
-                                    takePhotoListener.onClick(listDialog, position)
-                                else if (position == 1)
-                                    pickPhotoListener.onClick(listDialog, position)
-                                listDialog.dismiss()
-                            }
-                            showDialogOnMain(listDialog)
-                        } else {
-                            "拍照权限被拒绝".toast()
+            rxPermissions.request(
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+                .subscribe { granted ->
+                    if (granted) { // Always true pre-M
+                        val strings = arrayOf("拍照", "从相册中选取")
+                        val listDialog = NormalListDialog(activity, strings).title("请选择")
+                        listDialog.layoutAnimation(null)
+                        listDialog.setOnOperItemClickL { _, _, position, _ ->
+                            if (position == 0)
+                                takePhotoListener.onClick(listDialog, position)
+                            else if (position == 1)
+                                pickPhotoListener.onClick(listDialog, position)
+                            listDialog.dismiss()
                         }
-                    }.isDisposed
+                        showDialogOnMain(listDialog)
+                    } else {
+                        "拍照权限被拒绝".toast()
+                    }
+                }.isDisposed
         } else {
             "未检测到外部sd卡".toast()
         }
@@ -370,7 +388,10 @@ abstract class LBaseActivity : RxAppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             if (a.isDestroyed || a.isFinishing) {
-                Log.i("YXH", "Activity is invalid." + " isDestoryed-->" + a.isDestroyed + " isFinishing-->" + a.isFinishing)
+                Log.i(
+                    "YXH",
+                    "Activity is invalid." + " isDestoryed-->" + a.isDestroyed + " isFinishing-->" + a.isFinishing
+                )
                 return false
             } else {
                 return true
@@ -384,14 +405,27 @@ abstract class LBaseActivity : RxAppCompatActivity() {
         val SIMPLE_ACTIVITY_INFO = "SIMPLE_ACTIVITY_INFO"
         val SIMPLE_ACTIVITY_TOOLBAR = "SIMPLE_ACTIVITY_TOOLBAR"
 
-        fun <F : androidx.fragment.app.Fragment, A : Activity> intentTo(activity: Activity, targetFragment: Class<F>, targetActivity: Class<A>, map: HashMap<String, *>? = null, targetCode: Int = 0) {
+        fun <F : androidx.fragment.app.Fragment, A : Activity> intentTo(
+            activity: Activity,
+            targetFragment: Class<F>,
+            targetActivity: Class<A>,
+            map: HashMap<String, *>? = null,
+            targetCode: Int = 0
+        ) {
             val intent = getIntent(activity, targetFragment, targetActivity, map)
             if (targetCode == 0)
                 activity.startActivity(intent)
             else
                 activity.startActivityForResult(intent, targetCode)
         }
-        fun <F : androidx.fragment.app.Fragment, A : Activity> intentTo(fragment: androidx.fragment.app.Fragment, targetFragment: Class<F>, targetActivity: Class<A>, map: HashMap<String, *>? = null, targetCode: Int = 0) {
+
+        fun <F : androidx.fragment.app.Fragment, A : Activity> intentTo(
+            fragment: androidx.fragment.app.Fragment,
+            targetFragment: Class<F>,
+            targetActivity: Class<A>,
+            map: HashMap<String, *>? = null,
+            targetCode: Int = 0
+        ) {
             val intent = getIntent(fragment.activity!!, targetFragment, targetActivity, map)
             if (targetCode == 0)
                 fragment.startActivity(intent)
@@ -399,7 +433,12 @@ abstract class LBaseActivity : RxAppCompatActivity() {
                 fragment.startActivityForResult(intent, targetCode)
         }
 
-        fun <A : Activity, F : androidx.fragment.app.Fragment> getIntent(activity: Activity, targetFragment: Class<F>, targetActivity: Class<A>, map: HashMap<String, *>? = null): Intent {
+        fun <A : Activity, F : androidx.fragment.app.Fragment> getIntent(
+            activity: Activity,
+            targetFragment: Class<F>,
+            targetActivity: Class<A>,
+            map: HashMap<String, *>? = null
+        ): Intent {
             val intent = Intent(activity, targetActivity)
             intent.putExtra(SIMPLE_ACTIVITY_INFO, targetFragment)
 

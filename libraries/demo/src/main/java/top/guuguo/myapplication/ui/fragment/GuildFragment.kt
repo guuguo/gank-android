@@ -26,15 +26,15 @@ class GuildFragment : LBaseFragment() {
 
     override fun initView() {
         super.initView()
-        activity.findViewById<FunctionTextView>(R.id.tv_function)?.let {
+        mActivity.findViewById<FunctionTextView>(R.id.tv_function)?.let {
             it.setOnClickListener {
-                HomeGuideDialog(activity, binding.btn, GuideType.TYPE_BIANLA_STORY).show()
-                HomeGuideDialog(activity, (activity as BaseCupertinoTitleActivity).getFunctionView(), GuideType.TYPE_SWIPE_DELETE).show()
+                HomeGuideDialog(mActivity, binding.btn, GuideType.TYPE_BIANLA_STORY).show()
+                HomeGuideDialog(mActivity, (mActivity as BaseCupertinoTitleActivity).getFunctionView(), GuideType.TYPE_SWIPE_DELETE).show()
             }
         }
-        activity.let {
+        mActivity.let {
             if (it is BaseCupertinoTitleActivity) {
-                it.getFunctionView().drawable = ContextCompat.getDrawable(activity, R.drawable.ic_search)
+                it.getFunctionView().drawable = ContextCompat.getDrawable(mActivity, R.drawable.ic_search)
             }
         }
     }

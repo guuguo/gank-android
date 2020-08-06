@@ -19,5 +19,5 @@ fun Toolbar.initNav(activity: Activity, backIcon: Int) {
 
 fun Toolbar.initNav(fragment: LBaseFragment, backIcon: Int) {
     setNavigationIcon(backIcon)
-    setNavigationOnClickListener { if (!fragment.onBackPressed()) fragment.activity?.onBackPressed() }
+    setNavigationOnClickListener { if (!fragment.onBackPressed()) fragment.requireActivity().onBackPressed() }
 }

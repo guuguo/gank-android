@@ -35,7 +35,7 @@ fun <T> RecyclerView.generate(
             DataBindingUtil.bind<ViewDataBinding>(viewHolder.itemView)
         }
 
-        override fun convert(helper: BaseViewHolder, item: T?) {
+        override fun convert(helper: BaseViewHolder, item: T) {
             convert?.invoke(helper, item)
         }
     }
@@ -86,7 +86,7 @@ fun <T : MultiItemEntity> RecyclerView.generateMultiType(typeResMap: Map<Int, Mu
 
         }
 
-        override fun convert(helper: BaseViewHolder, item: T?) {
+        override fun convert(helper: BaseViewHolder, item: T) {
             typeResMap[item?.itemType]?.convert?.invoke(helper, item)
         }
     }

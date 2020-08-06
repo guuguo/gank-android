@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api(Deps.kotlin.stdlib)
 }
 repositories {
     mavenCentral()

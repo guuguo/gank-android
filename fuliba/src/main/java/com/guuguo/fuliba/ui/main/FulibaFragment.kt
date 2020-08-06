@@ -22,7 +22,7 @@ class FulibaFragment : BaseFragment<FragmentFulibaBinding>() {
             h.getBinding<FulibaItemBinding>()?.bean = t
             h.itemView.setOnClickListener {
                 val bean = adapter.getItem(h.adapterPosition)
-                FullscreenWebViewActivity.intentTo(activity, bean?.url.safe())
+                FullscreenWebViewActivity.intentTo(mActivity, bean?.url.safe())
             }
         }
         binding.refresh.setOnRefreshListener {

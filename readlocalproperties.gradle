@@ -1,0 +1,5 @@
+//加载资源
+Properties properties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream();
+properties.load(inputStream)
+ext.debugFulibaApp = properties.getProperty("debugFulibaApp")

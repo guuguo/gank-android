@@ -3,13 +3,10 @@ package top.guuguo.myapplication.ui.fragment
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.request.RequestOptions
-import com.github.florent37.viewanimator.ViewAnimator
 import com.guuguo.android.lib.app.LBaseActivity
 import com.guuguo.android.lib.app.LBaseFragment
-import com.guuguo.android.lib.extension.getColorCompat
 import com.guuguo.android.lib.extension.safe
 import com.guuguo.android.lib.widget.SwipeNavigationLayout
 import kotlinx.android.synthetic.main.fragment_banner2.*
@@ -79,7 +76,7 @@ class NavigatorLayoutFragment : LBaseFragment() {
      * @param newslist
      */
     private fun initBanner(colorRes: Int) {
-        image_view.setBackgroundColor(activity.getColorCompat(colorRes))
+        image_view.setBackgroundColor(mActivity.getColorCompat(colorRes))
 //        ViewAnimator.animate(image_view).alpha(1f, 0f).duration(200).onStop {
 //            image_view.setBackgroundColor(activity.getColorCompat(colorRes))
 //            ViewAnimator.animate(image_view).alpha(0f, 1f).duration(500).start()

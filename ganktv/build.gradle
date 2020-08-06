@@ -3,13 +3,12 @@ apply plugin: 'kotlin-android'
 
 
 android {
-    compileSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+    compileSdkVersion(cfgs.compile)
 
     defaultConfig {
         applicationId "top.guuguo.ganktv"
-        minSdkVersion 21
-        targetSdkVersion  Integer.parseInt(project.TARGET_SDK_VERSION)
+        minSdkVersion(cfgs.min)
+        targetSdkVersion(cfgs.target)
         versionCode 1
         versionName "1.0"
     }
@@ -28,7 +27,7 @@ dependencies {
     //kotlin
     compile "com.android.support:leanback-v17:$support_version"
 //    compile "com.android.support:appcompat-v7:$support_version"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${versions.kotlin}"
 
     //support
     compile "com.android.support:cardview-v7:$support_version"

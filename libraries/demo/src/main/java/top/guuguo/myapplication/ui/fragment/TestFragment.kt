@@ -22,11 +22,11 @@ class TestFragment : LBaseFragment() {
     override fun getBackIconRes()=R.drawable.ic_arrow_back_24dp
     var type = 0
     override fun initView() {
-        activity.findViewById<FunctionTextView>(R.id.tv_function)?.let {
+        mActivity.findViewById<FunctionTextView>(R.id.tv_function)?.let {
             it.text="按钮"
            it.setOnClickListener { "按钮".toast() }
         }
-        (activity as? LBaseActivity)?.darkBar()
+        (mActivity as? LBaseActivity)?.darkBar()
         super.initView()
         search.searchClick = {
             doit()
@@ -46,7 +46,6 @@ class TestFragment : LBaseFragment() {
     fun delay(callback: () -> Unit) {
         Completable.complete()
                 .delay(1, TimeUnit.SECONDS)
-                .compose(bindToLifecycle<TestFragment>())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete { callback() }
                 .subscribe({}, {})

@@ -10,7 +10,6 @@ ext {
     } else {
         apply = 'com.android.library'
     }
-    compose_version = '0.1.0-dev13'
 
     //通用配置
     defaultConfig = { extensions ->
@@ -18,7 +17,7 @@ ext {
         extensions.compileSdkVersion cfgs.compile
         extensions.defaultConfig {
             minSdkVersion cfgs.min //兼容版本
-            targetSdkVersion cfgs.target//最高版本
+            targetSdkVersion(cfgs.target)//最高版本
             versionCode cfgs.versionCode//内部版本号
             versionName cfgs.versionName//外部版本号
         }

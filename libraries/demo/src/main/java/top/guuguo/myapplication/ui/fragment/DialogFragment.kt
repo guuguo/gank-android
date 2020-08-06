@@ -1,7 +1,6 @@
 package top.guuguo.myapplication.ui.fragment
 
 import android.app.Activity
-import androidx.fragment.app.Fragment
 import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.guuguo.android.dialog.dialog.CupertinoWarningDialog
@@ -11,9 +10,7 @@ import com.guuguo.android.dialog.dialog.NewEditAlertDialog
 import com.guuguo.android.dialog.utils.*
 import com.guuguo.android.lib.app.*
 import com.guuguo.android.lib.extension.dpToPx
-import com.guuguo.android.lib.extension.getDrawableCompat
 import com.guuguo.android.lib.extension.log
-import com.guuguo.android.lib.extension.safe
 import io.reactivex.Completable
 import kotlinx.android.synthetic.main.fragment_dialog.*
 import top.guuguo.myapplication.MyDialog
@@ -28,9 +25,9 @@ class DialogFragment : LBaseFragment() {
     override fun getBackIconRes() = R.drawable.ic_arrow_back_24dp
     override fun initView() {
         super.initView()
-        activity.let {
+        mActivity.let {
             if (it is BaseCupertinoTitleActivity) {
-                it.getFunctionView().drawable = activity.getDrawableCompat(R.drawable.ic_close_black_24dp)
+                it.getFunctionView().drawable = mActivity.getDrawableCompat(R.drawable.ic_close_black_24dp)
                 it.getFunctionView().setOnClickListener { }
             }
 
@@ -59,28 +56,28 @@ class DialogFragment : LBaseFragment() {
             }
         }
         btn_loading.setOnClickListener {
-            activity.dialogLoadingShow("加载中")
+            mActivity.dialogLoadingShow("加载中")
             Completable.complete().delay(2, TimeUnit.SECONDS).subscribe {
-                activity.dialogDismiss()
+                mActivity.dialogDismiss()
             }
         }
-        btn_error.setOnClickListener { activity.dialogErrorShow("出错了") }
-        btn_message.setOnClickListener { activity.dialogMsgShow("天气很好", "知道了", null) }
+        btn_error.setOnClickListener { mActivity.dialogErrorShow("出错了") }
+        btn_message.setOnClickListener { mActivity.dialogMsgShow("天气很好", "知道了", null) }
         btn_warning.setOnClickListener {
-            activity.dialogWarningShow("确定继续吗", "取消", "确定")
+            mActivity.dialogWarningShow("确定继续吗", "取消", "确定")
         }
-        btn_success.setOnClickListener { activity.dialogCompleteShow("可以了哈哈哈哈你好啊 啊啊 啊") }
+        btn_success.setOnClickListener { mActivity.dialogCompleteShow("可以了哈哈哈哈你好啊 啊啊 啊") }
         btn_alert_edit.setOnClickListener {
-            NewEditAlertDialog(activity).paddingVertical(10.dpToPx()).title("填写").btnText("取消", "完成").btnClick({ it.dismiss() }, { it.dismiss() }).show()
+            NewEditAlertDialog(mActivity).paddingVertical(10.dpToPx()).title("填写").btnText("取消", "完成").btnClick({ it.dismiss() }, { it.dismiss() }).show()
         }
         btn_alert_custom.setOnClickListener {
-            CustomAlertDialog(activity).contentView(TextView(activity)).title("填写").show()
+            CustomAlertDialog(mActivity).contentView(TextView(mActivity)).title("填写").show()
         }
         btn_alert_custom2.setOnClickListener {
-            MyDialog(activity).heightRatio(0.99f).widthRatio(0.9f).show()
+            MyDialog(mActivity).heightRatio(0.99f).widthRatio(0.9f).show()
         }
         btn_alert_custom3.setOnClickListener {
-            MyDialog(activity).show()
+            MyDialog(mActivity).show()
         }
     }
 

@@ -8,8 +8,6 @@ import androidx.annotation.ColorRes
 import android.view.View
 import com.guuguo.android.lib.app.LBaseActivity
 import com.guuguo.android.lib.app.LBaseFragment
-import com.guuguo.android.lib.extension.getColorCompat
-import com.guuguo.android.lib.extension.inflateLayout
 import com.guuguo.android.lib.extension.toast
 import com.guuguo.android.lib.widget.roundview.RoundTextView
 import kotlinx.android.synthetic.main.fragment_flowlayout.*
@@ -40,10 +38,10 @@ class FlowLayoutFragment : LBaseFragment() {
     }
 
     private fun setAdapterViews(view: FlowLayout, strS: Array<String>, @ColorRes colorRes: Int): FlowAdapter<String> {
-        val color = activity.getColorCompat(colorRes)
+        val color = mActivity.getColorCompat(colorRes)
         val adapter = object : FlowAdapter<String>() {
             override fun onCreateView(): View {
-                return activity.inflateLayout(R.layout.item_tag, fl_no_check, false);
+                return mActivity.inflateLayout(R.layout.item_tag, fl_no_check, false);
             }
 
             override fun onBindView(view: View, item: String, isChecked: Boolean) {

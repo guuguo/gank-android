@@ -1,10 +1,8 @@
 package com.guuguo.android.lib.app
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
 import com.google.android.material.appbar.AppBarLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -12,15 +10,12 @@ import androidx.appcompat.widget.Toolbar
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import com.guuguo.android.R
-import com.guuguo.android.lib.extension.dpToPx
 import com.guuguo.android.lib.extension.initNav
 import com.guuguo.android.lib.extension.safe
-import com.guuguo.android.lib.ktx.gone
-import com.guuguo.android.lib.ktx.visible
 import com.guuguo.android.lib.systembar.SystemBarHelper
 import com.guuguo.android.lib.widget.BianlaTitleLayout
-import com.trello.rxlifecycle2.components.support.RxFragment
 import io.reactivex.Observable
 
 
@@ -34,23 +29,18 @@ import io.reactivex.Observable
  * [getToolBar] 获取自定义的toolbar 用来沉浸状态栏，添加返回按钮以及电击事件等操作
  * [isNavigationBack] 配置是否在 toolbar 上添加返回按钮
  */
-abstract class LBaseFragment : RxFragment() {
+abstract class LBaseFragment : Fragment() {
 
     protected val TAG = this.javaClass.simpleName
-    lateinit var activity: AppCompatActivity
     protected abstract fun getLayoutResId(): Int
 
     private var isPrepare = false
     var mFirstLazyLoad = true
     protected var contentView: View? = null
 
+    open val mActivity get() = requireActivity()
     open protected fun setLayoutResId(inflater: LayoutInflater?, resId: Int, container: ViewGroup?): View {
         return inflater!!.inflate(resId, container, false)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        this.activity = context as AppCompatActivity
     }
 
     var customHeader: View? = null
@@ -70,12 +60,12 @@ abstract class LBaseFragment : RxFragment() {
     protected fun adapterCustomHeaderSystemBar(darkFont: Boolean = true) {
         customHeader?.let {
             if (it is AppBarLayout) {
-                SystemBarHelper.setPadding(activity, it)
+                SystemBarHelper.setPadding(this.mActivity, it)
             } else if (it is BianlaTitleLayout) {
-                SystemBarHelper.setHeightAndPadding(activity, it)
+                SystemBarHelper.setHeightAndPadding(this.mActivity, it)
             }
             if (darkFont)
-                SystemBarHelper.setStatusBarDarkMode(activity)
+                SystemBarHelper.setStatusBarDarkMode(this.mActivity)
         }
     }
 
@@ -84,7 +74,6 @@ abstract class LBaseFragment : RxFragment() {
             layoutInflater.inflate(R.layout.base_common_title, parent).findViewById(R.id.super_layout)
 
     protected open fun init(view: View, savedInstanceState: Bundle?) {
-        activity = getActivity() as AppCompatActivity
         initToolbar()
         initView()
         loadData()
@@ -131,7 +120,7 @@ abstract class LBaseFragment : RxFragment() {
                 if (it is BianlaTitleLayout) {
                     it.setup(centerText = getHeaderTitle(), leftImageRes = getBackIconRes().safe(R.drawable.ic_arrow_back_24dp))
                     it.leftImageView().setOnClickListener {
-                        if (!onBackPressed()) activity.onBackPressed()
+                        if (!onBackPressed()) requireActivity().onBackPressed()
                     }
 
                 } else if (it is AppBarLayout) {
@@ -146,7 +135,7 @@ abstract class LBaseFragment : RxFragment() {
 
         } else {
             if (isNavigationBack()) {
-                getToolBar()?.initNav(activity, getBackIconRes().safe(R.drawable.ic_arrow_back_white_24dp))
+                getToolBar()?.initNav(this.mActivity, getBackIconRes().safe(R.drawable.ic_arrow_back_white_24dp))
             }
             val str = getHeaderTitle()
             if (str != null)
@@ -192,7 +181,7 @@ abstract class LBaseFragment : RxFragment() {
     }
 
     protected open fun setTitle(title: String) {
-        activity.title = title
+        this.mActivity.title = title
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
